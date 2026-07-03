@@ -1,0 +1,513 @@
+.wizardCard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem;
+  background-color: var(--bg-card, #ffffff);
+  border: 1px solid var(--border, #cbd5e1);
+  border-radius: var(--radius-md, 8px);
+  box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
+}
+
+.stepper {
+  margin-bottom: 2rem;
+}
+
+.progressBarWrapper {
+  width: 100%;
+  height: 6px;
+  background-color: var(--border-subtle, #f1f5f9);
+  border-radius: var(--radius-full, 9999px);
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: var(--accent, #3b82f6);
+  transition: width 0.3s ease;
+}
+
+.stepsLabelRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted, #94a3b8);
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stepContainer {
+  text-align: left;
+}
+
+.stepTitle {
+  font-family: var(--font-family-display, inherit);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary, #1e293b);
+  margin: 0 0 0.25rem 0;
+}
+
+.stepDesc {
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748b);
+  margin: 0 0 2rem 0;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary, #1e293b);
+  text-align: left;
+}
+
+.inputSelectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+.select {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--border, #cbd5e1);
+  background-color: var(--bg-card, #ffffff);
+  color: var(--text-primary, #1e293b);
+  font-size: 0.95rem;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm, 6px);
+  border: 1px solid var(--border, #cbd5e1);
+  background-color: var(--bg-card, #ffffff);
+  color: var(--text-primary, #1e293b);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.input:focus,
+.select:focus {
+  border-color: var(--accent, #3b82f6);
+}
+
+.optionCard {
+  border: 1.5px solid var(--border, #cbd5e1);
+  border-radius: var(--radius-sm, 6px);
+  padding: 1.5rem;
+  background-color: var(--bg-card, #ffffff);
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.35rem;
+}
+
+.optionCard:hover {
+  border-color: var(--accent, #3b82f6);
+}
+
+.optionSelected {
+  border-color: var(--accent, #3b82f6);
+  background-color: var(--accent-subtle, #eff6ff);
+}
+
+.cardIcon {
+  color: var(--text-muted, #94a3b8);
+  margin-bottom: 0.5rem;
+}
+
+.cardIconActive {
+  color: var(--accent, #3b82f6);
+  margin-bottom: 0.5rem;
+}
+
+.optionCard strong {
+  font-family: var(--font-family-display, inherit);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary, #1e293b);
+}
+
+.optionCard span {
+  font-size: 0.8rem;
+  color: var(--text-muted, #64748b);
+  line-height: 1.3;
+}
+
+.priceHighlight {
+  font-size: 1.1rem !important;
+  font-weight: 800;
+  color: var(--accent, #3b82f6) !important;
+}
+
+.timelineSpan {
+  font-size: 0.75rem !important;
+  color: var(--text-muted, #64748b);
+}
+
+/* Dimensions */
+.toggleRow {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle, #f1f5f9);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.toggleBtn {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border, #cbd5e1);
+  border-radius: var(--radius-full, 9999px);
+  background-color: var(--bg-card, #ffffff);
+  color: var(--text-secondary, #475569);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toggleActive {
+  background-color: var(--accent, #3b82f6);
+  color: #ffffff;
+  border-color: var(--accent, #3b82f6);
+}
+
+.areaSummary {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  background-color: var(--bg-secondary, #f8fafc);
+  border-radius: var(--radius-sm, 6px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.areaSummary span {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted, #64748b);
+}
+
+.areaSummary strong {
+  font-size: 1.15rem;
+  color: var(--accent, #3b82f6);
+  font-weight: 800;
+}
+
+/* Floor Details */
+.numberBtn {
+  padding: 0.75rem 1.25rem;
+  border: 1.5px solid var(--border, #cbd5e1);
+  border-radius: var(--radius-sm, 6px);
+  background-color: var(--bg-card, #ffffff);
+  color: var(--text-primary, #1e293b);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.numberActive {
+  border-color: var(--accent, #3b82f6);
+  background-color: var(--accent-subtle, #eff6ff);
+  color: var(--accent, #3b82f6);
+}
+
+.checkboxGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.checkCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border: 1.5px solid var(--border, #cbd5e1);
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  background-color: var(--bg-card, #ffffff);
+  text-align: left;
+}
+
+.checkCard input {
+  margin-top: 3px;
+  cursor: pointer;
+}
+
+.checkCard strong {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-primary, #1e293b);
+}
+
+.checkCard span {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted, #64748b);
+  margin-top: 2px;
+}
+
+/* Slider */
+.sliderContainer {
+  width: 100%;
+}
+
+.rangeSlider {
+  width: 100%;
+  height: 6px;
+  background: var(--border-subtle, #f1f5f9);
+  border-radius: var(--radius-full, 9999px);
+  outline: none;
+  cursor: pointer;
+}
+
+.sliderLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted, #94a3b8);
+  margin-top: 0.75rem;
+}
+
+/* Chips */
+.chipsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.chip {
+  padding: 0.65rem 1.25rem;
+  border: 1.5px solid var(--border, #cbd5e1);
+  border-radius: var(--radius-full, 9999px);
+  background-color: var(--bg-card, #ffffff);
+  color: var(--text-secondary, #475569);
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+.chip:hover {
+  border-color: var(--accent, #3b82f6);
+}
+
+.chipActive {
+  background-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #3b82f6);
+  color: #ffffff;
+}
+
+/* Summary breakdown */
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.statsCard {
+  border: 1.5px solid var(--border, #cbd5e1);
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  background-color: var(--bg-card, #ffffff);
+}
+
+.totalBlock {
+  background-color: var(--bg-secondary, #f8fafc);
+  padding: 2.25rem 2rem;
+  border-bottom: 1.5px solid var(--border, #cbd5e1);
+}
+
+.totalBlock span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted, #94a3b8);
+  text-transform: uppercase;
+}
+
+.totalBlock h2 {
+  font-family: var(--font-family-display, inherit);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--accent, #3b82f6);
+  margin: 0.5rem 0;
+}
+
+.disclaimerText {
+  font-size: 0.65rem !important;
+  color: var(--text-muted, #94a3b8) !important;
+  text-transform: none !important;
+}
+
+.specMetaGrid {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.specMetaItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.specMetaItem strong {
+  color: var(--text-secondary, #475569);
+}
+
+.specMetaItem span {
+  font-weight: 700;
+  color: var(--text-primary, #1e293b);
+}
+
+.breakdownCard {
+  padding: 2rem;
+  background-color: var(--bg-card, #ffffff);
+  border: 1.5px solid var(--border, #cbd5e1);
+  border-radius: var(--radius-md, 8px);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cardHeading {
+  font-family: var(--font-family-display, inherit);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-primary, #1e293b);
+  margin: 0 0 0.5rem 0;
+}
+
+.progressRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+
+.progressLabel span {
+  color: var(--text-secondary, #475569);
+}
+
+.progressLabel strong {
+  font-weight: 700;
+  color: var(--text-primary, #1e293b);
+}
+
+.barOuter {
+  width: 100%;
+  height: 6px;
+  background-color: var(--border-subtle, #f1f5f9);
+  border-radius: var(--radius-full, 9999px);
+  overflow: hidden;
+}
+
+.barInner {
+  height: 100%;
+  border-radius: var(--radius-full, 9999px);
+}
+
+.emiBlock {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background-color: var(--bg-secondary, #f8fafc);
+  border: 1px solid var(--border, #cbd5e1);
+  border-radius: var(--radius-sm, 6px);
+}
+
+.emiIcon {
+  color: var(--accent, #3b82f6);
+}
+
+/* Success screen */
+.successPanel {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.successIcon {
+  color: #22c55e;
+  margin: 0 auto 1.5rem auto;
+}
+
+.successTitle {
+  font-family: var(--font-family-display, inherit);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--text-primary, #1e293b);
+  margin: 0 0 1rem 0;
+}
+
+.successDesc {
+  font-size: 0.95rem;
+  color: var(--text-secondary, #475569);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 2.5rem auto;
+}
+
+.successButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Common elements */
+.buttonRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  border-top: 1px solid var(--border-subtle, #f1f5f9);
+  padding-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .wizardCard {
+    padding: 1.75rem;
+  }
+  .summaryGrid {
+    grid-template-columns: 1fr;
+  }
+  .checkboxGrid {
+    grid-template-columns: 1fr;
+  }
+  .successButtons {
+    flex-direction: column;
+  }
+  .successButtons > * {
+    width: 100%;
+    justify-content: center;
+  }
+}

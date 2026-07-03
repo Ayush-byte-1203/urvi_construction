@@ -1,0 +1,45 @@
+.settingsLayout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.tabList {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tabBtn {
+  padding: 0.875rem 1.25rem;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+.tabBtn:last-child { border-bottom: none; }
+.tabBtn:hover { background: #f8fafc; color: #0f172a; }
+.tabBtnActive { background: #eff6ff !important; color: #2563eb !important; font-weight: 700; border-left: 3px solid #3b82f6; padding-left: calc(1.25rem - 3px); }
+
+.tabPanel {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.75rem;
+}
+
+@media (max-width: 768px) {
+  .settingsLayout { grid-template-columns: 1fr; }
+  .tabList { flex-direction: row; flex-wrap: wrap; }
+  .tabBtn { flex: 1; text-align: center; }
+}

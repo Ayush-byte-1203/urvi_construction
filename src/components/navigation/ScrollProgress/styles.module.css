@@ -1,0 +1,11 @@
+.progressBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background-color: var(--accent);
+  z-index: 9999; /* Top level above all headers */
+  width: 0%;
+  transition: width 0.1s ease-out;
+  pointer-events: none;
+}

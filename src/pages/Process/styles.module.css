@@ -1,0 +1,41 @@
+.timelineContainer {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.timelineList {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  position: relative;
+}
+
+.timelineLine {
+  position: absolute; 
+  top: 20px; 
+  bottom: 20px; 
+  left: 25px; 
+  width: 2px; 
+  background-color: var(--border); 
+  z-index: 1;
+}
+
+.timelineRow {
+  display: flex;
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.timelineBubble {
+  width: 52px; 
+  height: 52px; 
+  border-radius: 50%; 
+  background-color: var(--bg-secondary); 
+  border: 2px solid var(--accent); 
+  color: var(--accent); 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  flex-shrink: 0;
+}

@@ -1,0 +1,232 @@
+:root {
+  /* ==========================================================================
+     1. COLOR SYSTEM — Premium Light Architecture
+     ========================================================================== */
+
+  /* --- Core Background Hierarchy --- */
+  --bg-primary:    #FAFAF7;          /* warm off-white canvas */
+  --bg-secondary:  #F1F2EE;          /* soft sage-gray surfaces */
+  --bg-tertiary:   #E8E9E4;          /* muted section alternates */
+  --bg-card:       #FFFFFF;          /* pure white cards */
+  --bg-overlay:    rgba(250, 250, 247, 0.92);
+
+  /* Legacy aliases used across codebase */
+  --color-bg-default:      var(--bg-primary);
+  --color-bg-secondary:    var(--bg-secondary);
+  --color-surface-default: var(--bg-card);
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-acrylic: rgba(250, 250, 247, 0.9);
+  --color-overlay:         rgba(17, 24, 39, 0.55);
+
+  /* --- Brand Accent — Modern Blue --- */
+  --accent:               hsl(217, 91%, 50%);   /* #2563EB electric blue */
+  --accent-light:         hsl(217, 91%, 60%);   /* lighter on hover */
+  --accent-dark:          hsl(217, 91%, 38%);   /* pressed state */
+  --accent-subtle:        hsl(217, 91%, 96%);   /* tint backgrounds */
+  --accent-glow:          hsla(217, 91%, 50%, 0.18);
+
+  --brand-primary-default:  var(--bg-primary);
+  --brand-primary-hover:    var(--bg-secondary);
+  --brand-primary-active:   var(--bg-tertiary);
+  --brand-primary-disabled: rgba(250, 250, 247, 0.4);
+
+  --brand-secondary-default: var(--bg-secondary);
+  --brand-secondary-hover:   var(--bg-tertiary);
+  --brand-secondary-active:  #DDDECB;
+
+  --brand-accent-default:  var(--accent);
+  --brand-accent-hover:    var(--accent-light);
+  --brand-accent-active:   var(--accent-dark);
+  --brand-accent-disabled: hsla(217, 91%, 50%, 0.3);
+  --brand-accent-glow:     var(--accent-glow);
+
+  /* --- Typography Contrast Scale --- */
+  --text-primary:   #111827;   /* deep charcoal — headings */
+  --text-secondary: #374151;   /* dark gray — body copy */
+  --text-muted:     #6B7280;   /* medium gray — captions */
+  --text-disabled:  #9CA3AF;   /* disabled state */
+  --text-inverse:   #FFFFFF;   /* text on dark/colored bg */
+  --text-accent:    var(--accent);
+
+  --color-text-primary:   var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted:     var(--text-muted);
+  --color-text-disabled:  var(--text-disabled);
+
+  /* --- Borders & Dividers --- */
+  --border:                 #E5E7EB;
+  --border-subtle:          #F3F4F6;
+  --border-strong:          #D1D5DB;
+  --border-accent:          var(--accent);
+  --focus-ring:             hsla(217, 91%, 50%, 0.4);
+
+  --color-border-default:     var(--border);
+  --color-border-subtle:      var(--border-subtle);
+  --color-border-interactive: var(--accent);
+  --color-divider:            var(--border-subtle);
+  --color-focus-ring:         var(--focus-ring);
+
+  /* --- Semantic Feedback Colors --- */
+  --color-success-default: hsl(142, 71%, 38%);
+  --color-success-hover:   hsl(142, 71%, 45%);
+  --color-warning-default: hsl(38, 92%, 50%);
+  --color-warning-hover:   hsl(38, 92%, 60%);
+  --color-danger-default:  hsl(0, 72%, 51%);
+  --color-danger-hover:    hsl(0, 72%, 60%);
+  --color-info-default:    hsl(199, 89%, 48%);
+
+  /* legacy brand feedback aliases */
+  --brand-success: var(--color-success-default);
+  --brand-danger:  var(--color-danger-default);
+  --brand-warning: var(--color-warning-default);
+
+  /* --- Scrollbar & Selection --- */
+  --color-scrollbar-track:       var(--bg-secondary);
+  --color-scrollbar-thumb:       #CBD5E1;
+  --color-scrollbar-thumb-hover: var(--accent);
+  --color-selection-bg:          var(--accent);
+  --color-selection-text:        #FFFFFF;
+
+  /* ==========================================================================
+     2. TYPOGRAPHY SYSTEM
+     ========================================================================== */
+  --font-family-display: 'Plus Jakarta Sans', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --font-size-display-lg:      clamp(3rem, 7vw, 5.5rem);
+  --font-size-display-md:      clamp(2.5rem, 5vw, 4rem);
+  --font-size-display-sm:      clamp(1.875rem, 4vw, 2.75rem);
+
+  --font-size-hero:            clamp(2.25rem, 5vw, 4.25rem);
+  --font-size-page-heading:    clamp(1.875rem, 4vw, 3rem);
+  --font-size-section-heading: clamp(1.625rem, 3vw, 2.25rem);
+  --font-size-card-heading:    clamp(1.125rem, 2vw, 1.375rem);
+  --font-size-subheading:      clamp(1rem, 2vw, 1.125rem);
+
+  --font-size-body-lg:  1.125rem;
+  --font-size-body-md:  1rem;
+  --font-size-body-sm:  0.875rem;
+  --font-size-caption:  0.8rem;
+  --font-size-overline: 0.7rem;
+  --font-size-btn:      0.9rem;
+  --font-size-nav:      0.9rem;
+  --font-size-footer:   0.9rem;
+  --font-size-form-label: 0.825rem;
+  --font-size-input:    0.95rem;
+  --font-size-helper:   0.8rem;
+  --font-size-error:    0.8rem;
+
+  --lh-tight:   1.1;
+  --lh-heading: 1.25;
+  --lh-body:    1.7;
+  --lh-relaxed: 1.85;
+
+  /* ==========================================================================
+     3. SPACING — 8-Point Grid
+     ========================================================================== */
+  --space-xxs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-xxl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+
+  --gap-section:   var(--space-4xl);
+  --gap-container: var(--space-lg);
+  --gap-component: var(--space-xl);
+  --padding-card:  var(--space-lg);
+  --padding-button: 0.75rem 1.625rem;
+  --padding-input:  0.75rem 1rem;
+
+  /* ==========================================================================
+     4. CONTAINER WIDTHS
+     ========================================================================== */
+  --container-narrow:   800px;
+  --container-standard: 1200px;
+  --container-wide:     1440px;
+  --container-full:     100%;
+  --container-hero:     100%;
+  --container-reading:  680px;
+
+  /* ==========================================================================
+     5. BORDER RADIUS
+     ========================================================================== */
+  --radius-xs:       6px;
+  --radius-sm:       10px;
+  --radius-md:       14px;
+  --radius-lg:       20px;
+  --radius-xl:       28px;
+  --radius-full:     9999px;
+  --radius-circular: 50%;
+
+  /* ==========================================================================
+     6. SHADOWS — warm, light-friendly elevation
+     ========================================================================== */
+  --shadow-xs:         0 1px 2px rgba(17, 24, 39, 0.05);
+  --shadow-sm:         0 2px 6px rgba(17, 24, 39, 0.07);
+  --shadow-flat:       0 0 0 1px var(--border);
+  --shadow-surface:    0 1px 3px rgba(17, 24, 39, 0.06), 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-card:       0 4px 16px rgba(17, 24, 39, 0.07), 0 1px 4px rgba(17, 24, 39, 0.04);
+  --shadow-floating:   0 8px 30px rgba(17, 24, 39, 0.10), 0 2px 8px rgba(17, 24, 39, 0.06);
+  --shadow-modal:      0 20px 60px rgba(17, 24, 39, 0.18), 0 4px 16px rgba(17, 24, 39, 0.08);
+  --shadow-dropdown:   0 6px 20px rgba(17, 24, 39, 0.10), 0 1px 4px rgba(17, 24, 39, 0.05);
+  --shadow-navigation: 0 2px 12px rgba(17, 24, 39, 0.08);
+  --shadow-hover:      0 12px 40px rgba(17, 24, 39, 0.12), 0 4px 12px rgba(17, 24, 39, 0.06);
+  --shadow-lg:         var(--shadow-floating);
+  --shadow-md:         var(--shadow-card);
+
+  /* Blue accent shadow for buttons */
+  --shadow-accent:     0 4px 20px hsla(217, 91%, 50%, 0.30);
+  --shadow-accent-lg:  0 8px 32px hsla(217, 91%, 50%, 0.28);
+
+  /* ==========================================================================
+     7. BLUR EFFECTS
+     ========================================================================== */
+  --blur-sm:  8px;
+  --blur-md:  16px;
+  --blur-lg:  32px;
+
+  /* ==========================================================================
+     8. MOTION TOKENS
+     ========================================================================== */
+  --transition-fast:    0.18s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-normal:  0.32s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-slow:    0.55s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-elastic: 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-linear:  0.15s linear;
+
+  /* ==========================================================================
+     9. LAYOUT / NAV
+     ========================================================================== */
+  --header-height: 72px;
+
+  /* ==========================================================================
+     10. OPACITY HELPERS
+     ========================================================================== */
+  --opacity-hover:    0.85;
+  --opacity-muted:    0.6;
+  --opacity-disabled: 0.38;
+
+  /* ==========================================================================
+     11. BREAKPOINTS (ref only — use in media queries)
+     ========================================================================== */
+  --breakpoint-sm:  480px;
+  --breakpoint-md:  768px;
+  --breakpoint-lg:  1024px;
+  --breakpoint-xl:  1280px;
+  --breakpoint-xxl: 1440px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast:    0.01s linear;
+    --transition-normal:  0.01s linear;
+    --transition-slow:    0.01s linear;
+    --transition-elastic: 0.01s linear;
+    --transition-linear:  0.01s linear;
+  }
+}

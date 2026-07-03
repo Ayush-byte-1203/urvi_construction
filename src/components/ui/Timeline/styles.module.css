@@ -1,0 +1,248 @@
+/* =============================================
+   TIMELINE — Premium Alternate Journey Layout
+   ============================================= */
+.timelineContainer {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Center Vertical Guide Line */
+.centerLine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  transform: translateX(-50%);
+  background: var(--border-subtle);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.progressLine {
+  width: 100%;
+  height: 0;
+  background: linear-gradient(to bottom, var(--accent) 0%, var(--accent-light) 50%, var(--accent-dark) 100%);
+  border-radius: var(--radius-full);
+}
+
+.timelineList {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Timeline Item Row */
+.timelineItem {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: flex-end; /* Default right side */
+}
+
+.itemLeft {
+  justify-content: flex-start;
+}
+
+.itemRight {
+  justify-content: flex-end;
+}
+
+/* Middle node node markers */
+.timelineNode {
+  position: absolute;
+  left: 50%;
+  top: 2rem;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 4px solid var(--accent);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 4px var(--bg-card);
+}
+
+.nodeCore {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  transition: transform var(--transition-fast) ease;
+}
+
+.timelineItem:hover .nodeCore {
+  transform: scale(1.6);
+  background: var(--accent-light);
+}
+
+/* Timeline Premium Cards */
+.timelineCard {
+  width: 45%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-normal);
+  text-align: left;
+}
+
+.timelineItem:hover .timelineCard {
+  border-color: var(--accent);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Card Header */
+.cardHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+
+.yearBadge {
+  font-family: var(--font-family-display);
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--accent);
+  background: var(--bg-card);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  letter-spacing: 0.05em;
+}
+
+.iconCircle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent-subtle);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Supporting image wrapper */
+.cardImageWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.timelineItem:hover .cardImage {
+  transform: scale(1.04);
+}
+
+/* Card Content Body */
+.cardBody {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cardTitle {
+  font-family: var(--font-family-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.cardSubtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cardDesc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   RESPONSIVENESS (Tablet/Mobile rules)
+   ========================================================================== */
+@media (max-width: 991px) {
+  .centerLine {
+    left: 24px;
+    transform: none;
+  }
+
+  .timelineNode {
+    left: 24px;
+    transform: translateX(-50%);
+  }
+
+  .timelineItem {
+    justify-content: flex-end;
+  }
+
+  .itemLeft, .itemRight {
+    justify-content: flex-end;
+  }
+
+  .timelineCard {
+    width: calc(100% - 64px);
+  }
+}
+
+@media (max-width: 480px) {
+  .timelineContainer {
+    padding: 1rem 0;
+  }
+  
+  .timelineList {
+    gap: 3rem;
+  }
+
+  .centerLine {
+    left: 16px;
+  }
+
+  .timelineNode {
+    left: 16px;
+    top: 1.5rem;
+    width: 20px;
+    height: 20px;
+  }
+
+  .timelineCard {
+    width: calc(100% - 44px);
+  }
+
+  .cardHeaderRow {
+    padding: 1rem;
+  }
+
+  .cardBody {
+    padding: 1rem;
+  }
+}

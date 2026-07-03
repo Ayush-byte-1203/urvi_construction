@@ -1,0 +1,107 @@
+/* SearchModal — Light Theme */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 200;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5rem 1.5rem;
+  animation: smFadeIn 0.18s ease forwards;
+}
+
+.modalContent {
+  width: 100%;
+  max-width: 640px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-modal);
+  padding: 2rem;
+  position: relative;
+  animation: smSlideDown 0.28s cubic-bezier(0.25,1,0.5,1) forwards;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-xs);
+  transition: all var(--transition-fast);
+}
+.closeButton:hover { color: var(--accent); background: var(--accent-subtle); }
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+  gap: 0.5rem;
+}
+.inputWrapper:focus-within { border-color: var(--accent); }
+
+.searchIcon { color: var(--text-muted); display: flex; flex-shrink: 0; }
+
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-family: var(--font-family-display);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  outline: none;
+}
+.input::placeholder { color: var(--text-disabled); }
+
+.sectionTitle {
+  font-family: var(--font-family-display);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.listItem:hover { background: var(--accent-subtle); color: var(--accent); }
+
+.grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.625rem; }
+
+@keyframes smFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes smSlideDown {
+  from { transform: translateY(-16px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}

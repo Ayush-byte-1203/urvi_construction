@@ -1,0 +1,318 @@
+.hero {
+  background: linear-gradient(rgba(13, 14, 18, 0.8), rgba(13, 14, 18, 0.85)), 
+              url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80') center/cover;
+  padding: 8rem 0 4rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.breadcrumbs {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-overline);
+  color: var(--accent);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.breadcrumbs a {
+  color: var(--color-text-muted);
+}
+
+.breadcrumbs a:hover {
+  color: var(--text-primary);
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.detailSplit {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-4xl);
+}
+
+/* ==========================================================================
+   Features Checklist (Included vs Optional)
+   ========================================================================== */
+.checklistGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-xxl);
+}
+
+.checklistCol {
+  background: var(--bg-secondary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 2rem;
+}
+
+.checkTitle {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-card-heading);
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-divider);
+  padding-bottom: 0.5rem;
+}
+
+.checkList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.checkItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  font-size: var(--font-size-body-sm);
+  color: var(--color-text-secondary);
+}
+
+.checkIcon {
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.includedIcon {
+  color: var(--brand-success);
+}
+
+.optionalIcon {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Materials Grid
+   ========================================================================== */
+.materialsSection {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--border);
+  padding: var(--gap-section) 0;
+}
+
+.materialsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.materialCard {
+  padding: var(--space-xl);
+  background: var(--bg-primary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xs);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+}
+
+.materialTitle {
+  font-family: var(--font-family-display);
+  font-weight: 600;
+  font-size: var(--font-size-body-sm);
+  color: var(--text-primary);
+}
+
+.materialSpec {
+  font-size: 0.75rem;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.materialDesc {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Timeline / Stages Section
+   ========================================================================== */
+.stagesSection {
+  padding: var(--gap-section) 0;
+}
+
+/* ==========================================================================
+   Brand Partners
+   ========================================================================== */
+.partnersSection {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--border);
+  padding: var(--gap-section) 0;
+}
+
+.partnersGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+.partnerLogoCard {
+  height: 90px;
+  background: var(--bg-primary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: grayscale(100%);
+  opacity: 0.6;
+  transition: all var(--transition-normal);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.partnerLogoCard:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+.partnerName {
+  font-family: var(--font-family-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.partnerLogoCard:hover .partnerName {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Brochure Download Card
+   ========================================================================== */
+.brochureSection {
+  padding: var(--gap-section) 0;
+}
+
+.brochureCard {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  background: var(--bg-secondary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  margin-top: var(--space-xl);
+}
+
+.brochurePreview {
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(var(--accent-rgb), 0.1) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  border-right: 1px solid var(--color-border-subtle);
+}
+
+.brochureIcon {
+  color: var(--accent);
+  filter: drop-shadow(0 4px 12px rgba(var(--accent-rgb), 0.2));
+}
+
+.brochureText {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.brochureTitle {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-section-heading);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.brochureDesc {
+  font-size: var(--font-size-body-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--lh-body);
+}
+
+.brochureMeta {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Gallery Section
+   ========================================================================== */
+.gallerySection {
+  padding: var(--gap-section) 0;
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 991px) {
+  .detailSplit {
+    grid-template-columns: 1fr;
+    gap: var(--space-xxl);
+  }
+}
+
+@media (max-width: 768px) {
+  .checklistGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  .materialsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .brochureCard {
+    grid-template-columns: 1fr;
+  }
+  
+  .brochurePreview {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 2rem;
+  }
+  
+  .brochureText {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .materialsGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .partnersGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+}
