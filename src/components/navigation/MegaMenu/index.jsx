@@ -212,38 +212,13 @@ const menuContents = {
       linkText: 'Call Support Cell'
     }
   },
-  careers: {
-    categories: [
-      {
-        group: 'Opportunities',
-        links: [
-          { title: 'Engineering & BIM jobs', desc: 'Roles for Revit designers, project engineers.', path: '/careers', icon: <Briefcase size={16} /> },
-          { title: 'Internship programs', desc: 'Practical site audits training for civil graduates.', path: '/careers', icon: <Award size={16} /> }
-        ]
-      },
-      {
-        group: 'Culture & Benefits',
-        links: [
-          { title: 'Site Safety Benefits', desc: 'Comprehensive coverage, bonus schedules, premium gear.', path: '/careers', icon: <ShieldCheck size={16} /> },
-          { title: 'Operational Guidelines', desc: 'Safety first framework and certifications training.', path: '/careers', icon: <HardHat size={16} /> }
-        ]
-      }
-    ],
-    featured: {
-      title: 'Join BuildCraft Crew',
-      desc: 'Submit your portfolio coordinates directly to our hiring cell.',
-      image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=400&q=80',
-      path: '/careers',
-      linkText: 'See Open Positions'
-    }
-  },
   contact: {
     categories: [
       {
         group: 'Direct Channels',
         links: [
-          { title: 'Call Headquarters', desc: '+91 98765 43210 (Hours: 9 AM - 6 PM)', path: '/contact', icon: <Phone size={16} /> },
-          { title: 'Email Inquiries', desc: 'support@buildcraft.com (48-hour SLA)', path: '/contact', icon: <Mail size={16} /> }
+          { title: 'Call Headquarters', desc: '+91 94286 94361 (Hours: 9 AM - 6 PM)', path: '/contact', icon: <Phone size={16} /> },
+          { title: 'Email Inquiries', desc: 'cparamarsh@gmail.com (48-hour SLA)', path: '/contact', icon: <Mail size={16} /> }
         ]
       },
       {

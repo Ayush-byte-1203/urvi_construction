@@ -4,13 +4,13 @@ export const packagesData = {
       id: 'core-shell-build',
       name: 'Core Shell Build',
       tagline: 'Standard structural framing and shell layouts.',
-      price: '₹2,100',
+      price: '₹1,499',
       unit: '/ sq. ft. onwards',
       popular: false,
       timeline: '6 to 8 Months build time',
       
       // Comparison metrics
-      constructionCost: '₹2,100 / sq. ft.',
+      constructionCost: '₹1,499 / sq. ft.',
       materialQuality: 'Standard structural grade',
       steelBrand: 'Local standard TMT Fe 500',
       cementBrand: 'UltraTech / ACC standard',
@@ -66,13 +66,13 @@ export const packagesData = {
       id: 'executive-smart-build',
       name: 'Executive Smart Build',
       tagline: 'Premium finishes and smart home integrations.',
-      price: '₹3,500',
+      price: '₹1,799',
       unit: '/ sq. ft. onwards',
       popular: true,
       timeline: '9 to 11 Months build time',
       
       // Comparison metrics
-      constructionCost: '₹3,500 / sq. ft.',
+      constructionCost: '₹1,799 / sq. ft.',
       materialQuality: 'Premium grade certified',
       steelBrand: 'Tata Tiscon / Jindal Fe 500D',
       cementBrand: 'UltraTech premium / Birla A1',
@@ -124,16 +124,16 @@ export const packagesData = {
       ]
     },
     {
-      id: 'signature-elite-build',
-      name: 'Signature Elite Build',
+      id: 'premium-elite-build',
+      name: 'Premium Elite Build',
       tagline: 'Custom luxury villa designs and high-end finishes.',
-      price: '₹5,200',
+      price: '₹2,111',
       unit: '/ sq. ft. onwards',
       popular: false,
       timeline: '12 to 15 Months build time',
       
       // Comparison metrics
-      constructionCost: '₹5,200 / sq. ft.',
+      constructionCost: '₹2,111 / sq. ft.',
       materialQuality: 'Ultra-luxury elite grade',
       steelBrand: 'Tata Tiscon Fe 550D premium',
       cementBrand: 'UltraTech Super / Birla super',

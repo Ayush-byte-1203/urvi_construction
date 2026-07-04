@@ -38,7 +38,6 @@ const SearchModal = ({ isOpen, onClose }) => {
 
   const suggestedPages = [
     { title: 'Portfolio Projects Grid', desc: 'Detailed case reviews' },
-    { title: 'Careers - Design Cell openings', desc: 'Join engineering operations' },
     { title: 'Premium construction Packages', desc: 'Estimation cost details' }
   ];
 

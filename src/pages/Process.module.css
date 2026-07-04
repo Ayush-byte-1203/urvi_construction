@@ -1,0 +1,541 @@
+/* ==========================================================================
+   PROCESS ROADMAP — Blueprint & Premium Stepper Experience Styles
+   ========================================================================== */
+
+/* Spacing and Header Refinement */
+.processHeader {
+  min-height: auto !important;
+  padding-top: 72px !important;
+  padding-bottom: 72px !important;
+  background: linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)),
+              url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1920&q=80') center/cover !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.processBadge {
+  font-size: 12px !important;
+  margin-bottom: 16px !important;
+  display: block;
+}
+
+.processTitle {
+  font-size: 36px !important;
+  margin-bottom: 20px !important;
+  color: #ffffff !important;
+}
+
+.processSubtitle {
+  font-size: 16px !important;
+  margin-bottom: 0 !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  line-height: 1.6 !important;
+}
+
+/* Vertical Rhythm Layout Wrapper */
+.pageContentWrapper {
+  padding-top: 72px; /* Hero -> Timeline spacing: 72px */
+  padding-bottom: 80px; /* Information Card -> Next Section: 80px */
+  background: var(--bg-primary, #080c18);
+}
+
+/* Slim Stepper Container */
+.stepperWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.78) !important; /* Glass soft-white background */
+  backdrop-filter: blur(20px);
+  border: 1px solid #E8ECF5 !important; /* Thin border #E8ECF5 */
+  border-radius: 28px !important; /* Larger border-radius */
+  padding: 32px 48px !important; /* Increased horizontal padding */
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(59, 130, 246, 0.2) transparent;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.02) !important; /* Soft layered shadow */
+  height: 170px;
+}
+
+.stepperWrapper::-webkit-scrollbar {
+  height: 4px;
+}
+
+.stepperWrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(59, 130, 246, 0.2);
+  border-radius: 4px;
+}
+
+.stepperTrack {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--node-gap, 32px);
+  width: max-content;
+  margin: 0 auto;
+  padding: 0 48px; /* Proper padding first/last to prevent crop */
+}
+
+/* Connection Lines */
+.progressLineBg {
+  position: absolute;
+  left: 80px;
+  right: 80px;
+  top: 44px; /* Centered through the center of 56px icons */
+  height: 3px;
+  background: #E2E8F0 !important; /* Light grey remaining line */
+  z-index: 1;
+}
+
+.stepperProgress {
+  position: absolute;
+  left: 80px;
+  top: 44px;
+  height: 3px;
+  background: var(--accent, #3b82f6) !important; /* Active blue progress line */
+  z-index: 2;
+  transform-origin: left center;
+  pointer-events: none;
+  transition: width 0.3s ease;
+}
+
+/* Stepper Nodes */
+.stepNode {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  z-index: 3;
+  width: 90px;
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Stage Number (Phase label): 12px, Medium, Letter spacing, Uppercase */
+.stepNumber {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px !important; /* Reduced vertical spacing */
+  transition: color 300ms ease;
+}
+
+/* Icons circle wrapper: 56px, white background, soft shadow */
+.stepIconWrapper {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #ffffff !important;
+  border: 2.5px solid #E8ECF5 !important;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 300ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03) !important;
+}
+
+.stepIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 300ms ease;
+}
+
+/* Stage Name Label (Stage title): 16px/18px, Semibold, Dark color */
+.stepLabel {
+  margin-top: 6px;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #64748b;
+  transition: color 300ms ease;
+  white-space: nowrap;
+}
+
+/* Active Node Style */
+.stepNode.active {
+  transform: scale(1.05);
+}
+
+.stepNode.active .stepIconWrapper {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%) !important; /* Primary blue gradient background */
+  border-color: #3b82f6 !important;
+  color: #ffffff !important; /* White icon */
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3), 0 0 12px rgba(59, 130, 246, 0.15) !important; /* Strong shadow + glow */
+}
+
+.stepNode.active .stepLabel {
+  color: #0f172a !important; /* Dark title for active */
+  font-weight: 700 !important;
+}
+
+.stepNode.active .stepNumber {
+  color: var(--accent, #3b82f6) !important;
+}
+
+/* Completed Node Style */
+.stepNode.completed .stepIconWrapper {
+  border-color: var(--accent, #3b82f6) !important;
+  color: var(--accent, #3b82f6) !important;
+}
+
+/* Hover State */
+.stepNode:hover {
+  transform: translateY(-4px) !important; /* Lift card by 4px */
+}
+
+.stepNode:hover .stepIconWrapper {
+  border-color: var(--accent, #3b82f6) !important; /* Border color transition */
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.12) !important; /* Shadow increase */
+}
+
+.stepNode:hover .stepIcon {
+  transform: scale(1.12) !important; /* Icon scale animation */
+}
+
+/* Active Node Style */
+.stepNode.active {
+  transform: scale(1.05); /* scale: 1.05 */
+}
+
+.stepNode.active .stepIconWrapper {
+  border-color: var(--accent, #3b82f6); /* blue ring */
+  color: #ffffff;
+  background: var(--accent, #3b82f6);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.45); /* soft glow */
+}
+
+.stepNode.active .stepLabel {
+  color: var(--accent, #3b82f6); /* Active: Primary Blue */
+  font-weight: 700;
+}
+
+.stepNode.active .stepNumber {
+  color: var(--accent, #3b82f6); /* Active: Primary Blue */
+}
+
+/* Completed Node Style */
+.stepNode.completed .stepIconWrapper {
+  border-color: var(--accent, #3b82f6);
+  color: var(--accent, #3b82f6);
+}
+
+/* Hover State */
+.stepNode:hover {
+  transform: translateY(-5px); /* lift 5px */
+}
+
+.stepNode:hover .stepIconWrapper {
+  border-color: var(--accent, #3b82f6); /* blue border */
+}
+
+.stepNode:hover .stepIcon {
+  transform: rotate(6deg); /* icon rotates 6° */
+}
+
+/* Navigation Controls (Simple indicators, no prev/next text buttons) */
+.indicatorDots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.dotActive {
+  background: var(--accent, #3b82f6);
+  transform: scale(1.2);
+  box-shadow: 0 0 6px var(--accent, #3b82f6);
+}
+
+/* Detail Card Layout */
+.detailCard {
+  position: relative;
+  background: rgba(8, 12, 24, 0.85); /* Dark construction theme background */
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 24px; /* Border radius: 24px */
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35); /* Medium soft shadow */
+  backdrop-filter: blur(16px);
+  max-width: 960px; /* Max width: 960px */
+  margin: 32px auto 0; /* Timeline -> Card: 32px */
+  width: 100%;
+}
+
+.blueprintGrid {
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.cardContent {
+  display: flex; /* Two columns */
+  justify-content: space-between;
+  align-items: center;
+  gap: 36px;
+  width: 100%;
+  padding: 36px;
+}
+
+/* Left Column: Info (70% width) */
+.cardInfo {
+  flex: 0 0 70%;
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  gap: 16px;
+  padding: 0;
+}
+
+.cardBadge {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  color: var(--accent, #3b82f6);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.cardTitle {
+  font-size: 32px;
+  font-family: var(--font-family-display, 'Plus Jakarta Sans', sans-serif);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.cardDesc {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* Key Deliverables */
+.deliverablesSection h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.deliverablesSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.deliverablesSection li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 15px;
+  color: #ffffff;
+  line-height: 1.7;
+}
+
+.bulletIcon {
+  color: var(--accent, #3b82f6);
+  flex-shrink: 0;
+}
+
+/* Right Column: Image (30% width) */
+.cardImageWrapper {
+  flex: 0 0 30%;
+  max-width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardImage {
+  width: 120px; /* 120x120 image */
+  height: 120px;
+  border-radius: 16px; /* Rounded 16px */
+  object-fit: cover; /* Object-fit cover */
+  display: block;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Gaps */
+.stepperTrack {
+  --node-gap: 32px; /* Gap between stages: 24-32px */
+}
+
+@media (max-width: 1200px) {
+  .stepperTrack {
+    --node-gap: 28px;
+  }
+}
+
+@media (max-width: 991px) {
+  .stepperTrack {
+    --node-gap: 24px;
+  }
+  
+  .cardContent {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    padding: 24px;
+    gap: 24px;
+  }
+  
+  .cardInfo {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .cardImageWrapper {
+    flex: 0 0 100%;
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 576px) {
+  .stepperTrack {
+    --node-gap: 20px;
+  }
+  
+  .stepperWrapper {
+    padding: 1.25rem 1rem;
+  }
+  
+  .cardTitle {
+    font-size: 24px;
+  }
+  
+  .navBtn {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.75rem;
+  }
+}
+
+.progressLineBg {
+  left: 45px !important;
+  right: 45px !important;
+}
+
+/* Supporting Information Banner */
+.infoBanner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  background: linear-gradient(135deg, #0b0f19 0%, #1e293b 100%) !important;
+  border-radius: 20px !important;
+  padding: 2.5rem 3rem !important;
+  margin-top: 3.5rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25) !important;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Coordinate Grid Overlay on Banner */
+.infoBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.infoBannerLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  z-index: 1;
+  position: relative;
+}
+
+.infoBannerIconWrapper {
+  width: 56px;
+  height: 56px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent, #3b82f6);
+  flex-shrink: 0;
+}
+
+.infoBannerText h4 {
+  font-family: var(--font-family-display, inherit);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff !important;
+  margin: 0 0 0.5rem 0;
+}
+
+.infoBannerText p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75) !important;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 550px;
+}
+
+.infoBannerRight {
+  z-index: 1;
+  position: relative;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .infoBanner {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 2rem !important;
+  }
+  .infoBannerLeft {
+    flex-direction: column;
+    align-items: center;
+  }
+  .infoBannerText p {
+    max-width: 100%;
+  }
+  .infoBannerRight {
+    width: 100%;
+  }
+  .infoBannerRight button {
+    width: 100%;
+    justify-content: center;
+  }
+}

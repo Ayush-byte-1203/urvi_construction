@@ -1,61 +1,49 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
-
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Dependency directories
+# Dependencies
 node_modules/
-jspm_packages/
+/.pnp
+.pnp.js
 
-# Snowpack dependency directory (https://snowpack.dev/)
-web_modules/
+# Testing
+/coverage
+/.nyc_output
 
-# TypeScript cache
-*.tsbuildinfo
+# Production / Builds
+/dist
+/dist-ssr
+/build
+/out
 
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
-.eslintcache
-
-# Optional stylelint cache
-.stylelintcache
-
-# dotenv environment variable files
+# Runtime and Local Files
 .env
+.env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env.local
-.env.*.local
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Vite / Nuxt / Next build outputs
-dist
-dist-ssr
-*.local
-.next/
-out/
-
-# Editor directories and files
-.vscode/*
+# IDEs and Editors
+.vscode/
 !.vscode/extensions.json
 .idea/
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.DS_Store
+Thumbs.db
+
+# Diagnostic reports
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# TypeScript
+*.tsbuildinfo

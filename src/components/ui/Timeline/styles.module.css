@@ -15,7 +15,7 @@
   left: 50%;
   top: 0;
   bottom: 0;
-  width: 4px;
+  width: 2px; /* Make it thinner */
   transform: translateX(-50%);
   background: var(--border-subtle);
   border-radius: var(--radius-full);
@@ -33,7 +33,7 @@
 .timelineList {
   display: flex;
   flex-direction: column;
-  gap: 4.5rem;
+  gap: 3rem; /* Reduce card-to-card spacing */
   position: relative;
   z-index: 2;
 }
@@ -60,11 +60,11 @@
   left: 50%;
   top: 2rem;
   transform: translateX(-50%);
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: var(--bg-primary);
-  border: 4px solid var(--accent);
+  border: 3px solid var(--accent);
   z-index: 3;
   display: flex;
   align-items: center;
@@ -88,6 +88,7 @@
 /* Timeline Premium Cards */
 .timelineCard {
   width: 45%;
+  max-width: 340px; /* Card Width: 320–360px */
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
@@ -95,13 +96,23 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: all var(--transition-normal);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   text-align: left;
+}
+
+.itemLeft .timelineCard {
+  margin-left: auto;
+  margin-right: 2.5rem; /* Compact layout spacing next to center line */
+}
+
+.itemRight .timelineCard {
+  margin-right: auto;
+  margin-left: 2.5rem;
 }
 
 .timelineItem:hover .timelineCard {
   border-color: var(--accent);
-  transform: translateY(-6px);
+  transform: translateY(-6px); /* translateY(-6px) */
   box-shadow: var(--shadow-hover);
 }
 
@@ -110,7 +121,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem 1.5rem;
+  padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--border-subtle);
   background: var(--bg-secondary);
 }
@@ -141,7 +152,7 @@
 /* Supporting image wrapper */
 .cardImageWrapper {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 170px; /* Image Height: 160–180px */
   overflow: hidden;
   border-bottom: 1px solid var(--border-subtle);
 }
@@ -150,11 +161,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .timelineItem:hover .cardImage {
-  transform: scale(1.04);
+  transform: scale(1.08); /* Image zooms slightly */
 }
 
 /* Card Content Body */

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck, Clock, Award, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
+import HeroOverlay from '../../common/HeroOverlay';
 import styles from './styles.module.css';
 
 const Hero = () => {
@@ -19,8 +20,8 @@ const Hero = () => {
         <source src={videoUrl} type="video/mp4" />
       </video>
 
-      {/* Gradient Overlay */}
-      <div className={styles.heroOverlay} />
+      {/* Reusable Standardized Hero Overlay */}
+      <HeroOverlay type="video" />
 
       {/* Content */}
       <div className={`container ${styles.heroContentWrapper}`}>
@@ -85,12 +86,6 @@ const Hero = () => {
             </div>
           </div>
         </motion.div>
-      </div>
-
-      {/* Floating Micro UI badge */}
-      <div className={styles.floatingBadge}>
-        <div className={styles.badgePulse} />
-        <span>Live Cam: Staging Yard Active</span>
       </div>
     </div>
   );

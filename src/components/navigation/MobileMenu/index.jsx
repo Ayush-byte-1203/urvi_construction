@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { X, ChevronRight, Phone, Mail, Clock, Globe, Share2, Send, MapPin, MessageSquare } from 'lucide-react';
-import { appConfig } from '../../../config/appConfig';
+import { X, ChevronRight } from 'lucide-react';
 import { ROUTES } from '../../../constants/routes';
-import CitySelector from '../../common/CitySelector';
 import styles from './styles.module.css';
 
 const MobileMenu = ({ isOpen, onClose }) => {
-  const [selectedCity, setSelectedCity] = useState(localStorage.getItem('selectedCity') || 'vadodara');
-
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -27,12 +23,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
     };
   }, [isOpen, onClose]);
 
-  const handleCityChange = (cityId) => {
-    setSelectedCity(cityId);
-    localStorage.setItem('selectedCity', cityId);
-    window.dispatchEvent(new Event('cityChanged'));
-  };
-
   const navItems = [
     { name: 'Home', path: ROUTES.HOME },
     { name: 'About Us', path: ROUTES.ABOUT },
@@ -40,10 +30,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
     { name: 'Construction Packages', path: ROUTES.PACKAGES },
     { name: 'Completed Projects', path: ROUTES.PROJECTS },
     { name: 'Build Process', path: ROUTES.PROCESS },
-    { name: 'Knowledge Center', path: ROUTES.BLOG },
-    { name: 'FAQ Queries', path: ROUTES.FAQ },
-    { name: 'Careers Desk', path: ROUTES.CAREERS },
-    { name: 'Contact Us', path: ROUTES.CONTACT }
+    { name: 'FAQ Queries', path: ROUTES.FAQ }
   ];
 
   return (
@@ -67,12 +54,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
           </button>
         </div>
 
-        {/* City Selector */}
-        <div className={styles.citySelectorContainer}>
-          <span className={styles.sectionLabel}>Active City Location</span>
-          <CitySelector selectedCityId={selectedCity} onChangeCity={handleCityChange} />
-        </div>
-
         {/* Navigation list */}
         <nav className={styles.navList} role="navigation">
           {navItems.map((link) => (
@@ -90,52 +71,27 @@ const MobileMenu = ({ isOpen, onClose }) => {
           ))}
         </nav>
 
-        {/* Contact Info and Social links */}
+        {/* Contact Info and primary actions */}
         <div className={styles.drawerFooter}>
-          {/* Phone call widget */}
-          <a 
-            href={appConfig.company.phoneFormatted}
-            className={styles.phoneBadge}
-            aria-label={`Call BuildCraft at ${appConfig.company.phone}`}
-          >
-            <div className={styles.phoneIcon}>
-              <Phone size={14} />
-            </div>
-            <div>
-              <span className={styles.phoneText}>{appConfig.company.phone}</span>
-              <span className={styles.phoneLabel}>Working Shifts: {appConfig.company.businessHours}</span>
-            </div>
-          </a>
-
-          {/* Quick links & Address */}
-          <div className={styles.footerDetails}>
-            <div className={styles.footerItem}>
-              <Mail size={12} style={{ color: 'var(--accent)' }} />
-              <a href={appConfig.company.emailLink}>{appConfig.company.email}</a>
-            </div>
-            <div className={styles.footerItem}>
-              <MapPin size={12} style={{ color: 'var(--accent)' }} />
-              <span>{appConfig.company.address}</span>
-            </div>
-          </div>
-
           {/* Primary CTA button */}
           <Link 
             to={ROUTES.CONTACT}
             className="btn btn-primary"
-            style={{ width: '100%', display: 'flex', justifyContent: 'center', marginTop: '0.75rem' }}
+            style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: '0.75rem', padding: '0.85rem' }}
             onClick={onClose}
           >
             Get Free Quote
           </Link>
 
-          {/* Social Links Row */}
-          <div className={styles.socials}>
-            <a href={appConfig.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook Page"><Globe size={16} /></a>
-            <a href={appConfig.social.twitter} target="_blank" rel="noreferrer" aria-label="Twitter Profile"><MessageSquare size={16} /></a>
-            <a href={appConfig.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram Profile"><Share2 size={16} /></a>
-            <a href={appConfig.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn Profile"><Send size={16} /></a>
-          </div>
+          {/* Contact Button */}
+          <Link 
+            to={ROUTES.CONTACT}
+            className="btn btn-secondary"
+            style={{ width: '100%', display: 'flex', justifyContent: 'center', padding: '0.85rem' }}
+            onClick={onClose}
+          >
+            Contact Us
+          </Link>
         </div>
       </div>
     </>
@@ -143,3 +99,4 @@ const MobileMenu = ({ isOpen, onClose }) => {
 };
 
 export default MobileMenu;
+

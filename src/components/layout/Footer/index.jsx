@@ -76,7 +76,7 @@ const Footer = () => {
       <div className={styles.subFooter}>
         <div className={`container ${styles.subFooterContent}`}>
           <p className={styles.copyright}>
-            &copy; {currentYear} BuildCraft Constructions. All rights reserved.
+            &copy; {currentYear} Paramarsh Construction. All rights reserved.
           </p>
           <div className={styles.legalLinks}>
             {footerLinks.legal.map((link, idx) => (

@@ -119,6 +119,7 @@ select:focus-visible {
   line-height: var(--lh-tight);
   letter-spacing: -0.025em;
   color: var(--text-primary);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 .page-heading {
@@ -136,7 +137,7 @@ select:focus-visible {
   font-weight: 700;
   line-height: var(--lh-heading);
   margin-bottom: var(--space-xs);
-  color: var(--text-primary);
+  color: var(--text-primary-light, #101828);
 }
 
 .card-heading {
@@ -144,12 +145,12 @@ select:focus-visible {
   font-size: var(--font-size-card-heading);
   font-weight: 600;
   line-height: var(--lh-heading);
-  color: var(--text-primary);
+  color: var(--text-primary-light, #101828);
 }
 
 .subheading {
   font-size: var(--font-size-subheading);
-  color: var(--text-muted);
+  color: var(--text-secondary-light, #475467);
   max-width: var(--container-reading);
   line-height: var(--lh-relaxed);
 }
@@ -157,20 +158,34 @@ select:focus-visible {
 .text-body-lg {
   font-size: var(--font-size-body-lg);
   line-height: var(--lh-relaxed);
-  color: var(--text-secondary);
+  color: var(--text-secondary-light, #475467);
 }
 
 .text-body-md {
   font-size: var(--font-size-body-md);
   line-height: var(--lh-body);
-  color: var(--text-secondary);
+  color: var(--text-secondary-light, #475467);
 }
 
 .text-body-sm {
   font-size: var(--font-size-body-sm);
   line-height: var(--lh-body);
-  color: var(--text-muted);
+  color: var(--muted-light, #64748b);
 }
+
+/* Dark section visibility overrides */
+.section-dark .section-heading,
+.section-dark .card-heading {
+  color: var(--text-primary-dark, #FFFFFF) !important;
+}
+
+.section-dark .subheading,
+.section-dark .text-body-lg,
+.section-dark .text-body-md,
+.section-dark .text-body-sm {
+  color: var(--text-secondary-dark, rgba(255, 255, 255, 0.82)) !important;
+}
+
 
 .text-caption {
   font-size: var(--font-size-caption);
@@ -427,3 +442,99 @@ select:focus-visible {
   .anim-float { animation: none; }
   .anim-fade-in { animation: none; }
 }
+
+/* ==========================================================================
+   12. SUBPAGE HERO HEADER (Standardized Dark Banners)
+   ========================================================================== */
+.subpage-header {
+  background: linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)),
+              url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1920&q=80') center/cover;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0;
+}
+.subpage-header .container {
+  max-width: var(--container-standard);
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+.subpage-header h1 {
+  font-size: var(--font-size-page-heading);
+  color: #FFFFFF !important;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+  margin-bottom: 0.75rem;
+}
+.subpage-header .subtitle {
+  font-size: var(--font-size-subheading);
+  color: rgba(255, 255, 255, 0.9) !important;
+  max-width: var(--container-reading);
+  margin: 0.5rem auto 0;
+  line-height: var(--lh-relaxed);
+}
+.subpage-header .breadcrumbs {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-overline);
+  color: var(--accent, #3b82f6);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.subpage-header .breadcrumbs a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+.subpage-header .breadcrumbs span {
+  color: var(--accent, #3b82f6);
+}
+
+/* ==========================================================================
+   13. FORCE HERO TYPOGRAPHY OVERRIDES
+   ========================================================================== */
+.hero-title,
+.page-hero h1,
+.hero-content h1,
+.hero-content .title,
+.page-header h1,
+[class*="heroSection"] h1,
+[class*="hero"] h1,
+[class*="subpage"] h1 {
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+.hero-content p,
+.page-header p,
+[class*="heroSection"] p,
+[class*="hero"] p,
+[class*="subpage"] p,
+[class*="hero"] .subheading,
+[class*="subpage"] .subheading {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+
+[class*="heroSection"] [class*="breadcrumbs"] a,
+[class*="hero"] [class*="breadcrumbs"] a,
+[class*="subpage"] [class*="breadcrumbs"] a {
+  color: rgba(255, 255, 255, 0.75) !important;
+  text-decoration: none !important;
+}
+
+[class*="heroSection"] [class*="breadcrumbs"] span,
+[class*="hero"] [class*="breadcrumbs"] span,
+[class*="subpage"] [class*="breadcrumbs"] span {
+  color: var(--accent, #3b82f6) !important;
+}
+
+
+

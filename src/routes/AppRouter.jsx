@@ -5,26 +5,23 @@ import LoadingSpinner from '../components/common/LoadingSpinner';
 import { ROUTES } from '../constants/routes';
 
 // ── Public pages ──────────────────────────────────────────────────────────────
-const Home             = lazy(() => import('../pages/Home'));
-const Dashboard        = lazy(() => import('../pages/Dashboard'));
-const About            = lazy(() => import('../pages/About'));
-const Services         = lazy(() => import('../pages/Services'));
-const ServiceDetail    = lazy(() => import('../pages/ServiceDetail'));
-const Packages         = lazy(() => import('../pages/Packages'));
-const PackageDetail    = lazy(() => import('../pages/PackageDetail'));
-const Projects         = lazy(() => import('../pages/Projects'));
-const ProjectDetail    = lazy(() => import('../pages/ProjectDetail'));
-const Process          = lazy(() => import('../pages/Process'));
-const Testimonials     = lazy(() => import('../pages/Testimonials'));
-const Blog             = lazy(() => import('../pages/Blog'));
-const BlogDetail       = lazy(() => import('../pages/BlogDetail'));
-const FAQ              = lazy(() => import('../pages/FAQ'));
-const Careers          = lazy(() => import('../pages/Careers'));
-const Contact          = lazy(() => import('../pages/Contact'));
-const PrivacyPolicy    = lazy(() => import('../pages/PrivacyPolicy'));
-const TermsConditions  = lazy(() => import('../pages/TermsConditions'));
-const CookiePolicy     = lazy(() => import('../pages/CookiePolicy'));
-const NotFound         = lazy(() => import('../pages/NotFound'));
+const Home             = lazy(() => import('../pages/Home.jsx'));
+const Dashboard        = lazy(() => import('../pages/Dashboard.jsx'));
+const About            = lazy(() => import('../pages/About.jsx'));
+const Services         = lazy(() => import('../pages/Services.jsx'));
+const ServiceDetail    = lazy(() => import('../pages/ServiceDetail.jsx'));
+const Packages         = lazy(() => import('../pages/Packages.jsx'));
+const PackageDetail    = lazy(() => import('../pages/PackageDetail.jsx'));
+const Projects         = lazy(() => import('../pages/Projects.jsx'));
+const ProjectDetail    = lazy(() => import('../pages/ProjectDetail.jsx'));
+const Process          = lazy(() => import('../pages/Process.jsx'));
+const Testimonials     = lazy(() => import('../pages/Testimonials.jsx'));
+const FAQ              = lazy(() => import('../pages/FAQ.jsx'));
+const Contact          = lazy(() => import('../pages/Contact.jsx'));
+const PrivacyPolicy    = lazy(() => import('../pages/PrivacyPolicy.jsx'));
+const TermsConditions  = lazy(() => import('../pages/TermsConditions.jsx'));
+const CookiePolicy     = lazy(() => import('../pages/CookiePolicy.jsx'));
+const NotFound         = lazy(() => import('../pages/NotFound.jsx'));
 
 // ── Admin CMS ─────────────────────────────────────────────────────────────────
 const AdminLayout      = lazy(() => import('../admin/layouts/AdminLayout'));
@@ -100,10 +97,7 @@ const AppRouter = () => (
           <Route path={ROUTES.PROJECT_DETAIL} element={<ProjectDetail />} />
           <Route path={ROUTES.PROCESS}        element={<Process />} />
           <Route path={ROUTES.TESTIMONIALS}   element={<Testimonials />} />
-          <Route path={ROUTES.BLOG}           element={<Blog />} />
-          <Route path={ROUTES.BLOG_DETAIL}    element={<BlogDetail />} />
           <Route path={ROUTES.FAQ}            element={<FAQ />} />
-          <Route path={ROUTES.CAREERS}        element={<Careers />} />
           <Route path={ROUTES.CONTACT}        element={<Contact />} />
           <Route path={ROUTES.PRIVACY}        element={<PrivacyPolicy />} />
           <Route path={ROUTES.TERMS}          element={<TermsConditions />} />

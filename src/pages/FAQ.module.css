@@ -1,0 +1,193 @@
+.hero {
+  background: linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), 
+              url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80') center/cover;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0;
+}
+
+.breadcrumbs {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-overline);
+  color: var(--accent, #3b82f6);
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.breadcrumbs a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+}
+
+.breadcrumbs span {
+  color: var(--accent, #3b82f6);
+}
+
+.breadcrumbs a:hover {
+  color: #ffffff;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #FFFFFF !important;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+  margin-bottom: 1rem;
+}
+
+.heroDesc {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88) !important;
+  max-width: 700px;
+  margin: 0.5rem auto 0;
+}
+
+/* ==========================================================================
+   Filter & Search Area
+   ========================================================================== */
+.controlsWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--bg-secondary);
+  border: 1px solid var(--color-border-default);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-xs);
+  max-width: 400px;
+  width: 100%;
+}
+
+.searchInput {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: var(--font-size-body-sm);
+  width: 100%;
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.categoryPills {
+  display: flex;
+  gap: var(--space-xs);
+  overflow-x: auto;
+  padding-bottom: var(--space-xxs);
+}
+
+.pill {
+  padding: 0.5rem 1.25rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.pill:hover, .activePill {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   Featured Questions Cards
+   ========================================================================== */
+.featuredGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+  margin-bottom: var(--space-2xl);
+}
+
+.featuredCard {
+  background: var(--bg-secondary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.featuredTitle {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-body-sm);
+  color: var(--text-primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.featuredDesc {
+  font-size: var(--font-size-caption);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Accordions List
+   ========================================================================== */
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.faqButton {
+  width: 100%;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  font-family: var(--font-display);
+  transition: color var(--transition-fast);
+}
+
+.faqAnswer {
+  padding: 0 2rem 1.5rem 3.25rem; 
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  animation: fadeIn var(--transition-fast) forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .featuredGrid {
+    grid-template-columns: 1fr;
+  }
+}

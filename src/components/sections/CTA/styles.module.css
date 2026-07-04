@@ -24,6 +24,11 @@
 
 .gradient {
   background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
+  background-size: 24px 24px, 24px 24px, 100% 100%;
   box-shadow: 0 20px 60px rgba(37,99,235,0.25);
 }
 
@@ -101,12 +106,12 @@
 /* Light title on gradient bg */
 .gradient .title,
 .image .title {
-  color: #FFFFFF;
+  color: var(--text-primary-dark, #FFFFFF);
 }
 
 /* Dark title on solid bg */
 .solid .title {
-  color: var(--text-primary);
+  color: var(--text-primary-light, #101828);
 }
 
 .desc {
@@ -116,10 +121,11 @@
 }
 .gradient .desc,
 .image .desc {
-  color: rgba(255,255,255,0.75);
+  color: var(--text-secondary-dark, rgba(255, 255, 255, 0.82));
 }
+
 .solid .desc {
-  color: var(--text-muted);
+  color: var(--text-secondary-light, #475467);
 }
 
 .buttons {

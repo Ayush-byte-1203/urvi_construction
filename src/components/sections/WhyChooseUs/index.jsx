@@ -108,24 +108,6 @@ const WhyChooseUs = () => {
               ))}
             </ul>
           </div>
-
-          <div className={`glass-panel ${styles.auditsCard}`}>
-            <h3>Visual Quality Check Checklist</h3>
-            <div className={styles.checklistGrid}>
-              {[
-                { name: 'Soil Compaction', status: 'Passed' },
-                { name: 'Slump Curing Tests', status: 'Casted' },
-                { name: 'Steel Tensile Pulls', status: 'Audited' },
-                { name: 'MEP Insulation Audits', status: 'Passed' },
-                { name: 'Wall Waterproofing Curing', status: 'Verified' }
-              ].map((chk, idx) => (
-                <div key={idx} className={styles.chkRow}>
-                  <span>{chk.name}</span>
-                  <strong className={styles.statusLabel}>{chk.status}</strong>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* 3. Certifications Modal Section */}
@@ -166,38 +148,6 @@ const WhyChooseUs = () => {
                 <Heart size={24} className={styles.warIcon} />
                 <h3>{war.title}</h3>
                 <p>{war.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* 5. Download Center */}
-        <div style={{ marginTop: '5.5rem' }}>
-          <SectionHeader
-            eyebrow="Brochures Desk"
-            heading="Resource Download Center"
-            subheading="Download technical spec catalogs, checklists, and civil guidelines."
-          />
-
-          <div className="grid-3" style={{ marginTop: '3.5rem', gap: '1.5rem' }}>
-            {[
-              { title: 'Company profile brochure', size: 'PDF (4.2 MB)' },
-              { title: 'Material Specifications handbook', size: 'PDF (2.8 MB)' },
-              { title: 'Construction quality checklist', size: 'PDF (1.5 MB)' }
-            ].map((doc, idx) => (
-              <div key={idx} className={`glass-panel ${styles.downloadCard}`}>
-                <FileText size={24} className={styles.docIcon} />
-                <div>
-                  <strong>{doc.title}</strong>
-                  <span>{doc.size}</span>
-                </div>
-                <button 
-                  onClick={() => alert(`Starting download placeholder for ${doc.title}.`)}
-                  className={styles.dlBtn}
-                  aria-label={`Download ${doc.title}`}
-                >
-                  <Download size={16} />
-                </button>
               </div>
             ))}
           </div>

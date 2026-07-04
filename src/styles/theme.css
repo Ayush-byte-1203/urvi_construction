@@ -199,6 +199,21 @@
   --transition-linear:  0.15s linear;
 
   /* ==========================================================================
+     8.5. STANDARDIZED TEXT VISIBILITY TOKENS
+     ========================================================================== */
+  /* For light sections (dark text) */
+  --text-primary-light: #101828;
+  --text-secondary-light: #475467;
+  --muted-light: #64748b;
+  --heading-light: #101828;
+
+  /* For dark sections (light text) */
+  --text-primary-dark: #FFFFFF;
+  --text-secondary-dark: rgba(255, 255, 255, 0.82);
+  --muted-dark: rgba(255, 255, 255, 0.7);
+  --heading-dark: #FFFFFF;
+
+  /* ==========================================================================
      9. LAYOUT / NAV
      ========================================================================== */
   --header-height: 72px;

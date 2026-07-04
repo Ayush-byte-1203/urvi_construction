@@ -9,9 +9,7 @@ export const navigationData = {
     { name: 'Process', path: '/process' },
     { name: 'Packages', path: '/packages' },
     { name: 'Testimonials', path: '/testimonials' },
-    { name: 'Blog', path: '/blog' },
     { name: 'FAQ', path: '/faq' },
-    { name: 'Careers', path: '/careers' },
     { name: 'Client Portal', path: '/dashboard' },
   ],
   footerLinks: {
@@ -22,7 +20,6 @@ export const navigationData = {
       { name: 'Completed Projects', path: '/projects' },
       { name: 'Construction Process', path: '/process' },
       { name: 'Packages', path: '/packages' },
-      { name: 'Careers', path: '/careers' },
     ],
     specialties: [
       { name: 'Residential Construction', path: '/services' },

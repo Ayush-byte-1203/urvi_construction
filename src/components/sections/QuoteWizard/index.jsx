@@ -89,9 +89,9 @@ const QuoteWizard = () => {
 
   // Calculations Formulas
   const getRate = () => {
-    if (packageTier === 'core') return 2100;
-    if (packageTier === 'executive') return 3500;
-    return 5200;
+    if (packageTier === 'core') return 1499;
+    if (packageTier === 'executive') return 1799;
+    return 2111;
   };
 
   const getBuiltUpArea = () => {
@@ -155,29 +155,44 @@ const QuoteWizard = () => {
   };
 
   return (
-    <section className="section container" id="wizard">
-      <SectionHeader
-        eyebrow="Estimation Engine"
-        heading="Smart Quote Wizard & Cost Planner"
-        subheading="Configure your custom site properties, select packages, calculate structural load pricing, and plan your budgets."
-      />
-
-      <div className={`glass-panel ${styles.wizardCard}`} style={{ marginTop: '3.5rem' }}>
-        {/* Stepper Progress bar */}
-        {step < 10 && (
-          <div className={styles.stepper}>
-            <div className={styles.progressBarWrapper}>
-              <div className={styles.progressBar} style={{ width: `${(step / 9) * 100}%` }} />
+    <section className={styles.wizardSection} id="wizard">
+      <div className={`container ${styles.splitLayout}`}>
+        {/* Left Info Column */}
+        <div className={styles.leftInfoSection}>
+          <span className={styles.smallLabel}>Estimation Engine</span>
+          <h2 className={styles.largeHeading}>Estimate Your Specifications</h2>
+          <p className={styles.infoDescription}>
+            Configure your custom site properties, select package tiers, calculate structural load pricing, and plan callback schedules coordinates.
+          </p>
+          <div className={styles.detailsList}>
+            <div className={styles.detailItem}>
+              <ShieldCheck size={20} className={styles.detailIcon} />
+              <span>Lab Verified Materials & Steel Grades</span>
             </div>
-            <div className={styles.stepsLabelRow}>
-              <span>Step 0{step} / 09</span>
-              <span>Progress: {Math.round((step / 9) * 100)}%</span>
+            <div className={styles.detailItem}>
+              <Calculator size={20} className={styles.detailIcon} />
+              <span>Real-time Civil Calculations & Estimates</span>
             </div>
           </div>
-        )}
+        </div>
 
-        {/* Form panel bodies */}
-        <div className={styles.wizardBody} style={{ marginTop: '2rem' }}>
+        {/* Right Configurator Card Column */}
+        <div className={styles.configuratorCard}>
+          {/* Stepper Progress bar */}
+          {step < 10 && (
+            <div className={styles.stepper}>
+              <div className={styles.progressBarWrapper}>
+                <div className={styles.progressBar} style={{ width: `${(step / 9) * 100}%` }} />
+              </div>
+              <div className={styles.stepsLabelRow}>
+                <span>Step 0{step} / 09</span>
+                <span>{Math.round((step / 9) * 100)}% Complete</span>
+              </div>
+            </div>
+          )}
+
+          {/* Form panel bodies */}
+          <div className={styles.wizardBody}>
           {step === 1 && (
             <MotionWrapper variant="fadeIn" className={styles.stepContainer}>
               <h3 className={styles.stepTitle}>Select Active Location</h3>
@@ -244,9 +259,9 @@ const QuoteWizard = () => {
 
               <div className="grid-3" style={{ gap: '1rem' }}>
                 {[
-                  { id: 'core', name: 'Core Shell Build', price: '₹2,100/sqft', timeline: '8 Months', quality: 'Standard Civil' },
-                  { id: 'executive', name: 'Executive Smart', price: '₹3,500/sqft', timeline: '10 Months', quality: 'Premium Civil' },
-                  { id: 'signature', name: 'Signature Elite', price: '₹5,200/sqft', timeline: '12 Months', quality: 'Luxury Bespoke' }
+                  { id: 'core', name: 'Core Shell Build', price: '₹1,499/sqft', timeline: '8 Months', quality: 'Standard Civil' },
+                  { id: 'executive', name: 'Executive Smart', price: '₹1,799/sqft', timeline: '10 Months', quality: 'Premium Civil' },
+                  { id: 'signature', name: 'Premium Elite', price: '₹2,111/sqft', timeline: '12 Months', quality: 'Luxury Bespoke' }
                 ].map(item => (
                   <div
                     key={item.id}
@@ -384,6 +399,13 @@ const QuoteWizard = () => {
               <p className={styles.stepDesc}>Select your desired structural cost limits.</p>
 
               <div className={styles.sliderContainer} style={{ marginTop: '2rem' }}>
+                {/* Premium slider pill badge */}
+                <div className={styles.badgeContainer} style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
+                  <span className={styles.premiumBadge}>
+                    Active Value: {budgetRange === '20' ? 'Below ₹30 Lakhs' : budgetRange === '50' ? '₹50L - ₹75L' : budgetRange === '75' ? '₹75L - ₹1 Crore' : 'Above ₹1 Crore'}
+                  </span>
+                </div>
+
                 <input
                   type="range"
                   min="20"
@@ -650,8 +672,9 @@ const QuoteWizard = () => {
           )}
         </div>
       </div>
-    </section>
-  );
+    </div>
+  </section>
+);
 };
 
 export default QuoteWizard;

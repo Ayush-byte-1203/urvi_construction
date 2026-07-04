@@ -1,0 +1,31 @@
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(8, 12, 24, 0.72),
+    rgba(8, 12, 24, 0.60)
+  );
+  transition: opacity 0.3s ease;
+}
+
+/* Subtle top gradient to guarantee transparent header contrast */
+.overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  background: linear-gradient(to bottom, rgba(8, 12, 24, 0.65) 0%, rgba(8, 12, 24, 0) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Keep structural classes for backwards compatibility without compile errors */
+.overlayVideo { background: linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)); }
+.overlayDark { background: linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)); }
+.overlayMedium { background: linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)); }
+.overlayBright { background: linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)); }
+.overlayGradient { background: linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)); }

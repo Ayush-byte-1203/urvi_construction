@@ -30,5 +30,16 @@
   font-weight: 700;
   font-size: 1.25rem;
   letter-spacing: -0.01em;
-  color: var(--text-primary);
+  transition: color var(--transition-fast, 0.18s ease), text-shadow var(--transition-fast, 0.18s ease);
 }
+
+.textLight {
+  color: #FFFFFF;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.textDark {
+  color: var(--text-primary, #111827);
+  text-shadow: none;
+}
+
