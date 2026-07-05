@@ -450,6 +450,37 @@
   }
 }
 
+@media (max-width: 768px) {
+  .servicesAsymmetricGrid {
+    gap: 1.25rem;
+  }
+
+  .cardBody {
+    padding: 1.5rem;
+  }
+
+  .cardTitle {
+    font-size: 1.1rem;
+  }
+
+  .testimonialTextContent {
+    padding: 1.75rem;
+  }
+
+  .quoteBody {
+    font-size: 1rem;
+  }
+
+  .finalCtaSection {
+    padding: 4rem 0;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
 @media (max-width: 480px) {
   .packageCard {
     padding: 1.75rem 1.25rem;
@@ -465,10 +496,32 @@
   }
   .ctaButtons {
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
   }
   .finalCtaSection {
-    padding: 4rem 0;
+    padding: 3rem 0;
+  }
+  .ctaTitle {
+    font-size: clamp(1.25rem, 5vw, 1.75rem);
+  }
+  .ctaDesc {
+    font-size: 0.9rem;
+  }
+  .cardBody {
+    padding: 1.25rem;
+  }
+  .cardTag {
+    font-size: 0.6rem;
+  }
+  .cardTitle {
+    font-size: 1rem;
+  }
+  .cardDesc {
+    font-size: 0.8rem;
+  }
+  .packageHeader {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
   }
 }
 

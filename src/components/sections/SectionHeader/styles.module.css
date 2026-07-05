@@ -50,3 +50,35 @@
   margin-top: 0.875rem;
   max-width: var(--container-reading);
 }
+
+@media (max-width: 768px) {
+  .container {
+    margin-bottom: 2rem;
+  }
+
+  .heading {
+    font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+    max-width: 100%;
+  }
+
+  .subheading {
+    font-size: 0.9rem;
+    max-width: 100%;
+  }
+
+  .eyebrow {
+    font-size: 0.6rem;
+    padding: 0.25rem 0.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heading {
+    font-size: clamp(1.1rem, 5vw, 1.5rem);
+  }
+
+  .subheading {
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+}

@@ -297,3 +297,26 @@
     padding: 3.5rem 0;
   }
 }
+
+@media (max-width: 480px) {
+  .solutionsSection {
+    padding: 2.5rem 0;
+  }
+
+  .serviceCard {
+    padding: 1.25rem;
+  }
+
+  .serviceTitle {
+    font-size: 0.95rem;
+  }
+
+  .metaValue {
+    font-size: 0.95rem;
+  }
+
+  .chip {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+}

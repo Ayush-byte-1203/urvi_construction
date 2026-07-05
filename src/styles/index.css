@@ -565,5 +565,126 @@ select:focus-visible {
   color: var(--accent, #3b82f6) !important;
 }
 
+/* ==========================================================================
+   14. COMPREHENSIVE MOBILE-FIRST RESPONSIVE OVERRIDES
+   ========================================================================== */
 
+/* --- Prevent any horizontal overflow globally --- */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
 
+/* --- Images: never overflow their container --- */
+img, video, svg, canvas, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- Buttons: minimum touch target 48px on all devices --- */
+@media (max-width: 768px) {
+  .btn {
+    min-height: 48px;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.9rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.7rem 1rem;
+  }
+}
+
+/* --- Hero sections: stack and reduce padding on mobile --- */
+@media (max-width: 768px) {
+  .subpage-header {
+    min-height: 50vh;
+    padding: 6rem 0 3rem 0;
+  }
+
+  .subpage-header h1 {
+    font-size: clamp(1.5rem, 6vw, 2.25rem);
+  }
+
+  .subpage-header .subtitle {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .subpage-header {
+    min-height: 40vh;
+    padding: 5rem 0 2.5rem 0;
+  }
+}
+
+/* --- Typography: fluid clamping for all heading utility classes --- */
+@media (max-width: 768px) {
+  .display-lg {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+  }
+  .display-md {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
+  .display-sm {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+  .hero-heading {
+    font-size: clamp(1.75rem, 6vw, 3rem);
+  }
+  .page-heading {
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
+  }
+  .section-heading {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+  }
+}
+
+/* --- Form inputs: full width, proper sizing on mobile --- */
+@media (max-width: 768px) {
+  .form-control {
+    font-size: 16px; /* Prevents iOS zoom */
+    padding: 0.85rem 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+}
+
+/* --- Tables: allow horizontal scroll safely --- */
+table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+thead, tbody, tr, th, td {
+  display: revert; /* Restore table display within scrollable block */
+}
+
+/* --- Reduce heavy animations on mobile for performance --- */
+@media (max-width: 768px) {
+  .glass-panel:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Word wrap safety for long text --- */
+h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, strong {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
