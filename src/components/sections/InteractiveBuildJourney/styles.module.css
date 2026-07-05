@@ -1,172 +1,389 @@
-.journeyWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-  width: 100%;
-}
-
-.timelineRow {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+.journeySection {
+  background-color: #0b0f19; /* Dark blueprint aesthetic */
+  color: #ffffff;
   position: relative;
-  padding-bottom: 1rem;
+  overflow: hidden;
+  padding: 6rem 0;
 }
 
-.timelineRow::before {
-  content: '';
+/* Blueprint Grid Background */
+.blueprintGrid {
   position: absolute;
-  top: 22px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: var(--border-subtle, #f1f5f9);
+  inset: 0;
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.lightBlob {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.07) 0%, rgba(59, 130, 246, 0) 70%);
+  filter: blur(50px);
   z-index: 1;
 }
 
-.stepNode {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  z-index: 2;
-  flex: 1;
+.lightBlob2 {
+  position: absolute;
+  bottom: 10%;
+  right: 15%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(147, 197, 253, 0.05) 0%, rgba(147, 197, 253, 0) 70%);
+  filter: blur(60px);
+  z-index: 1;
 }
 
-.iconCircle {
-  width: 44px;
-  height: 44px;
+.timelineContainer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+/* Center Spine */
+.centerSpine {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #1d4ed8, #3b82f6, #60a5fa, rgba(96, 165, 250, 0.1));
+  transform: translateX(-50%);
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+.glowingCore {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, #60a5fa, transparent);
+  animation: travelDown 8s linear infinite;
+}
+
+@keyframes travelDown {
+  0% { top: -10%; }
+  100% { top: 110%; }
+}
+
+.stagesList {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  width: 100%;
+}
+
+.stageRow {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.rowLeft {
+  justify-content: flex-start;
+  padding-right: 50%;
+}
+
+.rowRight {
+  justify-content: flex-end;
+  padding-left: 50%;
+}
+
+/* Center marker */
+.spineNodeMarker {
+  position: absolute;
+  left: 50%;
+  top: 30px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.markerDot {
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: var(--bg-card, #ffffff);
-  border: 2px solid var(--border, #cbd5e1);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted, #64748b);
-  transition: all var(--transition-normal, 0.25s ease);
+  transition: all 0.3s ease;
 }
 
-.stepNode:hover .iconCircle {
-  border-color: var(--accent, #3b82f6);
-  color: var(--accent, #3b82f6);
-}
-
-.activeNode .iconCircle {
-  background-color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+.markerCompleted {
+  background-color: #2563eb;
+  border: 3px solid #60a5fa;
   color: #ffffff;
-  box-shadow: 0 0 0 4px var(--accent-subtle, #eff6ff);
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.6);
 }
 
-.nodeTitle {
-  font-family: var(--font-family-display, inherit);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-muted, #94a3b8);
-  margin-top: 0.5rem;
-  transition: color var(--transition-fast, 0.15s ease);
+.markerCurrent {
+  background-color: #3b82f6;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.25);
+  animation: pulseRipple 2s infinite;
 }
 
-.activeNode .nodeTitle {
-  color: var(--accent, #3b82f6);
-  font-weight: 800;
+.markerUpcoming {
+  background-color: #1e293b;
+  border: 3px solid #475569;
 }
 
-/* Detail Card */
-.detailCard {
-  width: 100%;
-  max-width: 800px;
-  padding: 3rem;
-  background-color: var(--bg-card, #ffffff);
-  border: 1px solid var(--border, #cbd5e1);
-  border-radius: var(--radius-md, 8px);
-  text-align: left;
-  box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
+@keyframes pulseRipple {
+  0% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+  100% { box-shadow: 0 0 0 0px rgba(59, 130, 246, 0); }
 }
 
-.detailHeader {
+/* Premium Card */
+.journeyCard {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.rowLeft .journeyCard {
+  margin-right: auto;
+}
+
+.rowRight .journeyCard {
+  margin-left: auto;
+}
+
+.journeyCard:hover {
+  border-color: rgba(96, 165, 250, 0.3);
+  box-shadow: 0 12px 30px rgba(59, 130, 246, 0.15);
+}
+
+.journeyCard:hover .iconCircleWrapper {
+  transform: scale(1.05) rotate(5deg);
+  background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+  color: #ffffff;
+}
+
+.cardExpanded {
+  border-color: rgba(96, 165, 250, 0.4);
+  background: rgba(30, 41, 59, 0.85);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.cardHeader {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
 }
 
-.stepNum {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--accent, #3b82f6);
-  background-color: var(--accent-subtle, #eff6ff);
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--radius-xs, 4px);
+.iconCircleWrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1.5px solid rgba(255, 255, 255, 0.08);
+  color: #60a5fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
-.stepLabel {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted, #64748b);
+.headerInfo {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.phaseLabel {
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #60a5fa;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
 }
 
-.detailTitle {
-  font-family: var(--font-family-display, inherit);
-  font-size: 1.5rem;
+.phaseTitle {
+  font-size: 1.3rem;
   font-weight: 800;
-  color: var(--text-primary, #1e293b);
-  margin: 0 0 0.5rem 0;
-}
-
-.detailText {
-  font-size: 0.95rem;
-  color: var(--text-secondary, #475569);
-  line-height: 1.6;
+  color: #ffffff;
   margin: 0;
 }
 
-.note {
+.labelSubtext {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 0.15rem;
+}
+
+.cardBrief {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  text-align: left;
+  margin: 0 0 1.5rem 0;
+}
+
+.cardQuickMeta {
   display: flex;
-  align-items: center;
-  gap: 0.35rem;
+  gap: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 1.25rem;
+}
+
+.metaBadge {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 0.15rem;
   font-size: 0.75rem;
-  color: var(--text-muted, #94a3b8);
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-subtle, #f1f5f9);
 }
 
-@media (max-width: 900px) {
-  .timelineRow {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-  .timelineRow::before {
-    display: none;
-  }
-  .stepNode {
-    flex-direction: row;
-    gap: 0.5rem;
-    align-items: center;
-    border: 1px solid var(--border, #cbd5e1);
-    padding: 0.5rem;
-    border-radius: var(--radius-sm, 6px);
-  }
-  .iconCircle {
-    width: 32px;
-    height: 32px;
-  }
-  .nodeTitle {
-    margin-top: 0;
-  }
-  .detailCard {
-    padding: 1.75rem;
-  }
+.metaBadge span {
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
-@media (max-width: 576px) {
-  .timelineRow {
-    grid-template-columns: repeat(2, 1fr);
+.metaBadge strong {
+  font-size: 0.85rem;
+  color: #e2e8f0;
+}
+
+.textCompleted { color: #60a5fa !important; }
+.textCurrent { color: #f59e0b !important; }
+.textUpcoming { color: #64748b !important; }
+
+/* Expanded panel */
+.expandedContent {
+  margin-top: 1.5rem;
+  overflow: hidden;
+  text-align: left;
+  position: relative;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin-bottom: 1.5rem;
+}
+
+.extendedGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.extraField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.extraField strong {
+  font-size: 0.75rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.extraField p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.deliverablesList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.dChip {
+  font-size: 0.75rem;
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.illustrationOverlay {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  font-size: 4rem;
+  opacity: 0.1;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Floating Stats */
+.floatingStatsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 1.5rem 0;
+  position: relative;
+  z-index: 4;
+}
+
+.statsTag {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 99px;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .centerSpine {
+    left: 20px;
+  }
+  
+  .spineNodeMarker {
+    left: 20px;
+  }
+  
+  .stageRow {
+    padding-left: 45px !important;
+    padding-right: 0 !important;
+    justify-content: flex-start !important;
+  }
+  
+  .journeyCard {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .floatingStatsContainer {
+    justify-content: flex-start;
+    padding-left: 45px;
   }
 }

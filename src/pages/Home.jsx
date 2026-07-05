@@ -15,7 +15,6 @@ import { faqData } from '../data/faqData';
 import Hero from '../components/sections/Hero';
 import TrustStrip from '../components/sections/TrustStrip';
 import OneStopHomeSolutions from '../components/sections/OneStopHomeSolutions';
-import InteractiveBuildJourney from '../components/sections/InteractiveBuildJourney';
 import MaterialBrandsExplorer from '../components/sections/MaterialBrandsExplorer';
 import VideoGallery from '../components/sections/VideoGallery';
 import QuoteWizard from '../components/sections/QuoteWizard';
@@ -239,9 +238,6 @@ const Home = () => {
           )}
         </div>
       </section>
-
-      {/* 6. Interactive Build Journey (9 stages) */}
-      <InteractiveBuildJourney />
 
       {/* 7. Why Choose Us (Large Feature Cards) */}
       <WhyChooseUs />

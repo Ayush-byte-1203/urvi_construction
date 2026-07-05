@@ -69,38 +69,6 @@ const Services = () => {
     { title: 'Support', label: '15-Year Coverage', desc: 'Registering waterproofing and foundation warranty files.' }
   ];
 
-  // Comparisons matrix
-  const comparisons = [
-    {
-      service: 'Villa Construction',
-      purpose: 'Bespoke Luxury Homes',
-      suitable: 'Private Land Owners',
-      timeline: '8-12 Months',
-      advantage: 'Custom floor design & premium materials sourcing'
-    },
-    {
-      service: 'Commercial Office Tower',
-      purpose: 'Multi-Tenant Plazas',
-      suitable: 'Real Estate Developers',
-      timeline: '12-18 Months',
-      advantage: 'LEED rating support and heavy-duty gantry steel frame'
-    },
-    {
-      service: 'Project Management (PMC)',
-      purpose: 'Budget & Quality Audits',
-      suitable: 'Independent Home Builders',
-      timeline: 'Varies',
-      advantage: 'Zero billing margins leakages, weekly drone reports'
-    }
-  ];
-
-  // Material Partners details
-  const brandsList = [
-    { name: 'UltraTech Cement', desc: 'Grade-53 structural strength cement.', use: 'Slab Casting & RCC Pillars', badge: 'Certified Core Strength', warranty: '15 Years' },
-    { name: 'Tata Tiscon Steel', desc: 'TMT steel rebars featuring extreme ductility.', use: 'Foundations & Column Framing', badge: 'Fe 550D High Elongation', warranty: '20 Years' },
-    { name: 'Asian Paints Apex', desc: 'Silicon emulsion weatherproof coating.', use: 'Exterior Protective Painting', badge: 'Anti-Algal UV-Protection', warranty: '7 Years' }
-  ];
-
   // Mapped FAQs
   const faqItems = faqData.slice(0, 5).map((f) => ({
     title: f.q,
@@ -143,45 +111,50 @@ const Services = () => {
 
           <div className={styles.heroCtaRow}>
             <Link to="/contact" className="btn btn-primary">Book Site Assessment</Link>
-            <a href="#solutions" className={`btn btn-secondary ${styles.btnSecTransparent}`}>Interactive Circle</a>
           </div>
 
           {/* Animated Statistics inside Hero */}
           <div className={styles.heroStats}>
             <div className={styles.statBox}>
               <strong>15+</strong>
-              <span>Years of Civil Audits</span>
+              <span>Years Support</span>
+            </div>
+            <div className={styles.statBox}>
+              <strong>250+</strong>
+              <span>Projects Handover</span>
             </div>
             <div className={styles.statBox}>
               <strong>100%</strong>
-              <span>Material Lab Verified</span>
-            </div>
-            <div className={styles.statBox}>
-              <strong>150+</strong>
-              <span>Custom Villas Handed Over</span>
+              <span>BOQ Safety Audited</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Service Categories Grouping */}
+      {/* 2. Interactive One Stop Solutions Showcase */}
+      <OneStopHomeSolutions />
+
+      {/* 3. Categorized Details Grid */}
       <section className="section container">
         <SectionHeader
-          eyebrow="Divisions Classification"
-          heading="Grouped Construction Divisions"
-          subheading="We cluster our specialist engineering services into distinct chronological categories representing the complete lifecycle of structural execution."
+          eyebrow="Category Filter"
+          heading="Specialty Services Details"
+          subheading="Select a category button below to review granular service scopes, expected durations and live image previews."
         />
 
-        {/* Category Pills Menu */}
+        {/* Category Tabs */}
         <div className={styles.pillsContainer} style={{ marginTop: '3.5rem' }}>
-          {categories.map((cat) => (
+          {categories.map((tab) => (
             <button
-              key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`${styles.pillBtn} ${activeCategory === cat.id ? styles.pillActive : ''}`}
+              key={tab.id}
+              onClick={() => {
+                setActiveCategory(tab.id);
+                setActiveStep(0);
+              }}
+              className={`${styles.pillBtn} ${activeCategory === tab.id ? styles.pillActive : ''}`}
             >
-              {cat.icon}
-              <span>{cat.label}</span>
+              {tab.icon}
+              <span>{tab.label}</span>
             </button>
           ))}
         </div>
@@ -193,7 +166,7 @@ const Services = () => {
               key={srv.id}
               variant="slideUp"
               delay={idx * 0.1}
-              className={`glass-panel ${styles.serviceCard}`}
+              className={styles.serviceCard}
             >
               <div className={styles.cardImage}>
                 <img src={srv.image} alt={srv.title} />
@@ -206,8 +179,8 @@ const Services = () => {
                   <Clock size={12} className={styles.metaIcon} />
                   <span>Timeline: {srv.timeline}</span>
                 </div>
-                <Link to={`/services/${srv.id}`} className={styles.cardLink}>
-                  Review Specifications <ArrowRight size={14} style={{ marginLeft: '4px' }} />
+                <Link to="/contact" className={styles.cardLink}>
+                  Book Scope Assessment <ArrowRight size={14} style={{ marginLeft: '4px' }} />
                 </Link>
               </div>
             </MotionWrapper>
@@ -215,16 +188,13 @@ const Services = () => {
         </div>
       </section>
 
-      {/* 3. One Stop Home Solutions widget */}
-      <OneStopHomeSolutions />
-
-      {/* 4. Interactive Build / Service Process */}
-      <section className={`section ${styles.processSection}`} id="process">
+      {/* 4. Scheduling Milestones Timeline */}
+      <section className={`section ${styles.processSection}`}>
         <div className="container">
           <SectionHeader
-            eyebrow="Execution Milestones"
-            heading="Turnkey Services Workflow"
-            subheading="An step-by-step workflow managing compliance permits, pricing approvals, structure curing checks, and handover reports."
+            eyebrow="Milestone Targets"
+            heading="Scheduling & Process Milestones"
+            subheading="An overview indicating chronological steps, lab compression audits and keys handover parameters."
           />
 
           <div className={styles.journeyWrapper} style={{ marginTop: '4rem' }}>
@@ -232,11 +202,11 @@ const Services = () => {
               {processSteps.map((stg, idx) => (
                 <div
                   key={idx}
-                  className={`${styles.stepNode} ${idx === activeStep ? styles.activeNode : ''}`}
                   onClick={() => setActiveStep(idx)}
+                  className={`${styles.stepNode} ${idx === activeStep ? styles.activeNode : ''}`}
                 >
                   <div className={styles.iconCircle}>
-                    <CheckCircle2 size={16} />
+                    {idx < activeStep ? <CheckCircle2 size={16} /> : <span>{idx + 1}</span>}
                   </div>
                   <span className={styles.nodeTitle}>{stg.title}</span>
                 </div>
@@ -255,86 +225,6 @@ const Services = () => {
                 <span>Click nodes above to review scheduling checks.</span>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. Service Comparison Section */}
-      <section className="section container">
-        <SectionHeader
-          eyebrow="Matrix Table"
-          heading="Service Specifications Comparison"
-          subheading="Compare scopes, parameters, execution schedules, and optimal applications of our key build formats."
-        />
-
-        <div className={styles.comparisonWrapper} style={{ marginTop: '3.5rem' }}>
-          <div className={styles.tableResponsive}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Build Segment</th>
-                  <th>Core Purpose</th>
-                  <th>Suitable For</th>
-                  <th>Baseline Duration</th>
-                  <th>Structural Advantage</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {comparisons.map((row, idx) => (
-                  <tr key={idx}>
-                    <td className={styles.boldCell}>{row.service}</td>
-                    <td>{row.purpose}</td>
-                    <td>{row.suitable}</td>
-                    <td className={styles.accentCell}>{row.timeline}</td>
-                    <td>{row.advantage}</td>
-                    <td>
-                      <Link to="/contact" className={styles.tableLink}>
-                        Select Scope &rarr;
-                      </Link>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. Material Brands Expanded */}
-      <section className={`section ${styles.brandsSection}`}>
-        <div className="container">
-          <SectionHeader
-            eyebrow="Partner Brands"
-            heading="Certified Raw Materials"
-            subheading="Review specifications and quality certifications of our certified cement, steel, and chemical waterproofing suppliers."
-          />
-
-          <div className="grid-3" style={{ marginTop: '3.5rem', gap: '2rem' }}>
-            {brandsList.map((brand, idx) => (
-              <MotionWrapper
-                key={idx}
-                variant="slideUp"
-                delay={idx * 0.1}
-                className={`glass-panel ${styles.brandCard}`}
-              >
-                <div className={styles.brandHeader}>
-                  <h4 className={styles.brandTitle}>{brand.name}</h4>
-                  <span className={styles.brandBadge}>{brand.badge}</span>
-                </div>
-                <p className={styles.brandDesc}>{brand.desc}</p>
-                <div className={styles.brandSpecs}>
-                  <div className={styles.specItem}>
-                    <strong>Application:</strong>
-                    <span>{brand.use}</span>
-                  </div>
-                  <div className={styles.specItem}>
-                    <strong>Manufacturer Warranty:</strong>
-                    <span>{brand.warranty}</span>
-                  </div>
-                </div>
-              </MotionWrapper>
-            ))}
           </div>
         </div>
       </section>
