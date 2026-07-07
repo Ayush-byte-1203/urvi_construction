@@ -4,32 +4,34 @@ import { Link } from 'react-router-dom';
 import { 
   ArrowRight, ShieldCheck, Clock, Users, Play, Star, Compass, AlertCircle
 } from 'lucide-react';
-import { appConfig } from '../config/appConfig';
-import { servicesData } from '../data/servicesData';
-import { projectsData } from '../data/projectsData';
-import { packagesData } from '../data/packagesData';
-import { testimonialsData } from '../data/testimonialsData';
-import { faqData } from '../data/faqData';
+import { appConfig } from '@config/appConfig';
+import { servicesData } from '@data/servicesData';
+import { projectsData } from '@data/projectsData';
+import { packagesData } from '@data/packagesData';
+import { testimonialsData } from '@data/testimonialsData';
+import { faqData } from '@data/faqData';
 
 // Reusable / Redesigned Sections
-import Hero from '../components/sections/Hero';
-import TrustStrip from '../components/sections/TrustStrip';
-import OneStopHomeSolutions from '../components/sections/OneStopHomeSolutions';
-import MaterialBrandsExplorer from '../components/sections/MaterialBrandsExplorer';
-import VideoGallery from '../components/sections/VideoGallery';
-import QuoteWizard from '../components/sections/QuoteWizard';
-import FeaturedProjects from '../components/sections/FeaturedProjects';
-import WhyChooseUs from '../components/sections/WhyChooseUs';
+import Hero from '@sections/Hero';
+import TrustStrip from '@sections/TrustStrip';
+import OneStopHomeSolutions from '@sections/OneStopHomeSolutions';
 
-import SectionHeader from '../components/sections/SectionHeader';
-import Accordion from '../components/ui/Accordion';
-import MotionWrapper from '../components/common/MotionWrapper';
-import MediaWrapper from '../components/common/MediaWrapper';
-import Button from '../components/common/Button';
-import CitySelector from '../components/common/CitySelector';
-import GenericCard from '../components/cards/GenericCard';
+import VideoGallery from '@sections/VideoGallery';
+import QuoteWizard from '@sections/QuoteWizard';
+import FeaturedProjects from '@sections/FeaturedProjects';
+import WhyChooseUs from '@sections/WhyChooseUs';
 
-import { HeaderThemeContext } from '../layouts/Layout';
+import SectionHeader from '@sections/SectionHeader';
+import Accordion from '@components/Accordion';
+import MotionWrapper from '@components/MotionWrapper';
+import MediaWrapper from '@components/MediaWrapper';
+import Button from '@components/Button';
+
+
+import CitySelector from '@components/CitySelector';
+import GenericCard from '@components/GenericCard';
+
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './Home.module.css';
 
 const Home = () => {
@@ -64,7 +66,7 @@ const Home = () => {
   const serviceImages = {
     residential: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
     commercial: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
-    industrial: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80'
+    industrial: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80'
   };
 
   // Testimonials slide controls
@@ -245,8 +247,6 @@ const Home = () => {
       {/* 8. Featured Projects (Asymmetrical grids) */}
       <FeaturedProjects />
 
-      {/* 9. Material Brands explorer */}
-      <MaterialBrandsExplorer />
 
       {/* 10. Video Gallery Preview */}
       <VideoGallery />
@@ -343,23 +343,8 @@ const Home = () => {
       {/* 14. Quote Wizard guided calculator preview */}
       <QuoteWizard />
 
-      {/* 15. Redesigned Final CTA */}
-      <section className={styles.finalCtaSection}>
-        <div className={`container ${styles.finalCtaContainer}`}>
-          <h2 className={styles.ctaTitle}>Let's Build Your Dream Home Together</h2>
-          <p className={styles.ctaDesc}>
-            Join coordinate site consultations checks with our spatial planners and general contracting engineers to clear mechanical BOQ estimates today.
-          </p>
-          <div className={styles.ctaButtons}>
-            <Link to="/contact" className={`btn btn-primary ${styles.btnPrimaryContrast}`}>
-              Book Free Site Consultation
-            </Link>
-            <Link to="/packages" className={`btn btn-secondary ${styles.btnSecondaryTransparent}`}>
-              Review Build Packages
-            </Link>
-          </div>
-        </div>
-      </section>
+      
+      
     </div>
   );
 };

@@ -1,6 +1,5 @@
 export const ROUTES = {
   HOME: '/',
-  DASHBOARD: '/dashboard',
   ABOUT: '/about',
   SERVICES: '/services',
   SERVICE_DETAIL: '/services/:id',
@@ -15,31 +14,5 @@ export const ROUTES = {
   PRIVACY: '/privacy',
   TERMS: '/terms',
   COOKIES: '/cookies',
-};
-
-export const ADMIN_ROUTES = {
-  ROOT:         '/admin',
-  SERVICES:     '/admin/content/services',
-  PACKAGES:     '/admin/content/packages',
-  PROJECTS:     '/admin/content/projects',
-  BLOGS:        '/admin/content/blogs',
-  TESTIMONIALS: '/admin/content/testimonials',
-  FAQ:          '/admin/content/faq',
-  BRANDS:       '/admin/content/brands',
-  LEADS:        '/admin/leads',
-  QUOTES:       '/admin/quotes',
-  CAREERS:      '/admin/careers',
-  APPLICATIONS: '/admin/applications',
-  NEWSLETTER:   '/admin/newsletter',
-  DOWNLOADS:    '/admin/downloads',
-  MEDIA:        '/admin/media',
-  USERS:        '/admin/users',
-  ROLES:        '/admin/roles',
-  SEO:          '/admin/seo',
-  PAGE_BUILDER: '/admin/page-builder',
-  CITIES:       '/admin/cities',
-  NAVIGATION:   '/admin/navigation',
-  ANALYTICS:    '/admin/analytics',
-  SETTINGS:     '/admin/settings',
 };
 

@@ -369,62 +369,7 @@
   margin-top: 2rem;
 }
 
-/* Redesigned Final CTA Section */
-.finalCtaSection {
-  background: linear-gradient(135deg, #0b0f19 0%, #1e293b 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 6rem 0;
-  color: #ffffff;
-  text-align: center;
-}
 
-.finalCtaContainer {
-  max-width: 800px;
-}
-
-.ctaTitle {
-  font-family: var(--font-family-display, inherit);
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0 0 1.25rem 0;
-  color: #ffffff;
-}
-
-.ctaDesc {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.7);
-  margin: 0 0 2.5rem 0;
-}
-
-.ctaButtons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.btnPrimaryContrast {
-  background-color: #ffffff;
-  color: var(--accent, #3b82f6);
-  font-weight: 700;
-}
-
-.btnPrimaryContrast:hover {
-  background-color: var(--accent-subtle, #eff6ff);
-}
-
-.btnSecondaryTransparent {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-}
-
-.btnSecondaryTransparent:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #ffffff;
-}
 
 /* Responsive Rules */
 @media (max-width: 1024px) {
@@ -470,15 +415,6 @@
   .quoteBody {
     font-size: 1rem;
   }
-
-  .finalCtaSection {
-    padding: 4rem 0;
-  }
-
-  .ctaButtons {
-    flex-direction: column;
-    align-items: stretch;
-  }
 }
 
 @media (max-width: 480px) {
@@ -493,19 +429,6 @@
   }
   .quoteBody {
     font-size: 1rem;
-  }
-  .ctaButtons {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .finalCtaSection {
-    padding: 3rem 0;
-  }
-  .ctaTitle {
-    font-size: clamp(1.25rem, 5vw, 1.75rem);
-  }
-  .ctaDesc {
-    font-size: 0.9rem;
   }
   .cardBody {
     padding: 1.25rem;

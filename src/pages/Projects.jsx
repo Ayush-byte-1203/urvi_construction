@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import { 
   ArrowRight, Search, Compass, Clock, ChevronRight, MapPin, CheckCircle2 
 } from 'lucide-react';
-import { appConfig } from '../config/appConfig';
-import { projectsData } from '../data/projectsData';
+import { appConfig } from '@config/appConfig';
+import { projectsData } from '@data/projectsData';
 
-import SectionHeader from '../components/sections/SectionHeader';
-import MotionWrapper from '../components/common/MotionWrapper';
-import Button from '../components/common/Button';
-import HeroOverlay from '../components/common/HeroOverlay';
-import CTA from '../components/sections/CTA';
-import { HeaderThemeContext } from '../layouts/Layout';
+import SectionHeader from '@sections/SectionHeader';
+import MotionWrapper from '@components/MotionWrapper';
+import Button from '@components/Button';
+import HeroOverlay from '@components/HeroOverlay';
+
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './Projects.module.css';
 
 const Projects = () => {
@@ -223,17 +223,8 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* 5. Book Similar Project CTA */}
-      <CTA
-        title="Inspired by Our Completed Case Studies?"
-        description="Schedule coordinate site inspections calls with our general contracting engineers to plan specifications today."
-        primaryBtnText="Book Consultation Call"
-        primaryBtnLink="/contact"
-        secondaryBtnText="Estimate Cost Calculator"
-        secondaryBtnLink="/packages"
-        bgVariant="gradient"
-        layout="center"
-      />
+      
+      
     </div>
   );
 };

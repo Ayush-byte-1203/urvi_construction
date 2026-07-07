@@ -71,35 +71,39 @@
   position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: var(--node-gap, 32px);
+  align-items: flex-start; /* Align to top so we can manually align connector */
   width: max-content;
   margin: 0 auto;
   padding: 0 48px; /* Proper padding first/last to prevent crop */
 }
 
-/* Connection Lines */
-.progressLineBg {
-  position: absolute;
-  left: 80px;
-  right: 80px;
-  top: 44px; /* Centered through the center of 56px icons */
+/* Connector Line */
+.connector {
+  flex-grow: 1;
+  width: 48px; /* Width between nodes */
   height: 3px;
-  background: #E2E8F0 !important; /* Light grey remaining line */
-  z-index: 1;
+  background-color: #E5E7EB;
+  border-radius: 2px;
+  margin-top: 44px; /* Perfectly aligned to the center of the 56px icon (considering stepNumber text above it) */
+  position: relative;
+  overflow: hidden;
 }
 
-.stepperProgress {
+.connectorFill {
   position: absolute;
-  left: 80px;
-  top: 44px;
-  height: 3px;
-  background: var(--accent, #3b82f6) !important; /* Active blue progress line */
-  z-index: 2;
-  transform-origin: left center;
-  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);
+  border-radius: 2px;
   transition: width 0.3s ease;
 }
+
+.connectorCompleted .connectorFill {
+  width: 100%;
+}
+
 
 /* Stepper Nodes */
 .stepNode {
@@ -385,20 +389,15 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Responsive Gaps */
-.stepperTrack {
-  --node-gap: 32px; /* Gap between stages: 24-32px */
-}
-
 @media (max-width: 1200px) {
-  .stepperTrack {
-    --node-gap: 28px;
+  .connector {
+    width: 28px;
   }
 }
 
 @media (max-width: 991px) {
-  .stepperTrack {
-    --node-gap: 24px;
+  .connector {
+    width: 24px;
   }
   
   .cardContent {
@@ -421,8 +420,8 @@
 }
 
 @media (max-width: 576px) {
-  .stepperTrack {
-    --node-gap: 20px;
+  .connector {
+    width: 20px;
   }
   
   .stepperWrapper {
@@ -437,11 +436,6 @@
     padding: 0.4rem 0.7rem;
     font-size: 0.75rem;
   }
-}
-
-.progressLineBg {
-  left: 45px !important;
-  right: 45px !important;
 }
 
 /* Supporting Information Banner */

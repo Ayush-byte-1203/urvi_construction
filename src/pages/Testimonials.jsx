@@ -4,14 +4,14 @@ import { Helmet } from 'react-helmet-async';
 import { 
   Star, MessageSquare, ChevronRight, Play, Quote, Award, ShieldCheck, CheckCircle2 
 } from 'lucide-react';
-import { appConfig } from '../config/appConfig';
-import { testimonialsData } from '../data/testimonialsData';
-import SectionHeader from '../components/sections/SectionHeader';
-import MotionWrapper from '../components/common/MotionWrapper';
-import MediaWrapper from '../components/common/MediaWrapper';
-import Button from '../components/common/Button';
-import CTA from '../components/sections/CTA';
-import { HeaderThemeContext } from '../layouts/Layout';
+import { appConfig } from '@config/appConfig';
+import { testimonialsData } from '@data/testimonialsData';
+import SectionHeader from '@sections/SectionHeader';
+import MotionWrapper from '@components/MotionWrapper';
+import MediaWrapper from '@components/MediaWrapper';
+import Button from '@components/Button';
+
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './Testimonials.module.css';
 
 const Testimonials = () => {
@@ -225,17 +225,8 @@ const Testimonials = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <CTA 
-        title="Ready to Build Your Project landmarks?"
-        description="We provide comprehensive initial spatial assessments and preliminary civil cost drafts calls."
-        primaryBtnText="Request Cost Assessment"
-        primaryBtnLink="/contact"
-        secondaryBtnText="Explore Projects Gallery"
-        secondaryBtnLink="/projects"
-        bgVariant="gradient"
-        layout="center"
-      />
+      
+      
     </div>
   );
 };

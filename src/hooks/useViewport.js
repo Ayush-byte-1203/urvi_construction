@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { THEME } from '../constants/theme';
+import { THEME } from '@constants/theme';
 
 export const useViewport = () => {
   const [width, setWidth] = useState(() => (typeof window !== 'undefined' ? window.innerWidth : 1200));

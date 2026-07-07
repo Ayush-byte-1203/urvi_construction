@@ -4,15 +4,16 @@ import { Helmet } from 'react-helmet-async';
 import { 
   ArrowLeft, Compass, Clock, MapPin, ShieldAlert, Award, ChevronRight, CheckCircle2, Play, Info, HelpCircle
 } from 'lucide-react';
-import { appConfig } from '../config/appConfig';
-import { projectsData } from '../data/projectsData';
+import { appConfig } from '@config/appConfig';
+import { projectsData } from '@data/projectsData';
 
-import SectionHeader from '../components/sections/SectionHeader';
-import GenericCard from '../components/cards/GenericCard';
-import Accordion from '../components/ui/Accordion';
-import MotionWrapper from '../components/common/MotionWrapper';
-import Button from '../components/common/Button';
-import { HeaderThemeContext } from '../layouts/Layout';
+import SectionHeader from '@sections/SectionHeader';
+import GenericCard from '@components/GenericCard';
+import Accordion from '@components/Accordion';
+import MotionWrapper from '@components/MotionWrapper';
+import Button from '@components/Button';
+
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './ProjectDetail.module.css';
 
 const ProjectDetail = () => {
@@ -25,7 +26,6 @@ const ProjectDetail = () => {
   useEffect(() => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
-  const [activeTimelineStep, setActiveTimelineStep] = useState(0);
 
   // Asset Mappings for Images
   const projectImages = {
@@ -59,17 +59,6 @@ const ProjectDetail = () => {
     { brand: 'TATA Steel Fe550D', type: 'Ductile rebar framing', why: 'Anti-corrosive properties safeguard foundations against waterfront humidity.' },
     { brand: 'UltraTech Cement', type: 'Grade-53 concrete', why: 'Ensures optimal slump tests and heavy-duty load parameters.' },
     { brand: 'Asian Paints Apex', type: 'Silicone Emulsion', why: 'Weather protection shield preserves facade aesthetics.' }
-  ];
-
-  // Timeline
-  const stages = [
-    { title: 'Planning', desc: 'Soil load testing and site clearing.' },
-    { title: 'Design', desc: 'BIM modeling coordinates verification.' },
-    { title: 'Foundation', desc: 'Concrete base pouring.' },
-    { title: 'Structure', desc: 'Erecting RCC pillars and slabs.' },
-    { title: 'MEP', desc: 'Routing electrical cables and conduits.' },
-    { title: 'Inspection', desc: 'Compression tests logging.' },
-    { title: 'Handover', desc: 'Clear checkpoints checklist transfer.' }
   ];
 
   const relatedProjects = Object.values(projectsData)
@@ -168,38 +157,6 @@ const ProjectDetail = () => {
               <h3>Engineering Solutions</h3>
             </div>
             <p className={styles.cardText}>{project.solutions}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Interactive Horizontal Construction Journey */}
-      <section className="section container">
-        <SectionHeader
-          eyebrow="Chronology stages"
-          heading="Interactive Construction Timeline"
-          subheading="Follow the chronological milestones tracked by our on-site general contracting managers."
-        />
-
-        <div className={styles.journeyWrapper} style={{ marginTop: '4rem' }}>
-          <div className={styles.timelineRow}>
-            {stages.map((stg, idx) => (
-              <div
-                key={idx}
-                className={`${styles.stepNode} ${idx === activeTimelineStep ? styles.activeNode : ''}`}
-                onClick={() => setActiveTimelineStep(idx)}
-              >
-                <div className={styles.iconCircle}>
-                  <CheckCircle2 size={16} />
-                </div>
-                <span className={styles.nodeTitle}>{stg.title}</span>
-              </div>
-            ))}
-          </div>
-
-          <div className={`glass-panel ${styles.timelineDetailCard}`}>
-            <span className={styles.timelineNum}>Milestone Phase 0{activeTimelineStep + 1}</span>
-            <h3 className={styles.timelineTitle}>{stages[activeTimelineStep].title}</h3>
-            <p className={styles.timelineText}>{stages[activeTimelineStep].desc}</p>
           </div>
         </div>
       </section>
@@ -327,19 +284,8 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Book Similar Project CTA Banner */}
-      <section className={styles.ctaBanner}>
-        <div className={`container ${styles.ctaContainer}`}>
-          <h2>Request a Similar Structural Build?</h2>
-          <p>
-            Book coordinate site inspections calls with our general contracting engineers to plan specifications today.
-          </p>
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginTop: '2.5rem', flexWrap: 'wrap' }}>
-            <Link to="/contact" className="btn btn-primary">Book Consultation</Link>
-            <Link to="/packages" className={`btn btn-secondary ${styles.btnSecOutline}`}>Review Build Pricing</Link>
-          </div>
-        </div>
-      </section>
+      
+      
     </div>
   );
 };

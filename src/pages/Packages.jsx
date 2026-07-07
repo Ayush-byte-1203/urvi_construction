@@ -3,26 +3,24 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ChevronRight, CheckCircle2, Info, HelpCircle, ShieldCheck
+  ChevronRight, CheckCircle2, HelpCircle, ShieldCheck
 } from 'lucide-react';
-import { appConfig } from '../config/appConfig';
-import { packagesData } from '../data/packagesData';
-import SectionHeader from '../components/sections/SectionHeader';
-import QuoteWizard from '../components/sections/QuoteWizard';
-import MotionWrapper from '../components/common/MotionWrapper';
-import Button from '../components/common/Button';
-import HeroOverlay from '../components/common/HeroOverlay';
-import CTA from '../components/sections/CTA';
-import { HeaderThemeContext } from '../layouts/Layout';
+import { appConfig } from '@config/appConfig';
+import { packagesData } from '@data/packagesData';
+import SectionHeader from '@sections/SectionHeader';
+import QuoteWizard from '@sections/QuoteWizard';
+import MotionWrapper from '@components/MotionWrapper';
+import Button from '@components/Button';
+import HeroOverlay from '@components/HeroOverlay';
+
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './Packages.module.css';
 
 const Packages = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
   const [activePackage, setActivePackage] = useState(1); // 0: Standard, 1: Premium, 2: Luxury
   const [openCategory, setOpenCategory] = useState('Design & Drawings'); // Synchronized comparison active row
-  const [estimatePlotSize, setEstimatePlotSize] = useState(1500);
-  const [estimateFloors, setEstimateFloors] = useState(2);
-  const [estimateCalculated, setEstimateCalculated] = useState(null);
+
 
   useEffect(() => {
     setHeaderTheme('dark');
@@ -179,15 +177,7 @@ const Packages = () => {
     ]
   };
 
-  // Calculate Estimator Cost
-  const handleEstimateCalculate = (e) => {
-    e.preventDefault();
-    const rate = activeData.price;
-    const area = estimatePlotSize * estimateFloors;
-    const cost = area * rate;
-    const duration = activeData.timeline;
-    setEstimateCalculated({ cost, duration, area });
-  };
+
 
   return (
     <div className="packages-page">
@@ -411,7 +401,7 @@ const Packages = () => {
           </div>
         </div>
 
-        {/* Action CTAs per Package */}
+        
         <div className={styles.ctaRow} style={{ marginTop: '3rem' }}>
           <Link to="/contact" className="btn btn-primary">Book Consultation</Link>
           <a href="tel:+919428694361" className="btn btn-secondary">Talk to Expert</a>
@@ -441,100 +431,10 @@ const Packages = () => {
         </div>
       </section>
 
-      {/* 12. Final Quote Wizard Section */}
-      <section className="section container" id="wizard">
-        <SectionHeader
-          eyebrow="Cost Estimator"
-          heading="Instant Construction Cost Calculator"
-          subheading="Configure your site parameters and get a high-precision cost and timeline estimation instantly."
-        />
 
-        <div className={styles.wizardGrid} style={{ marginTop: '3.5rem' }}>
-          <form className={styles.estimatorForm} onSubmit={handleEstimateCalculate}>
-            <div className={styles.formGroup}>
-              <label>Select Specifications Package</label>
-              <select
-                value={activePackage}
-                onChange={(e) => setActivePackage(Number(e.target.value))}
-                className={styles.formSelect}
-              >
-                <option value={0}>Standard (₹1499/sq.ft)</option>
-                <option value={1}>Premium (₹1799/sq.ft)</option>
-                <option value={2}>Luxury (₹2111/sq.ft)</option>
-              </select>
-            </div>
 
-            <div className={styles.formGroup}>
-              <label>Plot Area (sq. ft.)</label>
-              <input
-                type="number"
-                value={estimatePlotSize}
-                onChange={(e) => setEstimatePlotSize(Number(e.target.value))}
-                min={500}
-                max={10000}
-                className={styles.formInput}
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label>Floors Count</label>
-              <select
-                value={estimateFloors}
-                onChange={(e) => setEstimateFloors(Number(e.target.value))}
-                className={styles.formSelect}
-              >
-                <option value={1}>Ground Floor Only (1 Floor)</option>
-                <option value={2}>Ground + 1 (2 Floors)</option>
-                <option value={3}>Ground + 2 (3 Floors)</option>
-                <option value={4}>Ground + 3 (4 Floors)</option>
-              </select>
-            </div>
-
-            <button type="submit" className="btn btn-primary" style={{ width: '100%', marginTop: '1rem' }}>
-              Generate Construction Estimate
-            </button>
-          </form>
-
-          <div className={styles.estimatorResult}>
-            {estimateCalculated ? (
-              <div className={styles.resultBox}>
-                <h3>Estimated Project Metrics</h3>
-                <div className={styles.resultMetrics}>
-                  <div className={styles.resultMetricItem}>
-                    <span>Total Built-up Area:</span>
-                    <strong>{estimateCalculated.area.toLocaleString()} sq.ft.</strong>
-                  </div>
-                  <div className={styles.resultMetricItem}>
-                    <span>Construction Cost Estimate:</span>
-                    <strong className={styles.resultCost}>
-                      {estimateCalculated.cost.toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 })}
-                    </strong>
-                  </div>
-                  <div className={styles.resultMetricItem}>
-                    <span>Target Delivery Timeline:</span>
-                    <strong>{estimateCalculated.duration}</strong>
-                  </div>
-                  <div className={styles.resultMetricItem}>
-                    <span>Recommended Package:</span>
-                    <strong>{activeData.name}</strong>
-                  </div>
-                </div>
-                <Link to="/contact" className="btn btn-primary" style={{ marginTop: '1.5rem', width: '100%', textAlign: 'center' }}>
-                  Lock In Pricing & Book Consultation
-                </Link>
-              </div>
-            ) : (
-              <div className={styles.resultPlaceholder}>
-                <Info size={40} />
-                <p>Configure your plot size, package preference, and floor counts, then click calculate to review cost estimates.</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Final premium CTA */}
-      <CTA />
+      
+      
     </div>
   );
 };

@@ -271,148 +271,6 @@
   border-color: var(--accent, #3b82f6);
 }
 
-/* Process Section */
-.processSection {
-  background-color: var(--bg-secondary, #f8fafc);
-  border-top: 1px solid var(--border-subtle, #f1f5f9);
-  border-bottom: 1px solid var(--border-subtle, #f1f5f9);
-}
-
-.journeyWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-  width: 100%;
-}
-
-.timelineRow {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  position: relative;
-  padding-bottom: 1rem;
-}
-
-.timelineRow::before {
-  content: '';
-  position: absolute;
-  top: 22px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: var(--border-subtle, #f1f5f9);
-  z-index: 1;
-}
-
-.stepNode {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  z-index: 2;
-  flex: 1;
-}
-
-.iconCircle {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--bg-card, #ffffff);
-  border: 2px solid var(--border, #cbd5e1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-muted, #64748b);
-  transition: all var(--transition-normal, 0.25s ease);
-}
-
-.stepNode:hover .iconCircle {
-  border-color: var(--accent, #3b82f6);
-  color: var(--accent, #3b82f6);
-}
-
-.activeNode .iconCircle {
-  background-color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
-  color: #ffffff;
-  box-shadow: 0 0 0 4px var(--accent-subtle, #eff6ff);
-}
-
-.nodeTitle {
-  font-family: var(--font-family-display, inherit);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--text-muted, #94a3b8);
-  margin-top: 0.5rem;
-}
-
-.activeNode .nodeTitle {
-  color: var(--accent, #3b82f6);
-  font-weight: 800;
-}
-
-.detailCard {
-  width: 100%;
-  max-width: 800px;
-  padding: 3rem;
-  background-color: var(--bg-card, #ffffff);
-  border: 1px solid var(--border, #cbd5e1);
-  border-radius: var(--radius-md, 8px);
-  text-align: left;
-  box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
-}
-
-.detailHeader {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-}
-
-.stepNum {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--accent, #3b82f6);
-  background-color: var(--accent-subtle, #eff6ff);
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--radius-xs, 4px);
-}
-
-.stepLabel {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-muted, #64748b);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.detailTitle {
-  font-family: var(--font-family-display, inherit);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text-primary, #1e293b);
-  margin: 0 0 0.5rem 0;
-}
-
-.detailText {
-  font-size: 0.95rem;
-  color: var(--text-secondary, #475569);
-  line-height: 1.6;
-}
-
-.note {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.75rem;
-  color: var(--text-muted, #94a3b8);
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-subtle, #f1f5f9);
-}
-
 /* Comparison Matrix Table */
 .comparisonWrapper {
   width: 100%;
@@ -593,31 +451,12 @@
     font-size: 0.8rem;
   }
 
-  .timelineRow {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
+  .cardGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
-  .timelineRow::before {
-    display: none;
-  }
-  .stepNode {
-    flex-direction: row;
-    gap: 0.5rem;
-    align-items: center;
-    border: 1px solid var(--border, #cbd5e1);
-    padding: 0.5rem;
-    border-radius: var(--radius-sm, 6px);
-  }
-  .iconCircle {
-    width: 32px;
-    height: 32px;
-  }
-  .nodeTitle {
-    margin-top: 0;
-  }
-  .detailCard {
-    padding: 1.5rem;
+  .premiumCardContent {
+    padding: 2rem;
   }
 
   .ctaBanner {
@@ -652,16 +491,12 @@
     flex-shrink: 0;
   }
 
-  .timelineRow {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .detailCard {
-    padding: 1.25rem;
+  .premiumCardContent {
+    padding: 1.5rem;
   }
 
   .detailTitle {
-    font-size: 1.15rem;
+    font-size: 1.4rem;
   }
 
   .ctaContainer h2 {
@@ -674,10 +509,6 @@
 }
 
 @media (max-width: 380px) {
-  .timelineRow {
-    grid-template-columns: 1fr;
-  }
-
   .heroSection {
     padding: 5rem 0 2.5rem 0;
   }

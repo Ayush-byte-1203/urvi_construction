@@ -4,19 +4,19 @@ import { Helmet } from 'react-helmet-async';
 import { 
   ArrowLeft, CheckCircle2, PlusCircle, ChevronRight, Clock, ShieldCheck, Award, FileText, Download 
 } from 'lucide-react';
-import { appConfig } from '../config/appConfig';
-import { packagesData } from '../data/packagesData';
-import { faqData } from '../data/faqData';
-import SectionHeader from '../components/sections/SectionHeader';
-import GenericCard from '../components/cards/GenericCard';
-import Timeline from '../components/ui/Timeline';
-import MotionWrapper from '../components/common/MotionWrapper';
-import MediaWrapper from '../components/common/MediaWrapper';
-import Accordion from '../components/ui/Accordion';
-import Button from '../components/common/Button';
-import InquiryForm from '../components/ui/InquiryForm';
-import CTA from '../components/sections/CTA';
-import { HeaderThemeContext } from '../layouts/Layout';
+import { appConfig } from '@config/appConfig';
+import { packagesData } from '@data/packagesData';
+import { faqData } from '@data/faqData';
+import SectionHeader from '@sections/SectionHeader';
+import GenericCard from '@components/GenericCard';
+import PremiumTimeline from '@components/PremiumTimeline';
+import MotionWrapper from '@components/MotionWrapper';
+import MediaWrapper from '@components/MediaWrapper';
+import Accordion from '@components/Accordion';
+import Button from '@components/Button';
+import InquiryForm from '@components/InquiryForm';
+
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './PackageDetail.module.css';
 
 const PackageDetail = () => {
@@ -186,19 +186,12 @@ const PackageDetail = () => {
       </section>
 
       {/* Construction Stages timeline */}
-      <section className={styles.stagesSection}>
-        <div className="container">
-          <SectionHeader
-            eyebrow="Stages Workflow"
-            heading="Estimated Construction Timeline"
-            subheading="Review the timeline phases mapping concrete curing cycles, brickwork masonries, and finishing audits."
-          />
-
-          <div style={{ marginTop: '4rem' }}>
-            <Timeline items={plan.stages} />
-          </div>
-        </div>
-      </section>
+      <PremiumTimeline
+        eyebrow="Stages Workflow"
+        heading="Estimated Construction Timeline"
+        subheading="Review the timeline phases mapping concrete curing cycles, brickwork masonries, and finishing audits."
+        steps={plan.stages}
+      />
 
       {/* Material Brand Partners grayscale logos */}
       <section className={styles.partnersSection}>
@@ -279,7 +272,7 @@ const PackageDetail = () => {
           subheading="Fill plot specifications, locations, and structural timelines to obtain initial estimates call."
         />
         <div className="glass-panel" style={{ padding: '3rem', marginTop: '3.5rem' }}>
-          <InquiryForm defaultService="residential" />
+          <InquiryForm />
         </div>
       </section>
 
@@ -320,17 +313,8 @@ const PackageDetail = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <CTA 
-        title="Ready to Build Your Project landmarks?"
-        description="We provide comprehensive initial spatial assessments and preliminary civil cost drafts calls."
-        primaryBtnText="Get Free Quote Estimation"
-        primaryBtnLink="/contact"
-        secondaryBtnText="Explore Projects Gallery"
-        secondaryBtnLink="/projects"
-        bgVariant="gradient"
-        layout="center"
-      />
+      
+      
     </div>
   );
 };

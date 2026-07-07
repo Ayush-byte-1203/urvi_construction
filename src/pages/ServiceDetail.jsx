@@ -4,16 +4,16 @@ import { Helmet } from 'react-helmet-async';
 import { 
   ArrowLeft, CheckCircle2, ChevronRight, HardHat, ShieldCheck, Compass, Info, Play, HelpCircle 
 } from 'lucide-react';
-import { appConfig } from '../config/appConfig';
-import { servicesData } from '../data/servicesData';
-import { faqData } from '../data/faqData';
-import SectionHeader from '../components/sections/SectionHeader';
-import GenericCard from '../components/cards/GenericCard';
-import Accordion from '../components/ui/Accordion';
-import MotionWrapper from '../components/common/MotionWrapper';
-import Button from '../components/common/Button';
-import InquiryForm from '../components/ui/InquiryForm';
-import { HeaderThemeContext } from '../layouts/Layout';
+import { appConfig } from '@config/appConfig';
+import { servicesData } from '@data/servicesData';
+import { faqData } from '@data/faqData';
+import SectionHeader from '@sections/SectionHeader';
+import GenericCard from '@components/GenericCard';
+import Accordion from '@components/Accordion';
+import MotionWrapper from '@components/MotionWrapper';
+import Button from '@components/Button';
+import InquiryForm from '@components/InquiryForm';
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './ServiceDetail.module.css';
 
 const ServiceDetail = () => {
@@ -29,11 +29,11 @@ const ServiceDetail = () => {
   const serviceImages = {
     residential: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
     commercial: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
-    industrial: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=1200&q=80',
-    architecture: 'https://images.unsplash.com/photo-1503387762-592ded58c45a?auto=format&fit=crop&w=1200&q=80',
+    industrial: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80',
+    architecture: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80',
     renovation: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80',
     sustainable: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80',
-    pmc: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=1200&q=80',
+    pmc: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80',
     'smart-home': 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=1200&q=80',
     'material-supply': 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80',
     'plan-approval': 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80',
@@ -43,11 +43,11 @@ const ServiceDetail = () => {
   const serviceThumbnails = {
     residential: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
     commercial: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
-    industrial: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80',
-    architecture: 'https://images.unsplash.com/photo-1503387762-592ded58c45a?auto=format&fit=crop&w=600&q=80',
+    industrial: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80',
+    architecture: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80',
     renovation: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=600&q=80',
     sustainable: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=600&q=80',
-    pmc: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80',
+    pmc: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80',
     'smart-home': 'https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=600&q=80',
     'material-supply': 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80',
     'plan-approval': 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80',
@@ -196,11 +196,7 @@ const ServiceDetail = () => {
       {/* Inquiry Form Form */}
       <section className="section container" id="quote-form" style={{ maxWidth: '720px' }}>
         <div className="glass-panel" style={{ padding: '3rem' }}>
-          <span className="text-overline" style={{ display: 'block', textAlign: 'center', marginBottom: '0.5rem' }}>Consultation Desk</span>
-          <h3 style={{ textAlign: 'center', fontFamily: 'var(--font-family-display)', fontWeight: 800, fontSize: '1.75rem', color: 'var(--text-primary)', marginBottom: '2rem' }}>
-            Request Spec Consultation
-          </h3>
-          <InquiryForm defaultService={service.id} />
+          <InquiryForm />
         </div>
       </section>
 

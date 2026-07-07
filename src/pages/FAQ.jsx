@@ -4,13 +4,13 @@ import { Helmet } from 'react-helmet-async';
 import { 
   HelpCircle, ChevronDown, ChevronUp, Search, ChevronRight, MessageSquare, PhoneCall, HelpCircle as HelpIcon 
 } from 'lucide-react';
-import { appConfig } from '../config/appConfig';
-import { faqData } from '../data/faqData';
-import SectionHeader from '../components/sections/SectionHeader';
-import MotionWrapper from '../components/common/MotionWrapper';
-import Button from '../components/common/Button';
-import CTA from '../components/sections/CTA';
-import { HeaderThemeContext } from '../layouts/Layout';
+import { appConfig } from '@config/appConfig';
+import { faqData } from '@data/faqData';
+import SectionHeader from '@sections/SectionHeader';
+import MotionWrapper from '@components/MotionWrapper';
+import Button from '@components/Button';
+
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './FAQ.module.css';
 
 const FAQ = () => {
@@ -164,7 +164,7 @@ const FAQ = () => {
         </div>
       </section>
 
-      {/* Still Need Help Support CTA */}
+      
       <section className="section" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--color-border-subtle)' }}>
         <div className="container grid-2" style={{ alignItems: 'center', gap: '3rem' }}>
           <div>
@@ -205,17 +205,8 @@ const FAQ = () => {
         </div>
       </section>
 
-      {/* Closing CTA */}
-      <CTA 
-        title="Ready to Scale Your Build Ambition?"
-        description="Let's formulate preliminary spatial layouts and concrete foundations calculations call."
-        primaryBtnText="Request consultation Call"
-        primaryBtnLink="/contact"
-        secondaryBtnText="Review Estimating Tiers"
-        secondaryBtnLink="/packages"
-        bgVariant="gradient"
-        layout="center"
-      />
+      
+      
     </div>
   );
 };

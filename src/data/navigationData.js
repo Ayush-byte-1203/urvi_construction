@@ -10,7 +10,6 @@ export const navigationData = {
     { name: 'Packages', path: '/packages' },
     { name: 'Testimonials', path: '/testimonials' },
     { name: 'FAQ', path: '/faq' },
-    { name: 'Client Portal', path: '/dashboard' },
   ],
   footerLinks: {
     navigation: [

@@ -512,42 +512,6 @@
   border-top: 1px solid var(--border-subtle, #f1f5f9);
 }
 
-/* CTA Footer banner */
-.ctaBanner {
-  background: linear-gradient(135deg, #0b0f19 0%, #1e293b 100%);
-  padding: 5.5rem 0;
-  color: #ffffff;
-  text-align: center;
-}
-
-.ctaContainer {
-  max-width: 800px;
-}
-
-.ctaContainer h2 {
-  font-family: var(--font-family-display, inherit);
-  font-size: 2.25rem;
-  font-weight: 800;
-  margin: 0 0 1rem 0;
-}
-
-.ctaContainer p {
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.75);
-  margin: 0;
-}
-
-.btnSecOutline {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-}
-
-.btnSecOutline:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: #ffffff;
-}
-
 @media (max-width: 1024px) {
   .dashboardGrid {
     grid-template-columns: repeat(2, 1fr);
@@ -558,40 +522,8 @@
   }
 }
 
-@media (max-width: 768px) {
-  .timelineRow {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-  .timelineRow::before {
-    display: none;
-  }
-  .stepNode {
-    flex-direction: row;
-    gap: 0.5rem;
-    align-items: center;
-    border: 1px solid var(--border, #cbd5e1);
-    padding: 0.5rem;
-    border-radius: var(--radius-sm, 6px);
-  }
-  .iconCircle {
-    width: 32px;
-    height: 32px;
-  }
-  .nodeTitle {
-    margin-top: 0;
-  }
-  .timelineDetailCard {
-    padding: 1.5rem;
-  }
-}
-
 @media (max-width: 576px) {
   .dashboardGrid {
     grid-template-columns: 1fr;
-  }
-  .timelineRow {
-    grid-template-columns: repeat(2, 1fr);
   }
 }

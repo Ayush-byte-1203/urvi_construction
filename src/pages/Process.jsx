@@ -5,8 +5,8 @@ import {
   Users, FileText, MapPin, HardHat, ShieldCheck, Home, CheckCircle2 
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Button from '../components/common/Button';
-import { HeaderThemeContext } from '../layouts/Layout';
+import Button from '@components/Button';
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './Process.module.css';
 
 const Process = () => {
@@ -56,7 +56,7 @@ const Process = () => {
       desc: 'Steel pillars or concrete slabs take shape. Walls are laid out using energy-efficient AAC brick masonry.',
       icon: <HardHat size={22} />,
       deliverables: ['RCC Column Pillars Framed', 'Ceiling Slabs Curing', 'AAC Block Walls Built'],
-      image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=400&q=80'
+      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80'
     },
     {
       phase: 'Phase 05',
@@ -102,32 +102,29 @@ const Process = () => {
           {/* Stepper Navigation Track Container */}
           <div className={styles.stepperWrapper}>
             <div className={styles.stepperTrack}>
-              {/* Completed/Upcoming progress connection line */}
-              <div className={styles.progressLineBg} />
-              <div 
-                className={styles.stepperProgress} 
-                style={{ 
-                  left: '45px',
-                  width: `calc(${(activeStep / (steps.length - 1)) * 100}% - ${(activeStep / (steps.length - 1)) * 90}px)` 
-                }}
-              />
-
               {steps.map((stg, idx) => {
                 const isActive = idx === activeStep;
                 const isCompleted = idx < activeStep;
                 return (
-                  <button
-                    key={idx}
-                    className={`${styles.stepNode} ${isActive ? styles.active : ''} ${isCompleted ? styles.completed : ''}`}
-                    onClick={() => setActiveStep(idx)}
-                    aria-label={`Go to ${stg.title}`}
-                  >
-                    <span className={styles.stepNumber}>{stg.phase}</span>
-                    <div className={styles.stepIconWrapper}>
-                      <span className={styles.stepIcon}>{stg.icon}</span>
-                    </div>
-                    <span className={styles.stepLabel}>{stg.shortLabel}</span>
-                  </button>
+                  <React.Fragment key={idx}>
+                    <button
+                      className={`${styles.stepNode} ${isActive ? styles.active : ''} ${isCompleted ? styles.completed : ''}`}
+                      onClick={() => setActiveStep(idx)}
+                      aria-label={`Go to ${stg.title}`}
+                    >
+                      <span className={styles.stepNumber}>{stg.phase}</span>
+                      <div className={styles.stepIconWrapper}>
+                        <span className={styles.stepIcon}>{stg.icon}</span>
+                      </div>
+                      <span className={styles.stepLabel}>{stg.shortLabel}</span>
+                    </button>
+                    
+                    {idx < steps.length - 1 && (
+                      <div className={`${styles.connector} ${idx < activeStep ? styles.connectorCompleted : ''}`}>
+                        <div className={styles.connectorFill} />
+                      </div>
+                    )}
+                  </React.Fragment>
                 );
               })}
             </div>

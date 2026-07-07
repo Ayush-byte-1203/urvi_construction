@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 import {
   Target, Compass, Shield, Award, Users, FileText, CheckCircle2, ChevronRight, ArrowRight
 } from 'lucide-react';
-import { appConfig } from '../config/appConfig';
-import { statsData } from '../data/statsData';
-import { testimonialsData } from '../data/testimonialsData';
-import SectionHeader from '../components/sections/SectionHeader';
-import Timeline from '../components/ui/Timeline';
-import MotionWrapper from '../components/common/MotionWrapper';
-import MediaWrapper from '../components/common/MediaWrapper';
-import Button from '../components/common/Button';
-import CTA from '../components/sections/CTA';
-import HeroOverlay from '../components/common/HeroOverlay';
-import { HeaderThemeContext } from '../layouts/Layout';
+import { appConfig } from '@config/appConfig';
+import { statsData } from '@data/statsData';
+import { testimonialsData } from '@data/testimonialsData';
+import SectionHeader from '@sections/SectionHeader';
+import PremiumTimeline from '@components/PremiumTimeline';
+import MotionWrapper from '@components/MotionWrapper';
+import MediaWrapper from '@components/MediaWrapper';
+import Button from '@components/Button';
+
+import HeroOverlay from '@components/HeroOverlay';
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './About.module.css';
 
 const About = () => {
@@ -48,20 +48,12 @@ const About = () => {
     { title: 'Green Building Council', authority: 'Sustainable Construction', desc: 'LEED orientation design parameters and recycled materials usages.' }
   ];
 
-  const materialPartners = [
-    { name: 'UltraTech Cement', category: 'Cement Spans' },
-    { name: 'Tata Tiscon Steel', category: 'EAF Reinforcements' },
-    { name: 'Havells Electrical', category: 'Conduits & Grid' },
-    { name: 'Asian Paints', category: 'Coatings' },
-    { name: 'Kajaria Tiles', category: 'Flooring Layouts' },
-    { name: 'Jaquar Fittings', category: 'Sanitary Spcs' }
-  ];
 
   const galleryImages = [
     'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
     'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80',
     'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=600&q=80',
+    'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80',
     'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
     'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80'
   ];
@@ -124,6 +116,7 @@ const About = () => {
                 alt="Paramarsh Construction Engineering Staging"
                 className={styles.overviewImage}
               />
+              
             </div>
           </MotionWrapper>
         </div>
@@ -170,18 +163,12 @@ const About = () => {
       </section>
 
       {/* Company Timeline milestones */}
-      <section className={styles.timelineSection}>
-        <div className="container">
-          <SectionHeader
-            eyebrow="Milestones"
-            heading="Historical Staged Timeline"
-            subheading="Review our trajectory from boutique residential drafts to heavy civil logistics developers."
-          />
-          <div style={{ marginTop: '4rem' }}>
-            <Timeline items={timelineSteps} />
-          </div>
-        </div>
-      </section>
+      <PremiumTimeline
+        eyebrow="Milestones"
+        heading="Historical Staged Timeline"
+        subheading="Review our trajectory from boutique residential drafts to heavy civil logistics developers."
+        steps={timelineSteps}
+      />
 
       {/* Certifications & Standards */}
       <section className="section container">
@@ -202,29 +189,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Material Partners Grayscale Hovers */}
-      <section className={styles.partnersSection}>
-        <div className="container">
-          <SectionHeader
-            eyebrow="Supply Chain"
-            heading="Premium Material Partners"
-            subheading="We procure only certified raw materials from verified vendors, ensuring structural endurance."
-          />
-
-          <div className={styles.partnersGrid}>
-            {materialPartners.map((part, idx) => (
-              <MotionWrapper key={idx} variant="fadeIn" delay={idx * 0.08} className={styles.partnerLogoCard}>
-                <div>
-                  <div className={styles.partnerName}>{part.name}</div>
-                  <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', marginTop: '0.25rem', textTransform: 'uppercase' }}>
-                    {part.category}
-                  </div>
-                </div>
-              </MotionWrapper>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Office & Site Gallery */}
       <section className="section container">
@@ -265,6 +229,8 @@ const About = () => {
         </div>
       </section>
 
+      
+      
     </div>
   );
 };

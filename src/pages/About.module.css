@@ -202,12 +202,6 @@
   margin-top: 2rem;
 }
 
-/* Timeline section */
-.timelineSection {
-  padding: var(--gap-section) 0;
-  background: var(--bg-primary);
-}
-
 .overviewSplit {
   display: grid;
   grid-template-columns: 1.2fr 1fr;

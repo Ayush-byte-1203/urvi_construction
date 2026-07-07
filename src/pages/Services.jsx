@@ -2,20 +2,23 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { 
-  ChevronRight, Compass, HardHat, FileText, ShieldCheck, ArrowRight, Info, Play, CheckCircle2, Star, Clock 
+  ChevronRight, Compass, HardHat, FileText, ShieldCheck, ArrowRight, Info, Play, CheckCircle2, Star, Clock,
+  Sparkles, CalendarDays, ClipboardCheck, Hammer, Sofa, KeyRound, BadgeCheck, Users, Briefcase
 } from 'lucide-react';
-import { appConfig } from '../config/appConfig';
-import { servicesData } from '../data/servicesData';
-import { faqData } from '../data/faqData';
+import { motion, AnimatePresence } from 'framer-motion';
+import { appConfig } from '@config/appConfig';
+import { servicesData } from '@data/servicesData';
+import { faqData } from '@data/faqData';
 
-import SectionHeader from '../components/sections/SectionHeader';
-import OneStopHomeSolutions from '../components/sections/OneStopHomeSolutions';
-import Accordion from '../components/ui/Accordion';
-import MotionWrapper from '../components/common/MotionWrapper';
-import Button from '../components/common/Button';
-import HeroOverlay from '../components/common/HeroOverlay';
-import CTA from '../components/sections/CTA';
-import { HeaderThemeContext } from '../layouts/Layout';
+import SectionHeader from '@sections/SectionHeader';
+import OneStopHomeSolutions from '@sections/OneStopHomeSolutions';
+import Accordion from '@components/Accordion';
+import MotionWrapper from '@components/MotionWrapper';
+import Button from '@components/Button';
+import HeroOverlay from '@components/HeroOverlay';
+import PremiumTimeline from '@components/PremiumTimeline';
+
+import { HeaderThemeContext } from '@/layouts/Layout';
 import styles from './Services.module.css';
 
 const Services = () => {
@@ -37,16 +40,16 @@ const Services = () => {
   // Group services by category
   const categoryServices = {
     planning: [
-      { id: 'architecture', title: 'Architecture & Design', desc: 'BIM coordinates, spatial layouts, 3D renderings.', tag: 'Design Cell', timeline: '3-6 Weeks', image: 'https://images.unsplash.com/photo-1503387762-592ded58c45a?auto=format&fit=crop&w=500&q=80' },
+      { id: 'architecture', title: 'Architecture & Design', desc: 'BIM coordinates, spatial layouts, 3D renderings.', tag: 'Design Cell', timeline: '3-6 Weeks', image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=500&q=80' },
       { id: 'sustainable', title: 'Sustainable Optimization', desc: 'Low-carbon concrete, solar path coordinates.', tag: 'Eco Design', timeline: '2-4 Weeks', image: 'https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=500&q=80' }
     ],
     construction: [
       { id: 'residential', title: 'Residential Construction', desc: 'Luxury custom villa builds, multi-family framing.', tag: 'General Contract', timeline: '8-12 Months', image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=500&q=80' },
       { id: 'commercial', title: 'Commercial Developments', desc: 'Corporate hubs, plazas, high-load steel structures.', tag: 'Heavy Contract', timeline: '12-18 Months', image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=500&q=80' },
-      { id: 'industrial', title: 'Industrial Complexes', desc: 'Gantry sheds, flat slab logistics zones.', tag: 'Precast Civil', timeline: '14-24 Months', image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=500&q=80' }
+      { id: 'industrial', title: 'Industrial Complexes', desc: 'Gantry sheds, flat slab logistics zones.', tag: 'Precast Civil', timeline: '14-24 Months', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=500&q=80' }
     ],
     specialized: [
-      { id: 'pmc', title: 'PMC Audits Control', desc: 'Vendor checks, weekly reports, budget controls.', tag: 'Audit Consultancy', timeline: 'Ongoing', image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ecc?auto=format&fit=crop&w=500&q=80' },
+      { id: 'pmc', title: 'PMC Audits Control', desc: 'Vendor checks, weekly reports, budget controls.', tag: 'Audit Consultancy', timeline: 'Ongoing', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=500&q=80' },
       { id: 'material-supply', title: 'Direct Material Supply', desc: 'Procuring UltraTech cement, Tata rebar steel.', tag: 'Logistics Supply', timeline: 'Immediate', image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=500&q=80' },
       { id: 'plan-approval', title: 'Zoning & Permits Approval', desc: 'Soil geotech clearings, municipal submittals.', tag: 'Legal Approvals', timeline: '4-8 Weeks', image: 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=500&q=80' }
     ],
@@ -56,17 +59,17 @@ const Services = () => {
     ]
   };
 
-  // 9 process steps
+  // 9 process steps enriched
   const processSteps = [
-    { title: 'Consultation', label: 'Needs Assessment', desc: 'Discussing budget caps, floor counts, and spatial ideas.' },
-    { title: 'Site Visit', label: 'Soil Audits', desc: 'Testing land topography bounds and soil geotech reports.' },
-    { title: 'Planning', label: 'Revit Blueprints', desc: 'Erecting 3D BIM coordinate models and engineering charts.' },
-    { title: 'Quotation', label: 'Milestones BOQ', desc: 'Detailing pricing lines with zero contract margins additions.' },
-    { title: 'Approval', label: 'Zoning clearances', desc: 'Submitting site files to local municipality planners.' },
-    { title: 'Construction', label: 'Foundation Casting', desc: 'Erecting RCC pillars structural frames and brickworks.' },
-    { title: 'Inspection', label: 'Lab Compression Checks', desc: 'Independent checks verify materials stress constraints.' },
-    { title: 'Handover', label: 'Keys Sign-Off', desc: 'Clearing final checks list and transferring access keys.' },
-    { title: 'Support', label: '15-Year Coverage', desc: 'Registering waterproofing and foundation warranty files.' }
+    { title: 'Idea', label: 'Vision & Goals', desc: 'Collaborating to understand spatial requirements, budget limitations, and architectural dreams.', duration: '3 Days', deliverables: ['Budget Planning', 'Site Analysis', 'Requirement Gathering'], team: 'Lead Architect, Client Coordinator', status: 'Completed', checks: 'Site viability approval', illustration: '📐', icon: <Sparkles size={20} /> },
+    { title: 'Planning', label: 'Geotech Checks', desc: 'Mapping soil load capacities, plot coordinates parameters, and structuring timelines.', duration: '5 Days', deliverables: ['Soil Testing', 'Surveys', 'Timeline Scheduling'], team: 'Geotech Engineer, Planner', status: 'Completed', checks: 'Soil bearing capacity', illustration: '📊', icon: <CalendarDays size={20} /> },
+    { title: 'Design', label: 'BIM 3D Renderings', desc: 'Drafting Revit BIM blueprints, HVAC mapping, and exporting calculation reports.', duration: '14 Days', deliverables: ['3D Renderings', 'BIM Coordination', 'Load Calculations'], team: 'BIM Architect, Designer', status: 'Current', checks: 'Structural audit log', illustration: '💻', icon: <Compass size={20} /> },
+    { title: 'Approval', label: 'Zoning & Permits', desc: 'Submitting structural maps to municipal offices and securing clearances.', duration: '21 Days', deliverables: ['Sanction Files', 'Zoning NOC', 'Environmental Certifications'], team: 'Compliance Consultant', status: 'Upcoming', checks: 'Municipality approvals', illustration: '📁', icon: <ClipboardCheck size={20} /> },
+    { title: 'Construction', label: 'Foundation Curing', desc: 'Excavation, pouring rebar concrete foundations, and erecting structural frames.', duration: '120 Days', deliverables: ['Excavation', 'RCC Casting', 'Masonry'], team: 'Site Supervisor, Engineer', status: 'Upcoming', checks: 'Cube test certificates', illustration: '🏗', icon: <Hammer size={20} /> },
+    { title: 'Quality Check', label: 'Lab Audits', desc: 'Laboratory testing of concrete cubes compression limits and EAF steel checks.', duration: 'Ongoing', deliverables: ['Cube Testing', 'Tensile Inspections', 'Waterproofing Verification'], team: 'PMC Auditor, QC Tech', status: 'Upcoming', checks: 'Tensile validation', illustration: '🔬', icon: <ShieldCheck size={20} /> },
+    { title: 'Interior', label: 'Fittings & Aesthetics', desc: 'Laying floor tiles, routing low-voltage wires, and installing sanitary fixtures.', duration: '45 Days', deliverables: ['Flooring', 'Ceiling Setup', 'Sanitary Fittings'], team: 'Interior Architect', status: 'Upcoming', checks: 'Bathroom leak validation', illustration: '🛋', icon: <Sofa size={20} /> },
+    { title: 'Handover', label: 'Keys Sign-Off', desc: 'Final site snagging inspections list clearing and official keys transfer.', duration: '7 Days', deliverables: ['Snagging List', 'Safety Certifications', 'Final Keys'], team: 'Project Director', status: 'Upcoming', checks: 'Compliance log', illustration: '🔑', icon: <KeyRound size={20} /> },
+    { title: 'Warranty', label: '15-Year Coverage', desc: 'Providing structural warranty coverage certificate and maintenance checkups.', duration: '15 Years', deliverables: ['Structural Warranty', 'Dampness Warranty', 'Inspections Calendar'], team: 'Support Lead', status: 'Upcoming', checks: 'Warranty registry', illustration: '📜', icon: <BadgeCheck size={20} /> }
   ];
 
   // Mapped FAQs
@@ -188,46 +191,15 @@ const Services = () => {
         </div>
       </section>
 
-      {/* 4. Scheduling Milestones Timeline */}
-      <section className={`section ${styles.processSection}`}>
-        <div className="container">
-          <SectionHeader
-            eyebrow="Milestone Targets"
-            heading="Scheduling & Process Milestones"
-            subheading="An overview indicating chronological steps, lab compression audits and keys handover parameters."
-          />
-
-          <div className={styles.journeyWrapper} style={{ marginTop: '4rem' }}>
-            <div className={styles.timelineRow}>
-              {processSteps.map((stg, idx) => (
-                <div
-                  key={idx}
-                  onClick={() => setActiveStep(idx)}
-                  className={`${styles.stepNode} ${idx === activeStep ? styles.activeNode : ''}`}
-                >
-                  <div className={styles.iconCircle}>
-                    {idx < activeStep ? <CheckCircle2 size={16} /> : <span>{idx + 1}</span>}
-                  </div>
-                  <span className={styles.nodeTitle}>{stg.title}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className={`glass-panel ${styles.detailCard}`}>
-              <div className={styles.detailHeader}>
-                <span className={styles.stepNum}>Milestone Phase 0{activeStep + 1}</span>
-                <span className={styles.stepLabel}>{currentStep.label}</span>
-              </div>
-              <h3 className={styles.detailTitle}>{currentStep.title}</h3>
-              <p className={styles.detailText}>{currentStep.desc}</p>
-              <div className={styles.note}>
-                <Info size={14} />
-                <span>Click nodes above to review scheduling checks.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 4. Premium Scheduling Milestones Timeline */}
+      <PremiumTimeline
+        eyebrow="Milestone Targets"
+        heading="Scheduling & Process Milestones"
+        subheading="An interactive overview indicating chronological steps, lab compression audits and keys handover parameters."
+        steps={processSteps}
+        activeStep={activeStep}
+        onStepChange={setActiveStep}
+      />
 
       {/* 7. Grouped FAQ Accordions */}
       <section className="section container" style={{ maxWidth: '800px' }}>
@@ -241,17 +213,8 @@ const Services = () => {
         </div>
       </section>
 
-      {/* 8. Conversion Quote CTA */}
-      <CTA
-        title="Ready to Deploy Our Design-Build Framework?"
-        description="Schedule a site audit call with our engineers to verify structural soil capabilities and estimate material BOQ parameters today."
-        primaryBtnText="Schedule Free Site Consultation"
-        primaryBtnLink="/contact"
-        secondaryBtnText="Review Estimate Pricing"
-        secondaryBtnLink="/packages"
-        bgVariant="gradient"
-        layout="left"
-      />
+      
+      
     </div>
   );
 };
