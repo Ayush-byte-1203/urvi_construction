@@ -29,13 +29,6 @@
   margin-bottom: 4rem;
 }
 
-@media (max-width: 1024px) {
-  .footerGrid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 576px) {
-  .footerGrid { grid-template-columns: 1fr; gap: 2.5rem; }
-}
-
 .footerCol {
   display: flex;
   flex-direction: column;
@@ -145,10 +138,6 @@
   gap: 1.5rem;
 }
 
-@media (max-width: 768px) {
-  .subFooterContent { flex-direction: column; text-align: center; }
-}
-
 .copyright {
   font-size: 0.825rem;
   color: rgba(255,255,255,0.65);
@@ -157,10 +146,6 @@
 .legalLinks {
   display: flex;
   gap: 1.5rem;
-}
-
-@media (max-width: 480px) {
-  .legalLinks { flex-direction: column; gap: 0.5rem; }
 }
 
 .legalLinks a {

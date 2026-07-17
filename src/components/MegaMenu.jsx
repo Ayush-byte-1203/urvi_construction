@@ -70,10 +70,10 @@ const menuContents = {
       {
         group: 'Specialized & Smart Solutions',
         links: [
-          { title: 'Smart Home Automation', desc: 'Low-voltage panel grids & sensory systems.', path: '/services', icon: <Cpu size={16} /> },
-          { title: 'PMC Consultancy', desc: 'Supervised scheduling and milestone billing support.', path: '/services', icon: <FileCheck size={16} /> },
-          { title: 'Plan Clearance & Permits', desc: 'Municipal approvals and zoning clearance coordination.', path: '/services', icon: <FileText size={16} /> },
-          { title: 'Material Supply network', desc: 'Direct sourcing of certified EAF steel reinforcements.', path: '/services', icon: <Package size={16} /> }
+          { title: 'Turnkey Solutions', desc: 'We have One-stop, stress-free construction from start to finish. We handle it all. Your dream, our mission.', path: '/services', icon: <Package size={16} /> },
+          { title: 'Construction Management', desc: 'We are here to understand your unique style and preferences, translating them into functional pleasing spaces.', path: '/services', icon: <FileCheck size={16} /> },
+          { title: 'Interior Designs', desc: 'We bring expertise, precision, and a keen eye for detail to every aspect of your construction process.', path: '/services', icon: <Compass size={16} /> },
+          { title: 'Structural/Architectural', desc: 'Expert design and robust structural planning, all under one roof. Your vision, our expertise.', path: '/services', icon: <HardHat size={16} /> }
         ]
       }
     ],
@@ -121,13 +121,7 @@ const menuContents = {
           { title: 'Commercial Plaza units', desc: 'Offices, logistics warehouses, and assembly yards.', path: '/projects', icon: <Briefcase size={16} /> }
         ]
       },
-      {
-        group: 'Active Media',
-        links: [
-          { title: 'Ongoing Builds', desc: 'See live concrete pouring reports from active sites.', path: '/projects', icon: <HardHat size={16} /> },
-          { title: 'Site Video Gallery', desc: 'Walkthroughs of structural frameworks inspections.', path: '/projects', icon: <Compass size={16} /> }
-        ]
-      }
+      
     ],
     featured: {
       title: 'Vista Waterfront Residences',

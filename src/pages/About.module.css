@@ -108,39 +108,74 @@
 /* Values */
 .valuesGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
   margin-top: 2rem;
 }
 
 .valueCard {
   padding: 2rem 1.75rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-sm);
+  background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%), var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle, rgba(0,0,0,0.05));
+  border-radius: var(--radius-md, 12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
-  transition: border-color var(--transition-normal), transform var(--transition-normal);
+  gap: 1rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.valueCard::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent, #3b82f6), #8b5cf6);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
 }
 
 .valueCard:hover {
-  border-color: var(--accent);
-  transform: translateY(-4px);
+  border-color: rgba(59, 130, 246, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.valueCard:hover::before {
+  transform: scaleX(1);
 }
 
 .valueTitle {
   font-family: var(--font-family-display);
-  font-size: 1rem;
+  font-size: 1.15rem;
   color: var(--text-primary);
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.01em;
 }
 
 .valueDesc {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: 1.7;
+}
+
+.valueDesc li {
+  position: relative;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.valueDesc li::marker {
+  color: var(--accent, #3b82f6);
+  transition: color 0.2s ease;
+}
+
+.valueCard:hover .valueDesc li::marker {
+  color: #8b5cf6;
 }
 
 /* Partners */
@@ -197,7 +232,7 @@
 /* Gallery */
 .galleryGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.25rem;
   margin-top: 2rem;
 }
@@ -232,103 +267,4 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-@media (max-width: 1024px) {
-  .valuesGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .partnersGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .galleryGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 768px) {
-  .hero {
-    min-height: 50vh;
-    padding: 6rem 0 3rem 0;
-  }
-
-  .heroTitle {
-    font-size: clamp(1.5rem, 6vw, 2.25rem);
-  }
-
-  .heroDesc {
-    font-size: 0.95rem;
-  }
-
-  .visionMissionSection {
-    padding: 60px 0;
-  }
-
-  .visionCard {
-    padding: 1.75rem;
-  }
-
-  .cardTitle {
-    font-size: 1.25rem;
-  }
-
-  .valueCard {
-    padding: 1.5rem;
-  }
-
-  .overviewSplit {
-    gap: 2.5rem;
-  }
-
-  .partnersSection {
-    padding: 60px 0;
-  }
-}
-
-@media (max-width: 576px) {
-  .hero {
-    min-height: 40vh;
-    padding: 5rem 0 2.5rem 0;
-  }
-
-  .valuesGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .partnersGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .galleryGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .overviewSplit {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .visionCard {
-    padding: 1.5rem;
-  }
-
-  .cardIcon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .cardTitle {
-    font-size: 1.15rem;
-  }
-
-  .valueCard {
-    padding: 1.25rem;
-  }
-
-  .partnerLogoCard {
-    height: 70px;
-    padding: 0.75rem;
-  }
 }

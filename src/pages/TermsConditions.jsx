@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { appConfig } from '@config/appConfig';
-import { HeaderThemeContext } from '@/layouts/Layout';
+import { appConfig } from '../data/appConfig';
+import { HeaderThemeContext } from '../components/Layout';
 
 const TermsConditions = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);

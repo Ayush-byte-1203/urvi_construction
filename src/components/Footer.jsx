@@ -1,15 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Globe, Share2, MessageSquare, Send } from 'lucide-react';
-import { appConfig } from '@config/appConfig';
-import { navigationData } from '@data/navigationData';
-import Logo from '@components/Logo';
-import Newsletter from '@components/Newsletter';
+import { appConfig } from '../data/appConfig';
+import { navigationData } from '../data/navigationData';
+import Logo from './Logo';
+import { useGlobalData } from '../context/GlobalDataContext';
+// import Newsletter from './Newsletter';
 import styles from './Footer.module.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const { footerLinks } = navigationData;
+  const { siteSettings } = useGlobalData();
 
   return (
     <footer className={styles.footer} role="contentinfo">
@@ -20,13 +22,12 @@ const Footer = () => {
             <Logo />
           </div>
           <p className={styles.footerDescription}>
-            Crafting premium commercial structural designs, luxury residential complexes, and precast civil engineering masterpieces.
-          </p>
+            Your One-Point Solution for All Construction Challenges          </p>
           <div className={styles.socialLinks}>
-            <a href={appConfig.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook Page Link"><Globe size={18} /></a>
-            <a href={appConfig.social.twitter} target="_blank" rel="noreferrer" aria-label="Twitter Page Link"><MessageSquare size={18} /></a>
-            <a href={appConfig.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram Profile Link"><Share2 size={18} /></a>
-            <a href={appConfig.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn Profile Link"><Send size={18} /></a>
+            <a href={siteSettings?.facebook_url || appConfig.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook Page Link"><Globe size={18} /></a>
+            <a href={siteSettings?.twitter_url || appConfig.social.twitter} target="_blank" rel="noreferrer" aria-label="Twitter Page Link"><MessageSquare size={18} /></a>
+            <a href={siteSettings?.instagram_url || appConfig.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram Profile Link"><Share2 size={18} /></a>
+            <a href={siteSettings?.linkedin_url || appConfig.social.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn Profile Link"><Send size={18} /></a>
           </div>
         </div>
 
@@ -56,19 +57,19 @@ const Footer = () => {
           <div className={styles.footerContactItems}>
             <div className={styles.footerContactItem}>
               <Phone size={16} className={styles.contactIcon} />
-              <a href={appConfig.company.phoneFormatted}>{appConfig.company.phone}</a>
+              <a href={`tel:${siteSettings?.contact_phone?.replace(/\D/g, '') || appConfig.company.phoneFormatted.replace('tel:', '')}`}>{siteSettings?.contact_phone || appConfig.company.phone}</a>
             </div>
             <div className={styles.footerContactItem}>
               <Mail size={16} className={styles.contactIcon} />
-              <a href={appConfig.company.emailLink}>{appConfig.company.email}</a>
+              <a href={`mailto:${siteSettings?.contact_email || appConfig.company.email}`}>{siteSettings?.contact_email || appConfig.company.email}</a>
             </div>
             <div className={styles.footerContactItem}>
               <MapPin size={16} className={styles.contactIcon} />
-              <span>{appConfig.company.address}</span>
+              <span>{siteSettings?.address || appConfig.company.address}</span>
             </div>
           </div>
 
-          <Newsletter />
+
         </div>
       </div>
 
@@ -76,7 +77,7 @@ const Footer = () => {
       <div className={styles.subFooter}>
         <div className={`container ${styles.subFooterContent}`}>
           <p className={styles.copyright}>
-            &copy; {currentYear} Paramarsh Construction. All rights reserved.
+            &copy; {currentYear} {siteSettings?.site_name || appConfig.company.name}. All rights reserved.
           </p>
           <div className={styles.legalLinks}>
             {footerLinks.legal.map((link, idx) => (

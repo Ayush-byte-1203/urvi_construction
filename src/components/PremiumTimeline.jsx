@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, ChevronRight, Clock, ShieldCheck, Users, FileText } from 'lucide-react';
-import SectionHeader from '@sections/SectionHeader';
+import SectionHeader from './SectionHeader';
 import styles from './PremiumTimeline.module.css';
 
 const PremiumTimeline = ({
@@ -21,6 +21,22 @@ const PremiumTimeline = ({
     if (!isControlled) setInternalStep(idx);
     if (onStepChange) onStepChange(idx);
   };
+
+  useEffect(() => {
+    if (steps.length <= 1) return;
+
+    const interval = setInterval(() => {
+      const nextStep = (activeStep + 1) % steps.length;
+      if (!isControlled) {
+        setInternalStep(nextStep);
+      }
+      if (onStepChange) {
+        onStepChange(nextStep);
+      }
+    }, 4000); // cycle every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [steps.length, activeStep, isControlled, onStepChange]);
 
   if (!steps || steps.length === 0) return null;
 

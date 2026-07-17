@@ -11,8 +11,8 @@ const NotFound = () => {
       style={{ minHeight: '80vh', padding: '10rem 2rem 6rem' }}
     >
       <Helmet>
-        <title>Page Not Found (404) | Paramarsh Construction</title>
-        <meta name="description" content="The page you requested could not be found. Return to the Paramarsh Construction homepage." />
+        <title>Page Not Found (404) | {appConfig.company.name}</title>
+        <meta name="description" content={`The page you requested could not be found. Return to the ${appConfig.company.name} homepage.`} />
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 

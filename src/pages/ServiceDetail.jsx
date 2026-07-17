@@ -4,22 +4,24 @@ import { Helmet } from 'react-helmet-async';
 import { 
   ArrowLeft, CheckCircle2, ChevronRight, HardHat, ShieldCheck, Compass, Info, Play, HelpCircle 
 } from 'lucide-react';
-import { appConfig } from '@config/appConfig';
-import { servicesData } from '@data/servicesData';
-import { faqData } from '@data/faqData';
-import SectionHeader from '@sections/SectionHeader';
-import GenericCard from '@components/GenericCard';
-import Accordion from '@components/Accordion';
-import MotionWrapper from '@components/MotionWrapper';
-import Button from '@components/Button';
-import InquiryForm from '@components/InquiryForm';
-import { HeaderThemeContext } from '@/layouts/Layout';
+import { appConfig } from '../data/appConfig';
+import { servicesData } from '../data/servicesData';
+import { faqData } from '../data/faqData';
+import SectionHeader from '../components/SectionHeader';
+import GenericCard from '../components/GenericCard';
+import Accordion from '../components/Accordion';
+import MotionWrapper from '../components/MotionWrapper';
+import Button from '../components/Button';
+import InquiryForm from '../components/InquiryForm';
+import { useGlobalData } from '../context/GlobalDataContext';
+import { HeaderThemeContext } from '../components/Layout';
 import styles from './ServiceDetail.module.css';
 
 const ServiceDetail = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
   const { id } = useParams();
-  const service = servicesData[id] || servicesData.residential;
+  const { services, faqs } = useGlobalData();
+  const service = services?.find(s => s.id.toString() === id) || servicesData.residential;
 
   useEffect(() => {
     setHeaderTheme('dark');
@@ -67,9 +69,10 @@ const ServiceDetail = () => {
     .slice(0, 3);
 
   // Grouped FAQ Items specific to service
-  const serviceFAQs = faqData.slice(0, 3).map((f) => ({
-    title: f.q,
-    content: f.a
+  const displayFaqs = faqs && faqs.length > 0 ? faqs : faqData;
+  const serviceFAQs = displayFaqs.slice(0, 3).map((f) => ({
+    title: f.question || f.q,
+    content: f.answer || f.a
   }));
 
   const heroStyle = {
@@ -79,11 +82,13 @@ const ServiceDetail = () => {
   return (
     <div className="service-detail-page">
       <Helmet>
-        <title>{service.title} Specifications | Paramarsh Construction</title>
-        <meta name="description" content={service.tagline} />
+        <title>{service.title || 'Service Details'} | {appConfig.company.name}</title>
+        <meta name="description" content={service.tagline || 'Premium Quality'} />
       </Helmet>
 
-      {/* Hero Header */}
+      {/* ========================================== */}
+      {/* SECTION: Hero Header */}
+      {/* ========================================== */}
       <section className={styles.hero} style={heroStyle}>
         <div className={`container ${styles.heroContainer}`}>
           <div className={styles.breadcrumbs}>
@@ -95,7 +100,7 @@ const ServiceDetail = () => {
           </div>
 
           <h1 className={styles.heroTitle}>{service.title}</h1>
-          <p className={styles.heroDesc}>{service.tagline}</p>
+          <p className={styles.heroDesc}>{service.tagline || 'Premium Quality'}</p>
           
           <div className={styles.heroActions}>
             <a href="#quote-form" className="btn btn-primary">Request Pricing Call</a>
@@ -104,7 +109,9 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* Split Details Section */}
+      {/* ========================================== */}
+      {/* SECTION: Split Details Section */}
+      {/* ========================================== */}
       <section className="section container" id="overview">
         <Link to="/services" className={styles.backLink}>
           <ArrowLeft size={14} style={{ marginRight: '6px' }} /> Return to Ecosystem
@@ -115,11 +122,11 @@ const ServiceDetail = () => {
           <div className={styles.scopeColumn}>
             <span className="text-overline">Division Overview</span>
             <h2 className={styles.sectionTitle}>Scope & Specifications</h2>
-            <p className={styles.descriptionText}>{service.desc}</p>
+            <p className={styles.descriptionText}>{service.scope_text || service.description || service.desc}</p>
 
             <h3 className={styles.subHeading}>Engineering Benefits</h3>
             <div className={styles.benefitGrid}>
-              {service.benefits.map((b, idx) => (
+              {(service.benefits && service.benefits.length > 0 ? service.benefits : (service.features || ['Optimized efficiency', 'Quality assured', 'Expert managed'])).map((b, idx) => (
                 <div key={idx} className={styles.benefitItem}>
                   <CheckCircle2 size={16} className={styles.benefitCheck} />
                   <span>{b}</span>
@@ -127,15 +134,7 @@ const ServiceDetail = () => {
               ))}
             </div>
 
-            {/* Micro Video Walkthrough Mockup */}
-            <div className={styles.videoPlaceholder}>
-              <img src={serviceThumbnails[service.id]} alt="Staging Preview" className={styles.videoBg} />
-              <div className={styles.videoOverlay} />
-              <div className={styles.playBtn} onClick={() => alert('Launching site staging playback walkthrough.')}>
-                <Play size={18} fill="currentColor" />
-              </div>
-              <span className={styles.playLabel}>Watch Site Staging Video</span>
-            </div>
+
           </div>
 
           {/* Right Column: Interactive Process Roadmap */}
@@ -144,14 +143,18 @@ const ServiceDetail = () => {
             <p className={styles.roadmapSub}>Sequence of execution checkpoints followed by site coordinators:</p>
 
             <div className={styles.roadmapList}>
-              {service.process.map((step, idx) => (
+              {(service.workflow_steps && service.workflow_steps.length > 0 ? service.workflow_steps : (service.process || [
+                { title: 'Consultation & Initial Discussion' },
+                { title: 'Project Planning & Strategy' },
+                { title: 'Execution & Quality Check' }
+              ])).map((step, idx, arr) => (
                 <div key={idx} className={styles.roadmapStep}>
                   <div className={styles.indicatorCol}>
                     <span className={styles.roadmapBubble}>{idx + 1}</span>
-                    {idx < service.process.length - 1 && <span className={styles.roadmapLine} />}
+                    {idx < arr.length - 1 && <span className={styles.roadmapLine} />}
                   </div>
                   <div className={styles.stepTextCol}>
-                    <span className={styles.stepTitle}>{step}</span>
+                    <h4 className={styles.stepHeading}>{step.title || step}</h4>
                   </div>
                 </div>
               ))}
@@ -160,8 +163,10 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* Standard Materials Table */}
-      <section className={`section ${styles.materialsSection}`}>
+      {/* ========================================== */}
+      {/* SECTION: Standard Materials Table */}
+      {/* ========================================== */}
+      {/* <section className={`section ${styles.materialsSection}`}>
         <div className="container">
           <SectionHeader
             eyebrow="Bill of Materials"
@@ -179,9 +184,11 @@ const ServiceDetail = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Service FAQ Accordion */}
+      {/* ========================================== */}
+      {/* SECTION: Service FAQ Accordion */}
+      {/* ========================================== */}
       <section className="section container" style={{ maxWidth: '800px' }}>
         <SectionHeader
           eyebrow="Q&A Helpdesk"
@@ -193,14 +200,18 @@ const ServiceDetail = () => {
         </div>
       </section>
 
-      {/* Inquiry Form Form */}
-      <section className="section container" id="quote-form" style={{ maxWidth: '720px' }}>
+      {/* ========================================== */}
+      {/* SECTION: Inquiry Form Form */}
+      {/* ========================================== */}
+      {/* <section className="section container" id="quote-form" style={{ maxWidth: '720px' }}>
         <div className="glass-panel" style={{ padding: '3rem' }}>
           <InquiryForm />
         </div>
-      </section>
+      </section> */}
 
-      {/* Related Services recommendations */}
+      {/* ========================================== */}
+      {/* SECTION: Related Services recommendations */}
+      {/* ========================================== */}
       <section className={`section ${styles.relatedSection}`}>
         <div className="container">
           <SectionHeader

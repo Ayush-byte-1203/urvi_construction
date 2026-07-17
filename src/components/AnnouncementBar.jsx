@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Clock, ShieldAlert } from 'lucide-react';
-import { appConfig } from '@config/appConfig';
+import { appConfig } from '../data/appConfig';
 import styles from './AnnouncementBar.module.css';
 
 const AnnouncementBar = () => {
@@ -32,9 +32,9 @@ const AnnouncementBar = () => {
           <span>Premium Construction Audits. <a href="#consultation" className={styles.link}>Request Free Estimate</a></span>
         </div>
       </div>
-      <button 
-        className={styles.closeButton} 
-        onClick={handleDismiss} 
+      <button
+        className={styles.closeButton}
+        onClick={handleDismiss}
         aria-label="Dismiss Announcement"
       >
         <X size={16} />

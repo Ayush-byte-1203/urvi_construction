@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Button from '@components/Button';
+import Button from './Button';
 import styles from './CookieConsent.module.css';
 
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const consent = localStorage.getItem('buildcraft-cookie-consent');
+    const consent = localStorage.getItem('paramas-cookie-consent');
     if (!consent) {
       setIsVisible(true);
     }

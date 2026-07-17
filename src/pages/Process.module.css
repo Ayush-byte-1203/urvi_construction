@@ -389,55 +389,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-@media (max-width: 1200px) {
-  .connector {
-    width: 28px;
-  }
-}
-
-@media (max-width: 991px) {
-  .connector {
-    width: 24px;
-  }
-  
-  .cardContent {
-    flex-direction: column-reverse;
-    align-items: flex-start;
-    padding: 24px;
-    gap: 24px;
-  }
-  
-  .cardInfo {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-  
-  .cardImageWrapper {
-    flex: 0 0 100%;
-    max-width: 100%;
-    justify-content: flex-start;
-  }
-}
-
-@media (max-width: 576px) {
-  .connector {
-    width: 20px;
-  }
-  
-  .stepperWrapper {
-    padding: 1.25rem 1rem;
-  }
-  
-  .cardTitle {
-    font-size: 24px;
-  }
-  
-  .navBtn {
-    padding: 0.4rem 0.7rem;
-    font-size: 0.75rem;
-  }
-}
-
 /* Supporting Information Banner */
 .infoBanner {
   display: flex;
@@ -509,27 +460,4 @@
   z-index: 1;
   position: relative;
   flex-shrink: 0;
-}
-
-@media (max-width: 768px) {
-  .infoBanner {
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    padding: 2rem !important;
-  }
-  .infoBannerLeft {
-    flex-direction: column;
-    align-items: center;
-  }
-  .infoBannerText p {
-    max-width: 100%;
-  }
-  .infoBannerRight {
-    width: 100%;
-  }
-  .infoBannerRight button {
-    width: 100%;
-    justify-content: center;
-  }
 }

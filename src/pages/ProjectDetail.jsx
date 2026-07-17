@@ -4,54 +4,50 @@ import { Helmet } from 'react-helmet-async';
 import { 
   ArrowLeft, Compass, Clock, MapPin, ShieldAlert, Award, ChevronRight, CheckCircle2, Play, Info, HelpCircle
 } from 'lucide-react';
-import { appConfig } from '@config/appConfig';
-import { projectsData } from '@data/projectsData';
+import { appConfig } from '../data/appConfig';
+import { useGlobalData } from '../context/GlobalDataContext';
 
-import SectionHeader from '@sections/SectionHeader';
-import GenericCard from '@components/GenericCard';
-import Accordion from '@components/Accordion';
-import MotionWrapper from '@components/MotionWrapper';
-import Button from '@components/Button';
+import SectionHeader from '../components/SectionHeader';
+import GenericCard from '../components/GenericCard';
+import Accordion from '../components/Accordion';
+import MotionWrapper from '../components/MotionWrapper';
+import Button from '../components/Button';
 
-import { HeaderThemeContext } from '@/layouts/Layout';
+import { HeaderThemeContext } from '../components/Layout';
 import styles from './ProjectDetail.module.css';
 
 const ProjectDetail = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
   const { id } = useParams();
-  const project = projectsData[id] || projectsData['vista-residences'];
+  const { projects: projectsData, isLoading } = useGlobalData();
+  
+  const project = projectsData?.find(p => p.id.toString() === id) || projectsData?.[0];
 
   const [sliderPos, setSliderPos] = useState(50);
+  const [activeStage, setActiveStage] = useState('All');
+  const [lightboxImage, setLightboxImage] = useState(null);
+
+  // Extract unique stages from project images
+  const availableStages = ['All', ...new Set((project?.images || []).map(img => img.stage))];
+  
+  const filteredImages = activeStage === 'All' 
+    ? (project?.images || [])
+    : (project?.images || []).filter(img => img.stage === activeStage);
 
   useEffect(() => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
 
-  // Asset Mappings for Images
-  const projectImages = {
-    'apex-tower': 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
-    'vista-residences': 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
-    'helios-logistics': 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80',
-    'luna-villas': 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
-    'zenith-hub': 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
-    'nova-assembly': 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1200&q=80'
-  };
-
-  const projectThumbnails = {
-    'apex-tower': 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
-    'vista-residences': 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
-    'helios-logistics': 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80',
-    'luna-villas': 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80',
-    'zenith-hub': 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-    'nova-assembly': 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80'
-  };
+  if (isLoading || !project) {
+    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading Project Specifications...</div>;
+  }
 
   // Specs
   const technicalSpecs = [
-    { label: 'Built area', value: project.area },
-    { label: 'Floors Count', value: 'G + 2 Floors structure' },
-    { label: 'Material Grade', value: 'Bespoke Luxury Tiers' },
-    { label: 'Seismic Protection', value: 'Seismic Zone III Compliant' }
+    { label: 'Built area', value: project.built_area || 'Not Specified' },
+    { label: 'Floors Count', value: project.floors_count || 'Not Specified' },
+    { label: 'Material Grade', value: project.material_grade || 'Not Specified' },
+    { label: 'Seismic Protection', value: project.seismic_protection || 'Not Specified' }
   ];
 
   // Materials Used
@@ -61,12 +57,14 @@ const ProjectDetail = () => {
     { brand: 'Asian Paints Apex', type: 'Silicone Emulsion', why: 'Weather protection shield preserves facade aesthetics.' }
   ];
 
-  const relatedProjects = Object.values(projectsData)
+  const relatedProjects = (projectsData || [])
     .filter((p) => p.id !== project.id)
     .slice(0, 3);
 
+  const fallbackImage = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80';
+
   const heroStyle = {
-    backgroundImage: `linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.9)), url(${projectImages[project.id]})`
+    backgroundImage: `linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.9)), url(${project.image || fallbackImage})`
   };
 
   const handleMouseMove = (e) => {
@@ -84,11 +82,13 @@ const ProjectDetail = () => {
   return (
     <div className="project-detail-page">
       <Helmet>
-        <title>{project.title} Case study | Paramarsh Construction</title>
+        <title>{project.title} Case study | {appConfig.company.name}</title>
         <meta name="description" content={project.scope} />
       </Helmet>
 
-      {/* Hero Header */}
+      {/* ========================================== */}
+      {/* SECTION: Hero Header */}
+      {/* ========================================== */}
       <section className={styles.hero} style={heroStyle}>
         <div className={`container ${styles.heroContainer}`}>
           <div className={styles.breadcrumbs}>
@@ -104,7 +104,9 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Specifications Dashboard */}
+      {/* ========================================== */}
+      {/* SECTION: Specifications Dashboard */}
+      {/* ========================================== */}
       <section className="section container">
         <Link to="/projects" className={styles.backLink}>
           <ArrowLeft size={14} style={{ marginRight: '6px' }} /> Return to Portfolio
@@ -126,22 +128,24 @@ const ProjectDetail = () => {
             <span className="text-overline">Case Context</span>
             <h2 className={styles.sectionTitle}>Client Requirements</h2>
             <p className={styles.goalsText}>
-              The client requested a bespoke structural design optimized for waterfront aesthetics, low carbon footprints, and seismic reinforcements.
+              {project.client_requirements || project.description || 'Client requirements were fulfilled according to bespoke structural designs.'}
             </p>
           </div>
           <div className={`glass-panel ${styles.rightCol}`}>
             <strong>Project Metadata</strong>
             <div className={styles.metaRow}>
-              <span>Client: {project.client}</span>
-              <span>Architect: {project.architect}</span>
-              <span>Location: {project.location}</span>
+              <span>Client: {project.client_name || 'Not Specified'}</span>
+              <span>Architect: {project.architect_name || 'Not Specified'}</span>
+              <span>Location: {project.location || 'Not Specified'}</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Structural Challenges & Engineering Solutions */}
-      <section className={`section ${styles.challengesSection}`}>
+      {/* ========================================== */}
+      {/* SECTION: Structural Challenges & Engineering Solutions */}
+      {/* ========================================== */}
+      {/* <section className={`section ${styles.challengesSection}`}>
         <div className="container grid-2" style={{ gap: '3rem' }}>
           <div className={`glass-panel ${styles.challengesCard}`}>
             <div className={styles.cardHeader} style={{ color: '#ef4444' }}>
@@ -159,52 +163,75 @@ const ProjectDetail = () => {
             <p className={styles.cardText}>{project.solutions}</p>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Before & After Interactive Image Comparison Slider */}
-      <section className={`section ${styles.comparisonSection}`}>
-        <div className="container" style={{ maxWidth: '800px' }}>
-          <SectionHeader
-            eyebrow="Visual checks"
-            heading="Before & After Comparison"
-            subheading="Hover and slide your cursor left and right over the container to compare raw site excavation staging against the finished layout."
-          />
+      {/* ========================================== */}
+      {/* SECTION: Image Gallery (Replacing Before/After) */}
+      {/* ========================================== */}
+      {(project?.images && project.images.length > 0) && (
+        <section className={`section ${styles.comparisonSection}`}>
+          <div className="container" style={{ maxWidth: '1000px' }}>
+            <SectionHeader
+              eyebrow="Visual checks"
+              heading="Project Gallery"
+              subheading="Explore detailed images from different phases of the project lifecycle."
+            />
 
-          <div 
-            className={styles.sliderContainer} 
-            onMouseMove={handleMouseMove}
-            onTouchMove={(e) => {
-              if (e.touches[0]) {
-                const rect = e.currentTarget.getBoundingClientRect();
-                const x = e.touches[0].clientX - rect.left;
-                const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-                setSliderPos(percentage);
-              }
-            }}
-            style={{ marginTop: '3.5rem' }}
-          >
-            {/* Before image */}
-            <div className={styles.beforeImageWrapper}>
-              <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80" alt="Excavation Staging" />
-              <span className={`${styles.sliderLabelTag} ${styles.labelBefore}`}>Before (Civil Base)</span>
-            </div>
+            {/* Tabs */}
+            <>
+              <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '2rem', flexWrap: 'wrap' }}>
+                {availableStages.map(stage => (
+                  <button
+                    key={stage}
+                    onClick={() => setActiveStage(stage)}
+                    style={{
+                      padding: '0.5rem 1.5rem',
+                      borderRadius: '50px',
+                      background: activeStage === stage ? 'var(--accent)' : 'transparent',
+                      color: activeStage === stage ? '#fff' : 'var(--text-main, #333)',
+                      border: '1px solid',
+                      borderColor: activeStage === stage ? 'var(--accent)' : '#ccc',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease'
+                    }}
+                  >
+                    {stage}
+                  </button>
+                ))}
+              </div>
 
-            {/* After image */}
-            <div className={styles.afterImageWrapper} style={{ width: `${sliderPos}%` }}>
-              <img src={projectImages[project.id]} alt="Finished Landmark" style={{ width: '800px', maxWidth: 'none' }} />
-              <span className={`${styles.sliderLabelTag} ${styles.labelAfter}`}>After (Finished Villa)</span>
-            </div>
-
-            {/* Slider bar line */}
-            <div className={styles.sliderBar} style={{ left: `${sliderPos}%` }}>
-              <div className={styles.sliderHandle} />
-            </div>
+              {/* Masonry-style Grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '3.5rem' }}>
+                {filteredImages.map((img, idx) => (
+                  <MotionWrapper key={idx} variant="slideUp" delay={idx * 0.1} className={`glass-panel`} style={{ padding: '0.5rem', overflow: 'hidden' }}>
+                    <img 
+                      src={img.image} 
+                      alt={img.caption || `${project.title} - ${img.stage}`} 
+                      style={{ width: '100%', height: '250px', objectFit: 'cover', borderRadius: '4px', cursor: 'zoom-in' }}
+                      onClick={() => setLightboxImage(img.image)}
+                    />
+                    <div style={{ padding: '1rem 0.5rem 0.5rem' }}>
+                      <span style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'var(--accent)', fontWeight: 600, letterSpacing: '1px' }}>
+                        {img.stage} Phase
+                      </span>
+                      {img.caption && (
+                        <p style={{ fontSize: '0.875rem', marginTop: '0.5rem', color: 'rgba(255,255,255,0.7)' }}>
+                          {img.caption}
+                        </p>
+                      )}
+                    </div>
+                  </MotionWrapper>
+                ))}
+              </div>
+            </>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* Material Showcase */}
-      <section className="section container">
+      {/* ========================================== */}
+      {/* SECTION: Material Showcase */}
+      {/* ========================================== */}
+      {/* <section className="section container">
         <SectionHeader
           eyebrow="Procured components"
           heading="Material Showcase"
@@ -220,29 +247,16 @@ const ProjectDetail = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
 
-      {/* Drone Video Walkthrough */}
-      <section className={`section ${styles.videoSection}`}>
-        <div className="container" style={{ maxWidth: '720px' }}>
-          <SectionHeader
-            eyebrow="Media playback"
-            heading="Aerial Drone walkthrough"
-            subheading="Watch finished structure layout details filmed via drone site checks."
-          />
+      {/* ========================================== */}
+      {/* SECTION: Drone Video Walkthrough */}
+      {/* ========================================== */}
+      {/* make th */}
 
-          <div className={styles.videoPlayerCard} style={{ marginTop: '3rem' }}>
-            <img src={projectThumbnails[project.id]} alt="Drone Preview" />
-            <div className={styles.videoOverlay} />
-            <button className={styles.playBtn} onClick={() => alert('Launching drone walkthrough playback.')}>
-              <Play size={20} fill="currentColor" />
-            </button>
-            <span className={styles.playbackTag}>Play Timelapse</span>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQs Specific to Project */}
+      {/* ========================================== */}
+      {/* SECTION: FAQs Specific to Project */}
+      {/* ========================================== */}
       <section className="section container" style={{ maxWidth: '800px' }}>
         <SectionHeader
           eyebrow="Q&A Helpdesk"
@@ -254,8 +268,10 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Related Case Studies */}
-      <section className={`section ${styles.relatedSection}`}>
+      {/* ========================================== */}
+      {/* SECTION: Related Case Studies */}
+      {/* ========================================== */}
+      {/* <section className={`section ${styles.relatedSection}`}>
         <div className="container">
           <SectionHeader
             eyebrow="Explore Portfolio"
@@ -267,13 +283,13 @@ const ProjectDetail = () => {
             {relatedProjects.map((item, idx) => (
               <MotionWrapper key={item.id} variant="slideUp" delay={idx * 0.1}>
                 <GenericCard
-                  image={projectThumbnails[item.id]}
-                  badge={item.tag}
+                  image={item.image || fallbackImage}
+                  badge={item.category_name || item.category || 'Portfolio'}
                   title={item.title}
-                  description={item.scope}
+                  description={item.description}
                   meta={[
-                    <span key="area"><Compass size={12} style={{ marginRight: '0.25rem', color: 'var(--accent)' }} /> {item.area}</span>,
-                    <span key="year"><Clock size={12} style={{ marginRight: '0.25rem', color: 'var(--accent)' }} /> {item.year}</span>
+                    <span key="area"><Compass size={12} style={{ marginRight: '0.25rem', color: 'var(--accent)' }} /> {item.built_area || item.area || 'TBD'}</span>,
+                    <span key="year"><Clock size={12} style={{ marginRight: '0.25rem', color: 'var(--accent)' }} /> {item.completion_date || item.year || 'TBD'}</span>
                   ]}
                   ctaText="Read Case Study"
                   ctaLink={`/projects/${item.id}`}
@@ -282,9 +298,37 @@ const ProjectDetail = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+            zIndex: 9999,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'zoom-out',
+            padding: '2rem'
+          }}
+          onClick={() => setLightboxImage(null)}
+        >
+          <img 
+            src={lightboxImage} 
+            alt="Enlarged view" 
+            style={{
+              maxHeight: '100%',
+              maxWidth: '100%',
+              objectFit: 'contain',
+              borderRadius: '8px',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.5)'
+            }} 
+          />
+        </div>
+      )}
       
     </div>
   );

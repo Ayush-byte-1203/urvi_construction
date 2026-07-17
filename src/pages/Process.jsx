@@ -5,17 +5,29 @@ import {
   Users, FileText, MapPin, HardHat, ShieldCheck, Home, CheckCircle2 
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Button from '@components/Button';
-import { HeaderThemeContext } from '@/layouts/Layout';
+import { useGlobalData } from '../context/GlobalDataContext';
+import { usePageData } from '../hooks/usePageData';
+import Button from '../components/Button';
+import { HeaderThemeContext } from '../components/Layout';
 import styles from './Process.module.css';
 
 const Process = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
+  const { siteSettings, isLoading: isGlobalLoading } = useGlobalData();
+  const { pageData, isLoading: isPageLoading } = usePageData('process');
   const [activeStep, setActiveStep] = useState(0);
+
+  const isLoading = isGlobalLoading || isPageLoading;
 
   useEffect(() => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
+
+  if (isLoading) {
+    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading dynamic content from backend...</div>;
+  }
+
+  const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Process`, defaultDescription: pageData?.subtitle || 'Our Process' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...' } };
 
   const steps = [
     {
@@ -85,15 +97,15 @@ const Process = () => {
   return (
     <div className="process-page">
       <Helmet>
-        <title>Construction Process Roadmap | Paramarsh Construction</title>
-        <meta name="description" content="Review our step-by-step building process timeline, from zoning permit applications to keys handover." />
+        <title>Execution Methodology | {appConfig.seo.defaultTitle}</title>
+        <meta name="description" content={appConfig.seo.defaultDescription} />
       </Helmet>
 
       <section className={`subpage-header ${styles.processHeader}`}>
         <div className="container">
           <span className={`accent-text ${styles.processBadge}`}>Strategic Timeline</span>
-          <h1 className={`title-large ${styles.processTitle}`}>Our Construction Process</h1>
-          <p className={`subtitle ${styles.processSubtitle}`}>Learn how we guide your project from soil testing and permits to finished handover, using strict quality assurance checks.</p>
+          <h1 className={`title-large ${styles.processTitle}`}>{pageData?.title || 'Our Construction Process'}</h1>
+          <p className={`subtitle ${styles.processSubtitle}`}>{pageData?.subtitle || 'Learn how we guide your project from soil testing and permits to finished handover, using strict quality assurance checks.'}</p>
         </div>
       </section>
 

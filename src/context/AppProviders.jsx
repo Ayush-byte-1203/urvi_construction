@@ -1,14 +1,17 @@
 import React from 'react';
-import { ThemeProvider } from '@/context/ThemeContext';
-import { NotificationProvider } from '@/context/NotificationContext';
-import { ModalProvider } from '@/context/ModalContext';
+import { ThemeProvider } from './ThemeContext';
+import { NotificationProvider } from './NotificationContext';
+import { ModalProvider } from './ModalContext';
+import { GlobalDataProvider } from './GlobalDataContext';
 
 export const AppProviders = ({ children }) => {
   return (
     <ThemeProvider>
       <NotificationProvider>
         <ModalProvider>
-          {children}
+          <GlobalDataProvider>
+            {children}
+          </GlobalDataProvider>
         </ModalProvider>
       </NotificationProvider>
     </ThemeProvider>

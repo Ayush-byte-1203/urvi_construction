@@ -1,7 +1,7 @@
 /* AnnouncementBar — Blue accent stripe */
 .bar {
-  background: linear-gradient(90deg, hsl(217,91%,50%) 0%, hsl(217,91%,44%) 100%);
-  color: rgba(255,255,255,0.9);
+  background: linear-gradient(90deg, hsl(217, 91%, 50%) 0%, hsl(217, 91%, 44%) 100%);
+  color: rgba(255, 255, 255, 0.9);
   font-family: var(--font-family-display);
   font-size: 0.72rem;
   font-weight: 500;
@@ -28,27 +28,30 @@
   gap: var(--space-xs);
 }
 
-.icon { color: rgba(255,255,255,0.8); }
+.icon {
+  color: rgba(255, 255, 255, 0.8);
+}
 
 .link {
   color: #FFFFFF;
   font-weight: 700;
   text-decoration: underline;
-  text-decoration-color: rgba(255,255,255,0.4);
+  text-decoration-color: rgba(255, 255, 255, 0.4);
   text-underline-offset: 2px;
 }
-.link:hover { text-decoration-color: #FFFFFF; }
+
+.link:hover {
+  text-decoration-color: #FFFFFF;
+}
 
 .closeButton {
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
   display: flex;
   transition: color var(--transition-fast);
   flex-shrink: 0;
 }
-.closeButton:hover { color: #FFFFFF; }
 
-@media (max-width: 768px) {
-  .bar { padding: 0.5rem var(--space-md); }
-  .content { flex-direction: column; gap: 0.2rem; text-align: center; }
+.closeButton:hover {
+  color: #FFFFFF;
 }

@@ -1,0 +1,36 @@
+.stripWrapper {
+  background-color: var(--bg-surface-elevated, #0B1120);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1.5rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+.stripContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.qualityCheckWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.qualityImage {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+}
+
+.qualityText {
+  color: #FFFFFF;
+  font-family: var(--font-family-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0.5px;
+}

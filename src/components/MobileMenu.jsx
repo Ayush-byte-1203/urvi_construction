@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { X, ChevronRight } from 'lucide-react';
-import { ROUTES } from '@constants/routes';
+import { ROUTES } from '../data/routes';
 import styles from './MobileMenu.module.css';
 
 const MobileMenu = ({ isOpen, onClose }) => {
@@ -27,10 +27,8 @@ const MobileMenu = ({ isOpen, onClose }) => {
     { name: 'Home', path: ROUTES.HOME },
     { name: 'About Us', path: ROUTES.ABOUT },
     { name: 'Services', path: ROUTES.SERVICES },
-    { name: 'Construction Packages', path: ROUTES.PACKAGES },
     { name: 'Completed Projects', path: ROUTES.PROJECTS },
-    { name: 'Build Process', path: ROUTES.PROCESS },
-    { name: 'FAQ Queries', path: ROUTES.FAQ }
+    { name: 'Blog', path: ROUTES.BLOG }
   ];
 
   return (

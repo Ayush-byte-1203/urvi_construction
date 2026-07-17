@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { 
   Mail, Phone, MapPin, Send, CheckCircle2, ChevronRight, ShieldCheck, Clock 
 } from 'lucide-react';
-import { appConfig } from '@config/appConfig';
-import SectionHeader from '@sections/SectionHeader';
-import MotionWrapper from '@components/MotionWrapper';
-import Button from '@components/Button';
-import HeroOverlay from '@components/HeroOverlay';
-import InquiryForm from '@components/InquiryForm';
-import { HeaderThemeContext } from '@/layouts/Layout';
+import { appConfig } from '../data/appConfig';
+import SectionHeader from '../components/SectionHeader';
+import MotionWrapper from '../components/MotionWrapper';
+import Button from '../components/Button';
+import HeroOverlay from '../components/HeroOverlay';
+import InquiryForm from '../components/InquiryForm';
+import { HeaderThemeContext } from '../components/Layout';
 import styles from './Contact.module.css';
 
 const Contact = () => {
@@ -22,21 +22,23 @@ const Contact = () => {
   return (
     <div className="contact-page">
       <Helmet>
-        <title>Contact Paramarsh Construction | Premium Construction Estimates</title>
-        <meta name="description"        content="Get in touch for a free site assessment, engineering drawings review, or cost estimate. Book a consultation with Paramarsh Construction today." />
+        <title>Contact {appConfig.company.name} | Premium Construction Estimates</title>
+        <meta name="description"        content={`Get in touch for a free site assessment, engineering drawings review, or cost estimate. Book a consultation with ${appConfig.company.name} today.`} />
         <link rel="canonical"           href={`${appConfig.seo.siteUrl}/contact`} />
         <meta property="og:type"        content="website" />
-        <meta property="og:title"       content="Contact Paramarsh Construction | Premium Construction Estimates" />
-        <meta property="og:description" content="Book a free site assessment or cost estimation call with our engineering team." />
+        <meta property="og:title"       content={`Contact ${appConfig.company.name} | Premium Construction Estimates`} />
+        <meta property="og:description" content={`Get in touch for a free site assessment, engineering drawings review, or cost estimate. Book a consultation with ${appConfig.company.name} today.`} />
         <meta property="og:url"         content={`${appConfig.seo.siteUrl}/contact`} />
-        <meta property="og:image"       content={appConfig.seo.ogImage} />
+        <meta property="og:image"       content={`${appConfig.seo.siteUrl}/seo/contact-banner.jpg`} />
         <meta name="twitter:card"       content="summary_large_image" />
-        <meta name="twitter:title"      content="Contact Paramarsh Construction" />
+        <meta name="twitter:title"      content={`Contact ${appConfig.company.name}`} />
         <meta name="twitter:description" content="Book a free site assessment or cost estimation call." />
         <meta name="twitter:image"      content={appConfig.seo.ogImage} />
       </Helmet>
 
-      {/* Breadcrumb Header */}
+      {/* ========================================== */}
+      {/* SECTION: Breadcrumb Header */}
+      {/* ========================================== */}
       <section className={styles.hero}>
         <HeroOverlay type="dark" />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -52,7 +54,9 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Split layout: Info cards vs Multi-form */}
+      {/* ========================================== */}
+      {/* SECTION: Split layout: Info cards vs Multi-form */}
+      {/* ========================================== */}
       <section className="section container">
         <div className="grid-2">
           {/* Direct channels */}
@@ -102,7 +106,9 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* FAQ Preview Block */}
+      {/* ========================================== */}
+      {/* SECTION: FAQ Preview Block */}
+      {/* ========================================== */}
       <section className="section container" style={{ maxWidth: '800px' }}>
         <SectionHeader
           eyebrow="FAQ"

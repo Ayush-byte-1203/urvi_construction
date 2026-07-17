@@ -4,14 +4,14 @@ import { Helmet } from 'react-helmet-async';
 import { 
   Star, MessageSquare, ChevronRight, Play, Quote, Award, ShieldCheck, CheckCircle2 
 } from 'lucide-react';
-import { appConfig } from '@config/appConfig';
-import { testimonialsData } from '@data/testimonialsData';
-import SectionHeader from '@sections/SectionHeader';
-import MotionWrapper from '@components/MotionWrapper';
-import MediaWrapper from '@components/MediaWrapper';
-import Button from '@components/Button';
+import { appConfig } from '../data/appConfig';
+import { testimonialsData } from '../data/testimonialsData';
+import SectionHeader from '../components/SectionHeader';
+import MotionWrapper from '../components/MotionWrapper';
+import MediaWrapper from '../components/MediaWrapper';
+import Button from '../components/Button';
 
-import { HeaderThemeContext } from '@/layouts/Layout';
+import { HeaderThemeContext } from '../components/Layout';
 import styles from './Testimonials.module.css';
 
 const Testimonials = () => {
@@ -57,7 +57,9 @@ const Testimonials = () => {
         <meta name="description" content="Read reviews and testimonials from corporate group leaders and luxury residential clients." />
       </Helmet>
 
-      {/* Breadcrumb Header */}
+      {/* ========================================== */}
+      {/* SECTION: Breadcrumb Header */}
+      {/* ========================================== */}
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.breadcrumbs}>
@@ -72,7 +74,9 @@ const Testimonials = () => {
         </div>
       </section>
 
-      {/* Satisfaction Counters Section */}
+      {/* ========================================== */}
+      {/* SECTION: Satisfaction Counters Section */}
+      {/* ========================================== */}
       <section className="section container">
         <div className={styles.metricsGrid}>
           {ratingsMetrics.map((met, idx) => (
@@ -182,7 +186,9 @@ const Testimonials = () => {
         </div>
       </section>
 
-      {/* Trust Highlights segment */}
+      {/* ========================================== */}
+      {/* SECTION: Trust Highlights segment */}
+      {/* ========================================== */}
       <section className="section" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--color-border-subtle)' }}>
         <div className="container">
           <SectionHeader

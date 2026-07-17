@@ -1,84 +1,96 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import {
-  Target, Compass, Shield, Award, Users, FileText, CheckCircle2, ChevronRight, ArrowRight
+import { 
+  Building2, Users, Target, Shield, Clock, Compass, Ruler, Lightbulb, ChevronRight
 } from 'lucide-react';
-import { appConfig } from '@config/appConfig';
-import { statsData } from '@data/statsData';
-import { testimonialsData } from '@data/testimonialsData';
-import SectionHeader from '@sections/SectionHeader';
-import PremiumTimeline from '@components/PremiumTimeline';
-import MotionWrapper from '@components/MotionWrapper';
-import MediaWrapper from '@components/MediaWrapper';
-import Button from '@components/Button';
+import { useGlobalData } from '../context/GlobalDataContext';
+import { usePageData } from '../hooks/usePageData';
+import { statsData } from '../data/statsData';
+import SectionHeader from '../components/SectionHeader';
+import PremiumTimeline from '../components/PremiumTimeline';
+import MotionWrapper from '../components/MotionWrapper';
+import MediaWrapper from '../components/MediaWrapper';
+import Button from '../components/Button';
+import sample1 from '../Images/sample1.jpeg';
+import sample2 from '../Images/sample2.jpeg';
+import sample3 from '../Images/sample3.jpeg';
+import sample4 from '../Images/sample4.jpeg';
 
-import HeroOverlay from '@components/HeroOverlay';
-import { HeaderThemeContext } from '@/layouts/Layout';
+import HeroOverlay from '../components/HeroOverlay';
+import { HeaderThemeContext } from '../components/Layout';
 import styles from './About.module.css';
 
 const About = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
+  const containerRef = useRef(null);
+  const { siteSettings, isLoading: isGlobalLoading } = useGlobalData();
+  const { pageData, sections, isLoading: isPageLoading } = usePageData('about');
+  const isLoading = isGlobalLoading || isPageLoading;
 
   useEffect(() => {
-    setHeaderTheme('dark');
+    setHeaderTheme('light');
   }, [setHeaderTheme]);
+
+  if (isLoading) {
+    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading dynamic content from backend...</div>;
+  }
+
+  const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | About`, defaultDescription: pageData?.subtitle || 'About Us', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
   const coreValues = [
-    { icon: <Shield size={24} />, title: 'Safety Integrity', desc: 'Ensuring structural safety and EAF material load certifications.' },
-    { icon: <Target size={24} />, title: 'Millimetric Precision', desc: 'Drafting exact BOQ estimations and matching strict planning codes.' },
-    { icon: <Compass size={24} />, title: 'Green Sustainability', desc: 'Utilizing carbon-absorbing concrete blocks and solar orientation plans.' },
-    { icon: <Award size={24} />, title: 'Uncompromising Quality', desc: 'Using certified engineering teams and high-grade cement spans.' },
-    { icon: <Users size={24} />, title: 'Total Transparency', desc: 'Providing active updates and budget spreadsheets on client portals.' },
-    { icon: <FileText size={24} />, title: 'Milestone Adherence', desc: 'Deploying continuous logistics checks to keep sites on schedule.' },
-    { icon: <CheckCircle2 size={24} />, title: 'Aesthetic Vision', desc: 'Bespoke designs under double-glazed architectural facades.' },
-    { icon: <ArrowRight size={24} />, title: 'Operational Excellence', desc: 'Managing civil submissions, zoning clearances, and final keys handover.' }
+    {
+      title: 'Pre-Construction Testing', 
+      desc: [
+        'Soil Bearing Analysis: Testing soil compaction and load capacity before designing foundations to prevent future building settlement or cracking.',
+        'Material Lab Validation: Conducting strict compressive strength tests on concrete blocks and tensile testing on structural steel before they enter the site.'
+      ]
+    },
+    {
+      title: 'Engineering & Design Validation', 
+      desc: [
+        'Structural Stability Review: Verifying columns, beams, and foundation sizing through certified structural engineers to ensure resistance against seismic activity and heavy loads.',
+        'Blueprint Cross-Checking: Reviewing architectural plans against mechanical, electrical, and plumbing (MEP) layouts to eliminate installation conflicts.'
+      ]
+    },
+    {
+      title: 'Premium Branded Materials', 
+      desc: [
+        'Utilizing carbon-absorbing concrete blocks and solar orientation plans.'
+      ]
+    },
+    {
+      title: 'Uncompromising Quality', 
+      desc: [
+        'Certified Supply Chain: Exclusively sourcing materials from leading national brands (such as Jindal, UltraTech, and Astral) to guarantee long-term durability.',
+        'Zero Compromise Policy: Banning unbranded, sub-standard materials or unverified local mixes from the construction site.'
+      ]
+    },
+    {
+      title: 'Strict Quality Checks & Standards', 
+      desc: [
+        '150+ Multi-Stage Checkpoints: Applying a rigorous master checklist across every single floor, auditing everything from concrete curing times to waterproofing layers.',
+        'IS Standard Alignment: Executing all masonry, steel bending, concrete mixing, and electrical routing in strict compliance with the Bureau of Indian Standards (BIS/IS Codes).'
+      ]
+    },
   ];
-
-  const timelineSteps = [
-    { step: '2011', title: 'Company Founded', description: 'Established as a residential renovator cell in Placeholder City.' },
-    { step: '2015', title: 'Commercial Expansion', description: 'First corporate commercial plaza completed with zero safety incidents.' },
-    { step: '2019', title: 'Industrial Division Launch', description: 'Launched heavy logistics warehouse units and precast span manufacturing.' },
-    { step: '2023', title: 'ISO & Quality Awards', description: 'Recognized for eco-conscious build choices and green orientations.' },
-    { step: 'Future', title: 'AI Staged Construction', description: 'Integrating live project monitoring and structural sensor grids.' }
-  ];
-
-  const certifications = [
-    { title: 'ISO 9001:2015', authority: 'Quality Management Standards', desc: 'Ensures construction practices and material procurement align with global rules.' },
-    { title: 'ISO 45001:2018', authority: 'Occupational Health & Safety', desc: 'Verified on-site worker safety protocols and zero-accident target checks.' },
-    { title: 'Green Building Council', authority: 'Sustainable Construction', desc: 'LEED orientation design parameters and recycled materials usages.' }
-  ];
-
 
   const galleryImages = [
-    'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
-    'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80'
+    sample1,
+    sample2,
+    sample3,
+    sample4,
   ];
-
-  // Curate testimonial
-  const featuredTestimonial = testimonialsData[0];
 
   return (
     <div className="about-page">
       <Helmet>
-        <title>About Us &amp; Legacy | {appConfig.company.name}</title>
+        <title>{appConfig.seo.defaultTitle}</title>
         <meta name="description" content="Discover our history of engineering landmarks, certifications, partner networks, and values that make us Vadodara's premier construction company." />
-        <link rel="canonical" href={`${appConfig.seo.siteUrl}/about`} />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={`About Us & Legacy | ${appConfig.company.name}`} />
-        <meta property="og:description" content="Discover our history of engineering landmarks, certifications, partner networks, and values." />
-        <meta property="og:url" content={`${appConfig.seo.siteUrl}/about`} />
-        <meta property="og:image" content={appConfig.seo.ogImage} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`About Us | ${appConfig.company.name}`} />
-        <meta name="twitter:description" content="Discover our engineering legacy, certifications and partner network." />
-        <meta name="twitter:image" content={appConfig.seo.ogImage} />
       </Helmet>
 
-      {/* Breadcrumbs Subpage Hero */}
+      {/* ========================================== */}
+      {/* SECTION: Breadcrumbs Subpage Hero */}
+      {/* ========================================== */}
       <section className={styles.hero}>
         <HeroOverlay type="dark" />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
@@ -87,22 +99,30 @@ const About = () => {
             <ChevronRight size={12} />
             <span>About Us</span>
           </div>
-          <h1 className={styles.heroTitle}>Who We Are</h1>
-          <p className={styles.heroDesc}>
-            We translate architectural calculations into physical luxury and structural resilience.
-          </p>
+          <div className={styles.heroText}>
+            {/* <span className={styles.heroEyebrow}>Legacy of Excellence</span> */}
+            <h1 className={styles.heroTitle}>{pageData?.title || 'Precision Meets Passion'}</h1>
+            <p className={styles.heroDesc}>
+              {pageData?.subtitle || `For over two decades, ${appConfig.company.name} has been at the forefront of architectural innovation and structural integrity.`}
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Heritage split layout */}
+      {/* ========================================== */}
+      {/* SECTION: Heritage split layout */}
+      {/* ========================================== */}
       <section className="section container">
         <div className={styles.overviewSplit}>
           <MotionWrapper variant="slideRight" className={styles.overviewText}>
             <span className="text-overline">Heritage & Foundation</span>
             <h2 className="display-sm">Engineered for Lifetimes</h2>
             <p className="text-body-md">
-              At Paramarsh Construction, we believe that premium landmark properties are defined by details.
-              Our teams manage zoning permissions, civil calculations, precast concrete structures, and interior fit-outs under strict timelines.
+              
+Built to last
+"We believe a premium home shouldn't demand an compromised budget. We deliver exact structural excellence tailored to your financial plan."
+
+
             </p>
             <p className="text-body-sm" style={{ color: 'var(--text-muted)' }}>
               Headquartered in Placeholder City, we maintain a zero-incident safety track record across all our residential, commercial, and industrial sites.
@@ -113,7 +133,7 @@ const About = () => {
             <div className={styles.overviewImageWrapper}>
               <img
                 src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80"
-                alt="Paramarsh Construction Engineering Staging"
+                alt={`${appConfig.company.name} Engineering Staging`}
                 className={styles.overviewImage}
               />
               
@@ -122,14 +142,16 @@ const About = () => {
         </div>
       </section>
 
-      {/* Vision & Mission Cards */}
+      {/* ========================================== */}
+      {/* SECTION: Vision & Mission Cards */}
+      {/* ========================================== */}
       <section className={styles.visionMissionSection}>
         <div className="container grid-2" style={{ gap: '3rem' }}>
           <MotionWrapper variant="slideUp" className={styles.visionCard}>
             <Target size={36} className={styles.cardIcon} />
             <h3 className={styles.cardTitle}>Our Mission</h3>
             <p className={styles.cardDesc}>
-              To construct exceptional spaces that inspire human lives, optimize energy utilization scales, and build confidence through transparent material ledgers and scheduled deliveries.
+              To eliminate the stress and delays of traditional construction by delivering transparent planning, premium materials, and certified engineering standards
             </p>
           </MotionWrapper>
 
@@ -137,13 +159,15 @@ const About = () => {
             <Compass size={36} className={styles.cardIcon} />
             <h3 className={styles.cardTitle}>Our Vision</h3>
             <p className={styles.cardDesc}>
-              To pioneer zero-carbon concrete block integrations, advanced BIM drawings coordinations, and smart sensory monitoring structures, establishing a new global benchmark of construction excellence.
+              To shape the future of modern living by crafting durable, sustainable, and structurally flawless properties engineered to protect generations to come.
             </p>
           </MotionWrapper>
         </div>
       </section>
 
-      {/* Core Values Grid */}
+      {/* ========================================== */}
+      {/* SECTION: Core Values Grid */}
+      {/* ========================================== */}
       <section className="section container">
         <SectionHeader
           eyebrow="Core Values"
@@ -156,41 +180,29 @@ const About = () => {
             <MotionWrapper key={idx} variant="slideUp" delay={idx * 0.08} className={styles.valueCard}>
               <div style={{ color: 'var(--accent)', marginBottom: '0.25rem' }}>{val.icon}</div>
               <h4 className={styles.valueTitle}>{val.title}</h4>
-              <p className={styles.valueDesc}>{val.desc}</p>
+              <ul className={styles.valueDesc} style={{ paddingLeft: '1.25rem', margin: 0, listStyleType: 'disc' }}>
+                {Array.isArray(val.desc) ? val.desc.map((bullet, i) => (
+                  <li key={i} style={{ marginBottom: '0.5rem' }}>{bullet}</li>
+                )) : <li>{val.desc}</li>}
+              </ul>
             </MotionWrapper>
           ))}
         </div>
       </section>
 
-      {/* Company Timeline milestones */}
-      <PremiumTimeline
+      {/* ========================================== */}
+      {/* SECTION: Company Timeline milestones */}
+      {/* ========================================== */}
+      {/* <PremiumTimeline
         eyebrow="Milestones"
         heading="Historical Staged Timeline"
         subheading="Review our trajectory from boutique residential drafts to heavy civil logistics developers."
         steps={timelineSteps}
-      />
+      /> */}
 
-      {/* Certifications & Standards */}
-      <section className="section container">
-        <SectionHeader
-          eyebrow="Credentials"
-          heading="Certifications & Safety Protocols"
-          subheading="Every concrete pour, structural weld, and electrical layout undergoes verified inspections to match international benchmarks."
-        />
-
-        <div className="grid-3" style={{ marginTop: '3rem' }}>
-          {certifications.map((cert, idx) => (
-            <MotionWrapper key={idx} variant="slideUp" delay={idx * 0.15} className="glass-panel" style={{ padding: '2.5rem' }}>
-              <span className="text-overline" style={{ fontSize: '0.75rem' }}>{cert.authority}</span>
-              <h4 className="card-heading mb-2" style={{ marginTop: '0.5rem', fontWeight: 600 }}>{cert.title}</h4>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: '1.6' }}>{cert.desc}</p>
-            </MotionWrapper>
-          ))}
-        </div>
-      </section>
-
-
-      {/* Office & Site Gallery */}
+      {/* ========================================== */}
+      {/* SECTION: Office & Site Gallery */}
+      {/* ========================================== */}
       <section className="section container">
         <SectionHeader
           eyebrow="Active Operations"
@@ -203,29 +215,12 @@ const About = () => {
             <MotionWrapper key={idx} variant="scale" delay={idx * 0.1} className="glass-panel" style={{ overflow: 'hidden' }}>
               <MediaWrapper
                 src={src}
-                alt={`Paramarsh Construction Operation ${idx + 1}`}
+                alt={`${appConfig.company.name} Operation ${idx + 1}`}
                 aspectRatio="16/10"
                 style={{ transition: 'transform var(--transition-slow)' }}
               />
             </MotionWrapper>
           ))}
-        </div>
-      </section>
-
-      {/* Featured Testimonial Highlight */}
-      <section className={styles.partnersSection}>
-        <div className="container" style={{ maxWidth: '800px', textAlign: 'center' }}>
-          <span className="text-overline">Client Reference</span>
-          <p className="text-body-lg" style={{ fontStyle: 'italic', color: 'var(--text-primary)', margin: '1.5rem 0', fontFamily: 'var(--font-family-display)' }}>
-            "{featuredTestimonial.quote}"
-          </p>
-          <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{featuredTestimonial.author}</div>
-          <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '2rem' }}>
-            {featuredTestimonial.role} &middot; <strong>{featuredTestimonial.project}</strong>
-          </div>
-          <Link to="/testimonials">
-            <Button variant="outline" iconRight={<ArrowRight size={16} />}>View All Client Reviews</Button>
-          </Link>
         </div>
       </section>
 

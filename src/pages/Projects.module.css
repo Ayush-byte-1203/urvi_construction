@@ -280,8 +280,6 @@
 /* Explorer controls row */
 .gridSection {
   background-color: var(--bg-secondary, #f8fafc);
-  border-top: 1px solid var(--border-subtle, #f1f5f9);
-  border-bottom: 1px solid var(--border-subtle, #f1f5f9);
 }
 
 .controlsRow {
@@ -344,7 +342,7 @@
   color: var(--accent, #3b82f6);
 }
 
-.chipActive {
+.chipBtn.chipActive {
   background-color: var(--accent, #3b82f6);
   border-color: var(--accent, #3b82f6);
   color: #ffffff;
@@ -495,76 +493,4 @@
 .btnSecOutline:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: #ffffff;
-}
-
-@media (max-width: 1024px) {
-  .featuredGrid {
-    grid-template-columns: 1fr;
-  }
-  .controlsRow {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .searchBox {
-    max-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .heroSection {
-    padding: 6rem 0 3rem 0;
-  }
-  .heroTitle {
-    font-size: clamp(1.5rem, 6vw, 2.25rem);
-  }
-  .heroDesc {
-    font-size: 0.95rem;
-  }
-  .heroStats {
-    gap: 1.5rem;
-    padding-top: 1.5rem;
-  }
-  .categoryPills {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 0.5rem;
-  }
-  .pillBtn {
-    flex-shrink: 0;
-    white-space: nowrap;
-  }
-  .ctaBanner {
-    padding: 3.5rem 0;
-  }
-  .ctaContainer h2 {
-    font-size: 1.75rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .heroSection {
-    padding: 5rem 0 2.5rem 0;
-  }
-  .heroStats {
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-  .statBox strong {
-    font-size: 1.5rem;
-  }
-  .supportingCard {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .supportingImg {
-    width: 100%;
-    height: 200px;
-  }
-  .cardContent {
-    padding: 1.25rem;
-  }
-  .cardTitle {
-    font-size: 1.05rem;
-  }
 }

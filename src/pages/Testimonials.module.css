@@ -224,37 +224,3 @@
   margin-top: 0.5rem; 
   color: var(--accent);
 }
-
-@media (max-width: 991px) {
-  .metricsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .videoGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .featuredCard {
-    grid-template-columns: 1fr;
-  }
-  
-  .featuredVisual {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    padding: 2rem;
-  }
-  
-  .featuredText {
-    padding: 2.5rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .metricsGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .videoGrid {
-    grid-template-columns: 1fr;
-  }
-}

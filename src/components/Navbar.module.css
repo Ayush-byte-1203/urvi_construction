@@ -92,6 +92,8 @@
 }
 
 
+
+
 /* Underline Animation on Hover */
 .navLink::after {
   content: '';
@@ -164,19 +166,3 @@
 }
 
 /* Media Queries for Responsiveness */
-@media (max-width: 1180px) {
-  .navLink {
-    padding: 0.5rem 0.6rem;
-    font-size: 0.825rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .desktopNav,
-  .btnNav {
-    display: none !important;
-  }
-  .menuToggle {
-    display: flex;
-  }
-}

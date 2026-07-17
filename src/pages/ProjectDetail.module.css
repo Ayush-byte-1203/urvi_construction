@@ -511,19 +511,3 @@
   background-color: var(--bg-secondary, #f8fafc);
   border-top: 1px solid var(--border-subtle, #f1f5f9);
 }
-
-@media (max-width: 1024px) {
-  .dashboardGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .goalsBlock {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .dashboardGrid {
-    grid-template-columns: 1fr;
-  }
-}

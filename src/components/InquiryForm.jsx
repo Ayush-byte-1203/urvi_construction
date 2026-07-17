@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Send, CheckCircle2 } from 'lucide-react';
-import Button from '@components/Button';
-import { isValidEmail } from '@utils/validators';
+import Button from './Button';
+import { isValidEmail } from '../utils/validators';
 import styles from './InquiryForm.module.css';
 
 const InquiryForm = () => {

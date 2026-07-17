@@ -4,6 +4,7 @@ export const navigationData = {
     { name: 'About Us', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Projects', path: '/projects' },
+    { name: 'Blog', path: '/blog' },
   ],
   secondaryLinks: [
     { name: 'Process', path: '/process' },
@@ -19,6 +20,7 @@ export const navigationData = {
       { name: 'Completed Projects', path: '/projects' },
       { name: 'Construction Process', path: '/process' },
       { name: 'Packages', path: '/packages' },
+      { name: 'Blog', path: '/blog' },
     ],
     specialties: [
       { name: 'Residential Construction', path: '/services' },
@@ -31,7 +33,7 @@ export const navigationData = {
     legal: [
       { name: 'Privacy Policy', path: '/privacy' },
       { name: 'Terms & Conditions', path: '/terms' },
-      { name: 'Cookie Policy', path: '/cookies' },
+      
     ]
   }
 };

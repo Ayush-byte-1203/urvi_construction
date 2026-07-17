@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { Menu, ArrowRight } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
-import { ROUTES } from '@constants/routes';
-import Logo from '@components/Logo';
-import MegaMenu from '@components/MegaMenu';
-import MobileMenu from '@components/MobileMenu';
+import { ROUTES } from '../data/routes';
+import Logo from './Logo';
+import MegaMenu from './MegaMenu';
+import MobileMenu from './MobileMenu';
 import styles from './Navbar.module.css';
 
 const Navbar = ({ theme = 'dark' }) => {
@@ -34,10 +34,8 @@ const Navbar = ({ theme = 'dark' }) => {
     { name: 'Home', path: ROUTES.HOME, key: 'home' },
     { name: 'About', path: ROUTES.ABOUT, key: 'about' },
     { name: 'Services', path: ROUTES.SERVICES, key: 'services' },
-    { name: 'Packages', path: ROUTES.PACKAGES, key: 'packages' },
     { name: 'Projects', path: ROUTES.PROJECTS, key: 'projects' },
-    { name: 'Process', path: ROUTES.PROCESS, key: 'process' },
-    { name: 'FAQ', path: ROUTES.FAQ, key: 'faq' },
+    { name: 'Blog', path: ROUTES.BLOG, key: 'blog' },
     { name: 'Contact', path: ROUTES.CONTACT, key: 'contact' }
   ];
 
@@ -72,7 +70,13 @@ const Navbar = ({ theme = 'dark' }) => {
               <div 
                 key={item.key} 
                 className={styles.navItemWrapper}
-                onMouseEnter={() => setActiveMegaItem(item.key)}
+                onMouseEnter={() => {
+                  if (item.key !== 'projects' && item.key !== 'home') {
+                    setActiveMegaItem(item.key);
+                  } else {
+                    setActiveMegaItem(null);
+                  }
+                }}
               >
                 <NavLink 
                   to={item.path}

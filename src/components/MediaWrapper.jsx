@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ImageOff } from 'lucide-react';
-import Skeleton from '@components/Skeleton';
+import Skeleton from './Skeleton';
 import styles from './MediaWrapper.module.css';
 
 const MediaWrapper = ({

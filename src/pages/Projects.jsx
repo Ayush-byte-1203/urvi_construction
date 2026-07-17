@@ -1,79 +1,67 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, Search, Compass, Clock, ChevronRight, MapPin, CheckCircle2 
-} from 'lucide-react';
-import { appConfig } from '@config/appConfig';
-import { projectsData } from '@data/projectsData';
+import { ArrowRight, MapPin, Calendar, MoveUpRight, Hexagon, Maximize, Ruler, Home, Compass } from 'lucide-react';
+import { useGlobalData } from '../context/GlobalDataContext';
+import { usePageData } from '../hooks/usePageData';
 
-import SectionHeader from '@sections/SectionHeader';
-import MotionWrapper from '@components/MotionWrapper';
-import Button from '@components/Button';
-import HeroOverlay from '@components/HeroOverlay';
+import SectionHeader from '../components/SectionHeader';
+import MotionWrapper from '../components/MotionWrapper';
+import Button from '../components/Button';
+import HeroOverlay from '../components/HeroOverlay';
 
-import { HeaderThemeContext } from '@/layouts/Layout';
+import { HeaderThemeContext } from '../components/Layout';
 import styles from './Projects.module.css';
 
 const Projects = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
+  const { siteSettings, projects: projectsData, isLoading: isGlobalLoading } = useGlobalData();
+  const { pageData, sections, isLoading: isPageLoading } = usePageData('projects');
+
+  const [activeFilter, setActiveFilter] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeCategory, setActiveCategory] = useState('all');
+
+  const isLoading = isGlobalLoading || isPageLoading;
 
   useEffect(() => {
-    setHeaderTheme('dark');
+    setHeaderTheme('light');
   }, [setHeaderTheme]);
 
-  const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'residential', label: 'Residential' },
-    { id: 'commercial', label: 'Commercial' },
-    { id: 'industrial', label: 'Industrial' },
-    { id: 'villa', label: 'Signature Villa' },
-    { id: 'renovation', label: 'Renovation' }
-  ];
+  if (isLoading) {
+    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading dynamic content from backend...</div>;
+  }
 
-  // Asset Mappings for Images
-  const projectImages = {
-    'apex-tower': 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80',
-    'vista-residences': 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
-    'helios-logistics': 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80',
-    'luna-villas': 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80',
-    'zenith-hub': 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=600&q=80',
-    'nova-assembly': 'https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=600&q=80'
-  };
+  const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Projects`, defaultDescription: pageData?.subtitle || 'Projects', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 
-  const projectList = Object.values(projectsData);
+  const rawCategories = ['All', ...new Set(projectsData.map(p => p.category_name || p.category || 'General'))];
 
-  // Filter Logic
-  const filteredProjects = projectList.filter((proj) => {
-    const matchesSearch = proj.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          proj.scope.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          proj.location.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeCategory === 'all' || 
-                            proj.category === activeCategory ||
-                            (activeCategory === 'villa' && proj.tag.toLowerCase().includes('villa')) ||
-                            (activeCategory === 'renovation' && proj.tag.toLowerCase().includes('renovation'));
+  const filteredProjects = projectsData.filter((proj) => {
+    const matchesSearch = proj.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (proj.scope || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (proj.location || '').toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = activeFilter === 'All' || (proj.category_name || proj.category) === activeFilter;
     return matchesSearch && matchesCategory;
   });
 
-  const featuredProject = projectsData['vista-residences'] || projectList[0];
-  const supportingProjects = projectList.filter(p => p.id !== featuredProject.id).slice(0, 4);
+  const featuredProject = projectsData[0];
+  const supportingProjects = projectsData.slice(1, 5);
 
   return (
     <div className="projects-page">
       <Helmet>
-        <title>Portfolio & Case Studies | Paramarsh Construction</title>
-        <meta name="description" content="Explore our high-performance build portfolio of luxury residential villas, commercial Plazas, and flat flooring logistics warehouses." />
+        <title>Portfolio & Landmarks | {appConfig.seo.defaultTitle}</title>
+        <meta name="description" content={appConfig.seo.defaultDescription} />
       </Helmet>
 
-      {/* 1. Projects Hero */}
+      {/* ========================================== */}
+      {/* SECTION: 1. Projects Hero */}
+      {/* ========================================== */}
       <section className={styles.heroSection}>
         <HeroOverlay type="dark" />
         <div className={`container ${styles.heroContainer}`}>
           <div className={styles.breadcrumbs}>
             <Link to="/">Home</Link>
-            <ChevronRight size={10} />
+            <Home size={10} style={{ margin: '0 8px' }} />
             <span>Case Studies</span>
           </div>
 
@@ -83,7 +71,7 @@ const Projects = () => {
           </p>
 
           {/* Stats inside Hero */}
-          <div className={styles.heroStats}>
+          {/* <div className={styles.heroStats}>
             <div className={styles.statBox}>
               <strong>150+</strong>
               <span>Delivered Landmarks</span>
@@ -96,33 +84,37 @@ const Projects = () => {
               <strong>15 Yrs</strong>
               <span>Civil Auditing Legacy</span>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
-      {/* 2. Featured Projects Showcase */}
+      {/* ========================================== */}
+      {/* SECTION: 2. Featured Projects Showcase */}
+      {/* ========================================== */}
       <section className="section container">
         <span className="text-overline">Portfolio Highlights</span>
         <h2 className="display-sm" style={{ marginTop: '0.25rem', marginBottom: '3rem' }}>Featured Case Studies</h2>
 
         <div className={styles.featuredGrid}>
-          {/* Left Large Featured Case */}
+          {/* ========================================== */}
+          {/* SECTION: Left Large Featured Case */}
+          {/* ========================================== */}
           <MotionWrapper variant="slideRight" className={`glass-panel ${styles.largeFeatured}`}>
             <div className={styles.largeImgWrapper}>
-              <img src={projectImages[featuredProject.id]} alt={featuredProject.title} />
+              <img src={featuredProject?.image} alt={featuredProject?.title} />
               <span className={styles.statusBadge}>Delivered</span>
             </div>
             <div className={styles.largeContent}>
-              <span className={styles.projectTag}>{featuredProject.tag}</span>
-              <h3>{featuredProject.title}</h3>
-              <p>{featuredProject.scope}</p>
-              
+              <span className={styles.projectTag}>{featuredProject?.category_name}</span>
+              <h3>{featuredProject?.title}</h3>
+              <p>{featuredProject?.scope}</p>
+
               <div className={styles.metaRow}>
-                <span><Compass size={14} /> {featuredProject.area}</span>
-                <span><MapPin size={14} /> {featuredProject.location}</span>
+                <span><Maximize size={14} /> {featuredProject?.area}</span>
+                <span><MapPin size={14} /> {featuredProject?.location}</span>
               </div>
 
-              <Link to={`/projects/${featuredProject.id}`} className={styles.caseLink}>
+              <Link to={`/projects/${featuredProject?.id}`} className={styles.caseLink}>
                 Review Case Specifications &rarr;
               </Link>
             </div>
@@ -130,15 +122,15 @@ const Projects = () => {
 
           {/* Right 4 Supporting Cases */}
           <div className={styles.supportingColumn}>
-            {supportingProjects.map((project, idx) => (
-              <Link 
-                key={project.id} 
-                to={`/projects/${project.id}`} 
+            {supportingProjects.map((project) => (
+              <Link
+                key={project.id}
+                to={`/projects/${project.id}`}
                 className={`glass-panel ${styles.supportingCard}`}
               >
-                <img src={projectImages[project.id]} alt={project.title} className={styles.supportingImg} />
+                <img src={project.image} alt={project.title} className={styles.supportingImg} />
                 <div>
-                  <span className={styles.supportTag}>{project.tag}</span>
+                  <span className={styles.supportTag}>{project.category_name}</span>
                   <h4 className={styles.supportTitle}>{project.title}</h4>
                   <span className={styles.supportLoc}>{project.location}</span>
                 </div>
@@ -148,7 +140,9 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* 3. Categories and Advanced Search */}
+      {/* ========================================== */}
+      {/* SECTION: 3. Categories and Advanced Search */}
+      {/* ========================================== */}
       <section className={`section ${styles.gridSection}`}>
         <div className="container">
           <SectionHeader
@@ -160,7 +154,6 @@ const Projects = () => {
           <div className={styles.controlsRow} style={{ marginTop: '3.5rem' }}>
             {/* Search Input */}
             <div className={styles.searchBox}>
-              <Search size={16} />
               <input
                 type="text"
                 placeholder="Search by name, category, or location..."
@@ -172,13 +165,13 @@ const Projects = () => {
 
             {/* Category Chips */}
             <div className={styles.chipsContainer}>
-              {categories.map((cat) => (
+              {rawCategories.map(cat => (
                 <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`${styles.chipBtn} ${activeCategory === cat.id ? styles.chipActive : ''}`}
+                  key={cat}
+                  onClick={() => setActiveFilter(cat)}
+                  className={`${styles.chipBtn} ${activeFilter === cat ? styles.chipActive : ''}`}
                 >
-                  {cat.label}
+                  {cat}
                 </button>
               ))}
             </div>
@@ -194,14 +187,14 @@ const Projects = () => {
                 className={`glass-panel ${styles.projectCard}`}
               >
                 <div className={styles.cardImgWrapper}>
-                  <img src={projectImages[project.id]} alt={project.title} />
-                  <span className={styles.cardBadge}>{project.year}</span>
+                  <img src={project.image || 'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'} alt={project.title} />
+                  <span className={styles.cardBadge}>{project.year || '2024'}</span>
                 </div>
                 <div className={styles.cardContent}>
-                  <span className={styles.cardTag}>{project.tag}</span>
+                  <span className={styles.cardTag}>{project.category_name || project.category || 'General'}</span>
                   <h3 className={styles.cardTitle}>{project.title}</h3>
                   <p className={styles.cardDesc}>{project.scope}</p>
-                  
+
                   <div className={styles.cardMeta}>
                     <Compass size={12} className={styles.metaIcon} />
                     <span>Area: {project.area}</span>
@@ -223,8 +216,8 @@ const Projects = () => {
         </div>
       </section>
 
-      
-      
+
+
     </div>
   );
 };

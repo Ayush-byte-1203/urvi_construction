@@ -4,19 +4,19 @@ import { Helmet } from 'react-helmet-async';
 import { 
   ArrowLeft, CheckCircle2, PlusCircle, ChevronRight, Clock, ShieldCheck, Award, FileText, Download 
 } from 'lucide-react';
-import { appConfig } from '@config/appConfig';
-import { packagesData } from '@data/packagesData';
-import { faqData } from '@data/faqData';
-import SectionHeader from '@sections/SectionHeader';
-import GenericCard from '@components/GenericCard';
-import PremiumTimeline from '@components/PremiumTimeline';
-import MotionWrapper from '@components/MotionWrapper';
-import MediaWrapper from '@components/MediaWrapper';
-import Accordion from '@components/Accordion';
-import Button from '@components/Button';
-import InquiryForm from '@components/InquiryForm';
+import { appConfig } from '../data/appConfig';
+import { packagesData } from '../data/packagesData';
+import { faqData } from '../data/faqData';
+import SectionHeader from '../components/SectionHeader';
+import GenericCard from '../components/GenericCard';
+import PremiumTimeline from '../components/PremiumTimeline';
+import MotionWrapper from '../components/MotionWrapper';
+import MediaWrapper from '../components/MediaWrapper';
+import Accordion from '../components/Accordion';
+import Button from '../components/Button';
+import InquiryForm from '../components/InquiryForm';
 
-import { HeaderThemeContext } from '@/layouts/Layout';
+import { HeaderThemeContext } from '../components/Layout';
 import styles from './PackageDetail.module.css';
 
 const PackageDetail = () => {
@@ -76,7 +76,9 @@ const PackageDetail = () => {
         <meta name="description" content={plan.tagline} />
       </Helmet>
 
-      {/* Hero Banner */}
+      {/* ========================================== */}
+      {/* SECTION: Hero Banner */}
+      {/* ========================================== */}
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.breadcrumbs}>
@@ -93,7 +95,9 @@ const PackageDetail = () => {
         </div>
       </section>
 
-      {/* Detail Split */}
+      {/* ========================================== */}
+      {/* SECTION: Detail Split */}
+      {/* ========================================== */}
       <section className="section container">
         <Link to="/packages" className={styles.backLink}>
           <ArrowLeft size={16} /> Back to All Packages
@@ -165,7 +169,9 @@ const PackageDetail = () => {
         </div>
       </section>
 
-      {/* Materials specification tables */}
+      {/* ========================================== */}
+      {/* SECTION: Materials specification tables */}
+      {/* ========================================== */}
       <section className={styles.materialsSection}>
         <div className="container">
           <SectionHeader
@@ -185,7 +191,9 @@ const PackageDetail = () => {
         </div>
       </section>
 
-      {/* Construction Stages timeline */}
+      {/* ========================================== */}
+      {/* SECTION: Construction Stages timeline */}
+      {/* ========================================== */}
       <PremiumTimeline
         eyebrow="Stages Workflow"
         heading="Estimated Construction Timeline"
@@ -193,7 +201,9 @@ const PackageDetail = () => {
         steps={plan.stages}
       />
 
-      {/* Material Brand Partners grayscale logos */}
+      {/* ========================================== */}
+      {/* SECTION: Material Brand Partners grayscale logos */}
+      {/* ========================================== */}
       <section className={styles.partnersSection}>
         <div className="container">
           <SectionHeader
@@ -217,7 +227,9 @@ const PackageDetail = () => {
         </div>
       </section>
 
-      {/* Download Brochure Card */}
+      {/* ========================================== */}
+      {/* SECTION: Download Brochure Card */}
+      {/* ========================================== */}
       <section className={styles.brochureSection}>
         <div className="container">
           <div className={styles.brochureCard}>
@@ -241,7 +253,9 @@ const PackageDetail = () => {
         </div>
       </section>
 
-      {/* Package Gallery Section */}
+      {/* ========================================== */}
+      {/* SECTION: Package Gallery Section */}
+      {/* ========================================== */}
       <section className={styles.gallerySection}>
         <div className="container">
           <SectionHeader
@@ -264,7 +278,9 @@ const PackageDetail = () => {
         </div>
       </section>
 
-      {/* Pricing Quote Request Form */}
+      {/* ========================================== */}
+      {/* SECTION: Pricing Quote Request Form */}
+      {/* ========================================== */}
       <section className="section container" style={{ maxWidth: '800px' }}>
         <SectionHeader
           eyebrow="Inquiry desk"
@@ -276,7 +292,9 @@ const PackageDetail = () => {
         </div>
       </section>
 
-      {/* Related Plans */}
+      {/* ========================================== */}
+      {/* SECTION: Related Plans */}
+      {/* ========================================== */}
       <section className="section" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--color-border-subtle)' }}>
         <div className="container">
           <SectionHeader

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MapPin, ChevronDown } from 'lucide-react';
-import { citiesData } from '@data/citiesData';
+import { citiesData } from '../data/citiesData';
 import styles from './CitySelector.module.css';
 
 const CitySelector = ({ selectedCityId, onChangeCity }) => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import AppRouter from '@/routes/AppRouter';
-import ErrorBoundary from '@components/ErrorBoundary';
-import AppProviders from '@/context/AppProviders';
+import AppRouter from './AppRouter';
+import ErrorBoundary from './components/ErrorBoundary';
+import AppProviders from './context/AppProviders';
 
 function App() {
   return (

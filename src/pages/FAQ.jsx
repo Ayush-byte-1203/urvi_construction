@@ -1,213 +1,223 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
+import { Search, ChevronDown, MessageCircle, Info, Settings, HelpCircle, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { 
-  HelpCircle, ChevronDown, ChevronUp, Search, ChevronRight, MessageSquare, PhoneCall, HelpCircle as HelpIcon 
-} from 'lucide-react';
-import { appConfig } from '@config/appConfig';
-import { faqData } from '@data/faqData';
-import SectionHeader from '@sections/SectionHeader';
-import MotionWrapper from '@components/MotionWrapper';
-import Button from '@components/Button';
-
-import { HeaderThemeContext } from '@/layouts/Layout';
+import { motion } from 'framer-motion';
+import Accordion from '../components/Accordion';
+import SectionHeader from '../components/SectionHeader';
 import styles from './FAQ.module.css';
+import { ROUTES } from '../data/routes';
+import { useGlobalData } from '../context/GlobalDataContext';
+
+const FAQ_DATA_FALLBACK = [
+  {
+    category: 'General',
+    questions: [
+      {
+        question: 'What types of construction projects do you handle?',
+        answer: 'We handle a wide range of projects including residential homes, commercial complexes, industrial facilities, and large-scale renovations. Our team has the expertise to manage projects of varying complexity and scale.'
+      },
+      {
+        question: 'Are you licensed and insured?',
+        answer: 'Yes, absolutely. We are fully licensed, bonded, and insured. We carry comprehensive liability insurance and workers\' compensation to protect both our clients and our team throughout the duration of any project.'
+      },
+      {
+        question: 'How long have you been in business?',
+        answer: 'We have been proudly serving the community for over 15 years, building a strong reputation for quality craftsmanship and reliable service.'
+      }
+    ]
+  },
+  {
+    category: 'Process',
+    questions: [
+      {
+        question: 'What is your typical project process?',
+        answer: 'Our process generally involves an initial consultation, followed by design and planning, obtaining necessary permits, the construction phase, and finally, a thorough walkthrough and handover. We keep you informed at every step.'
+      },
+      {
+        question: 'How do you handle changes during construction?',
+        answer: 'We use a formal change order process. If you request a change or if unforeseen circumstances require one, we will provide a detailed estimate of the cost and time impact for your approval before proceeding.'
+      },
+      {
+        question: 'Who will be my main point of contact?',
+        answer: 'You will be assigned a dedicated Project Manager who will be your primary point of contact throughout the entire build, ensuring clear communication and smooth coordination.'
+      }
+    ]
+  },
+  {
+    category: 'Pricing',
+    questions: [
+      {
+        question: 'How is the cost of my project determined?',
+        answer: 'Project costs are determined based on the scope of work, materials selected, site conditions, and labor requirements. We provide detailed, itemized estimates after the initial design and planning phase.'
+      },
+      {
+        question: 'Do you offer financing options?',
+        answer: 'While we do not provide direct financing, we work with several trusted financial institutions and can connect you with lending partners who specialize in construction loans.'
+      },
+      {
+        question: 'Are estimates free?',
+        answer: 'Yes, we offer complimentary initial consultations and high-level estimates. For detailed, itemized project proposals, a small design fee may apply, which is often credited towards the project cost if you choose to proceed.'
+      }
+    ]
+  }
+];
 
 const FAQ = () => {
-  const { setHeaderTheme } = useContext(HeaderThemeContext);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [activeIndex, setActiveIndex] = useState(null);
+  const { faqs } = useGlobalData();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
 
-  useEffect(() => {
-    setHeaderTheme('dark');
-  }, [setHeaderTheme]);
+  const faqData = useMemo(() => {
+    if (!faqs || faqs.length === 0) return FAQ_DATA_FALLBACK;
+    const grouped = {};
+    faqs.forEach(f => {
+      const cat = f.category_name || f.category || 'General';
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push({ question: f.question || f.q, answer: f.answer || f.a });
+    });
+    return Object.keys(grouped).map(cat => ({
+      category: cat,
+      questions: grouped[cat]
+    }));
+  }, [faqs]);
 
-  const categories = [
-    { id: 'all', label: 'All Queries' },
-    { id: 'general', label: 'General' },
-    { id: 'pricing', label: 'Pricing' },
-    { id: 'process', label: 'Process' },
-    { id: 'warranty', label: 'Warranty' }
-  ];
+  const categories = ['All', ...Array.from(new Set(faqData.map(item => item.category)))];
 
-  const toggleAccordion = (index) => {
-    setActiveIndex(activeIndex === index ? null : index);
-  };
+  const filteredFaqs = useMemo(() => {
+    return faqData.map(section => {
+      // Filter by category
+      if (activeCategory !== 'All' && section.category !== activeCategory) {
+        return null;
+      }
 
-  // Filter Logic
-  const filteredFAQs = faqData.filter((faq) => {
-    const matchesSearch = faq.q.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          faq.a.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = activeCategory === 'all' || faq.category === activeCategory;
-    return matchesSearch && matchesCategory;
-  });
+      // Filter by search query
+      const filteredQuestions = section.questions.filter(q => 
+        q.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        q.answer.toLowerCase().includes(searchQuery.toLowerCase())
+      );
 
-  // Featured Questions (first two)
-  const featuredFAQs = faqData.slice(0, 2);
+      if (filteredQuestions.length === 0) return null;
+
+      return {
+        ...section,
+        questions: filteredQuestions
+      };
+    }).filter(Boolean);
+  }, [searchQuery, activeCategory]);
 
   return (
-    <div className="faq-page">
-      <Helmet>
-        <title>Frequently Asked Questions | {appConfig.company.name}</title>
-        <meta name="description"        content="Get clear answers about construction timelines, payment milestones, material quality standards, structural warranties, and building approval processes." />
-        <link rel="canonical"           href={`${appConfig.seo.siteUrl}/faq`} />
-        <meta property="og:type"        content="website" />
-        <meta property="og:title"       content={`FAQ | ${appConfig.company.name}`} />
-        <meta property="og:description" content="Answers to common questions about construction, pricing, warranties and approvals." />
-        <meta property="og:url"         content={`${appConfig.seo.siteUrl}/faq`} />
-        <meta property="og:image"       content={appConfig.seo.ogImage} />
-        <meta name="twitter:card"       content="summary" />
-        <meta name="twitter:title"      content={`FAQ | ${appConfig.company.name}`} />
-        <meta name="twitter:description" content="Answers to common construction questions." />
-      </Helmet>
-
-      {/* Breadcrumb Header */}
+    <main className="page-wrapper">
+      {/* ========================================== */}
+      {/* SECTION: Hero Section */}
+      {/* ========================================== */}
       <section className={styles.hero}>
-        <div className="container">
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className={styles.breadcrumbs}>
-            <Link to="/">Home</Link>
-            <ChevronRight size={12} />
+            <Link to={ROUTES.HOME}>Home</Link>
+            <span>/</span>
             <span>FAQ</span>
           </div>
           <h1 className={styles.heroTitle}>Frequently Asked Questions</h1>
           <p className={styles.heroDesc}>
-            Find immediate answers detailing construction processes, payment terms, and structural safety clearances.
+            Find answers to common questions about our construction services, processes, and more. 
+            Can't find what you're looking for? Reach out to our support team.
           </p>
         </div>
       </section>
 
-      {/* Search and Filters Section */}
-      <section className="section container">
-        <div className={styles.controlsWrapper}>
-          {/* Category pills */}
-          <div className={styles.categoryPills}>
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`${styles.pill} ${activeCategory === cat.id ? styles.activePill : ''}`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Featured Questions section */}
-        {activeCategory === 'all' && !searchTerm && (
-          <div style={{ marginBottom: '3.5rem' }}>
-            <span className="text-overline">Common Queries</span>
-            <h2 className="display-sm" style={{ marginTop: '0.25rem', marginBottom: '2rem' }}>Featured Questions</h2>
+      <section className="section-padding" style={{ backgroundColor: 'var(--bg-primary)' }}>
+        <div className="container" style={{ maxWidth: '900px' }}>
+          
+          {/* Controls */}
+          <div className={styles.controlsWrapper}>
+            <div className={styles.searchBar}>
+              <Search size={20} color="var(--color-text-secondary)" />
+              <input 
+                type="text" 
+                placeholder="Search questions..." 
+                className={styles.searchInput}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
             
-            <div className={styles.featuredGrid}>
-              {featuredFAQs.map((faq, i) => (
-                <MotionWrapper key={i} variant="slideUp" delay={i * 0.15} className={styles.featuredCard}>
-                  <h3 className={styles.featuredTitle}>
-                    <HelpIcon size={18} style={{ color: 'var(--accent)' }} />
-                    {faq.q}
-                  </h3>
-                  <p className={styles.featuredDesc}>{faq.a}</p>
-                </MotionWrapper>
+            <div className={styles.categoryPills}>
+              {categories.map(cat => (
+                <button 
+                  key={cat}
+                  className={`${styles.pill} ${activeCategory === cat ? styles.activePill : ''}`}
+                  onClick={() => setActiveCategory(cat)}
+                >
+                  {cat}
+                </button>
               ))}
             </div>
           </div>
-        )}
 
-        {/* FAQ Accordion List */}
-        <div>
-          <span className="text-overline">FAQ Directory</span>
-          <h2 className="display-sm" style={{ marginTop: '0.25rem', marginBottom: '2.5rem' }}>Accordion Directory</h2>
-          
-          <div className={styles.faqList}>
-            {filteredFAQs.map((faq, index) => {
-              const isOpen = activeIndex === index;
-              return (
-                <div 
-                  key={index} 
-                  className="glass-panel" 
-                  style={{ 
-                    borderRadius: 'var(--radius-sm)', 
-                    overflow: 'hidden',
-                    borderColor: isOpen ? 'rgba(var(--accent-rgb), 0.3)' : 'rgba(255,255,255,0.05)'
-                  }}
-                >
-                  <button
-                    onClick={() => toggleAccordion(index)}
-                    className={styles.faqButton}
-                    style={{
-                      color: isOpen ? 'var(--accent)' : 'var(--text-primary)'
-                    }}
-                  >
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                      <HelpCircle size={18} style={{ color: isOpen ? 'var(--accent)' : 'var(--text-muted)' }} />
-                      {faq.q}
-                    </span>
-                    {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                  </button>
-
-                  {isOpen && (
-                    <div className={styles.faqAnswer}>
-                      {faq.a}
-                    </div>
-                  )}
+          {/* FAQ Content */}
+          <div className={styles.faqContent}>
+            {filteredFaqs.length > 0 ? (
+              filteredFaqs.map((section, idx) => (
+                <div key={idx} style={{ marginBottom: '3rem' }}>
+                  <SectionHeader 
+                    heading={section.category}
+                    align="left"
+                    style={{ marginBottom: '1.5rem' }}
+                  />
+                  <Accordion 
+                    items={section.questions.map(q => ({
+                      title: q.question,
+                      content: q.answer
+                    }))}
+                    allowMultiple={true}
+                  />
                 </div>
-              );
-            })}
+              ))
+            ) : (
+              <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--color-text-secondary)' }}>
+                <HelpCircle size={48} style={{ margin: '0 auto 1rem', opacity: 0.5 }} />
+                <h3>No results found</h3>
+                <p>We couldn't find any questions matching your search criteria.</p>
+                <button 
+                  onClick={() => { setSearchQuery(''); setActiveCategory('All'); }}
+                  style={{ marginTop: '1rem', padding: '0.75rem 1.5rem', background: 'var(--accent)', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+                >
+                  Clear Filters
+                </button>
+              </div>
+            )}
           </div>
-
-          {filteredFAQs.length === 0 && (
-            <div style={{ textAlign: 'center', padding: '4rem 0', color: 'var(--color-text-muted)' }}>
-              No matches found. Adjust search keywords.
-            </div>
-          )}
+          
+        </div>
+      </section>
+      
+      {/* ========================================== */}
+      {/* SECTION: Contact CTA Section */}
+      {/* ========================================== */}
+      <section style={{ padding: '5rem 0', backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--border)' }}>
+        <div className="container" style={{ textAlign: 'center', maxWidth: '600px' }}>
+          <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Still have questions?</h2>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', lineHeight: 1.6 }}>
+            Our team of construction experts is ready to help you with any specific inquiries you might have regarding your upcoming project.
+          </p>
+          <Link to={ROUTES.CONTACT} style={{ 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: '0.5rem', 
+            background: 'var(--accent)', 
+            color: 'white', 
+            padding: '1rem 2rem', 
+            borderRadius: 'var(--radius-full)', 
+            textDecoration: 'none',
+            fontWeight: 600,
+            transition: 'all 0.3s ease'
+          }}>
+            Contact Us <ArrowRight size={18} />
+          </Link>
         </div>
       </section>
 
-      
-      <section className="section" style={{ backgroundColor: 'var(--bg-secondary)', borderTop: '1px solid var(--color-border-subtle)' }}>
-        <div className="container grid-2" style={{ alignItems: 'center', gap: '3rem' }}>
-          <div>
-            <span className="text-overline">Still Need Help?</span>
-            <h2 className="display-sm" style={{ marginTop: '0.25rem', marginBottom: '1.5rem' }}>Talk directly to our estimating divisions</h2>
-            <p style={{ color: 'var(--color-text-secondary)', lineHeight: '1.6', marginBottom: '2rem' }}>
-              We draft exhaustive Bills of Quantities (BOQ) layouts matching client spatial drawings and zoning documents. Send blueprints directly to our desk.
-            </p>
-            
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              <Link to="/contact">
-                <Button variant="primary" iconRight={<MessageSquare size={16} />}>Contact Estimating Desk</Button>
-              </Link>
-              <a href={appConfig.company.phoneFormatted}>
-                <Button variant="outline" iconLeft={<PhoneCall size={16} />}>Call {appConfig.company.phone}</Button>
-              </a>
-            </div>
-          </div>
-
-          <div className="glass-panel" style={{ padding: '3rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <h3 style={{ fontSize: '1.25rem', fontFamily: 'var(--font-family-display)', fontWeight: 600, color: 'var(--text-primary)' }}>
-              Working Hours Desk
-            </h3>
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem' }}>
-              Our design cells and site operations desks coordinate logistics support during normal shift hours.
-            </p>
-            <div style={{ borderTop: '1px solid var(--color-divider)', paddingTop: '1rem' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-                <span style={{ color: 'var(--color-text-muted)' }}>Monday &ndash; Friday</span>
-                <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>9:00 AM &ndash; 6:00 PM</span>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem' }}>
-                <span style={{ color: 'var(--color-text-muted)' }}>Saturday &ndash; Sunday</span>
-                <span style={{ color: 'var(--text-primary)', fontWeight: 500 }}>Closed</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-      
-    </div>
+    </main>
   );
 };
 

@@ -4,7 +4,7 @@
   left: 2rem;
   z-index: 180; /* Above layouts, below overlays */
   max-width: 420px;
-  width: calc(100vw - 4rem);
+  width: calc(100% - 4rem);
   background: var(--bg-secondary);
   border: 1px solid var(--color-border-default);
   border-radius: var(--radius-sm);
@@ -38,13 +38,4 @@
 @keyframes slideIn {
   from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
-}
-
-@media (max-width: 768px) {
-  .banner {
-    bottom: 1.5rem;
-    left: 1.5rem;
-    width: calc(100vw - 3rem);
-    padding: 1.25rem;
-  }
 }
