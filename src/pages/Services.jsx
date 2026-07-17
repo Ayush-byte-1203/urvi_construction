@@ -31,9 +31,7 @@ const Services = () => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
 
-  if (isLoading) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading dynamic content from backend...</div>;
-  }
+
 
   const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Services`, defaultDescription: pageData?.subtitle || 'Services', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 

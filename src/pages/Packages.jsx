@@ -31,10 +31,6 @@ const Packages = () => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
 
-  if (pageLoading || globalLoading) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading dynamic content from backend...</div>;
-  }
-
   // Use dynamic packages from the backend
   const packageTiers = globalData.packages || [];
   

@@ -85,9 +85,7 @@ const Home = () => {
     window.dispatchEvent(new Event('cityChanged'));
   };
 
-  if (isLoading) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading dynamic content from backend...</div>;
-  }
+
 
   // Curated
   const serviceList = Object.values(servicesData).slice(0, 3); // 3 for asymmetrical grid

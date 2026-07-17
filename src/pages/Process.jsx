@@ -21,9 +21,7 @@ const Process = () => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
 
-  if (isLoading) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading dynamic content from backend...</div>;
-  }
+
 
   const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Process`, defaultDescription: pageData?.subtitle || 'Our Process' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...' } };
 
@@ -91,42 +89,44 @@ const Process = () => {
           {/* Selected Stage Detail Card */}
           <div className={styles.detailCard}>
             <AnimatePresence mode="wait">
-              <motion.div
-                key={activeStep}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.3 }}
-                className={styles.cardContent}
-              >
-                {/* Left Side: Info (70% width) */}
-                <div className={styles.cardInfo}>
-                  <span className={styles.cardBadge}>{currentStage.subtitle}</span>
-                  <h3 className={styles.cardTitle}>{currentStage.title}</h3>
-                  <p className={styles.cardDesc}>{currentStage.desc}</p>
-                  
-                  <div className={styles.deliverablesSection}>
-                    <h4>Key Deliverables:</h4>
-                    <ul>
-                      {currentStage.deliverables.map((item, dIdx) => (
-                        <li key={dIdx}>
-                          <CheckCircle2 size={16} className={styles.bulletIcon} />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+              {currentStage && (
+                <motion.div
+                  key={activeStep}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -15 }}
+                  transition={{ duration: 0.3 }}
+                  className={styles.cardContent}
+                >
+                  {/* Left Side: Info (70% width) */}
+                  <div className={styles.cardInfo}>
+                    <span className={styles.cardBadge}>{currentStage.subtitle}</span>
+                    <h3 className={styles.cardTitle}>{currentStage.title}</h3>
+                    <p className={styles.cardDesc}>{currentStage.desc}</p>
+                    
+                    <div className={styles.deliverablesSection}>
+                      <h4>Key Deliverables:</h4>
+                      <ul>
+                        {currentStage.deliverables.map((item, dIdx) => (
+                          <li key={dIdx}>
+                            <Icons.CheckCircle2 size={16} className={styles.bulletIcon} />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                </div>
 
-                {/* Right Side: Image (30% width) */}
-                <div className={styles.cardImageWrapper}>
-                  <img 
-                    src={currentStage.image} 
-                    alt={currentStage.title}
-                    className={styles.cardImage}
-                  />
-                </div>
-              </motion.div>
+                  {/* Right Side: Image (30% width) */}
+                  <div className={styles.cardImageWrapper}>
+                    <img 
+                      src={currentStage.image} 
+                      alt={currentStage.title}
+                      className={styles.cardImage}
+                    />
+                  </div>
+                </motion.div>
+              )}
             </AnimatePresence>
           </div>
 

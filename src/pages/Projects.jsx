@@ -27,9 +27,7 @@ const Projects = () => {
     setHeaderTheme('light');
   }, [setHeaderTheme]);
 
-  if (isLoading) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading dynamic content from backend...</div>;
-  }
+
 
   const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Projects`, defaultDescription: pageData?.subtitle || 'Projects', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 

@@ -33,9 +33,7 @@ const About = () => {
     setHeaderTheme('light');
   }, [setHeaderTheme]);
 
-  if (isLoading) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading dynamic content from backend...</div>;
-  }
+
 
   const seoConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | About`, defaultDescription: pageData?.subtitle || 'About Us', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 
