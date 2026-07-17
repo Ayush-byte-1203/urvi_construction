@@ -101,7 +101,7 @@ const Projects = () => {
           {/* ========================================== */}
           <MotionWrapper variant="slideRight" className={`glass-panel ${styles.largeFeatured}`}>
             <div className={styles.largeImgWrapper}>
-              <img src={featuredProject?.image} alt={featuredProject?.title} />
+              <img src={featuredProject?.image_url} alt={featuredProject?.title} />
               <span className={styles.statusBadge}>Delivered</span>
             </div>
             <div className={styles.largeContent}>
@@ -128,7 +128,7 @@ const Projects = () => {
                 to={`/projects/${project.id}`}
                 className={`glass-panel ${styles.supportingCard}`}
               >
-                <img src={project.image} alt={project.title} className={styles.supportingImg} />
+                <img src={project.image_url} alt={project.title} className={styles.supportingImg} />
                 <div>
                   <span className={styles.supportTag}>{project.category_name}</span>
                   <h4 className={styles.supportTitle}>{project.title}</h4>
@@ -164,12 +164,12 @@ const Projects = () => {
             </div>
 
             {/* Category Chips */}
-            <div className={styles.chipsContainer}>
+            <div className={styles.filterTabs}>
               {rawCategories.map(cat => (
                 <button
                   key={cat}
                   onClick={() => setActiveFilter(cat)}
-                  className={`${styles.chipBtn} ${activeFilter === cat ? styles.chipActive : ''}`}
+                  className={`${styles.filterBtn} ${activeFilter === cat ? styles.filterBtnActive : ''}`}
                 >
                   {cat}
                 </button>
@@ -187,7 +187,7 @@ const Projects = () => {
                 className={`glass-panel ${styles.projectCard}`}
               >
                 <div className={styles.cardImgWrapper}>
-                  <img src={project.image || 'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'} alt={project.title} />
+                  <img src={project.image_url || 'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'} alt={project.title} />
                   <span className={styles.cardBadge}>{project.year || '2024'}</span>
                 </div>
                 <div className={styles.cardContent}>
