@@ -7,6 +7,7 @@ import {
 import { useGlobalData } from '../context/GlobalDataContext';
 import { usePageData } from '../hooks/usePageData';
 import { statsData } from '../data/statsData';
+import { appConfig } from '../data/appConfig';
 import SectionHeader from '../components/SectionHeader';
 import PremiumTimeline from '../components/PremiumTimeline';
 import MotionWrapper from '../components/MotionWrapper';
@@ -36,7 +37,7 @@ const About = () => {
     return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading dynamic content from backend...</div>;
   }
 
-  const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | About`, defaultDescription: pageData?.subtitle || 'About Us', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
+  const seoConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | About`, defaultDescription: pageData?.subtitle || 'About Us', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
   const coreValues = [
     {
       title: 'Pre-Construction Testing', 
@@ -84,7 +85,7 @@ const About = () => {
   return (
     <div className="about-page">
       <Helmet>
-        <title>{appConfig.seo.defaultTitle}</title>
+        <title>{seoConfig.seo.defaultTitle}</title>
         <meta name="description" content="Discover our history of engineering landmarks, certifications, partner networks, and values that make us Vadodara's premier construction company." />
       </Helmet>
 

@@ -57,7 +57,7 @@ const Footer = () => {
           <div className={styles.footerContactItems}>
             <div className={styles.footerContactItem}>
               <Phone size={16} className={styles.contactIcon} />
-              <a href={`tel:${siteSettings?.contact_phone?.replace(/\D/g, '') || appConfig.company.phoneFormatted.replace('tel:', '')}`}>{siteSettings?.contact_phone || appConfig.company.phone}</a>
+              <a href={`tel:${siteSettings?.contact_phone ? siteSettings.contact_phone.replace(/\D/g, '') : appConfig.company.phoneFormatted.replace('tel:', '')}`}>{siteSettings?.contact_phone || appConfig.company.phone}</a>
             </div>
             <div className={styles.footerContactItem}>
               <Mail size={16} className={styles.contactIcon} />
