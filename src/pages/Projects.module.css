@@ -494,3 +494,34 @@
   background: rgba(255, 255, 255, 0.15);
   border-color: #ffffff;
 }
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .featuredGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 6rem 0 4rem 0;
+  }
+  
+  .controlsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .searchBox {
+    max-width: 100%;
+  }
+  
+  .chipsContainer {
+    justify-content: center;
+  }
+  
+  .heroStats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}

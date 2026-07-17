@@ -268,3 +268,34 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .valuesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .partnersGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .valuesGrid,
+  .galleryGrid,
+  .overviewSplit {
+    grid-template-columns: 1fr;
+  }
+  .partnersGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .overviewSplit {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .partnersGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

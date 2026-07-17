@@ -154,3 +154,28 @@
   transition: color var(--transition-fast);
 }
 .legalLinks a:hover { color: var(--accent, #3b82f6); }
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .footerGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .subFooterContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .legalLinks {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

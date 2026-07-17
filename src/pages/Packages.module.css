@@ -1898,3 +1898,35 @@
   font-style: italic;
   margin-top: 0.25rem;
 }
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .wizardGrid,
+  .materialsWrapper {
+    grid-template-columns: 1fr;
+  }
+  .comparisonGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 6rem 0 4rem 0;
+  }
+  .comparisonGrid {
+    grid-template-columns: 1fr;
+  }
+  .faqList {
+    grid-template-columns: 1fr;
+  }
+  .desktopCompare {
+    display: none;
+  }
+  .mobileCompare {
+    display: block;
+  }
+  .specsGrid {
+    grid-template-columns: 1fr !important;
+  }
+}

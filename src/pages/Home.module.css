@@ -377,3 +377,42 @@
   transform: translateY(-4px);
 }
 
+@media (max-width: 1024px) {
+  .servicesAsymmetricGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .serviceCardLarge {
+    grid-column: span 2;
+  }
+  .serviceCardSmall {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .servicesAsymmetricGrid {
+    grid-template-columns: 1fr;
+  }
+  .serviceCardLarge, .serviceCardSmall {
+    grid-column: span 1;
+  }
+  .largeLayout {
+    flex-direction: column;
+  }
+  .largeLayout .cardImageWrapper {
+    width: 100%;
+    aspect-ratio: 16/10;
+    min-height: 200px;
+  }
+  .testimonialSplitCard {
+    grid-template-columns: 1fr;
+  }
+  .testimonialTextContent {
+    padding: 1.5rem;
+  }
+  .quoteBody {
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+  }
+}
+

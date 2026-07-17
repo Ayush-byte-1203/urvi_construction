@@ -164,3 +164,24 @@
   align-items: center;
   justify-content: center;
 }
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .hero {
+    padding: 6rem 0 4rem 0;
+  }
+  .formTabs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .formTabs {
+    grid-template-columns: 1fr;
+  }
+  .infoCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

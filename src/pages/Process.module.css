@@ -461,3 +461,45 @@
   position: relative;
   flex-shrink: 0;
 }
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .cardContent {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .cardInfo {
+    flex: 0 0 100%;
+    max-width: 100%;
+    align-items: center;
+  }
+  .cardImageWrapper {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .deliverablesSection ul {
+    justify-content: center;
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .infoBanner {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem !important;
+  }
+  .infoBannerLeft {
+    flex-direction: column;
+  }
+  .stepperWrapper {
+    padding: 24px !important;
+    justify-content: flex-start;
+  }
+  .stepperTrack {
+    padding: 0 24px;
+  }
+  .cardTitle {
+    font-size: 24px;
+  }
+}

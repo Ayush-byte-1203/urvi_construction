@@ -199,3 +199,19 @@
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .hero {
+    padding: 6rem 0 4rem 0;
+  }
+  .featuredGrid {
+    grid-template-columns: 1fr;
+  }
+  .faqButton {
+    padding: 1rem 1.5rem;
+  }
+  .faqAnswer {
+    padding: 0 1.5rem 1rem 1.5rem;
+  }
+}

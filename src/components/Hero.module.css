@@ -1,3 +1,4 @@
+
 /* ==========================================================================
    HERO SECTION — Cinematic Video Hero Redesigned
    ========================================================================== */
@@ -153,4 +154,40 @@
 .itemIcon {
   color: #3b82f6;
   flex-shrink: 0;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .heroContentWrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+    padding-top: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroContainer {
+    min-height: 100vh;
+  }
+  
+  .heroTitle {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+  }
+  
+  .heroCtaGroup {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  
+  .heroCtaGroup > * {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .floatingPanel {
+    max-width: 100%;
+  }
 }

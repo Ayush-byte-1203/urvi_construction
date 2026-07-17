@@ -476,3 +476,32 @@
   background: var(--accent, #3b82f6);
   color: #ffffff;
 }
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 6rem 0 4rem 0;
+  }
+  
+  .heroCtaRow {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .heroCtaRow > * {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  .heroStats {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .tableResponsive {
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+  }
+}
