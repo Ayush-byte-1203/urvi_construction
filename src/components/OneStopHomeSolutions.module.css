@@ -280,3 +280,22 @@
   margin-top: 0.5rem;
   margin-bottom: 1rem;
 }
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .interactiveLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cardsGrid {
+    grid-template-columns: 1fr;
+  }
+  .previewPanel {
+    padding: 1.5rem;
+  }
+  .deliverablesGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -511,3 +511,23 @@
   background-color: var(--bg-secondary, #f8fafc);
   border-top: 1px solid var(--border-subtle, #f1f5f9);
 }
+
+/* Responsive Media Queries */
+@media (max-width: 1024px) {
+  .goalsBlock {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .dashboardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboardGrid {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    padding: 6rem 0 4rem 0;
+  }
+}

@@ -296,3 +296,16 @@
   70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
   100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
 }
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
+  }
+  .premiumCardContent {
+    padding: 1.5rem;
+  }
+  .cardHeaderLeft {
+    flex-wrap: wrap;
+  }
+}
