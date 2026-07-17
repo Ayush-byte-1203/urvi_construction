@@ -56,16 +56,25 @@ ${formData.message}
 
     setStatus('loading');
 
+    // Create a new window immediately to bypass browser popup blockers
+    const whatsappWindow = window.open('', '_blank');
+
     // Simulate API registration delay
     setTimeout(() => {
       setStatus('success');
       
       // WhatsApp Redirection
-      const whatsappNumber = "+91XXXXXXXXXX"; // Replace with actual number
+      const whatsappNumber = "+91xxxxxxxxx"; // Replace with actual number
       const message = generateWhatsAppMessage();
       const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
       
-      window.open(whatsappUrl, '_blank');
+      // Set the URL of the previously opened window
+      if (whatsappWindow) {
+        whatsappWindow.location.href = whatsappUrl;
+      } else {
+        // Fallback if popup was still blocked
+        window.location.href = whatsappUrl;
+      }
       
       setFormData({ name: '', email: '', phone: '', message: '' });
     }, 1200);
