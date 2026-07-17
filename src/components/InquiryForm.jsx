@@ -38,11 +38,35 @@ const InquiryForm = () => {
       return;
     }
 
+    // Generate WhatsApp Message
+    const generateWhatsAppMessage = () => {
+      const date = new Date().toLocaleString('en-IN');
+      return `📩 *New Website Enquiry*
+
+*Name:* ${formData.name}
+*Phone:* ${formData.phone}
+*Email:* ${formData.email}
+
+*Message:*
+${formData.message}
+
+*Submitted From:* Website Contact Form
+*Date:* ${date}`;
+    };
+
     setStatus('loading');
 
     // Simulate API registration delay
     setTimeout(() => {
       setStatus('success');
+      
+      // WhatsApp Redirection
+      const whatsappNumber = "+91XXXXXXXXXX"; // Replace with actual number
+      const message = generateWhatsAppMessage();
+      const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
+      
+      window.open(whatsappUrl, '_blank');
+      
       setFormData({ name: '', email: '', phone: '', message: '' });
     }, 1200);
   };
