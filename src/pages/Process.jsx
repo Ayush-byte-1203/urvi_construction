@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { 
-  Users, FileText, MapPin, HardHat, ShieldCheck, Home, CheckCircle2 
-} from 'lucide-react';
+import * as Icons from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGlobalData } from '../context/GlobalDataContext';
 import { usePageData } from '../hooks/usePageData';
@@ -13,7 +11,7 @@ import styles from './Process.module.css';
 
 const Process = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
-  const { siteSettings, isLoading: isGlobalLoading } = useGlobalData();
+  const { siteSettings, processSteps: backendSteps, isLoading: isGlobalLoading } = useGlobalData();
   const { pageData, isLoading: isPageLoading } = usePageData('process');
   const [activeStep, setActiveStep] = useState(0);
 
@@ -29,68 +27,16 @@ const Process = () => {
 
   const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Process`, defaultDescription: pageData?.subtitle || 'Our Process' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...' } };
 
-  const steps = [
-    {
-      phase: 'Phase 01',
-      shortLabel: 'Consultation',
-      title: 'Consultation & Spatial Blueprinting',
-      subtitle: 'Week 1 to 4',
-      desc: 'We conduct architectural brainstorming, prepare 3D visual models, analyze site soils, and draft the first estimation tables (BOQ).',
-      icon: <Users size={22} />,
-      deliverables: ['3D Visual Models', 'Soil Analysis Report', 'BOQ Estimation Table'],
-      image: 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=400&q=80'
-    },
-    {
-      phase: 'Phase 02',
-      shortLabel: 'Zoning Clearance',
-      title: 'Zoning Approval & Procurement',
-      subtitle: 'Week 5 to 8',
-      desc: 'Our legal desks submit structural documentation to state agencies for clearance while locking in material supply chains.',
-      icon: <FileText size={22} />,
-      deliverables: ['Regulatory Permissions', 'Material Procurement Plan', 'Structural NOCs'],
-      image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80'
-    },
-    {
-      phase: 'Phase 03',
-      shortLabel: 'Excavation',
-      title: 'Site Preparation & Substructures',
-      subtitle: 'Month 3',
-      desc: 'Excavation machinery grades the soil, setups anti-termite shields, and pours heavy concrete foundations.',
-      icon: <MapPin size={22} />,
-      deliverables: ['Site Excavation Complete', 'Anti-Termite Shield Setup', 'Concrete Foundation Poured'],
-      image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=400&q=80'
-    },
-    {
-      phase: 'Phase 04',
-      shortLabel: 'Framework',
-      title: 'Superstructure Framework Assembly',
-      subtitle: 'Month 4 to 6',
-      desc: 'Steel pillars or concrete slabs take shape. Walls are laid out using energy-efficient AAC brick masonry.',
-      icon: <HardHat size={22} />,
-      deliverables: ['RCC Column Pillars Framed', 'Ceiling Slabs Curing', 'AAC Block Walls Built'],
-      image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=400&q=80'
-    },
-    {
-      phase: 'Phase 05',
-      shortLabel: 'Integration',
-      title: 'MEP Integration & Wet Finishes',
-      subtitle: 'Month 7 to 9',
-      desc: 'Plumbing conduits, electrical lines, HVAC nodes, and initial wall plastering work are executed concurrently.',
-      icon: <ShieldCheck size={22} />,
-      deliverables: ['Concealed Wiring & Piping', 'HVAC Ducting Complete', 'Initial Wall Plastering'],
-      image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80'
-    },
-    {
-      phase: 'Phase 06',
-      shortLabel: 'Handover',
-      title: 'Premium Handovers & Quality Checks',
-      subtitle: 'Month 10 to 12',
-      desc: 'Applying finish coats, flooring tiles, smart controls setup, final compliance clearances, and key delivery.',
-      icon: <Home size={22} />,
-      deliverables: ['Flooring & Painting Complete', 'Final Compliance Audited', 'Keys Handed Over'],
-      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=400&q=80'
-    }
-  ];
+  const steps = backendSteps?.length > 0 ? backendSteps.map(s => ({
+    phase: `Phase ${String(s.step_number).padStart(2, '0')}`,
+    shortLabel: s.label || s.title,
+    title: s.title,
+    subtitle: s.duration || '',
+    desc: s.description,
+    icon: s.icon_name && Icons[s.icon_name] ? React.createElement(Icons[s.icon_name], { size: 22 }) : <Icons.HelpCircle size={22} />,
+    deliverables: s.team ? [s.team] : [], // Use team as deliverables fallback since model doesn't have deliverables
+    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=400&q=80'
+  })) : [];
 
   const currentStage = steps[activeStep];
 

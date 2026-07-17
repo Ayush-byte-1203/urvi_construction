@@ -75,7 +75,7 @@ const ProjectDetail = () => {
   };
 
   const faqItems = [
-    { title: 'What was the exact construction duration?', content: `This project was completed within ${project.year === '2025' ? '12 Months' : '10 Months'}, aligning with baseline schedules.` },
+    { title: 'What was the exact construction duration?', content: `This project was completed within ${project.completion_date ? 'Schedule' : '10 Months'}, aligning with baseline schedules.` },
     { title: 'Which raw material brands were specified?', content: 'Certified concrete was sourced from UltraTech Cement and steel rebar from TATA Steel.' }
   ];
 
@@ -83,7 +83,7 @@ const ProjectDetail = () => {
     <div className="project-detail-page">
       <Helmet>
         <title>{project.title} Case study | {appConfig.company.name}</title>
-        <meta name="description" content={project.scope} />
+        <meta name="description" content={project.description} />
       </Helmet>
 
       {/* ========================================== */}
@@ -100,7 +100,7 @@ const ProjectDetail = () => {
           </div>
 
           <h1 className={styles.heroTitle}>{project.title}</h1>
-          <p className={styles.heroDesc}>{project.tag} &middot; Completed specs case study</p>
+          <p className={styles.heroDesc}>{project.category_name || project.category || 'Portfolio'} &middot; Completed specs case study</p>
         </div>
       </section>
 

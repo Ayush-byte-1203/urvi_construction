@@ -136,8 +136,8 @@ Built to last
       <section className="section container">
         <SectionHeader
           eyebrow="Core Values"
-          heading="What Governs Our Sites"
-          subheading="Our engineering supervisors, design coordinators, and contractors operate under strict guidelines to ensure quality."
+          heading={pageData?.title || "What Governs Our Sites"}
+          subheading={pageData?.subtitle || "Our engineering supervisors, design coordinators, and contractors operate under strict guidelines to ensure quality."}
         />
 
         <div className={styles.valuesGrid}>

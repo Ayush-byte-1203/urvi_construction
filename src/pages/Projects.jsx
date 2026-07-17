@@ -37,7 +37,7 @@ const Projects = () => {
 
   const filteredProjects = projectsData.filter((proj) => {
     const matchesSearch = proj.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (proj.scope || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (proj.description || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
       (proj.location || '').toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = activeFilter === 'All' || (proj.category_name || proj.category) === activeFilter;
     return matchesSearch && matchesCategory;
@@ -101,16 +101,16 @@ const Projects = () => {
           {/* ========================================== */}
           <MotionWrapper variant="slideRight" className={`glass-panel ${styles.largeFeatured}`}>
             <div className={styles.largeImgWrapper}>
-              <img src={featuredProject?.image_url} alt={featuredProject?.title} />
+              <img src={featuredProject?.image} alt={featuredProject?.title} />
               <span className={styles.statusBadge}>Delivered</span>
             </div>
             <div className={styles.largeContent}>
               <span className={styles.projectTag}>{featuredProject?.category_name}</span>
               <h3>{featuredProject?.title}</h3>
-              <p>{featuredProject?.scope}</p>
+              <p>{featuredProject?.description}</p>
 
               <div className={styles.metaRow}>
-                <span><Maximize size={14} /> {featuredProject?.area}</span>
+                <span><Maximize size={14} /> {featuredProject?.built_area}</span>
                 <span><MapPin size={14} /> {featuredProject?.location}</span>
               </div>
 
@@ -128,7 +128,7 @@ const Projects = () => {
                 to={`/projects/${project.id}`}
                 className={`glass-panel ${styles.supportingCard}`}
               >
-                <img src={project.image_url} alt={project.title} className={styles.supportingImg} />
+                <img src={project.image} alt={project.title} className={styles.supportingImg} />
                 <div>
                   <span className={styles.supportTag}>{project.category_name}</span>
                   <h4 className={styles.supportTitle}>{project.title}</h4>
@@ -187,17 +187,17 @@ const Projects = () => {
                 className={`glass-panel ${styles.projectCard}`}
               >
                 <div className={styles.cardImgWrapper}>
-                  <img src={project.image_url || 'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'} alt={project.title} />
-                  <span className={styles.cardBadge}>{project.year || '2024'}</span>
+                  <img src={project.image || 'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'} alt={project.title} />
+                  <span className={styles.cardBadge}>{project.completion_date || '2024'}</span>
                 </div>
                 <div className={styles.cardContent}>
                   <span className={styles.cardTag}>{project.category_name || project.category || 'General'}</span>
                   <h3 className={styles.cardTitle}>{project.title}</h3>
-                  <p className={styles.cardDesc}>{project.scope}</p>
+                  <p className={styles.cardDesc}>{project.description}</p>
 
                   <div className={styles.cardMeta}>
                     <Compass size={12} className={styles.metaIcon} />
-                    <span>Area: {project.area}</span>
+                    <span>Area: {project.built_area}</span>
                   </div>
 
                   <Link to={`/projects/${project.id}`} className={styles.cardLink}>

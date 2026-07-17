@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Compass, HardHat, Sparkles, FileCheck, FileText, Package, Cpu, Shield, Leaf, ArrowRight, CheckCircle2
-} from 'lucide-react';
+import * as Icons from 'lucide-react';
+import { useGlobalData } from '../context/GlobalDataContext';
 import SectionHeader from './SectionHeader';
 import styles from './OneStopHomeSolutions.module.css';
 
@@ -18,110 +17,19 @@ const OneStopHomeSolutions = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const services = [
-    {
-      icon: <Compass size={28} />,
-      title: 'Architecture',
-      desc: 'BIM-coordinated 3D coordinate drafting cell creating luxury layouts with millimetric precision.',
-      deliverables: ['BIM 3D Model', 'Detailed Floor Plans', 'Exterior Facade Design', 'Structural Layouts'],
-      timeline: '15–20 Days',
-      badge: 'Elite Planning',
-      related: ['Construction', 'Interior Design', 'PMC'],
-      path: '/services'
-    },
-    {
-      icon: <HardHat size={28} />,
-      title: 'Construction',
-      desc: 'Your One-Point Solution for All Construction Challenges',
-      deliverables: ['Foundation RCC Pouring', 'Superstructure Masonry', 'Curing Supervision', 'Slab Casting'],
-      timeline: '180–240 Days',
-      badge: 'Turnkey Contract',
-      related: ['Architecture', 'Material Supply', 'PMC'],
-      path: '/services'
-    },
-    {
-      icon: <Sparkles size={28} />,
-      title: 'Interior Design',
-      desc: 'Custom interior fit-outs, vitrified floor maps, and champagne bronze layout coordinates.',
-      deliverables: ['3D Space Visualization', 'Material Selection Boards', 'False Ceiling Layouts', 'Custom Cabinets'],
-      timeline: '30–45 Days',
-      badge: 'Luxury Fit-out',
-      related: ['Architecture', 'Smart Home', 'Landscape'],
-      path: '/services'
-    },
-    {
-      icon: <FileCheck size={28} />,
-      title: 'PMC',
-      desc: 'Project Management Consultancy providing site schedules verification and BOQ audit updates.',
-      deliverables: ['BOQ Audits', 'Quality Inspection Logs', 'Milestone Verifications', 'Cost Controls Reporting'],
-      timeline: 'Ongoing Support',
-      badge: 'Independent Audit',
-      related: ['Construction', 'Legal Assistance', 'Approval'],
-      path: '/services'
-    },
-    {
-      icon: <FileText size={28} />,
-      title: 'Plan Approval',
-      desc: 'Handling soil geotech evaluations clearances and local municipality permissions files processing.',
-      deliverables: ['Zoning Permissions', 'Geotech Soil Reports', 'Municipality Submissions', 'Sanction NOC Clearance'],
-      timeline: '30–60 Days',
-      badge: 'Liaison Support',
-      related: ['Architecture', 'Legal Assistance', 'PMC'],
-      path: '/services'
-    },
-    // {
-    //   icon: <Package size={28} />,
-    //   title: 'Material Supply',
-    //   desc: 'Direct supplier yards network providing high-grade cement and Fe 550D rebar steel.',
-    //   deliverables: ['Direct Supply Logistics', 'Fe 550D Steel Deliveries', 'Quality Cement Sourcing', 'Batch Testing Reports'],
-    //   timeline: 'As Scheduled',
-    //   badge: 'Supply Chain',
-    //   related: ['Construction', 'PMC', 'Renovation'],
-    //   path: '/services'
-    // },
-    {
-      icon: <Cpu size={28} />,
-      title: 'Smart Home',
-      desc: 'Low-voltage home automations, ambient light routing, and CCTV sensory security grids.',
-      deliverables: ['Concealed Cabling', 'Automated Switchboards', 'CCTV Security Setup', 'Voice Control Config'],
-      timeline: '10–15 Days',
-      badge: 'Tech Upgrade',
-      related: ['Interior Design', 'Architecture', 'Renovation'],
-      path: '/services'
-    },
-    {
-      icon: <Sparkles size={28} />, // Reusing sparkles for renovation
-      title: 'Renovation',
-      desc: 'High-end remodeling mapping custom villa extensions and structural reinforcement updates.',
-      deliverables: ['Structural Reinforcements', 'Wall Remodeling', 'Dampness Treatments', 'Plumbing Overhauls'],
-      timeline: '30–90 Days',
-      badge: 'Remodeling Contract',
-      related: ['Construction', 'Material Supply', 'Smart Home'],
-      path: '/services'
-    },
-    // {
-    //   icon: <Shield size={28} />,
-    //   title: 'Legal Assistance',
-    //   desc: 'Clearing zoning bounds disputes and drafting escrow milestone agreements.',
-    //   deliverables: ['Milestone Escrow Drafting', 'Zoning Boundaries Audits', 'Title Clearances Records', 'Regulatory NOCs Check'],
-    //   timeline: '7–10 Days',
-    //   badge: 'Risk Mitigation',
-    //   related: ['PMC', 'Plan Approval', 'Construction'],
-    //   path: '/services'
-    // },
-    // {
-    //   icon: <Leaf size={28} />,
-    //   title: 'Landscape',
-    //   desc: 'Eco-conscious green landscape layouts featuring carbon-absorbing concrete borders.',
-    //   deliverables: ['Eco-conscious Green Borders', 'Garden Lighting Design', 'Carbon-absorbing Drainage', 'Foliage Layout Plans'],
-    //   timeline: '15–30 Days',
-    //   badge: 'Eco Design',
-    //   related: ['Interior Design', 'Architecture', 'Construction'],
-    //   path: '/services'
-    // }
-  ];
+  const { services: backendServices, isLoading } = useGlobalData();
+  const services = backendServices?.length > 0 ? backendServices.map(s => ({
+    icon: s.icon_name && Icons[s.icon_name] ? React.createElement(Icons[s.icon_name], { size: 28 }) : <Icons.HelpCircle size={28} />,
+    title: s.title,
+    desc: s.description,
+    deliverables: s.features || [],
+    timeline: s.tagline || 'Contact us', // using tagline for timeline fallback
+    badge: s.category?.name || 'Service',
+    related: [],
+    path: `/services/${s.id}`
+  })) : [];
 
-  const activeService = services[hoveredIdx];
+  const activeService = services[hoveredIdx] || services[0];
 
   const renderPreviewPanel = (isMobileView = false) => {
     return (
@@ -135,22 +43,22 @@ const OneStopHomeSolutions = () => {
       >
         <div className={styles.previewHeader}>
           <div className={styles.previewIconWrapper}>
-            {activeService.icon}
+            {activeService?.icon}
           </div>
           <div>
-            <span className={styles.previewBadge}>{activeService.badge}</span>
-            <h3 className={styles.previewTitle}>{activeService.title}</h3>
+            <span className={styles.previewBadge}>{activeService?.badge}</span>
+            <h3 className={styles.previewTitle}>{activeService?.title}</h3>
           </div>
         </div>
 
-        <p className={styles.previewDesc}>{activeService.desc}</p>
+        <p className={styles.previewDesc}>{activeService?.desc}</p>
 
         <div className={styles.deliverablesSection}>
           <h4>Key Deliverables</h4>
           <div className={styles.deliverablesGrid}>
-            {activeService.deliverables.map((item, idx) => (
+            {activeService?.deliverables?.map((item, idx) => (
               <div key={idx} className={styles.deliverableItem}>
-                <CheckCircle2 size={16} className={styles.checkIcon} />
+                <Icons.CheckCircle2 size={16} className={styles.checkIcon} />
                 <span>{item}</span>
               </div>
             ))}
@@ -160,14 +68,14 @@ const OneStopHomeSolutions = () => {
         <div className={styles.panelMetaGrid}>
           <div className={styles.metaBox}>
             <span className={styles.metaLabel}>Estimated Timeline</span>
-            <strong className={styles.metaValue}>{activeService.timeline}</strong>
+            <strong className={styles.metaValue}>{activeService?.timeline}</strong>
           </div>
         </div>
 
         <div className={styles.relatedSection}>
           <span className={styles.metaLabel}>Related Specialities</span>
           <div className={styles.relatedChips}>
-            {activeService.related.map((chip, idx) => (
+            {activeService?.related?.map((chip, idx) => (
               <span key={idx} className={styles.chip}>{chip}</span>
             ))}
           </div>
@@ -197,7 +105,7 @@ const OneStopHomeSolutions = () => {
         <div className={styles.interactiveLayout} style={{ marginTop: '4rem' }}>
           {/* Left Column: Grid of Service Cards */}
           <div className={styles.cardsGrid}>
-            {services.map((item, idx) => {
+            {services?.map((item, idx) => {
               const isActive = idx === hoveredIdx;
               return (
                 <React.Fragment key={idx}>
