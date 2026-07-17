@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import (
-    SiteSettings, PageContent, PageSection, ServiceCategory, Service,
+    SiteSettings, PageContent, ServiceCategory, Service,
     Package, PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
     ProjectCategory, Project, ProjectImage, Testimonial, FAQCategory, FAQ,
     CoreValue, Milestone, CompanyStat, ProcessStep, TrustPartner,
@@ -12,13 +12,7 @@ class SiteSettingsSerializer(serializers.ModelSerializer):
         model = SiteSettings
         fields = '__all__'
 
-class PageSectionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PageSection
-        fields = '__all__'
-
 class PageContentSerializer(serializers.ModelSerializer):
-    sections = PageSectionSerializer(many=True, read_only=True)
     class Meta:
         model = PageContent
         fields = '__all__'

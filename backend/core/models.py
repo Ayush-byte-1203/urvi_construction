@@ -10,7 +10,12 @@ class SiteSettings(models.Model):
     facebook_url = models.URLField(null=True, blank=True)
     twitter_url = models.URLField(null=True, blank=True)
     linkedin_url = models.URLField(null=True, blank=True)
-    instagram_url = models.URLField(null=True, blank=True)
+    instagram_url = models.URLField(max_length=255, null=True, blank=True)
+    
+    # Hero Section
+    hero_headline = models.TextField(null=True, blank=True, help_text="e.g., Your Dream <br/> Our Build <br/> Complete Site Solutions Under One Roof!")
+    hero_video_url = models.URLField(max_length=500, null=True, blank=True, help_text="URL to the background video for the homepage hero")
+    hero_poster_url = models.URLField(max_length=500, null=True, blank=True, help_text="URL to the poster image while video loads")
     
     def __str__(self):
         return self.site_name
@@ -39,21 +44,7 @@ class PageContent(models.Model):
         return f"{self.get_page_display()} Page"
 
 
-class PageSection(models.Model):
-    page = models.ForeignKey(PageContent, related_name="sections", on_delete=models.CASCADE)
-    section_name = models.CharField(max_length=100, help_text="E.g., 'Why Choose Us', 'Trust Strip', 'Video Mockup'")
-    title = models.CharField(max_length=255, null=True, blank=True)
-    subtitle = models.TextField(null=True, blank=True)
-    content = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to="sections/", null=True, blank=True)
-    image_2 = models.ImageField(upload_to="sections/", null=True, blank=True)
-    order = models.IntegerField(default=0)
-    
-    class Meta:
-        ordering = ['order']
-        
-    def __str__(self):
-        return f"{self.page.get_page_display()} - {self.section_name}"
+
 
 
 class ServiceCategory(models.Model):

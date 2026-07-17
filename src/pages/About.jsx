@@ -25,7 +25,7 @@ import styles from './About.module.css';
 const About = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
   const containerRef = useRef(null);
-  const { siteSettings, isLoading: isGlobalLoading } = useGlobalData();
+  const { siteSettings, coreValues, isLoading: isGlobalLoading } = useGlobalData();
   const { pageData, sections, isLoading: isPageLoading } = usePageData('about');
   const isLoading = isGlobalLoading || isPageLoading;
 
@@ -38,42 +38,6 @@ const About = () => {
   }
 
   const seoConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | About`, defaultDescription: pageData?.subtitle || 'About Us', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
-  const coreValues = [
-    {
-      title: 'Pre-Construction Testing', 
-      desc: [
-        'Soil Bearing Analysis: Testing soil compaction and load capacity before designing foundations to prevent future building settlement or cracking.',
-        'Material Lab Validation: Conducting strict compressive strength tests on concrete blocks and tensile testing on structural steel before they enter the site.'
-      ]
-    },
-    {
-      title: 'Engineering & Design Validation', 
-      desc: [
-        'Structural Stability Review: Verifying columns, beams, and foundation sizing through certified structural engineers to ensure resistance against seismic activity and heavy loads.',
-        'Blueprint Cross-Checking: Reviewing architectural plans against mechanical, electrical, and plumbing (MEP) layouts to eliminate installation conflicts.'
-      ]
-    },
-    {
-      title: 'Premium Branded Materials', 
-      desc: [
-        'Utilizing carbon-absorbing concrete blocks and solar orientation plans.'
-      ]
-    },
-    {
-      title: 'Uncompromising Quality', 
-      desc: [
-        'Certified Supply Chain: Exclusively sourcing materials from leading national brands (such as Jindal, UltraTech, and Astral) to guarantee long-term durability.',
-        'Zero Compromise Policy: Banning unbranded, sub-standard materials or unverified local mixes from the construction site.'
-      ]
-    },
-    {
-      title: 'Strict Quality Checks & Standards', 
-      desc: [
-        '150+ Multi-Stage Checkpoints: Applying a rigorous master checklist across every single floor, auditing everything from concrete curing times to waterproofing layers.',
-        'IS Standard Alignment: Executing all masonry, steel bending, concrete mixing, and electrical routing in strict compliance with the Bureau of Indian Standards (BIS/IS Codes).'
-      ]
-    },
-  ];
 
   const galleryImages = [
     sample1,
@@ -177,14 +141,14 @@ Built to last
         />
 
         <div className={styles.valuesGrid}>
-          {coreValues.map((val, idx) => (
+          {coreValues && coreValues.map((val, idx) => (
             <MotionWrapper key={idx} variant="slideUp" delay={idx * 0.08} className={styles.valueCard}>
-              <div style={{ color: 'var(--accent)', marginBottom: '0.25rem' }}>{val.icon}</div>
+              <div style={{ color: 'var(--accent)', marginBottom: '0.25rem' }}>{val.icon_name}</div>
               <h4 className={styles.valueTitle}>{val.title}</h4>
               <ul className={styles.valueDesc} style={{ paddingLeft: '1.25rem', margin: 0, listStyleType: 'disc' }}>
-                {Array.isArray(val.desc) ? val.desc.map((bullet, i) => (
+                {Array.isArray(val.description) ? val.description.map((bullet, i) => (
                   <li key={i} style={{ marginBottom: '0.5rem' }}>{bullet}</li>
-                )) : <li>{val.desc}</li>}
+                )) : <li>{val.description || val.desc}</li>}
               </ul>
             </MotionWrapper>
           ))}

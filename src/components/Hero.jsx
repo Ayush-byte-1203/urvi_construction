@@ -2,12 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useGlobalData } from '../context/GlobalDataContext';
 import HeroOverlay from './HeroOverlay';
 import styles from './Hero.module.css';
 
 const Hero = () => {
-  const videoUrl = "https://assets.mixkit.co/videos/preview/mixkit-modern-architecture-detail-with-concrete-and-glass-41763-large.mp4";
-  const posterUrl = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80";
+  const { siteSettings } = useGlobalData();
+  const videoUrl = siteSettings?.hero_video_url || "https://assets.mixkit.co/videos/preview/mixkit-modern-architecture-detail-with-concrete-and-glass-41763-large.mp4";
+  const posterUrl = siteSettings?.hero_poster_url || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80";
+
 
   return (
     <div className={styles.heroContainer}>
@@ -38,11 +41,10 @@ const Hero = () => {
           </div>
 
           {/* Headline */}
-          <h1 className={styles.heroTitle}>
-            Your Dream<br/>
-            Our Build<br/>
-            <span className={styles.heroTitleAccent}>Complete Site Solutions</span> Under One Roof!
-          </h1>
+          <h1 
+            className={styles.heroTitle} 
+            dangerouslySetInnerHTML={{ __html: siteSettings?.hero_headline || `Your Dream<br/>Our Build<br/><span class="${styles.heroTitleAccent}">Complete Site Solutions</span> Under One Roof!` }}
+          />
 
           {/* Subtitle */}
           {/* <p className={styles.heroSubtitle}>
