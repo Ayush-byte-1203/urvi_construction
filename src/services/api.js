@@ -1,4 +1,7 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+const API_URL = import.meta.env.VITE_API_URL || 
+  (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+    ? 'http://localhost:8000/api' 
+    : 'https://Paramarsh.pythonanywhere.com/api');
 
 export const fetchSiteSettings = async () => {
   const response = await fetch(`${API_URL}/settings/`);
