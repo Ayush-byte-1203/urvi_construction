@@ -58,22 +58,7 @@ const Hero = () => {
             End-to-end construction and architectural solutions. Delivering premium commercial and residential projects with uncompromising quality, transparent pricing, and strict adherence to timelines.
           </p>
 
-          <div className={styles.heroStats}>
-            <div className={styles.heroStatItem}>
-              <span className={styles.heroStatNumber}>15+</span>
-              <span className={styles.heroStatLabel}>Years Experience</span>
-            </div>
-            <div className={styles.heroStatDivider} />
-            <div className={styles.heroStatItem}>
-              <span className={styles.heroStatNumber}>250+</span>
-              <span className={styles.heroStatLabel}>Projects Completed</span>
-            </div>
-            <div className={styles.heroStatDivider} />
-            <div className={styles.heroStatItem}>
-              <span className={styles.heroStatNumber}>12+</span>
-              <span className={styles.heroStatLabel}>Locations Served</span>
-            </div>
-          </div>
+
           <div className={styles.heroCtaGroup}>
             <Link to="/contact" className="btn btn-primary">
               Get Free Quote <ArrowRight size={16} style={{ marginLeft: '4px' }} />
