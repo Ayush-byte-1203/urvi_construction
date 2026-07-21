@@ -200,15 +200,14 @@ const QuoteWizard = () => {
               
               <div className={styles.fieldGroup}>
                 <label className={styles.label}>Active City</label>
-                <div className={styles.inputSelectWrapper}>
+                <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                   <MapPin size={18} className={styles.inputIcon} />
-                  <select 
-                    value={city} 
-                    onChange={(e) => setCity(e.target.value)} 
-                    className={styles.select}
+                  <div 
+                    className={styles.input}
+                    style={{ paddingLeft: '2.75rem', display: 'flex', alignItems: 'center', background: '#f8fafc', color: '#64748b', cursor: 'default' }}
                   >
-                    <option value="vadodara">Vadodara, Gujarat</option>
-                  </select>
+                    Vadodara, Gujarat
+                  </div>
                 </div>
               </div>
 
@@ -520,7 +519,7 @@ const QuoteWizard = () => {
                       <span>RCC structural frames (35%)</span>
                       <strong>{(getTotalCost() * 0.35).toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 })}</strong>
                     </div>
-                    <div className={styles.barOuter}><div className={styles.barInner} style={{ width: '35%', backgroundColor: '#3b82f6' }} /></div>
+                    <div className={styles.barOuter}><div className={styles.barInner} style={{ width: '35%', backgroundColor: '#ff6b35' }} /></div>
                   </div>
 
                   <div className={styles.progressRow}>

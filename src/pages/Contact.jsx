@@ -5,6 +5,8 @@ import {
   Mail, Phone, MapPin, Send, CheckCircle2, ChevronRight, ShieldCheck, Clock 
 } from 'lucide-react';
 import { appConfig } from '../data/appConfig';
+import { useGlobalData } from '../context/GlobalDataContext';
+import { usePageData } from '../hooks/usePageData';
 import SectionHeader from '../components/SectionHeader';
 import MotionWrapper from '../components/MotionWrapper';
 import Button from '../components/Button';
@@ -15,6 +17,8 @@ import styles from './Contact.module.css';
 
 const Contact = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
+  const { pageData } = usePageData('contact');
+  
   useEffect(() => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
@@ -40,6 +44,14 @@ const Contact = () => {
       {/* SECTION: Breadcrumb Header */}
       {/* ========================================== */}
       <section className={styles.hero}>
+        {pageData?.hero_video && (
+          <video autoPlay loop muted playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
+            <source src={pageData.hero_video} type="video/mp4" />
+          </video>
+        )}
+        {pageData?.hero_image && !pageData?.hero_video && (
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${pageData.hero_image})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
+        )}
         <HeroOverlay type="dark" />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className={styles.breadcrumbs}>

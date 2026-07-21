@@ -16,7 +16,7 @@
 .breadcrumbs {
   font-family: var(--font-family-display);
   font-size: 0.7rem;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,7 +32,7 @@
 }
 
 .breadcrumbs span {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .breadcrumbs a:hover {
@@ -134,7 +134,7 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--accent, #3b82f6), #8b5cf6);
+  background: linear-gradient(90deg, var(--accent, #ff6b35), #8b5cf6);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s ease;
@@ -170,7 +170,7 @@
 }
 
 .valueDesc li::marker {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   transition: color 0.2s ease;
 }
 

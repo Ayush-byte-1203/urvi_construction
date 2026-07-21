@@ -19,7 +19,7 @@
 }
 
 .smallLabel {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   letter-spacing: 0.15em;
   text-transform: uppercase;
   font-size: 13px;
@@ -33,7 +33,7 @@
   font-size: clamp(2.25rem, 4.5vw, 3rem);
   font-weight: 800;
   line-height: 1.15;
-  color: #0f172a;
+  color: #1c1917;
   margin-bottom: 24px;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .detailIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   flex-shrink: 0;
 }
 
@@ -70,7 +70,7 @@
   border: 1px solid #E8ECF5 !important; /* Thin border #E8ECF5 */
   border-radius: 24px !important; /* Border radius 24px */
   padding: 40px 48px !important; /* Internal padding 40–48px */
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.05), 0 4px 12px rgba(15, 23, 42, 0.02) !important; /* Soft layered shadow */
+  box-shadow: 0 20px 40px rgba(28, 25, 23, 0.05), 0 4px 12px rgba(28, 25, 23, 0.02) !important; /* Soft layered shadow */
   position: relative;
   overflow: hidden;
 }
@@ -89,7 +89,7 @@
 
 .progressBar {
   height: 100%;
-  background-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
   transition: width 0.3s ease;
 }
 
@@ -112,7 +112,7 @@
   font-family: var(--font-family-display, inherit);
   font-size: 1.35rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
   margin: 0 0 0.35rem 0;
 }
 
@@ -172,12 +172,12 @@
 }
 
 .select:hover {
-  border-color: var(--accent, #3b82f6) !important;
+  border-color: var(--accent, #ff6b35) !important;
   background-color: #f8fafc !important;
 }
 
 .select:focus {
-  border-color: var(--accent, #3b82f6) !important;
+  border-color: var(--accent, #ff6b35) !important;
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12) !important;
 }
 
@@ -194,7 +194,7 @@
 }
 
 .input:focus {
-  border-color: var(--accent, #3b82f6) !important;
+  border-color: var(--accent, #ff6b35) !important;
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12) !important;
 }
 
@@ -213,11 +213,11 @@
 }
 
 .optionCard:hover {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .optionSelected {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
   background-color: var(--accent-subtle, #eff6ff);
 }
 
@@ -227,7 +227,7 @@
 }
 
 .cardIconActive {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   margin-bottom: 0.5rem;
 }
 
@@ -247,7 +247,7 @@
 .priceHighlight {
   font-size: 1.1rem !important;
   font-weight: 800;
-  color: var(--accent, #3b82f6) !important;
+  color: var(--accent, #ff6b35) !important;
 }
 
 .timelineSpan {
@@ -276,9 +276,9 @@
 }
 
 .toggleActive {
-  background-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
   color: #ffffff;
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .areaSummary {
@@ -299,7 +299,7 @@
 
 .areaSummary strong {
   font-size: 1.15rem;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   font-weight: 800;
 }
 
@@ -316,9 +316,9 @@
 }
 
 .numberActive {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
   background-color: var(--accent-subtle, #eff6ff);
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .checkboxGrid {
@@ -380,7 +380,7 @@
   width: 20px; /* Circular thumb */
   height: 20px;
   border-radius: 50%;
-  background: var(--accent, #3b82f6); /* Blue active thumb */
+  background: var(--accent, #ff6b35); /* Blue active thumb */
   box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -397,7 +397,7 @@
 
 .premiumBadge {
   background-color: var(--accent-subtle, #eff6ff) !important;
-  color: var(--accent, #3b82f6) !important;
+  color: var(--accent, #ff6b35) !important;
   font-size: 13px !important;
   font-weight: 700 !important;
   padding: 6px 16px !important;
@@ -435,12 +435,12 @@
 }
 
 .chip:hover {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .chipActive {
-  background-color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
   color: #ffffff;
 }
 
@@ -476,7 +476,7 @@
   font-family: var(--font-family-display, inherit);
   font-size: 1.75rem;
   font-weight: 800;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   margin: 0.5rem 0;
 }
 
@@ -571,7 +571,7 @@
 }
 
 .emiIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 /* Success screen */

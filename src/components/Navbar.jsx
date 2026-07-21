@@ -71,7 +71,7 @@ const Navbar = ({ theme = 'dark' }) => {
                 key={item.key} 
                 className={styles.navItemWrapper}
                 onMouseEnter={() => {
-                  if (item.key !== 'projects' && item.key !== 'home') {
+                  if (item.key !== 'home') {
                     setActiveMegaItem(item.key);
                   } else {
                     setActiveMegaItem(null);

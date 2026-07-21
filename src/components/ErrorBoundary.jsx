@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { AlertTriangle, RotateCcw } from 'lucide-react';
 
-export class ErrorBoundary extends Component {
+class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false, error: null, errorInfo: null };
@@ -37,15 +37,15 @@ export class ErrorBoundary extends Component {
             alignItems: 'center',
             justifyContent: 'center',
             backgroundColor: 'var(--bg-primary, #f8fafc)',
-            color: 'var(--text-primary, #0f172a)',
+            color: 'var(--text-primary, #1c1917)',
             padding: '2.5rem',
             textAlign: 'center',
             fontFamily: 'var(--font-body, system-ui, sans-serif)'
           }}
         >
           <div className="glass-panel" style={{ padding: '3.5rem', maxWidth: isDev ? '800px' : '580px', width: '100%', borderRadius: 'var(--radius-md, 12px)', border: '1px solid var(--border-color, #e2e8f0)', background: 'var(--card-bg, #ffffff)' }}>
-            <AlertTriangle size={54} className="accent-text mb-4" style={{ margin: '0 auto', color: '#3b82f6', animation: 'float 4s ease-in-out infinite' }} />
-            <span className="accent-text" style={{ fontSize: '0.8rem', letterSpacing: '0.15em', fontWeight: 'bold', color: '#3b82f6' }}>SYSTEM ERROR</span>
+            <AlertTriangle size={54} className="accent-text mb-4" style={{ margin: '0 auto', color: '#ff6b35', animation: 'float 4s ease-in-out infinite' }} />
+            <span className="accent-text" style={{ fontSize: '0.8rem', letterSpacing: '0.15em', fontWeight: 'bold', color: '#ff6b35' }}>SYSTEM ERROR</span>
             <h1 className="title-large mb-3" style={{ fontSize: '2.25rem', fontFamily: 'var(--font-display, inherit)', marginTop: '0.5rem' }}>Structural Crash Detected</h1>
             <p className="subtitle mb-6" style={{ margin: '0 auto 1.5rem', fontSize: '0.95rem', color: 'var(--text-muted, #64748b)' }}>
               An unexpected layout conflict has occurred during component mounting. Our engineering desk has been notified.
@@ -56,13 +56,13 @@ export class ErrorBoundary extends Component {
                 <div style={{ color: '#dc2626', fontWeight: 'bold', marginBottom: '0.5rem' }}>
                   [{this.state.error.name || 'Error'}]: {this.state.error.message}
                 </div>
-                <div style={{ color: '#0f172a', fontWeight: 'bold', marginBottom: '0.25rem' }}>Route: {window.location.pathname}</div>
+                <div style={{ color: '#1c1917', fontWeight: 'bold', marginBottom: '0.25rem' }}>Route: {window.location.pathname}</div>
                 <div style={{ whiteSpace: 'pre-wrap', color: '#475569', marginBottom: '0.75rem', maxHeight: '150px', overflowY: 'auto' }}>
                   {this.state.error.stack}
                 </div>
                 {this.state.errorInfo && (
                   <>
-                    <div style={{ color: '#0f172a', fontWeight: 'bold', marginBottom: '0.25rem' }}>Component Stack Trace:</div>
+                    <div style={{ color: '#1c1917', fontWeight: 'bold', marginBottom: '0.25rem' }}>Component Stack Trace:</div>
                     <div style={{ whiteSpace: 'pre-wrap', color: '#64748b', maxHeight: '150px', overflowY: 'auto' }}>
                       {this.state.errorInfo.componentStack}
                     </div>
@@ -74,7 +74,7 @@ export class ErrorBoundary extends Component {
             <button 
               onClick={this.handleReset}
               className="btn btn-primary"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', background: '#3b82f6', color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', background: '#ff6b35', color: '#fff', border: 'none', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}
             >
               <RotateCcw size={16} /> Reset System Session
             </button>

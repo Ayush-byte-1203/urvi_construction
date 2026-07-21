@@ -15,7 +15,7 @@
 .breadcrumbs {
   font-family: var(--font-family-display);
   font-size: var(--font-size-overline);
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   display: flex;
   justify-content: center;
   gap: var(--space-xs);
@@ -30,7 +30,7 @@
 }
 
 .breadcrumbs span {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .breadcrumbs a:hover {

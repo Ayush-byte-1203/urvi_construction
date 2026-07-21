@@ -13,7 +13,7 @@ import Accordion from '../components/Accordion';
 import MotionWrapper from '../components/MotionWrapper';
 import Button from '../components/Button';
 import HeroOverlay from '../components/HeroOverlay';
-import PremiumTimeline from '../components/PremiumTimeline';
+
 
 import { HeaderThemeContext } from '../components/Layout';
 import styles from './Services.module.css';
@@ -38,18 +38,7 @@ const Services = () => {
   // Generate categories from loaded services
   const rawCategories = ['All Divisions', ...new Set(servicesData.map(s => s.category_name || s.category || 'General'))];
 
-  // 9 process steps enriched
-  const processSteps = [
-    { title: 'Idea', label: 'Vision & Goals', desc: 'Collaborating to understand spatial requirements, budget limitations, and architectural dreams.', duration: '3 Days', deliverables: ['Budget Planning', 'Site Analysis', 'Requirement Gathering'], team: 'Lead Architect, Client Coordinator', status: 'Completed', checks: 'Site viability approval', illustration: '📐', icon: <Layers size={20} /> },
-    { title: 'Planning', label: 'Geotech Checks', desc: 'Mapping soil load capacities, plot coordinates parameters, and structuring timelines.', duration: '5 Days', deliverables: ['Soil Testing', 'Surveys', 'Timeline Scheduling'], team: 'Geotech Engineer, Planner', status: 'Completed', checks: 'Soil bearing capacity', illustration: '📊', icon: <Compass size={20} /> },
-    { title: 'Design', label: 'BIM 3D Renderings', desc: 'Drafting Revit BIM blueprints, HVAC mapping, and exporting calculation reports.', duration: '14 Days', deliverables: ['3D Renderings', 'BIM Coordination', 'Load Calculations'], team: 'BIM Architect, Designer', status: 'Current', checks: 'Structural audit log', illustration: '💻', icon: <Layers size={20} /> },
-    { title: 'Approval', label: 'Zoning & Permits', desc: 'Submitting structural maps to municipal offices and securing clearances.', duration: '21 Days', deliverables: ['Sanction Files', 'Zoning NOC', 'Environmental Certifications'], team: 'Compliance Consultant', status: 'Upcoming', checks: 'Municipality approvals', illustration: '📁', icon: <Layers size={20} /> },
-    { title: 'Construction', label: 'Foundation Curing', desc: 'Excavation, pouring rebar concrete foundations, and erecting structural frames.', duration: '120 Days', deliverables: ['Excavation', 'RCC Casting', 'Masonry'], team: 'Site Supervisor, Engineer', status: 'Upcoming', checks: 'Cube test certificates', illustration: '🏗', icon: <Layers size={20} /> },
-    { title: 'Quality Check', label: 'Lab Audits', desc: 'Laboratory testing of concrete cubes compression limits and EAF steel checks.', duration: 'Ongoing', deliverables: ['Cube Testing', 'Tensile Inspections', 'Waterproofing Verification'], team: 'PMC Auditor, QC Tech', status: 'Upcoming', checks: 'Tensile validation', illustration: '🔬', icon: <Layers size={20} /> },
-    { title: 'Interior', label: 'Fittings & Aesthetics', desc: 'Laying floor tiles, routing low-voltage wires, and installing sanitary fixtures.', duration: '45 Days', deliverables: ['Flooring', 'Ceiling Setup', 'Sanitary Fittings'], team: 'Interior Architect', status: 'Upcoming', checks: 'Bathroom leak validation', illustration: '🛋', icon: <Layers size={20} /> },
-    { title: 'Handover', label: 'Keys Sign-Off', desc: 'Final site snagging inspections list clearing and official keys transfer.', duration: '7 Days', deliverables: ['Snagging List', 'Safety Certifications', 'Final Keys'], team: 'Project Director', status: 'Upcoming', checks: 'Compliance log', illustration: '🔑', icon: <Layers size={20} /> },
-    { title: 'Warranty', label: '15-Year Coverage', desc: 'Providing structural warranty coverage certificate and maintenance checkups.', duration: '15 Years', deliverables: ['Structural Warranty', 'Dampness Warranty', 'Inspections Calendar'], team: 'Support Lead', status: 'Upcoming', checks: 'Warranty registry', illustration: '📜', icon: <Layers size={20} /> }
-  ];
+
 
   // const faqItems = (faqs || []).slice(0, 4).map((f) => ({
   //   title: f.question || f.q,
@@ -67,6 +56,15 @@ const Services = () => {
       </Helmet>
 
       <section className={styles.heroSection}>
+                {pageData?.hero_video && (
+          <video autoPlay loop muted playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
+            <source src={pageData.hero_video} type="video/mp4" />
+          </video>
+        )}
+        {pageData?.hero_image && !pageData?.hero_video && (
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${pageData.hero_image})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
+        )}
+
         <HeroOverlay type="dark" />
         <div className={`container ${styles.heroContainer}`}>
           <div className={styles.breadcrumbs}>
@@ -143,17 +141,7 @@ const Services = () => {
         </div>
       </section>
 
-      {/* ========================================== */}
-      <PremiumTimeline
-        eyebrow="Milestone Targets"
-        heading="Scheduling & Process Milestones"
-        subheading="An interactive overview indicating chronological steps, lab compression audits and keys handover parameters."
-        steps={processSteps}
-        activeStep={activeStep}
-        onStepChange={setActiveStep}
-      />
 
-      {/* ========================================== */}
       {/* SECTION: 7. Grouped FAQ Accordions */}
       {/* ========================================== */}
       {/* <section id="faq" className="section container" style={{ maxWidth: '800px' }}>

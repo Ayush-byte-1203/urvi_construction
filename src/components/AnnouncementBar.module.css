@@ -1,6 +1,6 @@
 /* AnnouncementBar — Blue accent stripe */
 .bar {
-  background: linear-gradient(90deg, hsl(217, 91%, 50%) 0%, hsl(217, 91%, 44%) 100%);
+  background: linear-gradient(90deg, hsl(16, 100%, 50%) 0%, hsl(16, 100%, 44%) 100%);
   color: rgba(255, 255, 255, 0.9);
   font-family: var(--font-family-display);
   font-size: 0.72rem;

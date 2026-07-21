@@ -3,6 +3,7 @@ import { useLocation, Outlet } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import AnnouncementBar from './AnnouncementBar';
+import QuotePopup from './QuotePopup';
 
 
 export const HeaderThemeContext = createContext({
@@ -40,6 +41,7 @@ const Layout = ({ children }) => {
           {children ?? <Outlet />}
         </main>
         <Footer />
+        <QuotePopup />
       </div>
     </HeaderThemeContext.Provider>
   );

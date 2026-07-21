@@ -7,12 +7,9 @@ import {
   fetchTestimonials,
   fetchFAQs,
   fetchCoreValues,
-  fetchMilestones,
-  fetchCompanyStats,
-  fetchProcessSteps,
-  fetchTrustPartners,
   fetchBlogCategories,
-  fetchBlogs
+  fetchBlogs,
+  fetchMegaMenus
 } from '../services/api';
 
 const GlobalDataContext = createContext();
@@ -28,12 +25,9 @@ export const GlobalDataProvider = ({ children }) => {
     testimonials: [],
     faqs: [],
     coreValues: [],
-    milestones: [],
-    companyStats: [],
-    processSteps: [],
-    trustPartners: [],
     blogCategories: [],
     blogs: [],
+    megaMenus: {},
     isLoading: true,
   });
 
@@ -48,12 +42,9 @@ export const GlobalDataProvider = ({ children }) => {
           testimonialsRes, 
           faqsRes,
           coreValuesRes,
-          milestonesRes,
-          companyStatsRes,
-          processStepsRes,
-          trustPartnersRes,
           blogCategoriesRes,
-          blogsRes
+          blogsRes,
+          megaMenusRes
         ] = await Promise.all([
           fetchSiteSettings(),
           fetchServices(),
@@ -62,12 +53,9 @@ export const GlobalDataProvider = ({ children }) => {
           fetchTestimonials(),
           fetchFAQs(),
           fetchCoreValues(),
-          fetchMilestones(),
-          fetchCompanyStats(),
-          fetchProcessSteps(),
-          fetchTrustPartners(),
           fetchBlogCategories(),
-          fetchBlogs()
+          fetchBlogs(),
+          fetchMegaMenus()
         ]);
         
         setGlobalData({
@@ -78,12 +66,12 @@ export const GlobalDataProvider = ({ children }) => {
           testimonials: testimonialsRes || [],
           faqs: faqsRes || [],
           coreValues: coreValuesRes || [],
-          milestones: milestonesRes || [],
-          companyStats: companyStatsRes || [],
-          processSteps: processStepsRes || [],
-          trustPartners: trustPartnersRes || [],
           blogCategories: blogCategoriesRes || [],
           blogs: blogsRes || [],
+          megaMenus: (megaMenusRes || []).reduce((acc, menu) => {
+            acc[menu.name] = menu;
+            return acc;
+          }, {}),
           isLoading: false,
         });
       } catch (error) {

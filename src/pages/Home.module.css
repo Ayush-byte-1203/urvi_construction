@@ -35,7 +35,7 @@
 .serviceCardLarge:hover,
 .serviceCardSmall:hover {
   transform: translateY(-4px);
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .largeLayout {
@@ -90,7 +90,7 @@
   font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   letter-spacing: 0.05em;
   display: block;
   margin-bottom: 0.5rem;
@@ -115,7 +115,7 @@
   display: block;
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 0.75rem;
@@ -133,8 +133,8 @@
 }
 
 .cardCta:hover {
-  color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
 }
 
 /* Packages section */
@@ -152,13 +152,13 @@
 }
 
 .packageCard:hover {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
   transform: translateY(-5px);
   box-shadow: var(--shadow-hover, 0 10px 15px -3px rgba(0, 0, 0, 0.05));
 }
 
 .popularCard {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
   box-shadow: 0 4px 32px rgba(59, 130, 246, 0.15);
 }
 
@@ -167,7 +167,7 @@
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--accent, #3b82f6);
+  background: var(--accent, #ff6b35);
   color: #FFFFFF;
   font-family: var(--font-family-display, inherit);
   font-size: 0.65rem;
@@ -282,7 +282,7 @@
   height: 48px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--accent, #3b82f6);
+  border: 2px solid var(--accent, #ff6b35);
 }
 
 .clientName {
@@ -331,7 +331,7 @@
   height: 52px;
   border-radius: 50%;
   background-color: #ffffff;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -372,7 +372,7 @@
 /* Responsive Rules */
 
 .activePackageCard {
-  border-color: var(--accent, #3b82f6) !important;
+  border-color: var(--accent, #ff6b35) !important;
   box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15) !important;
   transform: translateY(-4px);
 }

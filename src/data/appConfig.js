@@ -19,9 +19,9 @@ export const appConfig = {
       bgPrimary: "#FAFAF7",
       bgSecondary: "#F1F2EE",
       bgTertiary: "#E8E9E4",
-      accent: "hsl(217, 91%, 50%)",
-      accentLight: "hsl(217, 91%, 60%)",
-      accentDark: "hsl(217, 91%, 38%)",
+      accent: "hsl(16, 100%, 50%)",
+      accentLight: "hsl(16, 100%, 60%)",
+      accentDark: "hsl(16, 100%, 38%)",
       textPrimary: "#111827",
       textSecondary: "#374151",
       textMuted: "#6B7280"

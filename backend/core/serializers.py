@@ -3,7 +3,7 @@ from .models import (
     SiteSettings, PageContent, ServiceCategory, Service,
     Package, PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
     ProjectCategory, Project, ProjectImage, Testimonial, FAQCategory, FAQ,
-    CoreValue, Milestone, CompanyStat, ProcessStep, TrustPartner,
+    CoreValue,
     BlogCategory, BlogPost
 )
 
@@ -17,6 +17,11 @@ class PageContentSerializer(serializers.ModelSerializer):
         model = PageContent
         fields = '__all__'
 
+class ServiceCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ServiceCategory
+        fields = '__all__'
+
 class ServiceSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     class Meta:
@@ -26,6 +31,11 @@ class ServiceSerializer(serializers.ModelSerializer):
 class PackageAdvantageSerializer(serializers.ModelSerializer):
     class Meta:
         model = PackageAdvantage
+        fields = '__all__'
+
+class PackageMaterialCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PackageMaterialCategory
         fields = '__all__'
 
 class PackageMaterialSpecSerializer(serializers.ModelSerializer):
@@ -53,6 +63,11 @@ class ProjectImageSerializer(serializers.ModelSerializer):
         model = ProjectImage
         fields = '__all__'
 
+class ProjectCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectCategory
+        fields = '__all__'
+
 class ProjectSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     images = ProjectImageSerializer(many=True, read_only=True)
@@ -63,6 +78,11 @@ class ProjectSerializer(serializers.ModelSerializer):
 class TestimonialSerializer(serializers.ModelSerializer):
     class Meta:
         model = Testimonial
+        fields = '__all__'
+
+class FAQCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FAQCategory
         fields = '__all__'
 
 class FAQSerializer(serializers.ModelSerializer):
@@ -76,25 +96,7 @@ class CoreValueSerializer(serializers.ModelSerializer):
         model = CoreValue
         fields = '__all__'
 
-class MilestoneSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Milestone
-        fields = '__all__'
 
-class CompanyStatSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CompanyStat
-        fields = '__all__'
-
-class ProcessStepSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProcessStep
-        fields = '__all__'
-
-class TrustPartnerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = TrustPartner
-        fields = '__all__'
 
 class BlogCategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -105,4 +107,29 @@ class BlogPostSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     class Meta:
         model = BlogPost
+        fields = '__all__'
+
+from .models import MegaMenu, MegaMenuCategory, MegaMenuLink, MegaMenuFeatured
+
+class MegaMenuLinkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MegaMenuLink
+        fields = '__all__'
+
+class MegaMenuCategorySerializer(serializers.ModelSerializer):
+    links = MegaMenuLinkSerializer(many=True, read_only=True)
+    class Meta:
+        model = MegaMenuCategory
+        fields = '__all__'
+
+class MegaMenuFeaturedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MegaMenuFeatured
+        fields = '__all__'
+
+class MegaMenuSerializer(serializers.ModelSerializer):
+    categories = MegaMenuCategorySerializer(many=True, read_only=True)
+    featured = MegaMenuFeaturedSerializer(read_only=True)
+    class Meta:
+        model = MegaMenu
         fields = '__all__'

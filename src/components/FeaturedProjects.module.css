@@ -17,7 +17,7 @@
 
 .largeCard:hover {
   transform: translateY(-4px);
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .imageWrapper {
@@ -63,7 +63,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   letter-spacing: 0.08em;
   display: block;
   margin-bottom: 0.5rem;
@@ -102,7 +102,7 @@
 }
 
 .metaIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .ctaLink {
@@ -119,8 +119,8 @@
 }
 
 .ctaLink:hover {
-  color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
 }
 
 /* Supporting Column */
@@ -143,7 +143,7 @@
 
 .smallCard:hover {
   transform: translateY(-2px);
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .smallImageWrapper {
@@ -189,7 +189,7 @@
   font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   letter-spacing: 0.05em;
   margin-bottom: 0.25rem;
 }
@@ -220,8 +220,8 @@
 }
 
 .smallCard:hover .smallCta {
-  color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
 }
 
 /* Responsive Media Queries */

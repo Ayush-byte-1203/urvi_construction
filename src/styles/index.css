@@ -302,15 +302,15 @@ select:focus-visible {
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: var(--accent-dark);
   color: #FFFFFF;
-  border-color: var(--accent);
+  border-color: var(--accent-dark);
   box-shadow: var(--shadow-accent);
 }
 
 .btn-primary:hover {
-  background: var(--accent-dark);
-  border-color: var(--accent-dark);
+  background: hsl(16, 100%, 38%);
+  border-color: hsl(16, 100%, 38%);
   box-shadow: var(--shadow-accent-lg);
   transform: translateY(-1px);
 }
@@ -459,7 +459,7 @@ select:focus-visible {
 .subpage-header .breadcrumbs {
   font-family: var(--font-family-display);
   font-size: var(--font-size-overline);
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   display: flex;
   justify-content: center;
   gap: var(--space-xs);
@@ -472,7 +472,7 @@ select:focus-visible {
   text-decoration: none;
 }
 .subpage-header .breadcrumbs span {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 /* ==========================================================================
@@ -511,7 +511,7 @@ select:focus-visible {
 [class*="heroSection"] [class*="breadcrumbs"] span,
 [class*="hero"] [class*="breadcrumbs"] span,
 .subpage-header [class*="breadcrumbs"] span {
-  color: var(--accent, #3b82f6) !important;
+  color: var(--accent, #ff6b35) !important;
 }
 
 /* ==========================================================================
@@ -540,9 +540,7 @@ img, video, svg, canvas, iframe {
 
 /* --- Tables: allow horizontal scroll safely --- */
 table {
-  display: block;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+  width: 100%;
   max-width: 100%;
 }
 

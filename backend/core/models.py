@@ -39,6 +39,7 @@ class PageContent(models.Model):
     title = models.CharField(max_length=255)
     subtitle = models.TextField(null=True, blank=True)
     hero_image = models.ImageField(upload_to="pages/", null=True, blank=True)
+    hero_video = models.FileField(upload_to="pages/videos/", null=True, blank=True, help_text="Upload a background video (e.g. mp4). Overrides hero_image if provided.")
     
     def __str__(self):
         return f"{self.get_page_display()} Page"
@@ -239,55 +240,6 @@ class CoreValue(models.Model):
     def __str__(self):
         return self.title
 
-class Milestone(models.Model):
-    year = models.CharField(max_length=50)
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    order = models.IntegerField(default=0)
-    
-    class Meta:
-        ordering = ['order']
-        
-    def __str__(self):
-        return f"{self.year} - {self.title}"
-
-class CompanyStat(models.Model):
-    number = models.CharField(max_length=50)
-    label = models.CharField(max_length=255)
-    order = models.IntegerField(default=0)
-    
-    class Meta:
-        ordering = ['order']
-        
-    def __str__(self):
-        return f"{self.number} {self.label}"
-
-class ProcessStep(models.Model):
-    step_number = models.IntegerField(default=1)
-    title = models.CharField(max_length=255)
-    label = models.CharField(max_length=255)
-    description = models.TextField()
-    duration = models.CharField(max_length=100)
-    team = models.CharField(max_length=255)
-    icon_name = models.CharField(max_length=100)
-    order = models.IntegerField(default=0)
-    
-    class Meta:
-        ordering = ['order']
-        
-    def __str__(self):
-        return f"Step {self.step_number}: {self.title}"
-
-class TrustPartner(models.Model):
-    name = models.CharField(max_length=255)
-    logo = models.ImageField(upload_to="partners/")
-    order = models.IntegerField(default=0)
-    
-    class Meta:
-        ordering = ['order']
-        
-    def __str__(self):
-        return self.name
 
 class BlogCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -305,3 +257,47 @@ class BlogPost(models.Model):
     
     def __str__(self):
         return self.title
+
+class MegaMenu(models.Model):
+    name = models.CharField(max_length=50, unique=True, help_text="e.g., 'home', 'about', 'services'")
+    
+    def __str__(self):
+        return self.name
+
+class MegaMenuCategory(models.Model):
+    menu = models.ForeignKey(MegaMenu, related_name='categories', on_delete=models.CASCADE)
+    group_title = models.CharField(max_length=255)
+    order = models.IntegerField(default=0)
+    
+    class Meta:
+        ordering = ['order']
+        verbose_name_plural = "Mega Menu Categories"
+        
+    def __str__(self):
+        return f"{self.menu.name} - {self.group_title}"
+
+class MegaMenuLink(models.Model):
+    category = models.ForeignKey(MegaMenuCategory, related_name='links', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, null=True, blank=True)
+    path = models.CharField(max_length=255, help_text="e.g., '/about'")
+    icon_name = models.CharField(max_length=100, help_text="Lucide-react icon name, e.g., 'ShieldCheck'")
+    order = models.IntegerField(default=0)
+    
+    class Meta:
+        ordering = ['order']
+        
+    def __str__(self):
+        return self.title
+
+class MegaMenuFeatured(models.Model):
+    menu = models.OneToOneField(MegaMenu, related_name='featured', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.ImageField(upload_to="megamenu/", null=True, blank=True)
+    image_url = models.URLField(max_length=500, null=True, blank=True, help_text="Optional fallback image URL (e.g. Unsplash)")
+    path = models.CharField(max_length=255, help_text="e.g., '/projects'")
+    link_text = models.CharField(max_length=100, default="Explore")
+    
+    def __str__(self):
+        return f"Featured: {self.menu.name}"

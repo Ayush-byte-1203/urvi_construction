@@ -34,7 +34,7 @@
   font-family: var(--font-family-display, inherit);
   font-size: 0.7rem;
   text-transform: uppercase;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   letter-spacing: 0.12em;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -65,7 +65,7 @@
 }
 
 .linkIconWrapper {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   margin-top: 2px;
   flex-shrink: 0;
   display: flex;
@@ -84,7 +84,7 @@
 }
 
 .itemLink:hover .itemTitle {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .itemDesc {

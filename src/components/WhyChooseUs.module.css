@@ -17,7 +17,7 @@
 
 .whyCard:hover {
   transform: translateY(-4px);
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .cardHeaderRow {
@@ -32,7 +32,7 @@
   height: 52px;
   border-radius: var(--radius-sm, 6px);
   background-color: var(--accent-subtle, #eff6ff);
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,7 +41,7 @@
 .badgeTag {
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   background-color: var(--accent-subtle, #eff6ff);
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-xs, 4px);
@@ -167,12 +167,12 @@
 }
 
 .certCard:hover {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
   transform: translateY(-2px);
 }
 
 .certIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .certCard strong {
@@ -197,7 +197,7 @@
 }
 
 .warIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   margin-bottom: 1rem;
 }
 
@@ -229,7 +229,7 @@
 }
 
 .docIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .downloadCard div {
@@ -263,9 +263,9 @@
 }
 
 .dlBtn:hover {
-  background-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
   color: #ffffff;
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 /* Partner ecosystem */
@@ -281,7 +281,7 @@
 }
 
 .partIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   margin-bottom: 0.25rem;
 }
 
@@ -317,7 +317,7 @@
 }
 
 .mailIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   flex-shrink: 0;
 }
 
@@ -354,7 +354,7 @@
 }
 
 .newsletterInput:focus {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .subStatusText {
@@ -423,7 +423,7 @@
 }
 
 .modalIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   margin-bottom: 1rem;
 }
 

@@ -21,18 +21,18 @@
 }
 
 .primary {
-  background: var(--accent);
+  background: linear-gradient(180deg, #FF9A62, #FF7A45);
   color: #FFFFFF;
-  border-color: var(--accent);
-  box-shadow: 0 4px 18px hsla(217, 91%, 50%, 0.28);
+  border-color: transparent;
+  box-shadow: 0 4px 18px rgba(255, 122, 69, 0.28);
 }
 .primary:hover {
-  background: var(--accent-dark);
-  border-color: var(--accent-dark);
-  box-shadow: 0 8px 28px hsla(217, 91%, 50%, 0.35);
+  background: linear-gradient(180deg, #FF8A52, #FF6A35);
+  border-color: transparent;
+  box-shadow: 0 8px 28px rgba(255, 122, 69, 0.35);
   transform: translateY(-2px);
 }
-.primary:active { transform: translateY(0); box-shadow: 0 2px 10px hsla(217, 91%, 50%, 0.20); }
+.primary:active { transform: translateY(0); box-shadow: 0 2px 10px hsla(16, 100%, 45%, 0.20); }
 
 .secondary {
   background: var(--bg-card);
@@ -57,7 +57,7 @@
 .outline:hover {
   background: var(--accent);
   color: #FFFFFF;
-  box-shadow: 0 4px 18px hsla(217, 91%, 50%, 0.25);
+  box-shadow: 0 4px 18px hsla(16, 100%, 50%, 0.25);
   transform: translateY(-1px);
 }
 .outline:active { transform: translateY(0); background: var(--accent-dark); border-color: var(--accent-dark); }

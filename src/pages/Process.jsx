@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+  import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import * as Icons from 'lucide-react';
@@ -11,7 +11,8 @@ import styles from './Process.module.css';
 
 const Process = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
-  const { siteSettings, processSteps: backendSteps, isLoading: isGlobalLoading } = useGlobalData();
+  const { siteSettings, isLoading: isGlobalLoading } = useGlobalData();
+  const backendSteps = [];
   const { pageData, isLoading: isPageLoading } = usePageData('process');
   const [activeStep, setActiveStep] = useState(0);
 
@@ -45,8 +46,20 @@ const Process = () => {
         <meta name="description" content={appConfig.seo.defaultDescription} />
       </Helmet>
 
-      <section className={`subpage-header ${styles.processHeader}`}>
-        <div className="container">
+      <section className={`subpage-header ${styles.processHeader}`} style={{ position: 'relative', overflow: 'hidden' }}>
+        {pageData?.hero_video && (
+          <video autoPlay loop muted playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
+            <source src={pageData.hero_video} type="video/mp4" />
+          </video>
+        )}
+        {pageData?.hero_image && !pageData?.hero_video && (
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${pageData.hero_image})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
+        )}
+        {/* We need a manual overlay here if we put an image/video over the css background, because the css gradient is below our image. */}
+        {(pageData?.hero_image || pageData?.hero_video) && (
+           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: 'linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60))', zIndex: 1 }} />
+        )}
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <span className={`accent-text ${styles.processBadge}`}>Strategic Timeline</span>
           <h1 className={`title-large ${styles.processTitle}`}>{pageData?.title || 'Our Construction Process'}</h1>
           <p className={`subtitle ${styles.processSubtitle}`}>{pageData?.subtitle || 'Learn how we guide your project from soil testing and permits to finished handover, using strict quality assurance checks.'}</p>

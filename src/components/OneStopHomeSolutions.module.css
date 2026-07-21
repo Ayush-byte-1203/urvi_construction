@@ -75,19 +75,19 @@
 }
 
 .serviceCard:hover {
-  border-color: #3b82f6;
+  border-color: #ff6b35;
   box-shadow: 0 10px 20px rgba(59, 130, 246, 0.06);
 }
 
 .serviceCard:hover .iconContainer {
   transform: scale(1.05) rotate(5deg);
-  color: #3b82f6;
+  color: #ff6b35;
   background-color: #eff6ff;
 }
 
 /* Premium Active State */
 .serviceCardActive {
-  background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+  background: linear-gradient(135deg, #1d4ed8 0%, #ff6b35 100%);
   border-color: transparent;
   box-shadow: 0 12px 28px rgba(37, 99, 235, 0.25);
   transform: scale(1.02);
@@ -124,7 +124,7 @@
 .serviceCard h4 {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #1c1917;
   margin: 0;
   transition: color 0.2s ease;
 }
@@ -140,7 +140,7 @@
   border: 1px solid #cbd5e1;
   border-radius: 20px;
   padding: 2.25rem;
-  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 8px 30px rgba(28, 25, 23, 0.04);
 }
 
 .previewHeader {
@@ -157,7 +157,7 @@
   height: 60px;
   border-radius: 14px;
   background-color: #eff6ff;
-  color: #3b82f6;
+  color: #ff6b35;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -168,7 +168,7 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #3b82f6;
+  color: #ff6b35;
   background-color: #eff6ff;
   padding: 2px 8px;
   border-radius: 99px;
@@ -179,7 +179,7 @@
 .previewTitle {
   font-size: 1.4rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
   margin: 0;
 }
 
@@ -251,7 +251,7 @@
 .metaValue {
   font-size: 1.1rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
 }
 
 .relatedSection {

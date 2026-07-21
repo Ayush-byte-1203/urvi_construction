@@ -44,26 +44,6 @@ export const fetchCoreValues = async () => {
   return response.json();
 };
 
-export const fetchMilestones = async () => {
-  const response = await fetch(`${API_URL}/milestones/`);
-  return response.json();
-};
-
-export const fetchCompanyStats = async () => {
-  const response = await fetch(`${API_URL}/company-stats/`);
-  return response.json();
-};
-
-export const fetchProcessSteps = async () => {
-  const response = await fetch(`${API_URL}/process-steps/`);
-  return response.json();
-};
-
-export const fetchTrustPartners = async () => {
-  const response = await fetch(`${API_URL}/trust-partners/`);
-  return response.json();
-};
-
 export const fetchBlogCategories = async () => {
   const response = await fetch(`${API_URL}/blog-categories/`);
   return response.json();
@@ -71,5 +51,10 @@ export const fetchBlogCategories = async () => {
 
 export const fetchBlogs = async () => {
   const response = await fetch(`${API_URL}/blogs/`);
+  return response.json();
+};
+
+export const fetchMegaMenus = async () => {
+  const response = await fetch(`${API_URL}/mega-menus/`);
   return response.json();
 };

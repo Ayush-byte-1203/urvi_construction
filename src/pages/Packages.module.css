@@ -34,7 +34,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   margin-bottom: 1.5rem;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .breadcrumbs span {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .breadcrumbs a:hover {
@@ -103,7 +103,7 @@
 }
 
 .trustBadge svg {
-  color: #3b82f6;
+  color: #ff6b35;
 }
 
 /* Package cards */
@@ -121,7 +121,7 @@
 
 .planCard:hover {
   transform: translateY(-5px);
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
   box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
 }
 
@@ -204,7 +204,7 @@
 }
 
 .specIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .btnCardSec {
@@ -215,8 +215,8 @@
 
 .btnCardSec:hover {
   background-color: var(--accent-subtle, #eff6ff);
-  border-color: var(--accent, #3b82f6);
-  color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
+  color: var(--accent, #ff6b35);
 }
 
 /* Comparison matrix layout */
@@ -272,7 +272,7 @@
 .highlightCol {
   background-color: var(--accent-subtle, #eff6ff);
   font-weight: 600;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .mobileCompare {
@@ -307,11 +307,11 @@
 }
 
 .matNavItem:hover {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .matNavActive {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
   background-color: var(--accent-subtle, #eff6ff);
 }
 
@@ -323,7 +323,7 @@
 }
 
 .matNavActive strong {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .matNavItem span {
@@ -343,7 +343,7 @@
 .detailTag {
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6) !important;
+  color: var(--accent, #ff6b35) !important;
   background-color: var(--accent-subtle, #eff6ff) !important;
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-xs, 4px);
@@ -356,7 +356,7 @@
   font-family: var(--font-family-display, inherit);
   font-size: 1.5rem;
   font-weight: 700 !important;
-  color: #0F172A !important;
+  color: #1c1917 !important;
   margin: 0 0 0.75rem 0;
 }
 
@@ -508,13 +508,13 @@
 }
 
 .timelineNode:hover .nodeBubble {
-  border-color: var(--accent, #3b82f6);
-  color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
+  color: var(--accent, #ff6b35);
 }
 
 .nodeActive .nodeBubble {
-  background-color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
   color: #ffffff;
   box-shadow: 0 0 0 4px var(--accent-subtle, #eff6ff);
 }
@@ -528,7 +528,7 @@
 }
 
 .nodeActive .nodeTitle {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   font-weight: 800;
 }
 
@@ -546,7 +546,7 @@
 .timelineNum {
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   background-color: var(--accent-subtle, #eff6ff);
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-xs, 4px);
@@ -612,13 +612,13 @@
 }
 
 .quizOpt:hover {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .quizOptSelected {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
   background-color: var(--accent-subtle, #eff6ff);
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .quizInput {
@@ -631,7 +631,7 @@
 }
 
 .quizInput:focus {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .quizFormGroup {
@@ -662,7 +662,7 @@
 }
 
 .selectInput:focus {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .rangeInput {
@@ -671,7 +671,7 @@
   background: #cbd5e1;
   border-radius: 9999px;
   outline: none;
-  accent-color: var(--accent, #3b82f6);
+  accent-color: var(--accent, #ff6b35);
   cursor: pointer;
   margin: 12px 0;
 }
@@ -693,7 +693,7 @@
   font-family: var(--font-family-display, inherit);
   font-size: 1.25rem;
   font-weight: 800;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   margin: 0.25rem 0 0.5rem 0;
 }
 
@@ -746,10 +746,10 @@
   width: 100%;
   padding: 12px 20px;
   background: #ffffff;
-  border: 1.5px solid var(--accent, #3b82f6);
+  border: 1.5px solid var(--accent, #ff6b35);
   border-radius: 9999px;
   /* Rounded pill */
-  color: #0f172a;
+  color: #1c1917;
   font-weight: 600;
   font-size: 0.95rem;
   display: flex;
@@ -767,12 +767,12 @@
 }
 
 .dropdownIconLeft {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .dropdownChevron {
   transition: transform 0.25s ease;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .dropdownChevronOpen {
@@ -820,12 +820,12 @@
 
 .dropdownItem:hover {
   background: rgba(59, 130, 246, 0.05);
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .dropdownItemActive {
   background: rgba(59, 130, 246, 0.1);
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   font-weight: 700;
 }
 
@@ -854,7 +854,7 @@
 }
 
 .materialCardIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   background: rgba(59, 130, 246, 0.1);
   border: 1px solid rgba(59, 130, 246, 0.2);
   width: 48px;
@@ -944,14 +944,14 @@
 }
 
 .compareTable th {
-  background: #0f172a !important;
-  /* Dark navy background */
+  background: var(--accent) !important;
+  /* Light Orange background */
   padding: 16px 20px;
   font-size: 14px;
   font-weight: 700;
   color: #ffffff !important;
   /* White text */
-  border-bottom: 2.5px solid var(--accent, #3b82f6) !important;
+  border-bottom: 2.5px solid var(--accent, #ff6b35) !important;
   /* Thin bottom accent border */
   position: sticky;
   top: 0;
@@ -985,7 +985,7 @@
 }
 
 .compareTable tr:hover td:first-child {
-  color: var(--accent, #3b82f6) !important;
+  color: var(--accent, #ff6b35) !important;
   /* Highlight key label color slightly */
 }
 
@@ -993,7 +993,7 @@
 .compareTable td:first-child {
   font-weight: 600 !important;
   /* Feature column: Semibold */
-  color: #0f172a !important;
+  color: #1c1917 !important;
   /* Dark */
 }
 
@@ -1020,7 +1020,7 @@
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 20px;
-  color: #0F172A !important;
+  color: #1c1917 !important;
   border-bottom: 1px solid #cbd5e1 !important;
   padding-bottom: 10px;
 }
@@ -1052,7 +1052,7 @@
 }
 
 .activePlanCard {
-  border-color: var(--accent, #3b82f6) !important;
+  border-color: var(--accent, #ff6b35) !important;
   box-shadow: 0 8px 32px rgba(59, 130, 246, 0.15) !important;
   transform: translateY(-4px);
 }
@@ -1080,7 +1080,7 @@
 }
 
 .selectorCardActive {
-  border-color: var(--accent, #3b82f6) !important;
+  border-color: var(--accent, #ff6b35) !important;
   box-shadow: 0 10px 25px rgba(59, 130, 246, 0.12) !important;
   background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
 }
@@ -1093,7 +1093,7 @@
 }
 
 .selectorCardActive h4 {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .selectorCardPrice {
@@ -1105,7 +1105,7 @@
 .selectorCardPrice strong {
   font-size: 2rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
 }
 
 .selectorCardPrice span {
@@ -1127,7 +1127,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
 }
 
 /* Dynamic Details Panel */
@@ -1151,7 +1151,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   letter-spacing: 0.05em;
   background: #eff6ff;
   padding: 4px 12px;
@@ -1163,7 +1163,7 @@
 .detailsPanelLeft h2 {
   font-size: 1.75rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
   margin: 0 0 1rem 0;
 }
 
@@ -1187,7 +1187,7 @@
 }
 
 .panelTag strong {
-  color: #0f172a;
+  color: #1c1917;
   min-width: 100px;
 }
 
@@ -1226,7 +1226,7 @@
 .metricItem strong {
   font-size: 1.1rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
   display: block;
 }
 
@@ -1266,7 +1266,7 @@
 
 .sidebarTabActive {
   background-color: #eff6ff;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .sidebarArrow {
@@ -1303,7 +1303,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   letter-spacing: 0.05em;
   display: block;
   margin-bottom: 0.5rem;
@@ -1312,7 +1312,7 @@
 .materialDisplayHeader h3 {
   font-size: 1.75rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
   margin: 0;
 }
 
@@ -1362,9 +1362,9 @@
 }
 
 .compareTabBtnActive {
-  background-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
   color: #ffffff;
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .tableSubText {
@@ -1403,7 +1403,7 @@
 
 .phaseStatusHeader strong {
   font-size: 0.95rem;
-  color: #0f172a;
+  color: #1c1917;
 }
 
 .statusLabel {
@@ -1466,7 +1466,7 @@
 }
 
 .infoBarText strong {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .infoBarTrack {
@@ -1478,7 +1478,7 @@
 
 .infoBarProgress {
   height: 100%;
-  background: var(--accent, #3b82f6);
+  background: var(--accent, #ff6b35);
   border-radius: 9999px;
 }
 
@@ -1491,14 +1491,14 @@
 }
 
 .calloutIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   margin-bottom: 1rem;
 }
 
 .infographicCallout h4 {
   font-size: 1.2rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
   margin: 0 0 0.5rem 0;
 }
 
@@ -1522,7 +1522,7 @@
 .advantageCard h4 {
   font-size: 1.15rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
   margin: 0 0 1.5rem 0;
   border-bottom: 1px solid #e2e8f0;
   padding-bottom: 0.75rem;
@@ -1562,7 +1562,7 @@
 }
 
 .advantageMetric span {
-  color: #0f172a;
+  color: #1c1917;
   font-weight: 700;
 }
 
@@ -1602,14 +1602,14 @@
 }
 
 .faqIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   flex-shrink: 0;
 }
 
 .faqText h4 {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #1c1917;
   margin: 0 0 0.5rem 0;
 }
 
@@ -1660,14 +1660,14 @@
   border: 1.5px solid #cbd5e1;
   border-radius: 8px;
   font-size: 0.95rem;
-  color: #0f172a;
+  color: #1c1917;
   outline: none;
   background-color: #ffffff;
 }
 
 .formSelect:focus,
 .formInput:focus {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .estimatorResult {
@@ -1676,7 +1676,7 @@
 
 .resultBox {
   background: #ffffff;
-  border: 2px solid var(--accent, #3b82f6);
+  border: 2px solid var(--accent, #ff6b35);
   border-radius: 20px;
   padding: 2.5rem;
   width: 100%;
@@ -1689,7 +1689,7 @@
 .resultBox h3 {
   font-size: 1.35rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
   margin: 0 0 1.5rem 0;
   border-bottom: 1px solid #e2e8f0;
   padding-bottom: 0.75rem;
@@ -1716,12 +1716,12 @@
 
 .resultMetricItem strong {
   font-size: 1.05rem;
-  color: #0f172a;
+  color: #1c1917;
   font-weight: 700;
 }
 
 .resultCost {
-  color: var(--accent, #3b82f6) !important;
+  color: var(--accent, #ff6b35) !important;
   font-size: 1.5rem !important;
   font-weight: 800 !important;
 }
@@ -1769,7 +1769,7 @@
 
 .packageCompareCard:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 12px 24px rgba(28, 25, 23, 0.06);
 }
 
 .cardHeaderInfo {
@@ -1786,7 +1786,7 @@
 .cardHeaderInfo h3 {
   font-size: 1.25rem;
   font-weight: 800;
-  color: #0f172a;
+  color: #1c1917;
   margin: 0 0 0.5rem 0;
 }
 
@@ -1801,7 +1801,7 @@
 .comparePrice strong {
   font-size: 1.8rem;
   font-weight: 800;
-  color: #3b82f6;
+  color: #ff6b35;
 }
 
 .comparePrice span {
@@ -1840,7 +1840,7 @@
   border: none;
   font-size: 0.9rem;
   font-weight: 700;
-  color: #0f172a;
+  color: #1c1917;
   cursor: pointer;
   text-align: left;
   transition: background-color 0.2s ease, color 0.2s ease;
@@ -1848,12 +1848,12 @@
 
 .cardAccordionHeader:hover {
   background-color: #f8fafc;
-  color: #3b82f6;
+  color: #ff6b35;
 }
 
 .cardAccordionHeaderActive {
   background-color: #eff6ff;
-  color: #3b82f6;
+  color: #ff6b35;
   border-bottom: 1px solid #dbeafe;
 }
 
@@ -1873,14 +1873,14 @@
 }
 
 .cardAccordionContent strong {
-  color: #0f172a;
+  color: #1c1917;
   font-size: 0.95rem;
 }
 
 .colGrade {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #3b82f6;
+  color: #ff6b35;
   background: #eff6ff;
   padding: 2px 6px;
   border-radius: 4px;
@@ -1901,10 +1901,12 @@
 
 /* Responsive Media Queries */
 @media (max-width: 1024px) {
+
   .wizardGrid,
   .materialsWrapper {
     grid-template-columns: 1fr;
   }
+
   .comparisonGrid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1914,18 +1916,23 @@
   .heroSection {
     padding: 6rem 0 4rem 0;
   }
+
   .comparisonGrid {
     grid-template-columns: 1fr;
   }
+
   .faqList {
     grid-template-columns: 1fr;
   }
+
   .desktopCompare {
     display: none;
   }
+
   .mobileCompare {
     display: block;
   }
+
   .specsGrid {
     grid-template-columns: 1fr !important;
   }

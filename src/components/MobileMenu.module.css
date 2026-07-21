@@ -69,8 +69,8 @@
 }
 
 .closeButton:hover {
-  color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
   background: var(--accent-subtle, #eff6ff);
 }
 
@@ -96,12 +96,12 @@
 }
 
 .navLink:hover {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   background: var(--accent-subtle, #eff6ff);
 }
 
 .navLinkActive {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   background: var(--accent-subtle, #eff6ff);
   font-weight: 700;
 }

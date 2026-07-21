@@ -3,23 +3,13 @@ import { MapPin, ChevronDown } from 'lucide-react';
 import { citiesData } from '../data/citiesData';
 import styles from './CitySelector.module.css';
 
-const CitySelector = ({ selectedCityId, onChangeCity }) => {
+const CitySelector = () => {
   return (
     <div className={styles.selectorWrapper}>
       <MapPin size={16} className={styles.pinIcon} />
-      <select
-        value={selectedCityId}
-        onChange={(e) => onChangeCity(e.target.value)}
-        className={styles.selectInput}
-        aria-label="Select construction city"
-      >
-        {citiesData.map((city) => (
-          <option key={city.id} value={city.id}>
-            {city.name}
-          </option>
-        ))}
-      </select>
-      <ChevronDown size={14} className={styles.chevronIcon} />
+      <span className={styles.selectInput} style={{ padding: '8px 0', border: 'none', background: 'transparent' }}>
+        Vadodara, Gujarat
+      </span>
     </div>
   );
 };

@@ -60,7 +60,7 @@
 .backLink {
   display: inline-flex;
   align-items: center;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   font-size: 0.85rem;
   font-weight: 700;
   text-decoration: none;
@@ -137,7 +137,7 @@
   display: block;
   font-size: 0.8rem;
   text-transform: uppercase;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   letter-spacing: 0.05em;
   margin-bottom: 1rem;
 }
@@ -240,13 +240,13 @@
 }
 
 .stepNode:hover .iconCircle {
-  border-color: var(--accent, #3b82f6);
-  color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
+  color: var(--accent, #ff6b35);
 }
 
 .activeNode .iconCircle {
-  background-color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
   color: #ffffff;
   box-shadow: 0 0 0 4px var(--accent-subtle, #eff6ff);
 }
@@ -260,7 +260,7 @@
 }
 
 .activeNode .nodeTitle {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   font-weight: 800;
 }
 
@@ -277,7 +277,7 @@
 .timelineNum {
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   background-color: var(--accent-subtle, #eff6ff);
   padding: 0.25rem 0.5rem;
   border-radius: var(--radius-xs, 4px);
@@ -396,13 +396,13 @@
 
 .sliderHandle::before {
   border-width: 5px 6px 5px 0;
-  border-color: transparent var(--accent, #3b82f6) transparent transparent;
+  border-color: transparent var(--accent, #ff6b35) transparent transparent;
   margin-right: 4px;
 }
 
 .sliderHandle::after {
   border-width: 5px 0 5px 6px;
-  border-color: transparent transparent transparent var(--accent, #3b82f6);
+  border-color: transparent transparent transparent var(--accent, #ff6b35);
   margin-left: 4px;
 }
 
@@ -421,7 +421,7 @@
 .matBrand {
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   text-transform: uppercase;
 }
 
@@ -478,7 +478,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
   color: #ffffff;
   display: flex;
   align-items: center;

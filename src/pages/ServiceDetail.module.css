@@ -76,7 +76,7 @@
 .backLink {
   display: inline-flex;
   align-items: center;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   font-size: 0.85rem;
   font-weight: 700;
   text-decoration: none;
@@ -186,7 +186,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -259,7 +259,7 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -310,7 +310,7 @@
 .matSpec {
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   text-transform: uppercase;
 }
 

@@ -136,13 +136,13 @@
 }
 
 .pillBtn:hover {
-  border-color: var(--accent, #3b82f6);
-  color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
+  color: var(--accent, #ff6b35);
 }
 
 .pillActive {
-  background-color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
   color: #ffffff !important;
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
@@ -163,7 +163,7 @@
 
 .serviceCard:hover {
   transform: translateY(-6px) !important; /* Card lifts by 5–6px */
-  border-color: var(--accent, #3b82f6) !important;
+  border-color: var(--accent, #ff6b35) !important;
   background-color: var(--bg-card) !important; /* Keep uniform background */
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important; /* Soft shadow */
 }
@@ -235,7 +235,7 @@
 }
 
 .metaIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .cardLink {
@@ -255,11 +255,11 @@
 }
 
 .serviceCard:hover .cardTitle {
-  color: var(--accent, #3b82f6) !important; /* Heading changes to blue */
+  color: var(--accent, #ff6b35) !important; /* Heading changes to blue */
 }
 
 .serviceCard:hover .cardLink {
-  color: var(--accent, #3b82f6) !important;
+  color: var(--accent, #ff6b35) !important;
 }
 
 .serviceCard:hover .cardLink svg {
@@ -267,8 +267,8 @@
 }
 
 .cardLink:hover {
-  color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
 }
 
 /* Comparison Matrix Table */
@@ -317,13 +317,13 @@
 
 .accentCell {
   font-weight: 600;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .tableLink {
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   text-decoration: none;
 }
 
@@ -368,7 +368,7 @@
 .brandBadge {
   font-size: 0.6rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   background-color: var(--accent-subtle, #eff6ff);
   padding: 0.2rem 0.4rem;
   border-radius: var(--radius-xs, 4px);
@@ -450,7 +450,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
   flex-shrink: 0;
 }
 
@@ -464,7 +464,7 @@
   padding: 0.8rem;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   background: rgba(59, 130, 246, 0.05);
   border: 1px solid rgba(59, 130, 246, 0.2);
   border-radius: var(--radius-md, 8px);
@@ -473,7 +473,7 @@
 }
 
 .cardButton:hover {
-  background: var(--accent, #3b82f6);
+  background: var(--accent, #ff6b35);
   color: #ffffff;
 }
 

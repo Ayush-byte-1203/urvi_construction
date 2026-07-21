@@ -33,7 +33,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   margin-bottom: 1.5rem;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .breadcrumbs span {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .breadcrumbs a:hover {
@@ -120,7 +120,7 @@
 
 .largeFeatured:hover {
   transform: translateY(-4px);
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .largeImgWrapper {
@@ -166,7 +166,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   letter-spacing: 0.08em;
   margin-bottom: 0.5rem;
   display: block;
@@ -216,8 +216,8 @@
 }
 
 .caseLink:hover {
-  color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
 }
 
 /* Supporting column */
@@ -241,7 +241,7 @@
 
 .supportingCard:hover {
   transform: translateY(-2px);
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .supportingImg {
@@ -255,7 +255,7 @@
 .supportTag {
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   text-transform: uppercase;
   display: block;
   text-align: left;
@@ -316,7 +316,7 @@
 }
 
 .searchBox input:focus {
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .chipsContainer {
@@ -338,13 +338,13 @@
 }
 
 .chipBtn:hover {
-  border-color: var(--accent, #3b82f6);
-  color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
+  color: var(--accent, #ff6b35);
 }
 
 .chipBtn.chipActive {
-  background-color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  background-color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
   color: #ffffff;
 }
 
@@ -362,7 +362,7 @@
 
 .projectCard:hover {
   transform: translateY(-4px);
-  border-color: var(--accent, #3b82f6);
+  border-color: var(--accent, #ff6b35);
 }
 
 .cardImgWrapper {
@@ -406,7 +406,7 @@
 .cardTag {
   font-size: 0.65rem;
   font-weight: 700;
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
   text-transform: uppercase;
   display: block;
   margin-bottom: 0.35rem;
@@ -439,7 +439,7 @@
 }
 
 .metaIcon {
-  color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
 }
 
 .cardLink {
@@ -455,8 +455,8 @@
 }
 
 .cardLink:hover {
-  color: var(--accent, #3b82f6);
-  border-color: var(--accent, #3b82f6);
+  color: var(--accent, #ff6b35);
+  border-color: var(--accent, #ff6b35);
 }
 
 /* CTA Footer banner */

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Send, CheckCircle2 } from 'lucide-react';
 import Button from './Button';
 import { isValidEmail } from '../utils/validators';
+import { appConfig } from '../data/appConfig';
 import styles from './InquiryForm.module.css';
 
 const InquiryForm = () => {
@@ -64,7 +65,7 @@ ${formData.message}
       setStatus('success');
       
       // WhatsApp Redirection
-      const whatsappNumber = "+91xxxxxxxxx"; // Replace with actual number
+      const whatsappNumber = appConfig.company.phoneFormatted;
       const message = generateWhatsAppMessage();
       const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
       

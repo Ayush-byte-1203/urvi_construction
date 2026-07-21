@@ -55,6 +55,14 @@ const About = () => {
       {/* SECTION: Breadcrumbs Subpage Hero */}
       {/* ========================================== */}
       <section className={styles.hero}>
+        {pageData?.hero_video && (
+          <video autoPlay loop muted playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
+            <source src={pageData.hero_video} type="video/mp4" />
+          </video>
+        )}
+        {pageData?.hero_image && !pageData?.hero_video && (
+          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${pageData.hero_image})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
+        )}
         <HeroOverlay type="dark" />
         <div className="container" style={{ position: 'relative', zIndex: 2 }}>
           <div className={styles.breadcrumbs}>

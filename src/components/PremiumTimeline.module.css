@@ -100,7 +100,7 @@
 }
 
 .activeNode .iconCircle {
-  background: linear-gradient(135deg, var(--accent) 0%, #3b82f6 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, #ff6b35 100%);
   border-color: var(--accent);
   color: #ffffff;
   box-shadow: 0 0 0 6px var(--accent-subtle), 0 8px 16px rgba(59, 130, 246, 0.4);

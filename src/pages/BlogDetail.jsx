@@ -40,7 +40,7 @@ const BlogDetail = () => {
     .slice(0, 3);
 
   return (
-    <div style={{ paddingTop: '80px', paddingBottom: '4rem' }}>
+    <div style={{ paddingBottom: '4rem' }}>
       <Helmet>
         <title>{blog.title} | Paramarsh Construction</title>
         <meta name="description" content={blog.content.substring(0, 160).replace(/<[^>]+>/g, '')} />
@@ -86,14 +86,14 @@ const BlogDetail = () => {
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <MotionWrapper variant="slideUp" delay={0.2}>
             {/* Social Share (Mock) */}
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '2rem' }}>
+            {/* <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '2rem' }}>
               <button
                 onClick={() => alert('Sharing functionality would open native share sheet or links.')}
                 style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', padding: '0.5rem 1rem', borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', color: 'var(--text-main)', fontSize: '0.875rem' }}
               >
                 <Share2 size={16} /> Share Article
               </button>
-            </div>
+            </div> */}
 
             {/* Article Body */}
             <div
