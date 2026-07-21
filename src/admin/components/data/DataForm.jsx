@@ -4,7 +4,7 @@ import { useAdminAuth } from '../../context/AdminAuthContext';
 import { X, Save, Loader2, Plus, Trash2 } from 'lucide-react';
 import styles from './DataForm.module.css';
 
-const DataForm = ({ title, endpoint, schema, initialData, onCancel, onSuccess }) => {
+const DataForm = ({ title, endpoint, schema, initialData, onCancel, onSuccess, lookupField = 'id' }) => {
   const [formData, setFormData] = useState({});
   const [files, setFiles] = useState({});
   const [loading, setLoading] = useState(false);
@@ -86,8 +86,8 @@ const DataForm = ({ title, endpoint, schema, initialData, onCancel, onSuccess })
         payload = formData;
       }
 
-      if (initialData?.id) {
-        await axios.patch(`/api/${endpoint}/${initialData.id}/`, payload, { headers });
+      if (initialData && initialData[lookupField]) {
+        await axios.patch(`/api/${endpoint}/${initialData[lookupField]}/`, payload, { headers });
       } else {
         await axios.post(`/api/${endpoint}/`, payload, { headers });
       }

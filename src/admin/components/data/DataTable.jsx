@@ -4,7 +4,7 @@ import { useAdminAuth } from '../../context/AdminAuthContext';
 import { Plus, Edit2, Trash2, Search, Loader2 } from 'lucide-react';
 import styles from './DataTable.module.css';
 
-const DataTable = ({ title, endpoint, columns, onEdit }) => {
+const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [nextUrl, setNextUrl] = useState(null);
@@ -106,7 +106,7 @@ const DataTable = ({ title, endpoint, columns, onEdit }) => {
                     <button className={styles.iconBtn} onClick={() => onEdit(item)}>
                       <Edit2 size={16} />
                     </button>
-                    <button className={`${styles.iconBtn} ${styles.deleteBtn}`} onClick={() => handleDelete(item.id)}>
+                    <button className={`${styles.iconBtn} ${styles.deleteBtn}`} onClick={() => handleDelete(item[lookupField])}>
                       <Trash2 size={16} />
                     </button>
                   </td>

@@ -56,7 +56,7 @@ const MegaMenuForm = ({ initialData, onCancel, onSuccess }) => {
       let menuId = initialData?.id;
 
       if (menuId) {
-        await axios.patch(`/api/mega-menus/${menuId}/`, formData, { headers });
+        await axios.patch(`/api/mega-menus/${initialData.name}/`, formData, { headers });
       } else {
         const res = await axios.post(`/api/mega-menus/`, formData, { headers });
         menuId = res.data.id;

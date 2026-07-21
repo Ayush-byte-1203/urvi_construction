@@ -28,9 +28,9 @@ const AdminPageContents = () => {
 
   return (
     <>
-      <DataTable title="Page Contents" endpoint="pages" columns={columns} onEdit={(item) => setEditingItem(item)} />
+      <DataTable title="Page Contents" endpoint="pages" columns={columns} onEdit={(item) => setEditingItem(item)} lookupField="page" />
       {editingItem !== undefined && (
-        <DataForm title="Page Content" endpoint="pages" schema={schema} initialData={editingItem} onCancel={() => setEditingItem(undefined)} onSuccess={() => setEditingItem(undefined)} />
+        <DataForm title="Page Content" endpoint="pages" schema={schema} initialData={editingItem} onCancel={() => setEditingItem(undefined)} onSuccess={() => setEditingItem(undefined)} lookupField="page" />
       )}
     </>
   );

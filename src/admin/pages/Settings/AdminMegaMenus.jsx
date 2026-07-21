@@ -11,7 +11,7 @@ const AdminMegaMenus = () => {
 
   return (
     <>
-      <DataTable title="Mega Menus" endpoint="mega-menus" columns={columns} onEdit={(item) => setEditingItem(item)} />
+      <DataTable title="Mega Menus" endpoint="mega-menus" columns={columns} onEdit={(item) => setEditingItem(item)} lookupField="name" />
       {editingItem !== undefined && (
         <MegaMenuForm initialData={editingItem} onCancel={() => setEditingItem(undefined)} onSuccess={() => setEditingItem(undefined)} />
       )}
