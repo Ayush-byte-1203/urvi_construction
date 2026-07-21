@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../services/api';
 
 const AdminAuthContext = createContext(null);
 
@@ -9,7 +10,18 @@ export const AdminAuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const interceptor = axios.interceptors.response.use(
+    // Determine the base domain from API_URL by removing /api at the end
+    const baseURL = API_URL.replace(/\/api\/?$/, '');
+    
+    // Add request interceptor to prepend the correct backend base URL
+    const requestInterceptor = axios.interceptors.request.use((config) => {
+      if (config.url && config.url.startsWith('/api')) {
+        config.baseURL = baseURL;
+      }
+      return config;
+    });
+
+    const responseInterceptor = axios.interceptors.response.use(
       (response) => response,
       (error) => {
         const isLoginRequest = error.config && error.config.url && error.config.url.includes('/api/admin/token/');
@@ -23,7 +35,10 @@ export const AdminAuthProvider = ({ children }) => {
         return Promise.reject(error);
       }
     );
-    return () => axios.interceptors.response.eject(interceptor);
+    return () => {
+      axios.interceptors.request.eject(requestInterceptor);
+      axios.interceptors.response.eject(responseInterceptor);
+    };
   }, []);
 
   const login = async (email, password) => {

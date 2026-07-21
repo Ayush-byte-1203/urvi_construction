@@ -1,6 +1,6 @@
 const hostname = window.location.hostname;
 const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.');
-const API_URL = import.meta.env.VITE_API_URL || 
+export const API_URL = import.meta.env.VITE_API_URL || 
   (isLocal ? `http://${hostname}:8000/api` : 'https://Paramarsh.pythonanywhere.com/api');
 
 export const fetchSiteSettings = async () => {
