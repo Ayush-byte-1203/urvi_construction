@@ -1,10 +1,10 @@
 export const appConfig = {
   company: {
     name: "Paramarsh Construction",
-    phone: "+91 9428694361",
-    phoneFormatted: "tel:+919428694361",
-    email: "cparamarsh@gmail.com",
-    emailLink: "mailto:cparamarsh@gmail.com",
+    phone: "+91 8320978291",
+    phoneFormatted: "tel:+918320978291",
+    email: "ayushpancholi3@gmail.com",
+    emailLink: "mailto:ayushpancholi3@gmail.com",
     address: "Vadodara, Gujarat, India",
     businessHours: "Monday – Saturday, 9 AM – 6 PM",
   },

@@ -3,6 +3,7 @@ import {
   Calculator, Send, CheckCircle2, ChevronRight, ChevronLeft, MapPin, 
   Layers, HardHat, ShieldCheck, HelpCircle, FileText, Landmark, Phone 
 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import { appConfig } from '../data/appConfig';
 import SectionHeader from './SectionHeader';
 import MotionWrapper from './MotionWrapper';
@@ -26,7 +27,7 @@ const QuoteWizard = () => {
   const [hasParking, setHasParking] = useState(true);
   
   // Budget
-  const [budgetRange, setBudgetRange] = useState('50'); // 20: 20-30L, 30: 30-50L, 50: 50-75L, 75: 75L+
+  const [budgetRange, setBudgetRange] = useState('1'); // 0: 20-30L, 1: 30-50L, 2: 50-75L, 3: 75L+
   
   // Chips
   const [additionalReqs, setAdditionalReqs] = useState([]);
@@ -105,11 +106,73 @@ const QuoteWizard = () => {
   const getAddonsCost = () => {
     let addonTotal = 0;
     if (hasBasement) addonTotal += plotArea * 1800; // basement excavation is costly
+    if (hasParking) addonTotal += 150000; // parking shed / structural span
     if (additionalReqs.includes('pool')) addonTotal += 800000;
     if (additionalReqs.includes('lift')) addonTotal += 600000;
     if (additionalReqs.includes('solar')) addonTotal += 250000;
     if (additionalReqs.includes('theatre')) addonTotal += 400000;
     return addonTotal;
+  };
+
+  const getWhatsAppMessage = () => {
+    let msg = `*New Estimate Inquiry*\n\n`;
+    msg += `*Name:* ${name}\n`;
+    msg += `*Phone:* ${phone}\n`;
+    msg += `*Email:* ${email}\n`;
+    msg += `*Callback:* ${preferredTime}\n\n`;
+    msg += `*-- Project Details --*\n`;
+    msg += `*Location:* ${city}\n`;
+    msg += `*Project Type:* ${projectType}\n`;
+    msg += `*Package:* ${packageTier} (₹${getRate()}/sqft)\n`;
+    msg += `*Plot Area:* ${plotArea} sqft (L: ${plotLength}, W: ${plotWidth})\n`;
+    msg += `*Floors:* ${floorsCount}\n`;
+    msg += `*Basement:* ${hasBasement ? 'Yes' : 'No'}\n`;
+    msg += `*Parking:* ${hasParking ? 'Yes' : 'No'}\n`;
+    msg += `*Add-ons:* ${additionalReqs.length > 0 ? additionalReqs.join(', ') : 'None'}\n`;
+    msg += `*Target Budget:* ${budgetRange === '0' ? '₹20L - ₹30L' : budgetRange === '1' ? '₹30L - ₹50L' : budgetRange === '2' ? '₹50L - ₹75L' : '₹75L+'}\n\n`;
+    msg += `*-- Estimated Cost --*\n`;
+    msg += `*Built-up Area:* ${getBuiltUpArea()} sqft\n`;
+    msg += `*Base Cost:* ₹${getBaseCost().toLocaleString('en-IN')}\n`;
+    msg += `*Add-ons Cost:* ₹${getAddonsCost().toLocaleString('en-IN')}\n`;
+    msg += `*Total Estimated Cost:* ₹${getTotalCost().toLocaleString('en-IN')}\n`;
+    
+    return encodeURIComponent(msg);
+  };
+
+  const sendEmailNotification = () => {
+    const templateParams = {
+      admin_email: appConfig.company.email, // Dynamic recipient if needed
+      user_name: name,
+      user_phone: phone,
+      user_email: email,
+      callback_time: preferredTime,
+      location: city,
+      project_type: projectType,
+      package_tier: `${packageTier} (₹${getRate()}/sqft)`,
+      plot_area: `${plotArea} sqft (L: ${plotLength}, W: ${plotWidth})`,
+      floors: floorsCount,
+      basement: hasBasement ? 'Yes' : 'No',
+      parking: hasParking ? 'Yes' : 'No',
+      addons: additionalReqs.length > 0 ? additionalReqs.join(', ') : 'None',
+      target_budget: budgetRange === '0' ? '₹20L - ₹30L' : budgetRange === '1' ? '₹30L - ₹50L' : budgetRange === '2' ? '₹50L - ₹75L' : '₹75L+',
+      built_up_area: `${getBuiltUpArea()} sqft`,
+      base_cost: `₹${getBaseCost().toLocaleString('en-IN')}`,
+      addons_cost: `₹${getAddonsCost().toLocaleString('en-IN')}`,
+      total_cost: `₹${getTotalCost().toLocaleString('en-IN')}`
+    };
+
+    // NOTE: Replace these placeholders with your actual EmailJS keys!
+    emailjs.send(
+      'service_y7swanm', 
+      'template_3m9a5ed', 
+      templateParams, 
+      'jmcjMXdDCWLbDjHav'
+    )
+    .then((response) => {
+      console.log('SUCCESS! Email sent.', response.status, response.text);
+    }, (error) => {
+      console.error('FAILED to send email.', error);
+    });
   };
 
   const getTotalCost = () => {
@@ -397,35 +460,37 @@ const QuoteWizard = () => {
               <h3 className={styles.stepTitle}>Budget Targets Range</h3>
               <p className={styles.stepDesc}>Select your desired structural cost limits.</p>
 
-              <div className={styles.sliderContainer} style={{ marginTop: '2rem' }}>
-                {/* Premium slider pill badge */}
-                <div className={styles.badgeContainer} style={{ marginBottom: '1.5rem', textAlign: 'center' }}>
-                  <span className={styles.premiumBadge}>
-                    Active Value: {budgetRange === '20' ? 'Below ₹30 Lakhs' : budgetRange === '50' ? '₹50L - ₹75L' : budgetRange === '75' ? '₹75L - ₹1 Crore' : 'Above ₹1 Crore'}
-                  </span>
-                </div>
-
-                <input
-                  type="range"
-                  min="20"
-                  max="100"
-                  step="25"
-                  value={budgetRange}
-                  onChange={(e) => setBudgetRange(e.target.value)}
-                  className={styles.rangeSlider}
-                />
-                <div className={styles.sliderLabels}>
-                  <span>₹20L &ndash; ₹30L</span>
-                  <span>₹30L &ndash; ₹50L</span>
-                  <span>₹50L &ndash; ₹75L</span>
-                  <span>₹75L+</span>
-                </div>
+              <div className="grid-2" style={{ marginTop: '2rem', gap: '1rem' }}>
+                {[
+                  { id: '0', label: '₹20L - ₹30L', desc: 'Compact / Core Build' },
+                  { id: '1', label: '₹30L - ₹50L', desc: 'Standard Residential' },
+                  { id: '2', label: '₹50L - ₹75L', desc: 'Premium Villa' },
+                  { id: '3', label: '₹75L+', desc: 'Luxury Bespoke' }
+                ].map(item => (
+                  <div
+                    key={item.id}
+                    onClick={() => setBudgetRange(item.id)}
+                    className={`${styles.optionCard} ${budgetRange === item.id ? styles.optionSelected : ''}`}
+                    style={{ textAlign: 'center', padding: '1.5rem 1rem' }}
+                  >
+                    <div style={{ marginBottom: '0.5rem' }}>
+                      <input 
+                        type="radio" 
+                        checked={budgetRange === item.id} 
+                        onChange={() => setBudgetRange(item.id)}
+                        style={{ accentColor: 'var(--accent)', transform: 'scale(1.2)' }}
+                      />
+                    </div>
+                    <strong>{item.label}</strong>
+                    <span style={{ display: 'block', fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.25rem' }}>{item.desc}</span>
+                  </div>
+                ))}
               </div>
 
               <div className={styles.areaSummary} style={{ marginTop: '3rem' }}>
                 <span>Selected cost Target:</span>
                 <strong>
-                  {budgetRange === '20' ? 'Below ₹30 Lakhs' : budgetRange === '50' ? '₹50L - ₹75L' : budgetRange === '75' ? '₹75L - ₹1 Crore' : 'Above ₹1 Crore'}
+                  {budgetRange === '0' ? '₹20L - ₹30L' : budgetRange === '1' ? '₹30L - ₹50L' : budgetRange === '2' ? '₹50L - ₹75L' : '₹75L+'}
                 </strong>
               </div>
 
@@ -539,21 +604,7 @@ const QuoteWizard = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Loan EMI Calculator */}
-              <div className={`glass-panel ${styles.emiBlock}`} style={{ marginTop: '2rem' }}>
-                <Landmark size={22} className={styles.emiIcon} />
-                <div style={{ textAlign: 'left' }}>
-                  <h4 style={{ fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>Loan EMI Calculator estimate</h4>
-                  <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', margin: '4px 0 0 0' }}>
-                    Based on 80% financing limit at 8.5% interest rate over 15 years.
-                  </p>
-                </div>
-                <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
-                  <strong style={{ fontSize: '1.25rem', color: 'var(--accent)', fontWeight: 800 }}>{getEMI()}</strong>
-                  <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>per Month</span>
-                </div>
-              </div>
+              {/* Formula and EMI blocks removed as requested */}
 
               <div className={styles.buttonRow} style={{ marginTop: '2.5rem' }}>
                 <button onClick={handleBack} className="btn btn-secondary"><ChevronLeft size={14} /> Back</button>
@@ -608,15 +659,17 @@ const QuoteWizard = () => {
                 <div className="grid-2" style={{ gap: '1.5rem', marginTop: '1rem' }}>
                   <div className={styles.fieldGroup}>
                     <label className={styles.label}>Preferred Callback Time</label>
-                    <select 
-                      value={preferredTime} 
-                      onChange={(e) => setPreferredTime(e.target.value)} 
-                      className={styles.select}
-                    >
-                      <option value="morning">Morning (9 AM &ndash; 12 PM)</option>
-                      <option value="afternoon">Afternoon (12 PM &ndash; 4 PM)</option>
-                      <option value="evening">Evening (4 PM &ndash; 7 PM)</option>
-                    </select>
+                    <div className={styles.inputSelectWrapper}>
+                      <select 
+                        value={preferredTime} 
+                        onChange={(e) => setPreferredTime(e.target.value)} 
+                        className={styles.select}
+                      >
+                        <option value="morning">Morning (9 AM &ndash; 12 PM)</option>
+                        <option value="afternoon">Afternoon (12 PM &ndash; 4 PM)</option>
+                        <option value="evening">Evening (4 PM &ndash; 7 PM)</option>
+                      </select>
+                    </div>
                   </div>
                   <div className={styles.fieldGroup}>
                     <label className={styles.label}>Consent Checkbox *</label>
@@ -638,7 +691,12 @@ const QuoteWizard = () => {
               <div className={styles.buttonRow} style={{ marginTop: '2.5rem' }}>
                 <button onClick={handleBack} className="btn btn-secondary"><ChevronLeft size={14} /> Back</button>
                 <button 
-                  onClick={handleNext} 
+                  onClick={() => {
+                    handleNext();
+                    sendEmailNotification();
+                    const wpUrl = `https://wa.me/${appConfig.company.phoneFormatted.replace(/[^0-9]/g, '')}?text=${getWhatsAppMessage()}`;
+                    window.open(wpUrl, '_blank');
+                  }}
                   disabled={!name || !phone || !email || !consent}
                   className="btn btn-primary"
                 >
@@ -659,7 +717,7 @@ const QuoteWizard = () => {
               <div className={styles.successButtons}>
                 <button onClick={handleReset} className="btn btn-secondary">Start New Estimate</button>
                 <a 
-                  href={`https://wa.me/${appConfig.company.phoneFormatted.replace(/[^0-9]/g, '')}?text=Hi%20BuildCraft,%20I've%20just%20calculated%20a%20cost%20of%20${getTotalCost().toLocaleString('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 })}%20for%20my%20${getBuiltUpArea()}%20sqft%20site.`}
+                  href={`https://wa.me/${appConfig.company.phoneFormatted.replace(/[^0-9]/g, '')}?text=${getWhatsAppMessage()}`}
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="btn btn-primary"
