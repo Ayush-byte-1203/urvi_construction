@@ -58,7 +58,7 @@ const Home = () => {
   } : { company: { name: 'Loading...' }, seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 
   const packagesData = React.useMemo(() => {
-    return rawPackages.reduce((acc, pkg) => {
+    return (rawPackages || []).reduce((acc, pkg) => {
       const city = pkg.city || 'vadodara';
       if (!acc[city]) acc[city] = [];
       acc[city].push(pkg);
@@ -88,7 +88,7 @@ const Home = () => {
 
 
   // Curated
-  const serviceList = Object.values(servicesData).slice(0, 3); // 3 for asymmetrical grid
+  const serviceList = Object.values(servicesData || {}).slice(0, 3); // 3 for asymmetrical grid
   const cityPackages = packagesData[selectedCity] || [];
 
   const serviceImages = {
@@ -99,14 +99,14 @@ const Home = () => {
 
   // Testimonials slide controls
   const handlePrevTestimonial = () => {
-    setTestimonialIndex((prev) => (prev === 0 ? testimonialsData.length - 1 : prev - 1));
+    setTestimonialIndex((prev) => (prev === 0 ? (testimonialsData || []).length - 1 : prev - 1));
   };
   const handleNextTestimonial = () => {
-    setTestimonialIndex((prev) => (prev === testimonialsData.length - 1 ? 0 : prev + 1));
+    setTestimonialIndex((prev) => (prev === (testimonialsData || []).length - 1 ? 0 : prev + 1));
   };
 
   // Convert FAQs preview list
-  const faqItems = faqData.slice(0, 4).map((f) => ({
+  const faqItems = (faqData || []).slice(0, 4).map((f) => ({
     title: f.question || f.q,
     content: f.answer || f.a
   }));
@@ -312,24 +312,24 @@ const Home = () => {
             {/* Left Column: Client feedback info */}
             <div className={styles.testimonialTextContent}>
               <div className={styles.ratingRow}>
-                {testimonialsData.length > 0 && Array.from({ length: testimonialsData[testimonialIndex]?.rating || 5 }).map((_, i) => (
+                {(testimonialsData || []).length > 0 && Array.from({ length: testimonialsData[testimonialIndex]?.rating || 5 }).map((_, i) => (
                   <Star key={i} size={15} fill="currentColor" className={styles.starIcon} />
                 ))}
               </div>
               <p className={styles.quoteBody}>
-                "{testimonialsData.length > 0 ? (testimonialsData[testimonialIndex]?.content || testimonialsData[testimonialIndex]?.quote) : 'Loading...'}"
+                "{(testimonialsData || []).length > 0 ? (testimonialsData[testimonialIndex]?.content || testimonialsData[testimonialIndex]?.quote) : 'Loading...'}"
               </p>
 
               <div className={styles.clientDetails}>
                 <img
-                  src={testimonialsData.length > 0 && testimonialsData[testimonialIndex]?.image ? testimonialsData[testimonialIndex].image : `https://i.pravatar.cc/150?img=${(testimonialIndex + 12) * 3}`}
-                  alt={testimonialsData.length > 0 ? (testimonialsData[testimonialIndex]?.name || testimonialsData[testimonialIndex]?.author) : ''}
+                  src={(testimonialsData || []).length > 0 && testimonialsData[testimonialIndex]?.image ? testimonialsData[testimonialIndex].image : `https://i.pravatar.cc/150?img=${(testimonialIndex + 12) * 3}`}
+                  alt={(testimonialsData || []).length > 0 ? (testimonialsData[testimonialIndex]?.name || testimonialsData[testimonialIndex]?.author) : ''}
                   className={styles.clientAvatar}
                 />
                 <div>
-                  <span className={styles.clientName}>{testimonialsData.length > 0 ? (testimonialsData[testimonialIndex]?.name || testimonialsData[testimonialIndex]?.author) : ''}</span>
+                  <span className={styles.clientName}>{(testimonialsData || []).length > 0 ? (testimonialsData[testimonialIndex]?.name || testimonialsData[testimonialIndex]?.author) : ''}</span>
                   <span className={styles.clientMeta}>
-                    {testimonialsData.length > 0 ? testimonialsData[testimonialIndex]?.role : ''}
+                    {(testimonialsData || []).length > 0 ? testimonialsData[testimonialIndex]?.role : ''}
                   </span>
                 </div>
               </div>

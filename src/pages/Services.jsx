@@ -36,7 +36,7 @@ const Services = () => {
   const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Services`, defaultDescription: pageData?.subtitle || 'Services', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 
   // Generate categories from loaded services
-  const rawCategories = ['All Divisions', ...new Set(servicesData.map(s => s.category_name || s.category || 'General'))];
+  const rawCategories = ['All Divisions', ...new Set((servicesData || []).map(s => s.category_name || s.category || 'General'))];
 
 
 
@@ -46,8 +46,8 @@ const Services = () => {
   // }));
 
   const filteredServices = activeCategory === 'All Divisions' 
-    ? servicesData 
-    : servicesData.filter(s => (s.category_name || s.category) === activeCategory);
+    ? (servicesData || [])
+    : (servicesData || []).filter(s => (s.category_name || s.category) === activeCategory);
 
   return (
     <div className="services-page">

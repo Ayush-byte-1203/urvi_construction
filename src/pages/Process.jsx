@@ -147,7 +147,7 @@ const Process = () => {
           <div className={styles.infoBanner}>
             <div className={styles.infoBannerLeft}>
               <div className={styles.infoBannerIconWrapper}>
-                <HardHat size={32} className={styles.infoBannerIcon} />
+                <Icons.HardHat size={32} className={styles.infoBannerIcon} />
               </div>
               <div className={styles.infoBannerText}>
                 <h4>From Concept to Completion, We Build with Trust.</h4>

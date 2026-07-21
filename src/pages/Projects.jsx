@@ -31,9 +31,9 @@ const Projects = () => {
 
   const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Projects`, defaultDescription: pageData?.subtitle || 'Projects', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 
-  const rawCategories = ['All', ...new Set(projectsData.map(p => p.category_name || p.category || 'General'))];
+  const rawCategories = ['All', ...new Set((projectsData || []).map(p => p.category_name || p.category || 'General'))];
 
-  const filteredProjects = projectsData.filter((proj) => {
+  const filteredProjects = (projectsData || []).filter((proj) => {
     const matchesSearch = proj.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       (proj.description || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
       (proj.location || '').toLowerCase().includes(searchTerm.toLowerCase());
@@ -41,8 +41,8 @@ const Projects = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const featuredProject = projectsData[0];
-  const supportingProjects = projectsData.slice(1, 5);
+  const featuredProject = (projectsData || [])[0];
+  const supportingProjects = (projectsData || []).slice(1, 5);
 
   return (
     <div className="projects-page">

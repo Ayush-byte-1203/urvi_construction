@@ -21,8 +21,8 @@ const Blog = () => {
   const categories = ['All', ...new Set(blogCategories?.map(c => c.name) || [])];
 
   const filteredBlogs = activeCategory === 'All'
-    ? blogs
-    : blogs?.filter(b => b.category_name === activeCategory);
+    ? (blogs || [])
+    : (blogs || []).filter(b => b.category_name === activeCategory);
 
   return (
     <div className="blog-page">

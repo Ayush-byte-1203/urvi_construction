@@ -110,7 +110,7 @@ const PackageDetail = () => {
               <div className={styles.checklistCol}>
                 <h3 className={styles.checkTitle}>Included in Package</h3>
                 <div className={styles.checkList}>
-                  {plan.whatIncluded.map((feat, idx) => (
+                  {(plan.whatIncluded || []).map((feat, idx) => (
                     <div key={idx} className={styles.checkItem}>
                       <CheckCircle2 size={16} className={`${styles.checkIcon} ${styles.includedIcon}`} />
                       <span>{feat}</span>
@@ -122,7 +122,7 @@ const PackageDetail = () => {
               <div className={styles.checklistCol}>
                 <h3 className={styles.checkTitle}>Available as Optional</h3>
                 <div className={styles.checkList}>
-                  {plan.whatOptional.map((feat, idx) => (
+                  {(plan.whatOptional || []).map((feat, idx) => (
                     <div key={idx} className={styles.checkItem}>
                       <PlusCircle size={16} className={`${styles.checkIcon} ${styles.optionalIcon}`} />
                       <span>{feat}</span>
@@ -265,7 +265,7 @@ const PackageDetail = () => {
           />
 
           <div className={styles.galleryGrid}>
-            {plan.gallery.map((src, idx) => (
+            {(plan.gallery || []).map((src, idx) => (
               <MotionWrapper key={idx} variant="scale" delay={idx * 0.1} className="glass-panel" style={{ overflow: 'hidden' }}>
                 <MediaWrapper 
                   src={src} 
