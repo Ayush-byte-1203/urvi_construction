@@ -62,13 +62,26 @@ const DataForm = ({ title, endpoint, schema, initialData, onCancel, onSuccess, l
     setError(null);
 
     try {
+      // Create a clean copy of formData
+      let cleanFormData = { ...formData };
+      
+      // Remove file fields from payload if they are just string URLs (not newly uploaded files)
+      // This prevents DRF from throwing "The submitted data was not a file" when sending a PATCH request without a new file.
+      schema.forEach(field => {
+        if ((field.type === 'image' || field.type === 'video')) {
+          if (!files[field.key]) {
+            delete cleanFormData[field.key];
+          }
+        }
+      });
+
       const isFormData = Object.keys(files).length > 0;
       let payload;
       let headers = { Authorization: `Bearer ${token}` };
 
       if (isFormData) {
         payload = new FormData();
-        Object.entries(formData).forEach(([k, v]) => {
+        Object.entries(cleanFormData).forEach(([k, v]) => {
           if (files[k]) {
             payload.append(k, files[k]);
           } else if (v === null || v === undefined) {
@@ -76,14 +89,12 @@ const DataForm = ({ title, endpoint, schema, initialData, onCancel, onSuccess, l
           } else if (Array.isArray(v)) {
             // Send JSON as a string if using FormData
             payload.append(k, JSON.stringify(v));
-          } else if (typeof v !== 'string' || !v.startsWith('http')) {
+          } else {
             payload.append(k, v);
           }
         });
-        // Let Axios automatically set the Content-Type with the correct boundary
-        // headers['Content-Type'] = 'multipart/form-data';
       } else {
-        payload = formData;
+        payload = cleanFormData;
       }
 
       if (initialData && initialData[lookupField]) {

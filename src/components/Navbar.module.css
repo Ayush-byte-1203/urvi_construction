@@ -16,13 +16,13 @@
   align-items: center;
 }
 
-/* Scrolled/Solid State */
+/* Scrolled/Solid State (White Sticky Navbar) */
 .headerScrolled {
-  background: rgba(255, 107, 53, 0.88);
+  background: var(--bg-primary, #ffffff);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.05));
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* shadow on scroll only */
   height: 64px;
 }
 
@@ -93,6 +93,24 @@
 
 
 
+
+/* Light Theme / Scrolled state text colors */
+.headerScrolled .navLink,
+.headerTransparentLight .navLink {
+  color: var(--text-secondary, #374151);
+}
+
+.headerScrolled .navLink:hover,
+.headerTransparentLight .navLink:hover {
+  color: var(--accent, #ff6b35);
+  background: var(--accent-subtle, rgba(255, 107, 53, 0.05));
+}
+
+.headerScrolled .navLinkActive,
+.headerTransparentLight .navLinkActive {
+  color: var(--accent, #ff6b35) !important;
+  background: var(--accent-subtle, rgba(255, 107, 53, 0.08));
+}
 
 /* Underline Animation on Hover */
 .navLink::after {

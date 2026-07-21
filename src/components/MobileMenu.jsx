@@ -40,7 +40,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
       />
 
       {/* Slide-in drawer container */}
-      <div className={`${styles.drawer} ${isOpen ? styles.drawerOpen : ''}`}>
+      <div id="mobile-menu" className={`${styles.drawer} ${isOpen ? styles.drawerOpen : ''}`}>
         <div className={styles.drawerHeader}>
           <span className={styles.menuLabel}>Navigation Menu</span>
           <button 

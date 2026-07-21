@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Compass, Play, Layers, ChevronRight, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -51,9 +51,11 @@ const Services = () => {
 
   return (
     <div className="services-page">
-      <Helmet>
-        <title>{appConfig.seo.defaultTitle}</title>
-      </Helmet>
+      <SEO 
+        title={appConfig.seo.defaultTitle}
+        description={appConfig.seo.defaultDescription}
+        url="/services"
+      />
 
       <section className={styles.heroSection}>
                 {pageData?.hero_video && (

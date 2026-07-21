@@ -1,11 +1,14 @@
 import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { GlobalDataProvider } from './GlobalDataContext';
 
 const AppProviders = ({ children }) => {
   return (
-    <GlobalDataProvider>
-      {children}
-    </GlobalDataProvider>
+    <HelmetProvider>
+      <GlobalDataProvider>
+        {children}
+      </GlobalDataProvider>
+    </HelmetProvider>
   );
 };
 

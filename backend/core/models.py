@@ -201,7 +201,9 @@ class ProjectImage(models.Model):
 
 class Testimonial(models.Model):
     name = models.CharField(max_length=255)
-    role = models.CharField(max_length=255)
+    role = models.CharField(max_length=255, blank=True, null=True)
+    project_name = models.CharField(max_length=255, blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
     content = models.TextField()
     rating = models.IntegerField(default=5)
     image = models.ImageField(upload_to="testimonials/", null=True, blank=True)

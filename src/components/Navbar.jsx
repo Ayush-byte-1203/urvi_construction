@@ -104,7 +104,7 @@ const Navbar = ({ theme = 'dark' }) => {
 
             {/* Hamburger Toggle */}
             <button 
-              className={styles.menuToggle}
+              className={styles.menuToggle} aria-expanded={isMobileOpen} aria-controls="mobile-menu"
               onClick={() => setIsMobileOpen(true)}
               aria-label="Open Navigation Drawer"
             >

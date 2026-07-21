@@ -32,6 +32,7 @@ const Accordion = ({ items = [], allowMultiple = false, className = '' }) => {
               className={styles.header}
               onClick={() => handleToggle(idx)}
               aria-expanded={isOpen}
+              aria-controls={`accordion-content-${idx}`}
             >
               <span className={styles.title}>{item.title}</span>
               <span className={styles.icon}>
@@ -42,6 +43,7 @@ const Accordion = ({ items = [], allowMultiple = false, className = '' }) => {
             <AnimatePresence initial={false}>
               {isOpen && (
                 <motion.div
+                  id={`accordion-content-${idx}`}
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}

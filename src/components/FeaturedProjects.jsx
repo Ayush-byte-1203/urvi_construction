@@ -52,7 +52,7 @@ const FeaturedProjects = () => {
         {/* LEFT: Large Featured Card */}
         <MotionWrapper variant="slideRight" className={`glass-panel ${styles.largeCard}`}>
           <div className={styles.imageWrapper}>
-            <img src={featured.image} alt={featured.title} className={styles.projectImage} />
+            <img src={featured.image} alt={featured.title} className={styles.projectImage} loading="lazy" />
             <div className={styles.progressBadge}>Build Status: {featured.progress}</div>
           </div>
           <div className={styles.cardInfo}>
@@ -85,7 +85,7 @@ const FeaturedProjects = () => {
               className={`glass-panel ${styles.smallCard}`}
             >
               <div className={styles.smallImageWrapper}>
-                <img src={project.image} alt={project.title} className={styles.smallImage} />
+                <img src={project.image} alt={project.title} className={styles.smallImage} loading="lazy" />
                 <div className={styles.smallProgressBadge}>{project.progress}</div>
               </div>
               <div className={styles.smallCardContent}>

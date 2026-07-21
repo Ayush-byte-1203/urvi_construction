@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { 
   Mail, Phone, MapPin, Send, CheckCircle2, ChevronRight, ShieldCheck, Clock 
@@ -25,20 +25,11 @@ const Contact = () => {
 
   return (
     <div className="contact-page">
-      <Helmet>
-        <title>Contact {appConfig.company.name} | Premium Construction Estimates</title>
-        <meta name="description"        content={`Get in touch for a free site assessment, engineering drawings review, or cost estimate. Book a consultation with ${appConfig.company.name} today.`} />
-        <link rel="canonical"           href={`${appConfig.seo.siteUrl}/contact`} />
-        <meta property="og:type"        content="website" />
-        <meta property="og:title"       content={`Contact ${appConfig.company.name} | Premium Construction Estimates`} />
-        <meta property="og:description" content={`Get in touch for a free site assessment, engineering drawings review, or cost estimate. Book a consultation with ${appConfig.company.name} today.`} />
-        <meta property="og:url"         content={`${appConfig.seo.siteUrl}/contact`} />
-        <meta property="og:image"       content={`${appConfig.seo.siteUrl}/seo/contact-banner.jpg`} />
-        <meta name="twitter:card"       content="summary_large_image" />
-        <meta name="twitter:title"      content={`Contact ${appConfig.company.name}`} />
-        <meta name="twitter:description" content="Book a free site assessment or cost estimation call." />
-        <meta name="twitter:image"      content={appConfig.seo.ogImage} />
-      </Helmet>
+      <SEO 
+        title={`Contact ${appConfig.company.name} | Premium Construction Estimates`}
+        description={`Get in touch for a free site assessment, engineering drawings review, or cost estimate. Book a consultation with ${appConfig.company.name} today.`}
+        url="/contact"
+      />
 
       {/* ========================================== */}
       {/* SECTION: Breadcrumb Header */}

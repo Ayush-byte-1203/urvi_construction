@@ -255,7 +255,7 @@ const QuoteWizard = () => {
           )}
 
           {/* Form panel bodies */}
-          <div className={styles.wizardBody}>
+          <div className={styles.wizardBody} aria-live="polite">
           {step === 1 && (
             <MotionWrapper variant="fadeIn" className={styles.stepContainer}>
               <h3 className={styles.stepTitle}>Select Active Location</h3>
@@ -405,7 +405,13 @@ const QuoteWizard = () => {
 
               <div className={styles.buttonRow}>
                 <button onClick={handleBack} className="btn btn-secondary"><ChevronLeft size={14} /> Back</button>
-                <button onClick={handleNext} className="btn btn-primary">Next <ChevronRight size={14} /></button>
+                <button 
+                  onClick={handleNext} 
+                  disabled={!isManualArea ? (plotLength <= 0 || plotWidth <= 0) : plotArea <= 0}
+                  className="btn btn-primary"
+                >
+                  Next <ChevronRight size={14} />
+                </button>
               </div>
             </MotionWrapper>
           )}

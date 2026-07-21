@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, Calendar, MoveUpRight, Hexagon, Maximize, Ruler, Home, Compass } from 'lucide-react';
 import { useGlobalData } from '../context/GlobalDataContext';
@@ -46,10 +46,11 @@ const Projects = () => {
 
   return (
     <div className="projects-page">
-      <Helmet>
-        <title>Portfolio & Landmarks | {appConfig.seo.defaultTitle}</title>
-        <meta name="description" content={appConfig.seo.defaultDescription} />
-      </Helmet>
+      <SEO 
+        title={`Portfolio & Landmarks | ${appConfig.seo.defaultTitle}`}
+        description={appConfig.seo.defaultDescription}
+        url="/projects"
+      />
 
       {/* ========================================== */}
       {/* SECTION: 1. Projects Hero */}

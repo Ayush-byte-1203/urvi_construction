@@ -13,7 +13,7 @@ const Logo = ({ onClick, theme = 'dark' }) => {
   return (
     <Link to="/" className={styles.logo} onClick={onClick} aria-label={`${companyName} Home`}>
       <div className={styles.box}><img src={currentLogo} alt={`${companyName} Logo`} className={styles.logoImage} /></div>
-      <span className={`${styles.text} ${styles.textLight}`}>{companyName}</span>
+      <span className={`${styles.text} ${theme === 'light' ? styles.textDark : styles.textLight}`}>{companyName}</span>
     </Link>
   );
 };

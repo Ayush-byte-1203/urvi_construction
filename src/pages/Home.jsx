@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, ShieldCheck, Clock, Users, Play, Star, Compass, AlertCircle
@@ -113,30 +113,11 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      <Helmet>
-        <title>{appConfig.seo.defaultTitle}</title>
-        <meta name="description" content={appConfig.seo.defaultDescription} />
-        <link rel="canonical" href={appConfig.seo.siteUrl} />
-        {/* Open Graph */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={appConfig.seo.defaultTitle} />
-        <meta property="og:description" content={appConfig.seo.defaultDescription} />
-        <meta property="og:url" content={appConfig.seo.siteUrl} />
-        <meta property="og:image" content={appConfig.seo.ogImage} />
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={appConfig.seo.defaultTitle} />
-        <meta name="twitter:description" content={appConfig.seo.defaultDescription} />
-        <meta name="twitter:image" content={appConfig.seo.ogImage} />
-        {/* WebSite JSON-LD */}
-        <script type="application/ld+json">{JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
-          'name': appConfig.company.name,
-          'url': appConfig.seo.siteUrl,
-          'description': appConfig.seo.defaultDescription
-        })}</script>
-      </Helmet>
+      <SEO 
+        title="Home"
+        description={appConfig.seo.defaultDescription}
+        url="/"
+      />
 
       {/* ========================================== */}
       {/* SECTION: 1. Cinematic Hero video loop */}
@@ -329,7 +310,13 @@ const Home = () => {
                 <div>
                   <span className={styles.clientName}>{(testimonialsData || []).length > 0 ? (testimonialsData[testimonialIndex]?.name || testimonialsData[testimonialIndex]?.author) : ''}</span>
                   <span className={styles.clientMeta}>
-                    {(testimonialsData || []).length > 0 ? testimonialsData[testimonialIndex]?.role : ''}
+                    {(testimonialsData || []).length > 0 ? (
+                      [
+                        testimonialsData[testimonialIndex]?.role,
+                        testimonialsData[testimonialIndex]?.project_name,
+                        testimonialsData[testimonialIndex]?.location
+                      ].filter(Boolean).join(' • ')
+                    ) : ''}
                   </span>
                 </div>
               </div>

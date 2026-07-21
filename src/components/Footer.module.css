@@ -2,7 +2,7 @@
    FOOTER — Deep Navy, Premium Contrast
    ============================================= */
 .footer {
-  background: rgba(255, 107, 53, 0.88);
+  background: var(--text-primary, #111827); /* Charcoal background */
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding: 2rem 0 0;
   position: relative;
@@ -65,9 +65,9 @@
 }
 
 .socialLinks a:hover {
-  background: #ffffff;
-  border-color: #ffffff;
-  color: #ea580c;
+  background: var(--accent, #ea580c);
+  border-color: var(--accent, #ea580c);
+  color: #ffffff;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px hsla(16, 100%, 55%, 0.35);
 }

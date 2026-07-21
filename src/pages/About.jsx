@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import { 
   Building2, Users, Target, Shield, Clock, Compass, Ruler, Lightbulb, ChevronRight
@@ -46,10 +46,11 @@ const About = () => {
 
   return (
     <div className="about-page">
-      <Helmet>
-        <title>{seoConfig.seo.defaultTitle}</title>
-        <meta name="description" content="Discover our history of engineering landmarks, certifications, partner networks, and values that make us Vadodara's premier construction company." />
-      </Helmet>
+      <SEO 
+        title={seoConfig.seo.defaultTitle}
+        description="Discover our history of engineering landmarks, certifications, partner networks, and values that make us Vadodara's premier construction company."
+        url="/about"
+      />
 
       {/* ========================================== */}
       {/* SECTION: Breadcrumbs Subpage Hero */}
@@ -96,7 +97,7 @@ Built to last
 
             </p>
             <p className="text-body-sm" style={{ color: 'var(--text-muted)' }}>
-              Headquartered in Placeholder City, we maintain a zero-incident safety track record across all our residential, commercial, and industrial sites.
+              Headquartered in Vadodara, we maintain a zero-incident safety track record across all our residential, commercial, and industrial sites. Over the last 15 years, we have successfully delivered 250+ projects, ranging from bespoke luxury villas to multi-acre industrial logistics parks.
             </p>
           </MotionWrapper>
 
@@ -158,6 +159,40 @@ Built to last
               </ul>
             </MotionWrapper>
           ))}
+        </div>
+      </section>
+
+      {/* ========================================== */}
+      {/* SECTION: Leadership & Team */}
+      {/* ========================================== */}
+      <section className="section container">
+        <SectionHeader
+          eyebrow="Leadership"
+          heading="Meet The Founder & Team"
+          subheading="Our multidisciplinary team of licensed civil engineers, visionary architects, and rigorous project managers."
+        />
+
+        <div className={styles.visionMissionSection} style={{ marginTop: '3rem', display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
+          <MotionWrapper variant="slideRight" className={styles.overviewText} style={{ flex: 1, minWidth: '300px' }}>
+            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>The Founder's Story</h3>
+            <p className="text-body-md" style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
+              Founded with the singular vision of bringing absolute transparency to the construction industry, our leadership ensures that every structural calculation is double-checked and every client communication is completely factual.
+            </p>
+            <p className="text-body-md" style={{ color: 'var(--text-muted)' }}>
+              "We don't just build walls; we engineer secure environments where families and businesses can thrive for generations."
+            </p>
+          </MotionWrapper>
+          <MotionWrapper variant="slideLeft" style={{ flex: 1, minWidth: '300px' }}>
+            <div style={{ background: 'var(--bg-card)', padding: '2rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
+               <h4 style={{ color: 'var(--accent)', marginBottom: '1rem' }}>Certifications & Licenses</h4>
+               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--text-secondary)' }}>
+                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}><Shield size={20} color="var(--accent)" /> ISO 9001:2015 Quality Management</li>
+                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}><Building2 size={20} color="var(--accent)" /> Licensed Structural Engineers Association</li>
+                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}><Target size={20} color="var(--accent)" /> Approved Class-1 Government Contractors</li>
+                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}><Shield size={20} color="var(--accent)" /> Green Building Council Members</li>
+               </ul>
+            </div>
+          </MotionWrapper>
         </div>
       </section>
 
