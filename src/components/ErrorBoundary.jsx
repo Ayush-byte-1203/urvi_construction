@@ -28,7 +28,7 @@ class ErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      const isDev = import.meta.env?.DEV;
+      const isDev = true;
       return (
         <div 
           style={{
