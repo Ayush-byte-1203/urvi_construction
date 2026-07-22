@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import styles from './QuotePopup.module.css';
-
+import emailjs from '@emailjs/browser';
+import { appConfig } from '../data/appConfig';
 const QuotePopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -58,6 +59,47 @@ Email: ${formData.email}`;
     const encodedText = encodeURIComponent(text);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
     
+    const emailHtml = `
+    <h2 style="color: #ff6b35; margin-top: 0; margin-bottom: 5px; font-size: 24px;">New Quote Request</h2>
+    <p style="color: #64748b; font-size: 14px; margin-top: 0; margin-bottom: 25px;">A new quick quote request has been submitted from the website popup.</p>
+
+    <h3 style="background-color: #f1f5f9; padding: 10px 15px; border-radius: 4px; font-size: 16px; margin-bottom: 15px; color: #334155;">Client Details</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 14px;">
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold; width: 35%;">Name:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${formData.name}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Phone:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${formData.phone}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; font-weight: bold;">Email:</td>
+        <td style="padding: 8px 0; color: #475569;">${formData.email}</td>
+      </tr>
+    </table>
+    `;
+
+    const templateParams = {
+      admin_email: appConfig.company.email,
+      user_name: formData.name,
+      user_phone: formData.phone,
+      user_email: formData.email,
+      project_type: 'Quick Quote Popup Inquiry',
+      message_html: emailHtml
+    };
+
+    emailjs.send(
+      'service_y7swanm', 
+      'template_3m9a5ed', 
+      templateParams, 
+      'jmcjMXdDCWLbDjHav'
+    ).then((response) => {
+      console.log('SUCCESS! Email sent.', response.status, response.text);
+    }).catch((error) => {
+      console.error('FAILED to send email.', error);
+    });
+
     window.open(whatsappUrl, '_blank');
     setIsOpen(false);
   };

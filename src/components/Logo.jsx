@@ -12,7 +12,13 @@ const Logo = ({ onClick, theme = 'dark' }) => {
   const currentLogo = siteSettings?.logo || logoImg;
   return (
     <Link to="/" className={styles.logo} onClick={onClick} aria-label={`${companyName} Home`}>
-      <div className={styles.box}><img src={currentLogo} alt={`${companyName} Logo`} className={styles.logoImage} /></div>
+      <div className={styles.box}>
+        <img 
+          src={currentLogo} 
+          alt={`${companyName} Logo`} 
+          className={`${styles.logoImage} ${theme === 'dark' ? styles.logoImageInverted : ''}`} 
+        />
+      </div>
       <span className={`${styles.text} ${theme === 'light' ? styles.textDark : styles.textLight}`}>{companyName}</span>
     </Link>
   );

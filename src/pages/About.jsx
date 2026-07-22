@@ -30,7 +30,7 @@ const About = () => {
   const isLoading = isGlobalLoading || isPageLoading;
 
   useEffect(() => {
-    setHeaderTheme('light');
+    setHeaderTheme('dark');
   }, [setHeaderTheme]);
 
 

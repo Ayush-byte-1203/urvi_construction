@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import SectionHeader from './SectionHeader';
 import styles from '../pages/Packages.module.css';
 
 const PackageComparisonTable = ({ packageTiers }) => {
-  const [openCategory, setOpenCategory] = useState(null);
+  const [openCategoryDesktop, setOpenCategoryDesktop] = useState(null);
+  const [openCategoryMobile, setOpenCategoryMobile] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Pre-process material specs for easy accordion rendering
   const materialSpecs = {};
@@ -64,14 +73,23 @@ const PackageComparisonTable = ({ packageTiers }) => {
 
               <div className={styles.cardAccordionsList}>
                 {Object.keys(materialSpecs[tierId] || {}).map((category) => {
-                  const isOpen = openCategory === category;
+                  const isOpen = isMobile 
+                    ? (openCategoryMobile?.tierId === tierId && openCategoryMobile?.category === category)
+                    : (openCategoryDesktop === category);
+                  
                   const items = materialSpecs[tierId][category] || [];
                   return (
                     <div key={category} className={styles.cardAccordionItem}>
                       <button
                         type="button"
                         className={`${styles.cardAccordionHeader} ${isOpen ? styles.cardAccordionHeaderActive : ''}`}
-                        onClick={() => setOpenCategory(isOpen ? null : category)}
+                        onClick={() => {
+                          if (isMobile) {
+                            setOpenCategoryMobile(isOpen ? null : { tierId, category });
+                          } else {
+                            setOpenCategoryDesktop(isOpen ? null : category);
+                          }
+                        }}
                       >
                         <span>{category}</span>
                         <ChevronRight

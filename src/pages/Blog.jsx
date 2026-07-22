@@ -15,7 +15,7 @@ const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect(() => {
-    setHeaderTheme('light');
+    setHeaderTheme('dark');
   }, [setHeaderTheme]);
 
   const categories = ['All', ...new Set(blogCategories?.map(c => c.name) || [])];

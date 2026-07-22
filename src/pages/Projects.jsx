@@ -24,7 +24,7 @@ const Projects = () => {
   const isLoading = isGlobalLoading || isPageLoading;
 
   useEffect(() => {
-    setHeaderTheme('light');
+    setHeaderTheme('dark');
   }, [setHeaderTheme]);
 
 

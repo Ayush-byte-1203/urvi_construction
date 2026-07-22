@@ -161,6 +161,96 @@ const QuoteWizard = () => {
       total_cost: `₹${getTotalCost().toLocaleString('en-IN')}`
     };
 
+    const emailHtml = `
+    <h2 style="color: #ff6b35; margin-top: 0; margin-bottom: 5px; font-size: 24px;">New Estimate Inquiry</h2>
+    <p style="color: #64748b; font-size: 14px; margin-top: 0; margin-bottom: 25px;">A new cost estimation has been submitted via QuoteWizard.</p>
+
+    <!-- Client Details -->
+    <h3 style="background-color: #f1f5f9; padding: 10px 15px; border-radius: 4px; font-size: 16px; margin-bottom: 15px; color: #334155;">Client Details</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 14px;">
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold; width: 35%;">Name:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${name}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Phone:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${phone}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Email:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${email}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; font-weight: bold;">Callback Preference:</td>
+        <td style="padding: 8px 0; color: #475569; text-transform: capitalize;">${preferredTime}</td>
+      </tr>
+    </table>
+
+    <!-- Project Specifications -->
+    <h3 style="background-color: #f1f5f9; padding: 10px 15px; border-radius: 4px; font-size: 16px; margin-bottom: 15px; color: #334155;">Project Specifications</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 14px;">
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold; width: 35%;">Location:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569; text-transform: capitalize;">${city}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Project Type:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569; text-transform: capitalize;">${projectType}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Package:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569; text-transform: capitalize;">${packageTier}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Plot Area:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${plotArea} sqft</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Floors:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${floorsCount}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Basement:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${hasBasement ? 'Yes' : 'No'}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Parking:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${hasParking ? 'Yes' : 'No'}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Add-ons:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569; text-transform: capitalize;">${additionalReqs.length > 0 ? additionalReqs.join(', ') : 'None'}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; font-weight: bold;">Target Budget:</td>
+        <td style="padding: 8px 0; color: #475569;">${budgetRange === '0' ? '₹20L - ₹30L' : budgetRange === '1' ? '₹30L - ₹50L' : budgetRange === '2' ? '₹50L - ₹75L' : '₹75L+'}</td>
+      </tr>
+    </table>
+
+    <!-- Cost Breakdown -->
+    <h3 style="background-color: #eff6ff; padding: 10px 15px; border-radius: 4px; font-size: 16px; margin-bottom: 15px; color: #1e3a8a;">Estimated Cost Breakdown</h3>
+    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+      <tr>
+        <td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; font-weight: bold; width: 35%;">Built-up Area:</td>
+        <td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #475569;">${getBuiltUpArea()} sqft</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; font-weight: bold;">Base Cost:</td>
+        <td style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; color: #475569;">₹${getBaseCost().toLocaleString('en-IN')}</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px 0; border-bottom: 2px solid #cbd5e1; font-weight: bold;">Add-ons Cost:</td>
+        <td style="padding: 10px 0; border-bottom: 2px solid #cbd5e1; color: #475569;">₹${getAddonsCost().toLocaleString('en-IN')}</td>
+      </tr>
+      <tr>
+        <td style="padding: 15px 0; font-weight: 800; font-size: 16px; color: #1e293b;">Total Estimate:</td>
+        <td style="padding: 15px 0; font-weight: 800; font-size: 18px; color: #ff6b35;">₹${getTotalCost().toLocaleString('en-IN')}</td>
+      </tr>
+    </table>
+    `;
+    
+    templateParams.message_html = emailHtml;
+
     // NOTE: Replace these placeholders with your actual EmailJS keys!
     emailjs.send(
       'service_y7swanm', 

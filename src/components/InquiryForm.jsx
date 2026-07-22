@@ -3,6 +3,7 @@ import { Send, CheckCircle2 } from 'lucide-react';
 import Button from './Button';
 import { isValidEmail } from '../utils/validators';
 import { appConfig } from '../data/appConfig';
+import emailjs from '@emailjs/browser';
 import styles from './InquiryForm.module.css';
 
 const InquiryForm = () => {
@@ -56,6 +57,53 @@ ${formData.message}
     };
 
     setStatus('loading');
+
+    const emailHtml = `
+    <h2 style="color: #ff6b35; margin-top: 0; margin-bottom: 5px; font-size: 24px;">New General Inquiry</h2>
+    <p style="color: #64748b; font-size: 14px; margin-top: 0; margin-bottom: 25px;">A new project inquiry has been submitted via the contact form.</p>
+
+    <h3 style="background-color: #f1f5f9; padding: 10px 15px; border-radius: 4px; font-size: 16px; margin-bottom: 15px; color: #334155;">Client Details</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; font-size: 14px;">
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold; width: 35%;">Name:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${formData.name}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Phone:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${formData.phone}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; font-weight: bold;">Email:</td>
+        <td style="padding: 8px 0; border-bottom: 1px solid #f1f5f9; color: #475569;">${formData.email}</td>
+      </tr>
+    </table>
+
+    <h3 style="background-color: #f1f5f9; padding: 10px 15px; border-radius: 4px; font-size: 16px; margin-bottom: 15px; color: #334155;">Message Content</h3>
+    <div style="background-color: #ffffff; border: 1px solid #e2e8f0; padding: 15px; border-radius: 4px; font-size: 14px; color: #475569; white-space: pre-wrap; line-height: 1.5;">
+      ${formData.message}
+    </div>
+    `;
+
+    const templateParams = {
+      admin_email: appConfig.company.email,
+      user_name: formData.name,
+      user_phone: formData.phone,
+      user_email: formData.email,
+      project_type: 'General Website Inquiry',
+      addons: formData.message, // Fallback
+      message_html: emailHtml
+    };
+
+    emailjs.send(
+      'service_y7swanm', 
+      'template_3m9a5ed', 
+      templateParams, 
+      'jmcjMXdDCWLbDjHav'
+    ).then((response) => {
+      console.log('SUCCESS! Email sent.', response.status, response.text);
+    }).catch((error) => {
+      console.error('FAILED to send email.', error);
+    });
 
     // Create a new window immediately to bypass browser popup blockers
     const whatsappWindow = window.open('', '_blank');
