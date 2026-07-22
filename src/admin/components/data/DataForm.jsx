@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { X, Save, Loader2, Plus, Trash2 } from 'lucide-react';
 import styles from './DataForm.module.css';
+import { API_URL } from '../../services/api';
 
 const DataForm = ({ title, endpoint, schema, initialData, onCancel, onSuccess, lookupField = 'id' }) => {
   const [formData, setFormData] = useState({});
@@ -98,9 +99,9 @@ const DataForm = ({ title, endpoint, schema, initialData, onCancel, onSuccess, l
       }
 
       if (initialData && initialData[lookupField]) {
-        await axios.patch(`/api/${endpoint}/${initialData[lookupField]}/`, payload, { headers });
+        await axios.patch(`${API_URL}/${endpoint}/${initialData[lookupField]}/`, payload, { headers });
       } else {
-        await axios.post(`/api/${endpoint}/`, payload, { headers });
+        await axios.post(`${API_URL}/${endpoint}/`, payload, { headers });
       }
 
       onSuccess();

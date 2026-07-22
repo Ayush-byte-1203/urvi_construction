@@ -3,25 +3,27 @@ import axios from 'axios';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { Plus, Edit2, Trash2, Search, Loader2 } from 'lucide-react';
 import styles from './DataTable.module.css';
+import { API_URL } from '../../services/api';
 
 const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [nextUrl, setNextUrl] = useState(null);
   const [prevUrl, setPrevUrl] = useState(null);
-  const [currentUrl, setCurrentUrl] = useState(`/api/${endpoint}/`);
+  const [currentUrl, setCurrentUrl] = useState(`/${endpoint}/`);
   const { token } = useAdminAuth();
 
   useEffect(() => {
-    setCurrentUrl(`/api/${endpoint}/`);
+    setCurrentUrl(`/${endpoint}/`);
   }, [endpoint]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // We use absolute URL or relative URL from currentUrl
-        const res = await axios.get(currentUrl.startsWith('http') ? currentUrl : currentUrl, {
+        // We use absolute URL or relative URL prefixed with API_URL
+        const targetUrl = currentUrl.startsWith('http') ? currentUrl : `${API_URL}${currentUrl}`;
+        const res = await axios.get(targetUrl, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.data && res.data.results !== undefined) {
@@ -45,11 +47,12 @@ const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this item?')) return;
     try {
-      await axios.delete(`/api/${endpoint}/${id}/`, {
+      await axios.delete(`${API_URL}/${endpoint}/${id}/`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // re-fetch current page
-      const res = await axios.get(currentUrl, { headers: { Authorization: `Bearer ${token}` } });
+      const targetUrl = currentUrl.startsWith('http') ? currentUrl : `${API_URL}${currentUrl}`;
+      const res = await axios.get(targetUrl, { headers: { Authorization: `Bearer ${token}` } });
       if (res.data && res.data.results !== undefined) {
         setData(res.data.results);
         setNextUrl(res.data.next);
