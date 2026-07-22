@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import { Plus, Edit2, Trash2, Search, Loader2 } from 'lucide-react';
 import styles from './DataTable.module.css';
-import { API_URL } from '../../services/api';
+import { API_URL } from '../../../services/api';
 
 const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => {
   const [data, setData] = useState([]);
