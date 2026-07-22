@@ -4,9 +4,11 @@ import Button from './Button';
 import { isValidEmail } from '../utils/validators';
 import { appConfig } from '../data/appConfig';
 import emailjs from '@emailjs/browser';
+import { useGlobalData } from '../context/GlobalDataContext';
 import styles from './InquiryForm.module.css';
 
 const InquiryForm = () => {
+  const { siteSettings } = useGlobalData();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -95,10 +97,10 @@ ${formData.message}
     };
 
     emailjs.send(
-      'service_y7swanm', 
-      'template_3m9a5ed', 
+      siteSettings?.emailjs_service_id || 'service_y7swanm', 
+      siteSettings?.emailjs_template_id || 'template_3m9a5ed', 
       templateParams, 
-      'jmcjMXdDCWLbDjHav'
+      siteSettings?.emailjs_public_key || 'jmcjMXdDCWLbDjHav'
     ).then((response) => {
       console.log('SUCCESS! Email sent.', response.status, response.text);
     }).catch((error) => {

@@ -5,7 +5,7 @@ from .models import (
     BlogCategory, BlogPost,
     ServiceCategory, ProjectCategory, FAQCategory,
     PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
-    ProjectImage, MegaMenuCategory, MegaMenuLink, MegaMenuFeatured
+    ProjectImage
 )
 from .serializers import (
     SiteSettingsSerializer, PageContentSerializer, ServiceSerializer,
@@ -14,7 +14,7 @@ from .serializers import (
     BlogCategorySerializer, BlogPostSerializer,
     ServiceCategorySerializer, ProjectCategorySerializer, FAQCategorySerializer,
     PackageAdvantageSerializer, PackageMaterialCategorySerializer, PackageMaterialSpecSerializer, PackageFAQSerializer,
-    ProjectImageSerializer, MegaMenuCategorySerializer, MegaMenuLinkSerializer, MegaMenuFeaturedSerializer
+    ProjectImageSerializer
 )
 
 class PackageAdvantageViewSet(viewsets.ModelViewSet):
@@ -37,17 +37,7 @@ class ProjectImageViewSet(viewsets.ModelViewSet):
     queryset = ProjectImage.objects.all()
     serializer_class = ProjectImageSerializer
 
-class MegaMenuCategoryViewSet(viewsets.ModelViewSet):
-    queryset = MegaMenuCategory.objects.all()
-    serializer_class = MegaMenuCategorySerializer
 
-class MegaMenuLinkViewSet(viewsets.ModelViewSet):
-    queryset = MegaMenuLink.objects.all()
-    serializer_class = MegaMenuLinkSerializer
-
-class MegaMenuFeaturedViewSet(viewsets.ModelViewSet):
-    queryset = MegaMenuFeatured.objects.all()
-    serializer_class = MegaMenuFeaturedSerializer
 
 class ServiceCategoryViewSet(viewsets.ModelViewSet):
     queryset = ServiceCategory.objects.all()
@@ -104,10 +94,4 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all().order_by('-date')
     serializer_class = BlogPostSerializer
 
-from .models import MegaMenu
-from .serializers import MegaMenuSerializer
 
-class MegaMenuViewSet(viewsets.ModelViewSet):
-    queryset = MegaMenu.objects.all()
-    serializer_class = MegaMenuSerializer
-    lookup_field = 'name'

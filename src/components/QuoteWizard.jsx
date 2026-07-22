@@ -4,12 +4,14 @@ import {
   Layers, HardHat, ShieldCheck, HelpCircle, FileText, Landmark, Phone 
 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import { useGlobalData } from '../context/GlobalDataContext';
 import { appConfig } from '../data/appConfig';
 import SectionHeader from './SectionHeader';
 import MotionWrapper from './MotionWrapper';
 import styles from './QuoteWizard.module.css';
 
 const QuoteWizard = () => {
+  const { siteSettings } = useGlobalData();
   const [step, setStep] = useState(1);
   const [city, setCity] = useState('vadodara');
   const [projectType, setProjectType] = useState('residential');
@@ -251,12 +253,12 @@ const QuoteWizard = () => {
     
     templateParams.message_html = emailHtml;
 
-    // NOTE: Replace these placeholders with your actual EmailJS keys!
+    // NOTE: Fallback to placeholders if not set in backend
     emailjs.send(
-      'service_y7swanm', 
-      'template_3m9a5ed', 
+      siteSettings?.emailjs_service_id || 'service_y7swanm', 
+      siteSettings?.emailjs_template_id || 'template_3m9a5ed', 
       templateParams, 
-      'jmcjMXdDCWLbDjHav'
+      siteSettings?.emailjs_public_key || 'jmcjMXdDCWLbDjHav'
     )
     .then((response) => {
       console.log('SUCCESS! Email sent.', response.status, response.text);

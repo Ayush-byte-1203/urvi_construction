@@ -172,12 +172,12 @@ const Projects = () => {
             </div>
 
             {/* Category Chips */}
-            <div className={styles.filterTabs}>
+            <div className={styles.chipsContainer}>
               {rawCategories.map(cat => (
                 <button
                   key={cat}
                   onClick={() => setActiveFilter(cat)}
-                  className={`${styles.filterBtn} ${activeFilter === cat ? styles.filterBtnActive : ''}`}
+                  className={`${styles.chipBtn} ${activeFilter === cat ? styles.chipActive : ''}`}
                 >
                   {cat}
                 </button>

@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react';
 import SectionHeader from './SectionHeader';
 import styles from '../pages/Packages.module.css';
 
-const PackageComparisonTable = ({ packageTiers }) => {
+const PackageComparisonTable = ({ packageTiers, hideHeader = false }) => {
   const [openCategoryDesktop, setOpenCategoryDesktop] = useState(null);
   const [openCategoryMobile, setOpenCategoryMobile] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -50,14 +50,16 @@ const PackageComparisonTable = ({ packageTiers }) => {
   };
 
   return (
-    <div style={{ marginTop: '4rem', width: '100%' }}>
-      <SectionHeader
-        eyebrow="Tiers Comparison"
-        heading="Synchronized Specifications Comparison"
-        subheading="Expand any category below to compare material standards side-by-side across all packages."
-      />
+    <div style={{ marginTop: hideHeader ? '0' : '4rem', width: '100%' }}>
+      {!hideHeader && (
+        <SectionHeader
+          eyebrow="Tiers Comparison"
+          heading="Synchronized Specifications Comparison"
+          subheading="Expand any category below to compare material standards side-by-side across all packages."
+        />
+      )}
 
-      <div className={styles.comparisonGrid} style={{ marginTop: '3rem' }}>
+      <div className={styles.comparisonGrid} style={{ marginTop: hideHeader ? '1rem' : '3rem' }}>
         {packageTiers.map((tier) => {
           const tierId = tier.id;
           return (

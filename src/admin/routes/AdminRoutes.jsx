@@ -21,15 +21,11 @@ const AdminServiceCategories = lazy(() => import('../pages/Categories/AdminServi
 const AdminFAQCategories = lazy(() => import('../pages/Categories/AdminFAQCategories'));
 const AdminBlogCategories = lazy(() => import('../pages/Categories/AdminBlogCategories'));
 const AdminSiteSettings = lazy(() => import('../pages/Settings/AdminSiteSettings'));
-const AdminMegaMenus = lazy(() => import('../pages/Settings/AdminMegaMenus'));
 const AdminPackageAdvantages = lazy(() => import('../pages/Packages/AdminPackageAdvantages'));
 const AdminPackageMaterialCategories = lazy(() => import('../pages/Packages/AdminPackageMaterialCategories'));
 const AdminPackageMaterialSpecs = lazy(() => import('../pages/Packages/AdminPackageMaterialSpecs'));
 const AdminPackageFAQs = lazy(() => import('../pages/Packages/AdminPackageFAQs'));
 const AdminProjectImages = lazy(() => import('../pages/Projects/AdminProjectImages'));
-const AdminMegaMenuCategories = lazy(() => import('../pages/Settings/AdminMegaMenuCategories'));
-const AdminMegaMenuLinks = lazy(() => import('../pages/Settings/AdminMegaMenuLinks'));
-const AdminMegaMenuFeatured = lazy(() => import('../pages/Settings/AdminMegaMenuFeatured'));
 
 const AdminRoutes = () => {
   return (
@@ -55,15 +51,11 @@ const AdminRoutes = () => {
               <Route path="faq-categories" element={<AdminFAQCategories />} />
               <Route path="blog-categories" element={<AdminBlogCategories />} />
               <Route path="settings" element={<AdminSiteSettings />} />
-              <Route path="mega-menus" element={<AdminMegaMenus />} />
               <Route path="package-advantages" element={<AdminPackageAdvantages />} />
               <Route path="package-material-categories" element={<AdminPackageMaterialCategories />} />
               <Route path="package-material-specs" element={<AdminPackageMaterialSpecs />} />
               <Route path="package-faqs" element={<AdminPackageFAQs />} />
               <Route path="project-images" element={<AdminProjectImages />} />
-              <Route path="mega-menu-categories" element={<AdminMegaMenuCategories />} />
-              <Route path="mega-menu-links" element={<AdminMegaMenuLinks />} />
-              <Route path="mega-menu-featured" element={<AdminMegaMenuFeatured />} />
             </Route>
           </Route>
 

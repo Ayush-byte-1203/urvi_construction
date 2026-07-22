@@ -53,8 +53,3 @@ export const fetchBlogs = async () => {
   const response = await fetch(`${API_URL}/blogs/`);
   return response.json();
 };
-
-export const fetchMegaMenus = async () => {
-  const response = await fetch(`${API_URL}/mega-menus/`);
-  return response.json();
-};

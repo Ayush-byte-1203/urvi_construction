@@ -37,6 +37,15 @@ const Home = () => {
   const [testimonialIndex, setTestimonialIndex] = useState(0);
   const [selectedHomeCardIdx, setSelectedHomeCardIdx] = useState(null);
   const [showComparison, setShowComparison] = useState(false);
+  const [expandedMobilePkgIdx, setExpandedMobilePkgIdx] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const {
     siteSettings,
@@ -235,17 +244,30 @@ const Home = () => {
                     </div> */}
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: 'auto' }}>
-                      <div onClick={(e) => { e.stopPropagation(); setShowComparison(!showComparison); }}>
+                      <div onClick={(e) => { 
+                        e.stopPropagation(); 
+                        if (isMobile) {
+                          setExpandedMobilePkgIdx(expandedMobilePkgIdx === idx ? null : idx);
+                        } else {
+                          setShowComparison(!showComparison); 
+                        }
+                      }}>
                         <Button variant={selectedHomeCardIdx === idx ? 'primary' : 'secondary'} fullWidth>
-                          {showComparison ? "Hide Specifications" : "Compare Specifications"}
+                          {(isMobile ? expandedMobilePkgIdx === idx : showComparison) ? "Hide Specifications" : "Compare Specifications"}
                         </Button>
                       </div>
                       <Link to="/contact" onClick={(e) => e.stopPropagation()}>
-                        <Button variant="ghost" fullWidth>
+                        <Button variant="secondary" fullWidth>
                           Request Quote estimation
                         </Button>
                       </Link>
                     </div>
+
+                    {isMobile && expandedMobilePkgIdx === idx && (
+                      <div style={{ marginTop: '1.5rem', width: '100%' }}>
+                        <PackageComparisonTable packageTiers={[pkg]} hideHeader={true} />
+                      </div>
+                    )}
                   </MotionWrapper>
                 </div>
               ))}
@@ -256,7 +278,7 @@ const Home = () => {
             </div>
           )}
 
-          {showComparison && cityPackages.length > 0 && (
+          {!isMobile && showComparison && cityPackages.length > 0 && (
             <PackageComparisonTable packageTiers={cityPackages} />
           )}
         </div>

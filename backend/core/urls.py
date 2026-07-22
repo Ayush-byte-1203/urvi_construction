@@ -6,7 +6,7 @@ from .views import (
     CoreValueViewSet, BlogCategoryViewSet, BlogPostViewSet,
     ServiceCategoryViewSet, ProjectCategoryViewSet, FAQCategoryViewSet,
     PackageAdvantageViewSet, PackageMaterialCategoryViewSet, PackageMaterialSpecViewSet, PackageFAQViewSet,
-    ProjectImageViewSet, MegaMenuCategoryViewSet, MegaMenuLinkViewSet, MegaMenuFeaturedViewSet
+    ProjectImageViewSet
 )
 
 router = DefaultRouter()
@@ -15,9 +15,7 @@ router.register(r'package-material-categories', PackageMaterialCategoryViewSet)
 router.register(r'package-material-specs', PackageMaterialSpecViewSet)
 router.register(r'package-faqs', PackageFAQViewSet)
 router.register(r'project-images', ProjectImageViewSet)
-router.register(r'mega-menu-categories', MegaMenuCategoryViewSet)
-router.register(r'mega-menu-links', MegaMenuLinkViewSet)
-router.register(r'mega-menu-featured', MegaMenuFeaturedViewSet)
+
 router.register(r'service-categories', ServiceCategoryViewSet)
 router.register(r'project-categories', ProjectCategoryViewSet)
 router.register(r'faq-categories', FAQCategoryViewSet)
@@ -32,8 +30,7 @@ router.register(r'core-values', CoreValueViewSet)
 router.register(r'blog-categories', BlogCategoryViewSet)
 router.register(r'blogs', BlogPostViewSet)
 
-from .views import MegaMenuViewSet
-router.register(r'mega-menus', MegaMenuViewSet)
+
 urlpatterns = [
     path('', include(router.urls)),
 ]

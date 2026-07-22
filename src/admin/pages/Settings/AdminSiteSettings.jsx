@@ -22,7 +22,11 @@ const AdminSiteSettings = () => {
     { key: 'instagram_url', label: 'Instagram URL', type: 'text' },
     { key: 'hero_headline', label: 'Hero Headline', type: 'textarea' },
     { key: 'hero_video_url', label: 'Hero Video URL', type: 'text' },
-    { key: 'hero_poster_url', label: 'Hero Poster URL', type: 'text' }
+    { key: 'hero_poster_url', label: 'Hero Poster URL', type: 'text' },
+    { key: 'emailjs_service_id', label: 'EmailJS Service ID', type: 'text' },
+    { key: 'emailjs_template_id', label: 'EmailJS Template ID', type: 'text' },
+    { key: 'emailjs_public_key', label: 'EmailJS Public Key', type: 'text' },
+    { key: 'emailjs_private_key', label: 'EmailJS Private Key', type: 'text' }
   ];
 
   return (

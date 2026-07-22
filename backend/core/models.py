@@ -16,6 +16,11 @@ class SiteSettings(models.Model):
     hero_headline = models.TextField(null=True, blank=True, help_text="e.g., Your Dream <br/> Our Build <br/> Complete Site Solutions Under One Roof!")
     hero_video_url = models.URLField(max_length=500, null=True, blank=True, help_text="URL to the background video for the homepage hero")
     hero_poster_url = models.URLField(max_length=500, null=True, blank=True, help_text="URL to the poster image while video loads")
+    # EmailJS Credentials
+    emailjs_service_id = models.CharField(max_length=255, null=True, blank=True, help_text="e.g., service_xxxxxxx")
+    emailjs_template_id = models.CharField(max_length=255, null=True, blank=True, help_text="e.g., template_xxxxxxx")
+    emailjs_public_key = models.CharField(max_length=255, null=True, blank=True, help_text="e.g., your_public_key")
+    emailjs_private_key = models.CharField(max_length=255, null=True, blank=True, help_text="Optional, for backend/server usage")
     
     def __str__(self):
         return self.site_name
@@ -260,46 +265,4 @@ class BlogPost(models.Model):
     def __str__(self):
         return self.title
 
-class MegaMenu(models.Model):
-    name = models.CharField(max_length=50, unique=True, help_text="e.g., 'home', 'about', 'services'")
-    
-    def __str__(self):
-        return self.name
 
-class MegaMenuCategory(models.Model):
-    menu = models.ForeignKey(MegaMenu, related_name='categories', on_delete=models.CASCADE)
-    group_title = models.CharField(max_length=255)
-    order = models.IntegerField(default=0)
-    
-    class Meta:
-        ordering = ['order']
-        verbose_name_plural = "Mega Menu Categories"
-        
-    def __str__(self):
-        return f"{self.menu.name} - {self.group_title}"
-
-class MegaMenuLink(models.Model):
-    category = models.ForeignKey(MegaMenuCategory, related_name='links', on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    description = models.CharField(max_length=255, null=True, blank=True)
-    path = models.CharField(max_length=255, help_text="e.g., '/about'")
-    icon_name = models.CharField(max_length=100, help_text="Lucide-react icon name, e.g., 'ShieldCheck'")
-    order = models.IntegerField(default=0)
-    
-    class Meta:
-        ordering = ['order']
-        
-    def __str__(self):
-        return self.title
-
-class MegaMenuFeatured(models.Model):
-    menu = models.OneToOneField(MegaMenu, related_name='featured', on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    description = models.TextField()
-    image = models.ImageField(upload_to="megamenu/", null=True, blank=True)
-    image_url = models.URLField(max_length=500, null=True, blank=True, help_text="Optional fallback image URL (e.g. Unsplash)")
-    path = models.CharField(max_length=255, help_text="e.g., '/projects'")
-    link_text = models.CharField(max_length=100, default="Explore")
-    
-    def __str__(self):
-        return f"Featured: {self.menu.name}"

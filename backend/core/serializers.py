@@ -109,27 +109,3 @@ class BlogPostSerializer(serializers.ModelSerializer):
         model = BlogPost
         fields = '__all__'
 
-from .models import MegaMenu, MegaMenuCategory, MegaMenuLink, MegaMenuFeatured
-
-class MegaMenuLinkSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MegaMenuLink
-        fields = '__all__'
-
-class MegaMenuCategorySerializer(serializers.ModelSerializer):
-    links = MegaMenuLinkSerializer(many=True, read_only=True)
-    class Meta:
-        model = MegaMenuCategory
-        fields = '__all__'
-
-class MegaMenuFeaturedSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MegaMenuFeatured
-        fields = '__all__'
-
-class MegaMenuSerializer(serializers.ModelSerializer):
-    categories = MegaMenuCategorySerializer(many=True, read_only=True)
-    featured = MegaMenuFeaturedSerializer(read_only=True)
-    class Meta:
-        model = MegaMenu
-        fields = '__all__'

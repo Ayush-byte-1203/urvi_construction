@@ -4,14 +4,12 @@ import { Menu, ArrowRight } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import { ROUTES } from '../data/routes';
 import Logo from './Logo';
-import MegaMenu from './MegaMenu';
 import MobileMenu from './MobileMenu';
 import styles from './Navbar.module.css';
 
 const Navbar = ({ theme = 'dark' }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [activeMegaItem, setActiveMegaItem] = useState(null);
   
   const location = useLocation();
 
@@ -27,7 +25,6 @@ const Navbar = ({ theme = 'dark' }) => {
   // Close menus on route change
   useEffect(() => {
     setIsMobileOpen(false);
-    setActiveMegaItem(null);
   }, [location]);
 
   const navItems = [
@@ -58,11 +55,10 @@ const Navbar = ({ theme = 'dark' }) => {
     <>
       <header 
         className={getHeaderClass()} 
-        onMouseLeave={() => setActiveMegaItem(null)}
       >
         <div className={`container ${styles.headerContainer}`}>
           {/* LEFT: Brand Logo */}
-          <Logo theme={logoTheme} onClick={() => { setIsMobileOpen(false); setActiveMegaItem(null); }} />
+          <Logo theme={logoTheme} onClick={() => setIsMobileOpen(false)} />
 
           {/* CENTER: Navigation Links */}
           <nav className={styles.desktopNav} role="navigation" aria-label="Main Navigation">
@@ -70,13 +66,6 @@ const Navbar = ({ theme = 'dark' }) => {
               <div 
                 key={item.key} 
                 className={styles.navItemWrapper}
-                onMouseEnter={() => {
-                  if (item.key !== 'home') {
-                    setActiveMegaItem(item.key);
-                  } else {
-                    setActiveMegaItem(null);
-                  }
-                }}
               >
                 <NavLink 
                   to={item.path}
@@ -113,16 +102,6 @@ const Navbar = ({ theme = 'dark' }) => {
           </div>
         </div>
 
-        {/* Hover Mega Menu Overlay */}
-        <AnimatePresence>
-          {activeMegaItem && (
-            <MegaMenu 
-              activeItem={activeMegaItem}
-              isOpen={!!activeMegaItem} 
-              onClose={() => setActiveMegaItem(null)} 
-            />
-          )}
-        </AnimatePresence>
       </header>
 
       {/* Slide-in Mobile Drawer */}

@@ -52,28 +52,4 @@ admin.site.register(CoreValue)
 admin.site.register(BlogCategory)
 admin.site.register(BlogPost)
 
-# Mega Menu Admin
-from .models import MegaMenu, MegaMenuCategory, MegaMenuLink, MegaMenuFeatured
 
-class MegaMenuFeaturedInline(admin.StackedInline):
-    model = MegaMenuFeatured
-    extra = 0
-
-class MegaMenuCategoryInline(admin.TabularInline):
-    model = MegaMenuCategory
-    extra = 1
-
-class MegaMenuAdmin(admin.ModelAdmin):
-    inlines = [MegaMenuFeaturedInline, MegaMenuCategoryInline]
-
-class MegaMenuLinkInline(admin.TabularInline):
-    model = MegaMenuLink
-    extra = 1
-
-class MegaMenuCategoryAdmin(admin.ModelAdmin):
-    inlines = [MegaMenuLinkInline]
-    list_display = ('group_title', 'menu', 'order')
-    list_filter = ('menu',)
-
-admin.site.register(MegaMenu, MegaMenuAdmin)
-admin.site.register(MegaMenuCategory, MegaMenuCategoryAdmin)

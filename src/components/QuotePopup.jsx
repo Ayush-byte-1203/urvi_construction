@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import styles from './QuotePopup.module.css';
 import emailjs from '@emailjs/browser';
+import { useGlobalData } from '../context/GlobalDataContext';
 import { appConfig } from '../data/appConfig';
 const QuotePopup = () => {
+  const { siteSettings } = useGlobalData();
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -90,10 +92,10 @@ Email: ${formData.email}`;
     };
 
     emailjs.send(
-      'service_y7swanm', 
-      'template_3m9a5ed', 
+      siteSettings?.emailjs_service_id || 'service_y7swanm', 
+      siteSettings?.emailjs_template_id || 'template_3m9a5ed', 
       templateParams, 
-      'jmcjMXdDCWLbDjHav'
+      siteSettings?.emailjs_public_key || 'jmcjMXdDCWLbDjHav'
     ).then((response) => {
       console.log('SUCCESS! Email sent.', response.status, response.text);
     }).catch((error) => {

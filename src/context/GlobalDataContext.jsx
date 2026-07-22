@@ -8,8 +8,7 @@ import {
   fetchFAQs,
   fetchCoreValues,
   fetchBlogCategories,
-  fetchBlogs,
-  fetchMegaMenus
+  fetchBlogs
 } from '../services/api';
 
 const GlobalDataContext = createContext();
@@ -27,7 +26,6 @@ export const GlobalDataProvider = ({ children }) => {
     coreValues: [],
     blogCategories: [],
     blogs: [],
-    megaMenus: {},
     isLoading: true,
   });
 
@@ -43,8 +41,7 @@ export const GlobalDataProvider = ({ children }) => {
           faqsRes,
           coreValuesRes,
           blogCategoriesRes,
-          blogsRes,
-          megaMenusRes
+          blogsRes
         ] = await Promise.all([
           fetchSiteSettings(),
           fetchServices(),
@@ -54,8 +51,7 @@ export const GlobalDataProvider = ({ children }) => {
           fetchFAQs(),
           fetchCoreValues(),
           fetchBlogCategories(),
-          fetchBlogs(),
-          fetchMegaMenus()
+          fetchBlogs()
         ]);
         
         setGlobalData({
@@ -68,10 +64,6 @@ export const GlobalDataProvider = ({ children }) => {
           coreValues: coreValuesRes || [],
           blogCategories: blogCategoriesRes || [],
           blogs: blogsRes || [],
-          megaMenus: (megaMenusRes || []).reduce((acc, menu) => {
-            acc[menu.name] = menu;
-            return acc;
-          }, {}),
           isLoading: false,
         });
       } catch (error) {
