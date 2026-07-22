@@ -4,6 +4,8 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import AnnouncementBar from './AnnouncementBar';
 import QuotePopup from './QuotePopup';
+import LoadingSpinner from './LoadingSpinner';
+import { useGlobalData } from '../context/GlobalDataContext';
 
 
 export const HeaderThemeContext = createContext({
@@ -14,6 +16,7 @@ export const HeaderThemeContext = createContext({
 const Layout = ({ children }) => {
   const { pathname } = useLocation();
   const [headerTheme, setHeaderTheme] = useState('dark'); // 'dark' | 'light' | 'none'
+  const { isLoading } = useGlobalData();
 
   useEffect(() => {
     window.scrollTo({
@@ -29,6 +32,14 @@ const Layout = ({ children }) => {
 
   if (isAdmin) {
     return <>{children ?? <Outlet />}</>;
+  }
+
+  if (isLoading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg-primary, #ffffff)' }}>
+        <LoadingSpinner />
+      </div>
+    );
   }
 
   return (
