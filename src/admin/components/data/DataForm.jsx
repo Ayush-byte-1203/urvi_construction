@@ -103,7 +103,8 @@ const DataForm = ({ title, endpoint, schema, initialData, onCancel, onSuccess, l
       } else {
         await axios.post(`${API_URL}/${endpoint}/`, payload, { headers });
       }
-
+      
+      window.dispatchEvent(new CustomEvent('adminDataUpdated', { detail: { endpoint } }));
       onSuccess();
     } catch (err) {
       console.error('Save failed', err);

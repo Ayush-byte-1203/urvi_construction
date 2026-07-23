@@ -11,7 +11,18 @@ const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => 
   const [nextUrl, setNextUrl] = useState(null);
   const [prevUrl, setPrevUrl] = useState(null);
   const [currentUrl, setCurrentUrl] = useState(`/${endpoint}/`);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   const { token } = useAdminAuth();
+
+  useEffect(() => {
+    const handleDataUpdated = (e) => {
+      if (e.detail.endpoint === endpoint) {
+        setRefreshTrigger(prev => prev + 1);
+      }
+    };
+    window.addEventListener('adminDataUpdated', handleDataUpdated);
+    return () => window.removeEventListener('adminDataUpdated', handleDataUpdated);
+  }, [endpoint]);
 
   useEffect(() => {
     setCurrentUrl(`/${endpoint}/`);
@@ -42,7 +53,7 @@ const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => 
       }
     };
     fetchData();
-  }, [currentUrl, token]);
+  }, [currentUrl, token, refreshTrigger]);
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this item?')) return;
