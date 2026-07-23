@@ -83,7 +83,7 @@ const Blog = () => {
           <div className="grid-3" style={{ marginTop: '3.5rem', gap: '2rem' }}>
             {filteredBlogs.map((post, idx) => (
               <MotionWrapper key={post.id} variant="slideUp" delay={idx * 0.1} className="glass-panel" style={{ padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
+                <Link to={`/blog/${post.id}`} style={{ position: 'relative', height: '220px', overflow: 'hidden', display: 'block' }}>
                   <img
                     src={post.image || 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'}
                     alt={post.title}
@@ -94,7 +94,7 @@ const Blog = () => {
                       {post.category_name}
                     </span>
                   )}
-                </div>
+                </Link>
 
                 <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
                   <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>

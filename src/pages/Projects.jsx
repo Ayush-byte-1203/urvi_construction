@@ -119,10 +119,10 @@ const Projects = () => {
           {/* SECTION: Left Large Featured Case */}
           {/* ========================================== */}
           <MotionWrapper variant="slideRight" className={`glass-panel ${styles.largeFeatured}`}>
-            <div className={styles.largeImgWrapper}>
+            <Link to={`/projects/${featuredProject?.id}`} className={styles.largeImgWrapper} style={{ display: 'block' }}>
               <img src={featuredProject?.image} alt={featuredProject?.title} />
               <span className={styles.statusBadge}>Delivered</span>
-            </div>
+            </Link>
             <div className={styles.largeContent}>
               <span className={styles.projectTag}>{featuredProject?.category_name}</span>
               <h3>{featuredProject?.title}</h3>
@@ -205,10 +205,10 @@ const Projects = () => {
                 delay={idx * 0.08}
                 className={`glass-panel ${styles.projectCard}`}
               >
-                <div className={styles.cardImgWrapper}>
+                <Link to={`/projects/${project.id}`} className={styles.cardImgWrapper} style={{ display: 'block' }}>
                   <img src={project.image || 'https://images.unsplash.com/photo-1541888086425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'} alt={project.title} />
                   <span className={styles.cardBadge}>{project.completion_date || '2024'}</span>
-                </div>
+                </Link>
                 <div className={styles.cardContent}>
                   <span className={styles.cardTag}>{project.category_name || project.category || 'General'}</span>
                   <h3 className={styles.cardTitle}>{project.title}</h3>

@@ -51,10 +51,10 @@ const FeaturedProjects = () => {
       <div className={styles.asymmetricGrid}>
         {/* LEFT: Large Featured Card */}
         <MotionWrapper variant="slideRight" className={`glass-panel ${styles.largeCard}`}>
-          <div className={styles.imageWrapper}>
+          <Link to={`/projects/${featured.id}`} className={styles.imageWrapper} style={{ display: 'block' }}>
             <img src={featured.image} alt={featured.title} className={styles.projectImage} loading="lazy" />
             <div className={styles.progressBadge}>Build Status: {featured.progress}</div>
-          </div>
+          </Link>
           <div className={styles.cardInfo}>
             <span className={styles.tag}>{featured.tag}</span>
             <h3 className={styles.projectTitle}>{featured.title}</h3>
@@ -84,10 +84,10 @@ const FeaturedProjects = () => {
               delay={idx * 0.15}
               className={`glass-panel ${styles.smallCard}`}
             >
-              <div className={styles.smallImageWrapper}>
+              <Link to={`/projects/${project.id}`} className={styles.smallImageWrapper} style={{ display: 'block' }}>
                 <img src={project.image} alt={project.title} className={styles.smallImage} loading="lazy" />
                 <div className={styles.smallProgressBadge}>{project.progress}</div>
-              </div>
+              </Link>
               <div className={styles.smallCardContent}>
                 <span className={styles.smallTag}>{project.tag}</span>
                 <h4 className={styles.smallTitle}>{project.title}</h4>

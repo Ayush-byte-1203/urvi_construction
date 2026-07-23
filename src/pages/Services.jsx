@@ -120,12 +120,12 @@ const Services = () => {
           {filteredServices.map((service, idx) => (
             <MotionWrapper key={service.id || idx} variant="slideUp" delay={idx * 0.1}>
               <div className={`glass-panel ${styles.serviceCard}`}>
-                <div className={styles.cardImage}>
+                <Link to={`/services/${service.id}`} className={styles.cardImage} style={{ display: 'block' }}>
                   <img 
                     src={service.image || service.detail_image || "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80"} 
                     alt={service.title} 
                   />
-                </div>
+                </Link>
                 <div className={styles.cardContent}>
                   <div className={styles.cardMeta}>
                     <span className={styles.cardCategory}>{service.category_name || service.category}</span>
