@@ -15,10 +15,11 @@ from datetime import timedelta
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load .env file from the BASE_DIR specifically!
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -169,6 +170,12 @@ CLOUDINARY_STORAGE = {
     'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
     'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
 }
+
+import cloudinary
+# PythonAnywhere requires outbound connections (even to whitelisted APIs like Cloudinary) 
+# to go through their proxy. We configure Cloudinary to use this proxy if we are on PythonAnywhere.
+if os.environ.get('PYTHONANYWHERE_DOMAIN') or os.path.exists('/home/Paramarsh'):
+    cloudinary.config(api_proxy='http://proxy.server:3128')
 
 if os.environ.get('CLOUDINARY_CLOUD_NAME'):
     STORAGES = {
