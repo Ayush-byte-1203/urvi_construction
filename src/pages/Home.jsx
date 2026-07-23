@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import SEO from '../components/SEO';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight, ShieldCheck, Clock, Users, Play, Star, Compass, AlertCircle
@@ -79,6 +80,8 @@ const Home = () => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
 
+
+
   // Sync city updates from Navbar CitySelector
   useEffect(() => {
     const syncCity = () => {
@@ -119,6 +122,14 @@ const Home = () => {
     title: f.question || f.q,
     content: f.answer || f.a
   }));
+
+  if (isLoading) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="home-page">

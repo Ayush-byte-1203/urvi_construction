@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronRight, CheckCircle2, HelpCircle, ShieldCheck
@@ -27,9 +28,13 @@ const Packages = () => {
   const [openCategory, setOpenCategory] = useState('Design & Drawings');
 
 
+  const isLoading = globalLoading || pageLoading;
+
   useEffect(() => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
+
+
 
   // Use dynamic packages from the backend
   const packageTiers = globalData.packages || [];
@@ -59,6 +64,14 @@ const Packages = () => {
   });
 
 
+
+  if (isLoading) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="packages-page">

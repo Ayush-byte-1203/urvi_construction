@@ -1,6 +1,7 @@
   import React, { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import LoadingSpinner from '../components/LoadingSpinner';
 import * as Icons from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useGlobalData } from '../context/GlobalDataContext';
@@ -24,6 +25,8 @@ const Process = () => {
 
 
 
+
+
   const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Process`, defaultDescription: pageData?.subtitle || 'Our Process' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...' } };
 
   const steps = backendSteps?.length > 0 ? backendSteps.map(s => ({
@@ -38,6 +41,14 @@ const Process = () => {
   })) : [];
 
   const currentStage = steps[activeStep];
+
+  if (isLoading) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="process-page">

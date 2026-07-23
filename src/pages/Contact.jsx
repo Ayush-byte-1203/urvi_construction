@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import SEO from '../components/SEO';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import { 
   Mail, Phone, MapPin, Send, CheckCircle2, ChevronRight, ShieldCheck, Clock 
@@ -17,11 +18,23 @@ import styles from './Contact.module.css';
 
 const Contact = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
-  const { pageData } = usePageData('contact');
+  const { pageData, isLoading: isPageLoading } = usePageData('contact');
+  const { isLoading: isGlobalLoading } = useGlobalData();
+  const isLoading = isPageLoading || isGlobalLoading;
   
   useEffect(() => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
+
+
+
+  if (isLoading) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="contact-page">

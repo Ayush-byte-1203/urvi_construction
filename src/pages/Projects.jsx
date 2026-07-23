@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import SEO from '../components/SEO';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, Calendar, MoveUpRight, Hexagon, Maximize, Ruler, Home, Compass } from 'lucide-react';
 import { useGlobalData } from '../context/GlobalDataContext';
@@ -29,6 +30,8 @@ const Projects = () => {
 
 
 
+
+
   const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Projects`, defaultDescription: pageData?.subtitle || 'Projects', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 
   const rawCategories = ['All', ...new Set((projectsData || []).map(p => p.category_name || p.category || 'General'))];
@@ -43,6 +46,14 @@ const Projects = () => {
 
   const featuredProject = (projectsData || [])[0];
   const supportingProjects = (projectsData || []).slice(1, 5);
+
+  if (isLoading) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="projects-page">

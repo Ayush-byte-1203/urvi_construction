@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import SEO from '../components/SEO';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import { 
   Building2, Users, Target, Shield, Clock, Compass, Ruler, Lightbulb, ChevronRight
@@ -35,6 +36,8 @@ const About = () => {
 
 
 
+
+
   const seoConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | About`, defaultDescription: pageData?.subtitle || 'About Us', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 
   const galleryImages = [
@@ -43,6 +46,14 @@ const About = () => {
     sample3,
     sample4,
   ];
+
+  if (isLoading) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="about-page">

@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import SEO from '../components/SEO';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Star, Compass, Play, Layers, ChevronRight, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -33,6 +34,8 @@ const Services = () => {
 
 
 
+
+
   const appConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | Services`, defaultDescription: pageData?.subtitle || 'Services', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 
   // Generate categories from loaded services
@@ -48,6 +51,14 @@ const Services = () => {
   const filteredServices = activeCategory === 'All Divisions' 
     ? (servicesData || [])
     : (servicesData || []).filter(s => (s.category_name || s.category) === activeCategory);
+
+  if (isLoading) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="services-page">
