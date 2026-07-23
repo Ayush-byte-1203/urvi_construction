@@ -119,6 +119,7 @@ const ProjectForm = ({ initialData, onCancel, onSuccess }) => {
         }
       }
 
+      window.dispatchEvent(new CustomEvent('adminDataUpdated', { detail: { endpoint: 'projects' } }));
       onSuccess();
     } catch (err) {
       console.error(err);

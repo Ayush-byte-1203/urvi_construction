@@ -113,6 +113,7 @@ const PackageForm = ({ initialData, onCancel, onSuccess }) => {
         }
       }
 
+      window.dispatchEvent(new CustomEvent('adminDataUpdated', { detail: { endpoint: 'packages' } }));
       onSuccess();
     } catch (err) {
       console.error(err);
