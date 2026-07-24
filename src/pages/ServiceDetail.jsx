@@ -5,7 +5,6 @@ import {
   ArrowLeft, CheckCircle2, ChevronRight, HardHat, ShieldCheck, Compass, Info, Play, HelpCircle 
 } from 'lucide-react';
 import { appConfig } from '../data/appConfig';
-import { servicesData } from '../data/servicesData';
 import { faqData } from '../data/faqData';
 import SectionHeader from '../components/SectionHeader';
 import GenericCard from '../components/GenericCard';
@@ -21,7 +20,15 @@ const ServiceDetail = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
   const { id } = useParams();
   const { services, faqs } = useGlobalData();
-  const service = services?.find(s => s.id.toString() === id) || servicesData.residential;
+  const service = services?.find(s => s.id.toString() === id);
+
+  if (!service) {
+    return (
+      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <p>Service not found.</p>
+      </div>
+    );
+  }
 
   useEffect(() => {
     setHeaderTheme('dark');
@@ -64,8 +71,9 @@ const ServiceDetail = () => {
   ];
 
   // Recommendations
-  const relatedServices = Object.values(servicesData)
-    .filter((srv) => srv.id !== service.id)
+  const availableServices = services || [];
+  const relatedServices = availableServices
+    .filter((srv) => service && srv.id.toString() !== service.id.toString())
     .slice(0, 3);
 
   // Grouped FAQ Items specific to service
@@ -76,7 +84,7 @@ const ServiceDetail = () => {
   }));
 
   const heroStyle = {
-    backgroundImage: `linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.9)), url(${serviceImages[service.id]})`
+    backgroundImage: `linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.9)), url(${service.image || serviceImages[service.id] || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80"})`
   };
 
   return (
@@ -224,10 +232,10 @@ const ServiceDetail = () => {
             {relatedServices.map((srv, idx) => (
               <MotionWrapper key={srv.id} variant="slideUp" delay={idx * 0.1}>
                 <GenericCard
-                  image={serviceThumbnails[srv.id]}
+                  image={srv.image || serviceThumbnails[srv.id]}
                   badge={srv.tagline}
                   title={srv.title}
-                  description={srv.desc}
+                  description={srv.description || srv.desc}
                   ctaText="Explore Division Specs"
                   ctaLink={`/services/${srv.id}`}
                 />
