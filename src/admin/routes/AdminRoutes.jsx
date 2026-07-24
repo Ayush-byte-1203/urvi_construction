@@ -13,7 +13,7 @@ const AdminBlogs = lazy(() => import('../pages/Blogs/AdminBlogs'));
 const AdminTestimonials = lazy(() => import('../pages/SiteContent/AdminTestimonials'));
 const AdminFAQs = lazy(() => import('../pages/SiteContent/AdminFAQs'));
 const AdminCoreValues = lazy(() => import('../pages/SiteContent/AdminCoreValues'));
-
+const AdminGallery = lazy(() => import('../pages/SiteContent/AdminGallery'));
 
 const AdminPageContents = lazy(() => import('../pages/SiteContent/AdminPageContents'));
 const AdminProjectCategories = lazy(() => import('../pages/Categories/AdminProjectCategories'));
@@ -44,6 +44,7 @@ const AdminRoutes = () => {
               <Route path="testimonials" element={<AdminTestimonials />} />
               <Route path="faqs" element={<AdminFAQs />} />
               <Route path="core-values" element={<AdminCoreValues />} />
+              <Route path="gallery" element={<AdminGallery />} />
 
               <Route path="pages" element={<AdminPageContents />} />
               <Route path="project-categories" element={<AdminProjectCategories />} />

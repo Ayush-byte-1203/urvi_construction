@@ -30,17 +30,18 @@ const AdminServices = () => {
 
   const schema = [
     { key: 'title', label: 'Service Title', type: 'text', required: true },
-    { key: 'description', label: 'Description', type: 'textarea', required: true },
+    { key: 'description', label: 'Short Description (Side Box & Card)', type: 'textarea', required: true },
     { key: 'icon_name', label: 'Icon Name (Lucide)', type: 'text', required: true },
-    { key: 'image', label: 'Image', type: 'image' },
+    { key: 'image', label: 'Card Image', type: 'image' },
     { key: 'category', label: 'Category', type: 'select', options: categories },
-    { key: 'features', label: 'Features', type: 'json-list' },
-    { key: 'tagline', label: 'Tagline', type: 'text' },
-    { key: 'detail_image', label: 'Detail image', type: 'image' },
-    { key: 'scope_text', label: 'Scope text', type: 'textarea' },
-    { key: 'benefits', label: 'Benefits', type: 'json-list' },
-    { key: 'workflow_steps', label: 'Workflow steps', type: 'json-list' },
-    { key: 'video_url', label: 'Video url', type: 'text' },
+    { key: 'features', label: 'Key Deliverables (Side Box features)', type: 'json-list' },
+    { key: 'estimated_timeline', label: 'Estimated Timeline (Side Box)', type: 'text' },
+    { key: 'tagline', label: 'Hero Tagline (Detailed Page)', type: 'text' },
+    { key: 'detail_image', label: 'Hero Image (Detailed Page)', type: 'image' },
+    { key: 'scope_text', label: 'Scope text (Detailed Page)', type: 'textarea' },
+    { key: 'benefits', label: 'Engineering Benefits (Detailed Page)', type: 'json-list' },
+    { key: 'workflow_steps', label: 'Workflow steps (Detailed Page)', type: 'json-list' },
+    { key: 'video_url', label: 'Video url (Detailed Page)', type: 'text' },
   ];
 
   return (

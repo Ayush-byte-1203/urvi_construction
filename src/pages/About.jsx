@@ -26,7 +26,7 @@ import styles from './About.module.css';
 const About = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
   const containerRef = useRef(null);
-  const { siteSettings, coreValues, isLoading: isGlobalLoading } = useGlobalData();
+  const { siteSettings, coreValues, galleryImages: dynamicGallery, isLoading: isGlobalLoading } = useGlobalData();
   const { pageData, sections, isLoading: isPageLoading } = usePageData('about');
   const isLoading = isGlobalLoading || isPageLoading;
 
@@ -40,12 +40,14 @@ const About = () => {
 
   const seoConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | About`, defaultDescription: pageData?.subtitle || 'About Us', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
 
-  const galleryImages = [
-    sample1,
-    sample2,
-    sample3,
-    sample4,
-  ];
+  const galleryImages = dynamicGallery && dynamicGallery.length > 0 
+    ? dynamicGallery 
+    : [
+        { image: sample1 },
+        { image: sample2 },
+        { image: sample3 },
+        { image: sample4 },
+      ];
 
   if (isLoading) {
     return (
@@ -174,20 +176,20 @@ Built to last
       </section>
 
       {/* ========================================== */}
-      {/* SECTION: Leadership & Team */}
+      {/* SECTION: Leadership & Team -> Company Story */}
       {/* ========================================== */}
       <section className="section container">
         <SectionHeader
-          eyebrow="Leadership"
-          heading="Meet The Founder & Team"
-          subheading="Our multidisciplinary team of licensed civil engineers, visionary architects, and rigorous project managers."
+          eyebrow="Our Heritage"
+          heading="Company Story"
+          subheading="A proven track record of engineering excellence and structural integrity."
         />
 
         <div className={styles.visionMissionSection} style={{ marginTop: '3rem', display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
           <MotionWrapper variant="slideRight" className={styles.overviewText} style={{ flex: 1, minWidth: '300px' }}>
-            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>The Founder's Story</h3>
+            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Our Origins</h3>
             <p className="text-body-md" style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-              Founded with the singular vision of bringing absolute transparency to the construction industry, our leadership ensures that every structural calculation is double-checked and every client communication is completely factual.
+              Founded with the singular vision of bringing absolute transparency to the construction industry, our company ensures that every structural calculation is double-checked and every client communication is completely factual.
             </p>
             <p className="text-body-md" style={{ color: 'var(--text-muted)' }}>
               "We don't just build walls; we engineer secure environments where families and businesses can thrive for generations."
@@ -228,11 +230,11 @@ Built to last
         />
 
         <div className={styles.galleryGrid}>
-          {galleryImages.map((src, idx) => (
-            <MotionWrapper key={idx} variant="scale" delay={idx * 0.1} className="glass-panel" style={{ overflow: 'hidden' }}>
+          {galleryImages.map((item, idx) => (
+            <MotionWrapper key={item.id || idx} variant="scale" delay={idx * 0.1} className="glass-panel" style={{ overflow: 'hidden' }}>
               <MediaWrapper
-                src={src}
-                alt={`${appConfig.company.name} Operation ${idx + 1}`}
+                src={item.image}
+                alt={item.caption || `${appConfig.company.name} Operation ${idx + 1}`}
                 aspectRatio="16/10"
                 style={{ transition: 'transform var(--transition-slow)' }}
               />

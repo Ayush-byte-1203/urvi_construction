@@ -22,6 +22,7 @@ const Sidebar = () => {
         { name: 'Core values', icon: <Shield size={18} />, path: '/admin/core-values' },
         { name: 'FAQ Categories', icon: <Map size={18} />, path: '/admin/faq-categories' },
         { name: 'Faqs', icon: <HelpCircle size={18} />, path: '/admin/faqs' },
+        { name: 'Gallery', icon: <ImageIcon size={18} />, path: '/admin/gallery' },
         { name: 'Package Material Categories', icon: <LayoutDashboard size={18} />, path: '/admin/package-material-categories' },
         { name: 'Packages', icon: <FileText size={18} />, path: '/admin/packages' },
         { name: 'Page contents', icon: <LayoutDashboard size={18} />, path: '/admin/pages' },

@@ -5,7 +5,7 @@ from .models import (
     Package, PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
     ProjectCategory, Project, ProjectImage, Testimonial, FAQCategory, FAQ,
     CoreValue,
-    BlogCategory, BlogPost)
+    BlogCategory, BlogPost, GalleryImage)
 
 class PageContentAdmin(admin.ModelAdmin):
     pass
@@ -51,5 +51,6 @@ admin.site.register(CoreValue)
 
 admin.site.register(BlogCategory)
 admin.site.register(BlogPost)
+admin.site.register(GalleryImage)
 
 

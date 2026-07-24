@@ -5,7 +5,7 @@ from .models import (
     BlogCategory, BlogPost,
     ServiceCategory, ProjectCategory, FAQCategory,
     PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
-    ProjectImage
+    ProjectImage, GalleryImage
 )
 from .serializers import (
     SiteSettingsSerializer, PageContentSerializer, ServiceSerializer,
@@ -14,15 +14,15 @@ from .serializers import (
     BlogCategorySerializer, BlogPostSerializer,
     ServiceCategorySerializer, ProjectCategorySerializer, FAQCategorySerializer,
     PackageAdvantageSerializer, PackageMaterialCategorySerializer, PackageMaterialSpecSerializer, PackageFAQSerializer,
-    ProjectImageSerializer
+    ProjectImageSerializer, GalleryImageSerializer
 )
 
 class PackageAdvantageViewSet(viewsets.ModelViewSet):
-    queryset = PackageAdvantage.objects.all()
+    queryset = PackageAdvantage.objects.all().order_by('order')
     serializer_class = PackageAdvantageSerializer
 
 class PackageMaterialCategoryViewSet(viewsets.ModelViewSet):
-    queryset = PackageMaterialCategory.objects.all()
+    queryset = PackageMaterialCategory.objects.all().order_by('order')
     serializer_class = PackageMaterialCategorySerializer
 
 class PackageMaterialSpecViewSet(viewsets.ModelViewSet):
@@ -30,11 +30,11 @@ class PackageMaterialSpecViewSet(viewsets.ModelViewSet):
     serializer_class = PackageMaterialSpecSerializer
 
 class PackageFAQViewSet(viewsets.ModelViewSet):
-    queryset = PackageFAQ.objects.all()
+    queryset = PackageFAQ.objects.all().order_by('order')
     serializer_class = PackageFAQSerializer
 
 class ProjectImageViewSet(viewsets.ModelViewSet):
-    queryset = ProjectImage.objects.all()
+    queryset = ProjectImage.objects.all().order_by('order')
     serializer_class = ProjectImageSerializer
 
 
@@ -65,7 +65,7 @@ class ServiceViewSet(viewsets.ModelViewSet):
     serializer_class = ServiceSerializer
 
 class PackageViewSet(viewsets.ModelViewSet):
-    queryset = Package.objects.all()
+    queryset = Package.objects.all().order_by('order')
     serializer_class = PackageSerializer
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -81,7 +81,7 @@ class FAQViewSet(viewsets.ModelViewSet):
     serializer_class = FAQSerializer
 
 class CoreValueViewSet(viewsets.ModelViewSet):
-    queryset = CoreValue.objects.all()
+    queryset = CoreValue.objects.all().order_by('order')
     serializer_class = CoreValueSerializer
 
 
@@ -94,4 +94,6 @@ class BlogPostViewSet(viewsets.ModelViewSet):
     queryset = BlogPost.objects.all().order_by('-date')
     serializer_class = BlogPostSerializer
 
-
+class GalleryImageViewSet(viewsets.ModelViewSet):
+    queryset = GalleryImage.objects.all().order_by('order')
+    serializer_class = GalleryImageSerializer

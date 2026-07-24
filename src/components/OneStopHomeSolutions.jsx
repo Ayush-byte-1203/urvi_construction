@@ -23,9 +23,9 @@ const OneStopHomeSolutions = () => {
     title: s.title,
     desc: s.description,
     deliverables: s.features || [],
-    timeline: s.tagline || 'Contact us', // using tagline for timeline fallback
+    timeline: s.estimated_timeline || s.tagline || 'Contact us', // using estimated_timeline with fallback
     badge: s.category?.name || 'Service',
-    related: [],
+    related: backendServices.filter(bs => bs.category?.id === s.category?.id && bs.id !== s.id).slice(0, 2).map(bs => bs.title),
     path: `/services/${s.id}`
   })) : [];
 

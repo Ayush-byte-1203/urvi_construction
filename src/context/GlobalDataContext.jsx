@@ -8,7 +8,8 @@ import {
   fetchFAQs,
   fetchCoreValues,
   fetchBlogCategories,
-  fetchBlogs
+  fetchBlogs,
+  fetchGalleryImages
 } from '../services/api';
 
 const GlobalDataContext = createContext();
@@ -26,6 +27,7 @@ export const GlobalDataProvider = ({ children }) => {
     coreValues: [],
     blogCategories: [],
     blogs: [],
+    galleryImages: [],
     isLoading: true,
   });
 
@@ -41,7 +43,8 @@ export const GlobalDataProvider = ({ children }) => {
           faqsRes,
           coreValuesRes,
           blogCategoriesRes,
-          blogsRes
+          blogsRes,
+          galleryImagesRes
         ] = await Promise.all([
           fetchSiteSettings(),
           fetchServices(),
@@ -51,7 +54,8 @@ export const GlobalDataProvider = ({ children }) => {
           fetchFAQs(),
           fetchCoreValues(),
           fetchBlogCategories(),
-          fetchBlogs()
+          fetchBlogs(),
+          fetchGalleryImages()
         ]);
         
         setGlobalData({
@@ -64,6 +68,7 @@ export const GlobalDataProvider = ({ children }) => {
           coreValues: coreValuesRes || [],
           blogCategories: blogCategoriesRes || [],
           blogs: blogsRes || [],
+          galleryImages: galleryImagesRes || [],
           isLoading: false,
         });
       } catch (error) {

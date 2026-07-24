@@ -4,7 +4,7 @@ from .models import (
     Package, PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
     ProjectCategory, Project, ProjectImage, Testimonial, FAQCategory, FAQ,
     CoreValue,
-    BlogCategory, BlogPost
+    BlogCategory, BlogPost, GalleryImage
 )
 
 class SiteSettingsSerializer(serializers.ModelSerializer):
@@ -107,5 +107,10 @@ class BlogPostSerializer(serializers.ModelSerializer):
     category_name = serializers.CharField(source='category.name', read_only=True)
     class Meta:
         model = BlogPost
+        fields = '__all__'
+
+class GalleryImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GalleryImage
         fields = '__all__'
 

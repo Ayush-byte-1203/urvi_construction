@@ -69,13 +69,14 @@ class Service(models.Model):
     icon_name = models.CharField(max_length=100, help_text="Lucide react icon name, e.g., Building2")
     image = models.ImageField(upload_to="services/", null=True, blank=True)
     category = models.ForeignKey(ServiceCategory, on_delete=models.SET_NULL, null=True, blank=True)
-    features = models.JSONField(default=list, help_text="List of features as JSON array")
+    features = models.JSONField(default=list, help_text="List of features as JSON array (used as Key Deliverables in side box)")
+    estimated_timeline = models.CharField(max_length=255, null=True, blank=True, help_text="E.g., '3-6 Months' or 'Contact us' for side box timeline")
     
     # New detailed fields for ServiceDetail page
-    tagline = models.CharField(max_length=255, null=True, blank=True, help_text="E.g., 'Premium Quality'")
+    tagline = models.CharField(max_length=255, null=True, blank=True, help_text="E.g., 'Premium Quality' used in detailed page hero banner")
     detail_image = models.ImageField(upload_to="services/details/", null=True, blank=True)
-    scope_text = models.TextField(null=True, blank=True, help_text="Text under Scope & Specifications")
-    benefits = models.JSONField(default=list, blank=True, help_text="List of engineering benefits")
+    scope_text = models.TextField(null=True, blank=True, help_text="Detailed text under Scope & Specifications")
+    benefits = models.JSONField(default=list, blank=True, help_text="List of detailed engineering benefits")
     workflow_steps = models.JSONField(default=list, blank=True, help_text="List of workflow milestones")
     video_url = models.URLField(null=True, blank=True, help_text="URL for the staging video")
     
@@ -249,6 +250,7 @@ class CoreValue(models.Model):
         return self.title
 
 
+
 class BlogCategory(models.Model):
     name = models.CharField(max_length=100)
     
@@ -265,5 +267,16 @@ class BlogPost(models.Model):
     
     def __str__(self):
         return self.title
+
+class GalleryImage(models.Model):
+    image = models.ImageField(upload_to="gallery/")
+    caption = models.CharField(max_length=255, null=True, blank=True)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.caption or f"Gallery Image {self.id}"
 
 

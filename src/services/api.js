@@ -53,3 +53,8 @@ export const fetchBlogs = async () => {
   const response = await fetch(`${API_URL}/blogs/`);
   return response.json();
 };
+
+export const fetchGalleryImages = async () => {
+  const response = await fetch(`${API_URL}/gallery-images/`);
+  return response.json();
+};

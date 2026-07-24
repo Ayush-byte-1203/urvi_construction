@@ -6,7 +6,7 @@ from .views import (
     CoreValueViewSet, BlogCategoryViewSet, BlogPostViewSet,
     ServiceCategoryViewSet, ProjectCategoryViewSet, FAQCategoryViewSet,
     PackageAdvantageViewSet, PackageMaterialCategoryViewSet, PackageMaterialSpecViewSet, PackageFAQViewSet,
-    ProjectImageViewSet
+    ProjectImageViewSet, GalleryImageViewSet
 )
 
 router = DefaultRouter()
@@ -15,6 +15,7 @@ router.register(r'package-material-categories', PackageMaterialCategoryViewSet)
 router.register(r'package-material-specs', PackageMaterialSpecViewSet)
 router.register(r'package-faqs', PackageFAQViewSet)
 router.register(r'project-images', ProjectImageViewSet)
+router.register(r'gallery-images', GalleryImageViewSet)
 
 router.register(r'service-categories', ServiceCategoryViewSet)
 router.register(r'project-categories', ProjectCategoryViewSet)
