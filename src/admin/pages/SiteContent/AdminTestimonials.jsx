@@ -10,8 +10,13 @@ const AdminTestimonials = () => {
     { key: 'role', label: 'Role' },
     { key: 'rating', label: 'Rating' },
     { 
+      key: 'profile_image', 
+      label: 'Profile Image',
+      render: (val) => val ? <img src={val} alt="Profile" style={{ width: 50, height: 50, objectFit: 'cover', borderRadius: '50%' }} /> : 'No Image'
+    },
+    { 
       key: 'image', 
-      label: 'Image',
+      label: 'Side Image',
       render: (val) => val ? <img src={val} alt="Testimonial" style={{ width: 50, height: 50, objectFit: 'cover', borderRadius: 4 }} /> : 'No Image'
     }
   ];
@@ -21,7 +26,8 @@ const AdminTestimonials = () => {
     { key: 'role', label: 'Role', type: 'text', required: true },
     { key: 'content', label: 'Content', type: 'textarea', required: true },
     { key: 'rating', label: 'Rating (1-5)', type: 'text', defaultValue: '5' },
-    { key: 'image', label: 'Image', type: 'image' }
+    { key: 'profile_image', label: 'Profile Image', type: 'image' },
+    { key: 'image', label: 'Side Image', type: 'image' }
   ];
 
   return (

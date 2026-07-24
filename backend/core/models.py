@@ -212,6 +212,7 @@ class Testimonial(models.Model):
     content = models.TextField()
     rating = models.IntegerField(default=5)
     image = models.ImageField(upload_to="testimonials/", null=True, blank=True)
+    profile_image = models.ImageField(upload_to="testimonials/profiles/", null=True, blank=True)
     
     def __str__(self):
         return self.name

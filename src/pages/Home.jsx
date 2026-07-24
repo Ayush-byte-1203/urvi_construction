@@ -336,7 +336,7 @@ const Home = () => {
 
               <div className={styles.clientDetails}>
                 <img
-                  src={(testimonialsData || []).length > 0 && testimonialsData[testimonialIndex]?.image ? testimonialsData[testimonialIndex].image : `https://i.pravatar.cc/150?img=${(testimonialIndex + 12) * 3}`}
+                  src={(testimonialsData || []).length > 0 && testimonialsData[testimonialIndex]?.profile_image ? testimonialsData[testimonialIndex].profile_image : `https://i.pravatar.cc/150?img=${(testimonialIndex + 12) * 3}`}
                   alt={(testimonialsData || []).length > 0 ? (testimonialsData[testimonialIndex]?.name || testimonialsData[testimonialIndex]?.author) : ''}
                   className={styles.clientAvatar}
                 />
@@ -355,22 +355,13 @@ const Home = () => {
               </div>
             </div>
 
-            {/* Right Column: Video testimonial mockup placeholder */}
+            {/* Right Column: Testimonial Image */}
             <div className={styles.videoMockup}>
               <img
-                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80"
+                src={(testimonialsData || []).length > 0 && testimonialsData[testimonialIndex]?.image ? testimonialsData[testimonialIndex].image : "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=80"}
                 alt="Construction Staging Review Mock"
                 className={styles.mockupBg}
               />
-              <div className={styles.mockupOverlay} />
-              <button
-                className={styles.mockupPlayBtn}
-                onClick={() => alert('Launching video testimonial walkthrough overlay.')}
-                aria-label="Play video testimonial"
-              >
-                <Play size={20} fill="currentColor" />
-              </button>
-              <span className={styles.mockupLength}>Watch Story</span>
             </div>
           </div>
 
