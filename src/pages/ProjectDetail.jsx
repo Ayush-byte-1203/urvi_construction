@@ -137,6 +137,9 @@ const ProjectDetail = () => {
               <span>Client: {project.client_name || 'Confidential'}</span>
               <span>Architect: {project.architect_name || 'In-house Team'}</span>
               <span>Location: {project.location || 'Not Specified'}</span>
+              {project.floors_count && <span>Floors: {project.floors_count}</span>}
+              {project.material_grade && <span>Materials: {project.material_grade}</span>}
+              {project.seismic_protection && <span>Seismic Safety: {project.seismic_protection}</span>}
             </div>
           </div>
         </div>
