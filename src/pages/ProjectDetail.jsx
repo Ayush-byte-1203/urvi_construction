@@ -27,11 +27,15 @@ const ProjectDetail = () => {
   const [activeStage, setActiveStage] = useState('All');
   const [lightboxImage, setLightboxImage] = useState(null);
 
-  // Filter out Before/After images from the standard gallery
-  const galleryImages = (project?.images || []).filter(img => img.stage !== 'Before' && img.stage !== 'After');
+  // Include all images in the gallery
+  const galleryImages = project?.images || [];
 
-  // Extract unique stages from gallery images
-  const availableStages = ['All', ...new Set(galleryImages.map(img => img.stage))];
+  // Extract unique stages from gallery images, excluding 'Before' and 'After' for the filter buttons
+  const availableStages = ['All', ...new Set(
+    galleryImages
+      .map(img => img.stage)
+      .filter(stage => stage && stage !== 'Before' && stage !== 'After')
+  )];
   
   const filteredImages = activeStage === 'All' 
     ? galleryImages
@@ -168,7 +172,24 @@ const ProjectDetail = () => {
                   <ShieldAlert size={20} />
                   <h3>Site Challenges</h3>
                 </div>
-                <p className={styles.cardText}>{project.challenges}</p>
+                <div className={styles.cardText}>
+                  <ul style={{ paddingLeft: '1.25rem', margin: 0, listStylePosition: 'outside' }}>
+                    {(project.challenges.includes('*') || project.challenges.includes('\n')
+                      ? project.challenges.split(/(?:\*|\n)/)
+                      : project.challenges.split(/\.\s+/)
+                    )
+                      .map(s => s.trim())
+                      .filter(Boolean)
+                      .map((item, idx, arr) => {
+                        const isSentenceSplit = !project.challenges.includes('*') && !project.challenges.includes('\n');
+                        const formattedItem = isSentenceSplit && !item.endsWith('.') ? item + '.' : item;
+                        return (
+                          <li key={idx} style={{ marginBottom: '0.5rem' }}>{formattedItem}</li>
+                        );
+                      })
+                    }
+                  </ul>
+                </div>
               </div>
             )}
 
@@ -178,7 +199,24 @@ const ProjectDetail = () => {
                   <Award size={20} />
                   <h3>Engineering Solutions</h3>
                 </div>
-                <p className={styles.cardText}>{project.solutions}</p>
+                <div className={styles.cardText}>
+                  <ul style={{ paddingLeft: '1.25rem', margin: 0, listStylePosition: 'outside' }}>
+                    {(project.solutions.includes('*') || project.solutions.includes('\n')
+                      ? project.solutions.split(/(?:\*|\n)/)
+                      : project.solutions.split(/\.\s+/)
+                    )
+                      .map(s => s.trim())
+                      .filter(Boolean)
+                      .map((item, idx, arr) => {
+                        const isSentenceSplit = !project.solutions.includes('*') && !project.solutions.includes('\n');
+                        const formattedItem = isSentenceSplit && !item.endsWith('.') ? item + '.' : item;
+                        return (
+                          <li key={idx} style={{ marginBottom: '0.5rem' }}>{formattedItem}</li>
+                        );
+                      })
+                    }
+                  </ul>
+                </div>
               </div>
             )}
           </div>
