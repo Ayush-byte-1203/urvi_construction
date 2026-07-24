@@ -235,6 +235,22 @@ const ProjectForm = ({ initialData, onCancel, onSuccess }) => {
               <textarea className={styles.textarea} value={formData.solutions || ''} onChange={e => handleChange('solutions', e.target.value)} rows={3} />
             </div>
 
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Eco Features</label>
+                <input type="text" className={styles.input} value={formData.eco_features || ''} onChange={e => handleChange('eco_features', e.target.value)} placeholder="e.g., Rainwater Harvesting, Solar Ready" />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Scope Tags</label>
+                <input type="text" className={styles.input} value={formData.scope_tags || ''} onChange={e => handleChange('scope_tags', e.target.value)} placeholder="e.g., Civil, Plumbing, Electrical" />
+              </div>
+            </div>
+
+            <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
+              <label className={styles.label}>Solutions (Case Study)</label>
+              <textarea className={styles.textarea} value={formData.solutions || ''} onChange={e => handleChange('solutions', e.target.value)} rows={3} />
+            </div>
+
             <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
               <label className={styles.label}>Client Requirements</label>
               <textarea className={styles.textarea} value={formData.client_requirements || ''} onChange={e => handleChange('client_requirements', e.target.value)} rows={3} />
@@ -257,10 +273,12 @@ const ProjectForm = ({ initialData, onCancel, onSuccess }) => {
                     <input type="file" accept="image/*" onChange={(e) => handleInlineFileChange(idx, e.target.files[0])} style={{ width: '100%' }} />
                   </div>
                   <select className={styles.input} value={item.stage || 'Finished'} onChange={e => handleInlineChange(idx, 'stage', e.target.value)}>
+                    <option value="Before">Before</option>
                     <option value="Planning">Planning</option>
                     <option value="Design">Design</option>
                     <option value="Structure">Structure</option>
                     <option value="Finished">Finished</option>
+                    <option value="After">After</option>
                   </select>
                   <input type="text" className={styles.input} placeholder="Caption" value={item.caption || ''} onChange={e => handleInlineChange(idx, 'caption', e.target.value)} />
                   <input type="number" className={styles.input} value={item.order || 0} onChange={e => handleInlineChange(idx, 'order', e.target.value)} />

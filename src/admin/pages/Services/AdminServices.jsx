@@ -42,6 +42,8 @@ const AdminServices = () => {
     { key: 'benefits', label: 'Engineering Benefits (Detailed Page)', type: 'json-list' },
     { key: 'workflow_steps', label: 'Workflow steps (Detailed Page)', type: 'json-list' },
     { key: 'video_url', label: 'Video url (Detailed Page)', type: 'text' },
+    { key: 'included_features', label: 'Included Features', type: 'json-list' },
+    { key: 'excluded_features', label: 'Excluded Features', type: 'json-list' },
   ];
 
   return (

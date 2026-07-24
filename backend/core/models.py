@@ -80,6 +80,10 @@ class Service(models.Model):
     workflow_steps = models.JSONField(default=list, blank=True, help_text="List of workflow milestones")
     video_url = models.URLField(null=True, blank=True, help_text="URL for the staging video")
     
+    # Premium Fields
+    included_features = models.JSONField(default=list, blank=True, help_text="List of included deliverables")
+    excluded_features = models.JSONField(default=list, blank=True, help_text="List of excluded items")
+    
     def __str__(self):
         return self.title
 
@@ -190,15 +194,20 @@ class Project(models.Model):
     challenges = models.TextField(null=True, blank=True)
     solutions = models.TextField(null=True, blank=True)
     
+    eco_features = models.CharField(max_length=255, null=True, blank=True, help_text="e.g., Rainwater Harvesting, Solar Ready")
+    scope_tags = models.CharField(max_length=255, null=True, blank=True, help_text="Comma-separated scope tags, e.g., Civil, Plumbing, Electrical")
+    
     def __str__(self):
         return self.title
 
 class ProjectImage(models.Model):
     STAGE_CHOICES = [
+        ('Before', 'Before'),
         ('Planning', 'Planning'),
         ('Design', 'Design'),
         ('Structure', 'Structure'),
         ('Finished', 'Finished'),
+        ('After', 'After'),
     ]
     project = models.ForeignKey(Project, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to="projects/gallery/")

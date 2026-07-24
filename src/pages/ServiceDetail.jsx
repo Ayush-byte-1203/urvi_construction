@@ -142,7 +142,34 @@ const ServiceDetail = () => {
                 </div>
               ))}
             </div>
-
+            
+            {((service.included_features && service.included_features.length > 0) || (service.excluded_features && service.excluded_features.length > 0)) && (
+              <div style={{ marginTop: '3rem' }}>
+                <h3 className={styles.subHeading}>Service Inclusions & Exclusions</h3>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '1.5rem' }}>
+                  {service.included_features && service.included_features.length > 0 && (
+                    <div className="glass-panel" style={{ padding: '1.5rem' }}>
+                      <h4 style={{ color: '#22c55e', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><CheckCircle2 size={18} /> Included</h4>
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        {service.included_features.map((item, i) => (
+                          <li key={i} style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {service.excluded_features && service.excluded_features.length > 0 && (
+                    <div className="glass-panel" style={{ padding: '1.5rem' }}>
+                      <h4 style={{ color: '#ef4444', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 600 }}><ShieldCheck size={18} /> Excluded</h4>
+                      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                        {service.excluded_features.map((item, i) => (
+                          <li key={i} style={{ fontSize: '0.875rem', color: 'var(--text-secondary)' }}>• {item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
 
           </div>
 

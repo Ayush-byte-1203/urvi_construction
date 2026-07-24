@@ -30,12 +30,18 @@ class ProjectImageInline(admin.TabularInline):
     extra = 1
 
 class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'completion_year', 'built_area')
+    search_fields = ('title', 'location', 'client_name', 'scope_tags')
     inlines = [ProjectImageInline]
+
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category')
+    search_fields = ('title', 'description', 'tagline')
 
 admin.site.register(SiteSettings)
 admin.site.register(PageContent, PageContentAdmin)
 admin.site.register(ServiceCategory)
-admin.site.register(Service)
+admin.site.register(Service, ServiceAdmin)
 admin.site.register(Package, PackageAdmin)
 admin.site.register(PackageAdvantage)
 admin.site.register(PackageFAQ)

@@ -27,12 +27,15 @@ const ProjectDetail = () => {
   const [activeStage, setActiveStage] = useState('All');
   const [lightboxImage, setLightboxImage] = useState(null);
 
-  // Extract unique stages from project images
-  const availableStages = ['All', ...new Set((project?.images || []).map(img => img.stage))];
+  // Filter out Before/After images from the standard gallery
+  const galleryImages = (project?.images || []).filter(img => img.stage !== 'Before' && img.stage !== 'After');
+
+  // Extract unique stages from gallery images
+  const availableStages = ['All', ...new Set(galleryImages.map(img => img.stage))];
   
   const filteredImages = activeStage === 'All' 
-    ? (project?.images || [])
-    : (project?.images || []).filter(img => img.stage === activeStage);
+    ? galleryImages
+    : galleryImages.filter(img => img.stage === activeStage);
 
   useEffect(() => {
     setHeaderTheme('dark');
@@ -140,6 +143,14 @@ const ProjectDetail = () => {
               {project.floors_count && <span>Floors: {project.floors_count}</span>}
               {project.material_grade && <span>Materials: {project.material_grade}</span>}
               {project.seismic_protection && <span>Seismic Safety: {project.seismic_protection}</span>}
+              {project.eco_features && <span>Eco Features: {project.eco_features}</span>}
+              {project.scope_tags && (
+                <div style={{ marginTop: '0.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  {project.scope_tags.split(',').map(tag => (
+                    <span key={tag} style={{ background: 'var(--accent)', color: '#fff', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 600 }}>{tag.trim()}</span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -170,6 +181,36 @@ const ProjectDetail = () => {
                 <p className={styles.cardText}>{project.solutions}</p>
               </div>
             )}
+          </div>
+        </section>
+      )}
+
+
+      {/* ========================================== */}
+      {/* SECTION: Before & After */}
+      {/* ========================================== */}
+      {project.images?.some(i => i.stage === 'Before') && project.images?.some(i => i.stage === 'After') && (
+        <section className={`section ${styles.beforeAfterSection}`}>
+          <div className="container">
+             <SectionHeader
+              eyebrow="Transformation"
+              heading="Before & After"
+              subheading="See the striking visual difference from site acquisition to final handover."
+            />
+            <div className="grid-2" style={{ gap: '2rem', marginTop: '3rem' }}>
+              <div className="glass-panel" style={{ padding: '0.5rem' }}>
+                <div style={{ position: 'relative' }}>
+                  <img src={project.images.find(i => i.stage === 'Before').image} alt="Before" style={{ width: '100%', height: '400px', objectFit: 'cover', borderRadius: '4px' }} />
+                  <span style={{ position: 'absolute', top: '10px', left: '10px', background: '#000', color: '#fff', padding: '4px 12px', borderRadius: '4px', fontSize: '0.875rem', fontWeight: 600 }}>BEFORE</span>
+                </div>
+              </div>
+              <div className="glass-panel" style={{ padding: '0.5rem' }}>
+                <div style={{ position: 'relative' }}>
+                  <img src={project.images.find(i => i.stage === 'After').image} alt="After" style={{ width: '100%', height: '400px', objectFit: 'cover', borderRadius: '4px' }} />
+                  <span style={{ position: 'absolute', top: '10px', left: '10px', background: 'var(--accent)', color: '#fff', padding: '4px 12px', borderRadius: '4px', fontSize: '0.875rem', fontWeight: 600 }}>AFTER</span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       )}
