@@ -12,6 +12,17 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
+    // Detect chunk load errors or MIME type errors caused by stale deployments
+    const isChunkLoadError = error?.name === 'ChunkLoadError' || 
+                             (error?.message && error.message.includes('MIME type')) ||
+                             (error?.message && error.message.includes('dynamically imported module'));
+                             
+    if (isChunkLoadError) {
+      console.warn('Stale deployment detected. Reloading page to fetch new assets...');
+      window.location.reload();
+      return;
+    }
+
     this.setState({ errorInfo });
     console.group("🔴 React Component Mounting Crash Detected");
     console.error("Error Message:", error.message);
