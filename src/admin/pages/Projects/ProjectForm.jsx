@@ -211,6 +211,28 @@ const ProjectForm = ({ initialData, onCancel, onSuccess }) => {
                 <label className={styles.label}>Architect Name</label>
                 <input type="text" className={styles.input} value={formData.architect_name || ''} onChange={e => handleChange('architect_name', e.target.value)} />
               </div>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Completion Year</label>
+                <input type="text" className={styles.input} value={formData.completion_year || ''} onChange={e => handleChange('completion_year', e.target.value)} placeholder="e.g. 2024" />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Duration</label>
+                <input type="text" className={styles.input} value={formData.duration || ''} onChange={e => handleChange('duration', e.target.value)} placeholder="e.g. 18 Months" />
+              </div>
+              <div className={styles.formGroup}>
+                <label className={styles.label}>Budget Range</label>
+                <input type="text" className={styles.input} value={formData.budget_range || ''} onChange={e => handleChange('budget_range', e.target.value)} placeholder="e.g. ₹5 Cr - ₹7 Cr" />
+              </div>
+            </div>
+
+            <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
+              <label className={styles.label}>Challenges (Case Study)</label>
+              <textarea className={styles.textarea} value={formData.challenges || ''} onChange={e => handleChange('challenges', e.target.value)} rows={3} />
+            </div>
+
+            <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
+              <label className={styles.label}>Solutions (Case Study)</label>
+              <textarea className={styles.textarea} value={formData.solutions || ''} onChange={e => handleChange('solutions', e.target.value)} rows={3} />
             </div>
 
             <div className={styles.formGroup} style={{ marginTop: '1rem' }}>

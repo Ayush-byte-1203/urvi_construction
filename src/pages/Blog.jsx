@@ -6,6 +6,7 @@ import { useGlobalData } from '../context/GlobalDataContext';
 import SectionHeader from '../components/SectionHeader';
 import MotionWrapper from '../components/MotionWrapper';
 import HeroOverlay from '../components/HeroOverlay';
+import CTASection from '../components/CTASection';
 import { ArrowRight, Clock, User, Calendar, ChevronRight } from 'lucide-react';
 import styles from './Blog.module.css';
 
@@ -127,6 +128,14 @@ const Blog = () => {
           </div>
         )}
       </section>
+
+      {/* ========================================== */}
+      {/* SECTION: CTA */}
+      {/* ========================================== */}
+      <CTASection 
+        title="Looking for Expert Engineering?" 
+        description="Get in touch to discuss your upcoming project. Our team is ready to provide you with a comprehensive structural blueprint and cost analysis."
+      />
     </div>
   );
 };

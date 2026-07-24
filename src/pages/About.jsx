@@ -21,6 +21,7 @@ import sample4 from '../Images/sample4.jpeg';
 
 import HeroOverlay from '../components/HeroOverlay';
 import { HeaderThemeContext } from '../components/Layout';
+import CTASection from '../components/CTASection';
 import styles from './About.module.css';
 
 const About = () => {
@@ -243,7 +244,13 @@ Built to last
         </div>
       </section>
 
-      
+      {/* ========================================== */}
+      {/* SECTION: CTA */}
+      {/* ========================================== */}
+      <CTASection 
+        title="Start Your Engineering Journey Today" 
+        description="Whether it's a residential villa or an industrial logistics park, Paramarsh Construction brings transparency and structural integrity to every blueprint."
+      />
       
     </div>
   );

@@ -29,6 +29,12 @@ const QuotePopup = () => {
   }, []);
 
   useEffect(() => {
+    const handleOpen = () => setIsOpen(true);
+    window.addEventListener('openQuotePopup', handleOpen);
+    return () => window.removeEventListener('openQuotePopup', handleOpen);
+  }, []);
+
+  useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -52,11 +58,14 @@ const QuotePopup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    const whatsappNumber = '919428694361'; // Using footer number as default
-    const text = `Hello, I'm interested in starting a home plan. 
-Name: ${formData.name}
-Phone: ${formData.phone}
-Email: ${formData.email}`;
+    const whatsappNumber = '918320978291'; // Using footer number as default
+    const text = `Hello Paramarsh Construction,
+
+I would like to get a quote for a project. Here are my details:
+
+*Name:* ${formData.name}
+*Phone:* ${formData.phone}
+*Email:* ${formData.email}`;
 
     const encodedText = encodeURIComponent(text);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedText}`;

@@ -50,7 +50,7 @@ const Hero = () => {
           {/* Headline */}
           <h1 
             className={styles.heroTitle} 
-            dangerouslySetInnerHTML={{ __html: siteSettings?.hero_headline || `Your Dream<br/>Our Build<br/><span class="${styles.heroTitleAccent}">Complete Site Solutions</span> Under One Roof!` }}
+            dangerouslySetInnerHTML={{ __html: siteSettings?.hero_headline || `Premium Civil<br/>Construction<br/><span class="${styles.heroTitleAccent}">Residential Commercial Industrial</span>` }}
           />
 
           {/* Subtitle / Factual Value Proposition */}

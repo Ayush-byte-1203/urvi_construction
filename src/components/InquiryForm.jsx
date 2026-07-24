@@ -44,8 +44,9 @@ const InquiryForm = () => {
 
     // Generate WhatsApp Message
     const generateWhatsAppMessage = () => {
-      const date = new Date().toLocaleString('en-IN');
-      return `📩 *New Website Enquiry*
+      return `Hello Paramarsh Construction,
+
+I have submitted an inquiry on your website. Here are my details:
 
 *Name:* ${formData.name}
 *Phone:* ${formData.phone}
@@ -54,8 +55,7 @@ const InquiryForm = () => {
 *Message:*
 ${formData.message}
 
-*Submitted From:* Website Contact Form
-*Date:* ${date}`;
+Looking forward to hearing from you!`;
     };
 
     setStatus('loading');

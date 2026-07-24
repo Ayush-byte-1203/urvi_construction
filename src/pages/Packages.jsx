@@ -238,7 +238,7 @@ const Packages = () => {
         
         <div className={styles.ctaRow} style={{ marginTop: '3rem' }}>
           <Link to="/contact" className="btn btn-primary">Book Consultation</Link>
-          <a href="tel:+919428694361" className="btn btn-secondary">Talk to Expert</a>
+          <a href="tel:+918320978291" className="btn btn-secondary">Talk to Expert</a>
         </div>
       </section>
 

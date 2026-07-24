@@ -44,10 +44,10 @@ const ProjectDetail = () => {
 
   // Specs
   const technicalSpecs = [
-    { label: 'Built area', value: project.built_area || 'Not Specified' },
-    { label: 'Floors Count', value: project.floors_count || 'Not Specified' },
-    { label: 'Material Grade', value: project.material_grade || 'Not Specified' },
-    { label: 'Seismic Protection', value: project.seismic_protection || 'Not Specified' }
+    { label: 'Built Area', value: project.built_area || 'Not Specified' },
+    { label: 'Completion', value: project.completion_year || project.completion_date || 'Not Specified' },
+    { label: 'Duration', value: project.duration || 'Not Specified' },
+    { label: 'Budget Range', value: project.budget_range || 'Not Specified' }
   ];
 
   // Materials Used
@@ -75,7 +75,7 @@ const ProjectDetail = () => {
   };
 
   const faqItems = [
-    { title: 'What was the exact construction duration?', content: `This project was completed within ${project.completion_date ? 'Schedule' : '10 Months'}, aligning with baseline schedules.` },
+    { title: 'What was the exact construction duration?', content: `This project was completed within ${project.duration || project.completion_date || 'Schedule'}, aligning with baseline schedules.` },
     { title: 'Which raw material brands were specified?', content: 'Certified concrete was sourced from UltraTech Cement and steel rebar from TATA Steel.' }
   ];
 
@@ -126,7 +126,7 @@ const ProjectDetail = () => {
         <div className={styles.goalsBlock} style={{ marginTop: '3.5rem' }}>
           <div className={styles.leftCol}>
             <span className="text-overline">Case Context</span>
-            <h2 className={styles.sectionTitle}>Client Requirements</h2>
+            <h2 className={styles.sectionTitle}>Project Overview & Requirements</h2>
             <p className={styles.goalsText}>
               {project.client_requirements || project.description || 'Client requirements were fulfilled according to bespoke structural designs.'}
             </p>
@@ -134,8 +134,8 @@ const ProjectDetail = () => {
           <div className={`glass-panel ${styles.rightCol}`}>
             <strong>Project Metadata</strong>
             <div className={styles.metaRow}>
-              <span>Client: {project.client_name || 'Not Specified'}</span>
-              <span>Architect: {project.architect_name || 'Not Specified'}</span>
+              <span>Client: {project.client_name || 'Confidential'}</span>
+              <span>Architect: {project.architect_name || 'In-house Team'}</span>
               <span>Location: {project.location || 'Not Specified'}</span>
             </div>
           </div>
@@ -145,25 +145,31 @@ const ProjectDetail = () => {
       {/* ========================================== */}
       {/* SECTION: Structural Challenges & Engineering Solutions */}
       {/* ========================================== */}
-      {/* <section className={`section ${styles.challengesSection}`}>
-        <div className="container grid-2" style={{ gap: '3rem' }}>
-          <div className={`glass-panel ${styles.challengesCard}`}>
-            <div className={styles.cardHeader} style={{ color: '#ef4444' }}>
-              <ShieldAlert size={20} />
-              <h3>Site Challenges</h3>
-            </div>
-            <p className={styles.cardText}>{project.challenges}</p>
-          </div>
+      {(project.challenges || project.solutions) && (
+        <section className={`section ${styles.challengesSection}`}>
+          <div className="container grid-2" style={{ gap: '3rem' }}>
+            {project.challenges && (
+              <div className={`glass-panel ${styles.challengesCard}`}>
+                <div className={styles.cardHeader} style={{ color: '#ef4444' }}>
+                  <ShieldAlert size={20} />
+                  <h3>Site Challenges</h3>
+                </div>
+                <p className={styles.cardText}>{project.challenges}</p>
+              </div>
+            )}
 
-          <div className={`glass-panel ${styles.challengesCard}`}>
-            <div className={styles.cardHeader} style={{ color: '#22c55e' }}>
-              <Award size={20} />
-              <h3>Engineering Solutions</h3>
-            </div>
-            <p className={styles.cardText}>{project.solutions}</p>
+            {project.solutions && (
+              <div className={`glass-panel ${styles.challengesCard}`}>
+                <div className={styles.cardHeader} style={{ color: '#22c55e' }}>
+                  <Award size={20} />
+                  <h3>Engineering Solutions</h3>
+                </div>
+                <p className={styles.cardText}>{project.solutions}</p>
+              </div>
+            )}
           </div>
-        </div>
-      </section> */}
+        </section>
+      )}
 
       {/* ========================================== */}
       {/* SECTION: Image Gallery (Replacing Before/After) */}

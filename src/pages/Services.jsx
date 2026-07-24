@@ -14,7 +14,7 @@ import Accordion from '../components/Accordion';
 import MotionWrapper from '../components/MotionWrapper';
 import Button from '../components/Button';
 import HeroOverlay from '../components/HeroOverlay';
-
+import CTASection from '../components/CTASection';
 
 import { HeaderThemeContext } from '../components/Layout';
 import styles from './Services.module.css';
@@ -168,7 +168,13 @@ const Services = () => {
         </div>
       </section> */}
 
-      
+      {/* ========================================== */}
+      {/* SECTION: CTA */}
+      {/* ========================================== */}
+      <CTASection 
+        title="Need a Custom Service Package?" 
+        description="We tailor our architectural and engineering services to meet your specific project requirements and budget constraints."
+      />
       
     </div>
   );

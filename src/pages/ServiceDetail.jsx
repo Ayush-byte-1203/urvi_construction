@@ -12,6 +12,7 @@ import Accordion from '../components/Accordion';
 import MotionWrapper from '../components/MotionWrapper';
 import Button from '../components/Button';
 import InquiryForm from '../components/InquiryForm';
+import CTASection from '../components/CTASection';
 import { useGlobalData } from '../context/GlobalDataContext';
 import { HeaderThemeContext } from '../components/Layout';
 import styles from './ServiceDetail.module.css';
@@ -244,6 +245,14 @@ const ServiceDetail = () => {
           </div>
         </div>
       </section>
+
+      {/* ========================================== */}
+      {/* SECTION: CTA */}
+      {/* ========================================== */}
+      <CTASection 
+        title={`Ready for ${service.title}?`} 
+        description="Speak directly with our engineering division to get a detailed breakdown of specifications and timelines."
+      />
     </div>
   );
 };

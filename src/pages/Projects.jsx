@@ -10,6 +10,7 @@ import SectionHeader from '../components/SectionHeader';
 import MotionWrapper from '../components/MotionWrapper';
 import Button from '../components/Button';
 import HeroOverlay from '../components/HeroOverlay';
+import CTASection from '../components/CTASection';
 
 import { HeaderThemeContext } from '../components/Layout';
 import styles from './Projects.module.css';
@@ -235,8 +236,14 @@ const Projects = () => {
         </div>
       </section>
 
-
-
+      {/* ========================================== */}
+      {/* SECTION: CTA */}
+      {/* ========================================== */}
+      <CTASection 
+        title="Ready to Start Your Project?" 
+        description="Connect with our experts today to get a detailed engineering quote and structural assessment."
+      />
+      
     </div>
   );
 };

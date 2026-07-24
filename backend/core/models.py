@@ -183,6 +183,13 @@ class Project(models.Model):
     architect_name = models.CharField(max_length=255, null=True, blank=True)
     client_requirements = models.TextField(null=True, blank=True)
     
+    # Premium Case Study Fields
+    completion_year = models.CharField(max_length=50, null=True, blank=True, help_text="e.g. 2024")
+    duration = models.CharField(max_length=100, null=True, blank=True, help_text="e.g. 18 Months")
+    budget_range = models.CharField(max_length=100, null=True, blank=True, help_text="e.g. ₹5 Cr - ₹7 Cr")
+    challenges = models.TextField(null=True, blank=True)
+    solutions = models.TextField(null=True, blank=True)
+    
     def __str__(self):
         return self.title
 
