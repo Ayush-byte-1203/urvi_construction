@@ -5,8 +5,8 @@ import styles from './FloatingWhatsApp.module.css';
 const FloatingWhatsApp = () => {
   const { siteSettings } = useGlobalData();
   
-  const rawPhone = siteSettings?.contact_phone || '918320978291'; 
-  const whatsappNumber = rawPhone.replace(/[^0-9]/g, '');
+  const rawPhone = '918320978291'; 
+  const whatsappNumber = rawPhone;
   const message = "Hi! I am looking for construction services. Can we discuss my project?";
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
