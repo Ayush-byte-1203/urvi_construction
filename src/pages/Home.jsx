@@ -117,6 +117,15 @@ const Home = () => {
     setTestimonialIndex((prev) => (prev === (testimonialsData || []).length - 1 ? 0 : prev + 1));
   };
 
+  // Auto slide for testimonials
+  useEffect(() => {
+    if (!testimonialsData || testimonialsData.length === 0) return;
+    const interval = setInterval(() => {
+      setTestimonialIndex((prev) => (prev === testimonialsData.length - 1 ? 0 : prev + 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [testimonialsData]);
+
   // Convert FAQs preview list
   const faqItems = (faqData || []).slice(0, 4).map((f) => ({
     title: f.question || f.q,
