@@ -1,34 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Phone } from 'lucide-react';
-import MotionWrapper from './MotionWrapper';
 import styles from './CTASection.module.css';
 
-const CTASection = ({ 
-  title = "Ready to Build Your Vision?", 
-  description = "Partner with us for end-to-end structural excellence, premium materials, and absolute transparency from blueprint to handover.",
-  primaryText = "Request a Free Quote",
-  primaryLink = "/contact",
-  secondaryText = "Call Us Now",
-  secondaryLink = "tel:+918320978291"
-}) => {
+const CTASection = ({ title, subtitle, btnText = "Get a Free Consultation", btnLink = "/contact", eyebrow }) => {
   return (
     <section className={styles.ctaSection}>
-      <div className={styles.ctaBackground} />
-      <div className={`container ${styles.ctaContainer}`}>
-        <MotionWrapper variant="slideUp">
-          <h2 className={styles.title}>{title}</h2>
-          <p className={styles.description}>{description}</p>
-          
-          <div className={styles.buttonGroup}>
-            <Link to={primaryLink} className={styles.primaryButton}>
-              {primaryText} <ArrowRight size={18} />
-            </Link>
-            <a href={secondaryLink} className={styles.secondaryButton}>
-              <Phone size={18} /> {secondaryText}
-            </a>
-          </div>
-        </MotionWrapper>
+      <div className={styles.ctaContainer}>
+        {eyebrow && <span className="text-overline" style={{ marginBottom: '1rem', display: 'block' }}>{eyebrow}</span>}
+        <h2 className={styles.title}>
+          {title || "Ready to Bring Your Vision to Life?"}
+        </h2>
+        <p className={styles.description}>
+          {subtitle || "Contact our team of experts today for a free site visit and project estimation."}
+        </p>
+        <div className={styles.buttonGroup}>
+          <Link to={btnLink} className={styles.primaryButton}>
+            {btnText} <ArrowRight size={16} />
+          </Link>
+          <a href="tel:+919876543210" className={styles.secondaryButton}>
+            Call Us Now <Phone size={16} />
+          </a>
+        </div>
       </div>
     </section>
   );

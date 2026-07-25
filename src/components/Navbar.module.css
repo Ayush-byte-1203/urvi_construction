@@ -22,7 +22,8 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.05));
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); /* shadow on scroll only */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  /* shadow on scroll only */
   height: 64px;
 }
 
@@ -183,6 +184,84 @@
   box-shadow: var(--shadow-accent);
 }
 
+/* DROPDOWN MENU */
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--bg-card, #ffffff);
+  border: 1px solid var(--border-subtle, rgba(0, 0, 0, 0.05));
+  border-radius: var(--radius-md, 14px);
+  padding: 0.5rem;
+  min-width: 260px;
+  box-shadow: var(--shadow-dropdown, 0 6px 20px rgba(0, 0, 0, 0.1));
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  animation: fadeInDown 0.2s ease forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.dropdownItem {
+  padding: 0.875rem 1.25rem;
+  color: var(--text-secondary, #334155);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius-sm, 10px);
+  transition: all var(--transition-fast, 0.18s ease);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.dropdownItem:last-child {
+  margin-bottom: 0;
+}
+
+.dropdownItem:hover,
+.dropdownItem:focus {
+  background: var(--accent, #ff6b35);
+  color: #ffffff;
+  transform: translateX(4px);
+}
+
+/* Phone CTA */
+.phoneCta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary, #0f172a);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.headerTransparentDark .phoneCta,
+.header .phoneCta {
+  color: #ffffff;
+}
+
+.headerScrolled .phoneCta,
+.headerTransparentLight .phoneCta {
+  color: var(--text-primary, #0f172a);
+}
+
+.phoneCta:hover {
+  color: var(--accent, #ff6b35);
+}
+
 /* Media Queries for Responsiveness */
 @media (max-width: 1024px) {
   .desktopNav {
@@ -191,6 +270,12 @@
 
   .menuToggle {
     display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .desktopOnly {
+    display: none !important;
   }
 }
 

@@ -1,141 +1,148 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useContext, useState, useMemo } from 'react';
+import SEO from '../components/SEO';
 import { HeaderThemeContext } from '../components/Layout';
-import { useGlobalData } from '../context/GlobalDataContext';
 import SectionHeader from '../components/SectionHeader';
-import MotionWrapper from '../components/MotionWrapper';
-import HeroOverlay from '../components/HeroOverlay';
-import CTASection from '../components/CTASection';
-import { ArrowRight, Clock, User, Calendar, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import styles from './Blog.module.css';
+
+import { useGlobalData } from '../context/GlobalDataContext';
 
 const Blog = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
-  const { blogs, blogCategories } = useGlobalData();
+  const { blogs: allPosts } = useGlobalData();
+  const [visiblePosts, setVisiblePosts] = useState(6);
   const [activeCategory, setActiveCategory] = useState('All');
 
   useEffect(() => {
-    setHeaderTheme('dark');
+    setHeaderTheme('light');
   }, [setHeaderTheme]);
 
-  const categories = ['All', ...new Set(blogCategories?.map(c => c.name) || [])];
+  const categories = useMemo(() => {
+    if (!allPosts) return ['All'];
+    const cats = new Set(allPosts.map(p => p.category?.name || p.category_name).filter(Boolean));
+    return ['All', ...Array.from(cats)];
+  }, [allPosts]);
 
-  const filteredBlogs = activeCategory === 'All'
-    ? (blogs || [])
-    : (blogs || []).filter(b => b.category_name === activeCategory);
+  const filteredPosts = useMemo(() => {
+    if (!allPosts) return [];
+    if (activeCategory === 'All') return allPosts;
+    return allPosts.filter(p => (p.category?.name || p.category_name) === activeCategory);
+  }, [activeCategory, allPosts]);
+
+  const loadMore = () => {
+    setVisiblePosts(prev => Math.min(prev + 3, filteredPosts.length));
+  };
 
   return (
-    <div className="blog-page">
-      <Helmet>
-        <title>Blog | Paramarsh Construction</title>
-        <meta name="description" content="Read the latest news, insights, and construction methodologies from Paramarsh Construction." />
-      </Helmet>
+    <div className="page-wrapper">
+      <SEO 
+        title="Construction Blog | Insights & Trends"
+        description="Read our latest articles on construction trends, architectural design, and home building tips."
+      />
 
-      {/* ========================================== */}
-      {/* SECTION: Breadcrumbs Subpage Hero */}
-      {/* ========================================== */}
-      <section className={styles.hero}>
-        <HeroOverlay type="dark" />
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className={styles.breadcrumbs}>
-            <Link to="/">Home</Link>
-            <ChevronRight size={12} />
-            <span>Blog</span>
-          </div>
-          <div className={styles.heroText}>
-            {/* <span className={styles.heroEyebrow}>Insights & News</span> */}
-            <h1 className={styles.heroTitle}>Construction Blog</h1>
-            <p className={styles.heroDesc}>
-              Dive deep into civil engineering insights, project updates, and modern building methodologies.
+      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('https://images.unsplash.com/photo-1541888081600-01103f6f1c4e?auto=format&fit=crop&w=1920&q=80')` }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="breadcrumbs">
+              <Link to="/">Home</Link>
+              <span>/</span>
+              <span>Blog</span>
+            </div>
+            <h1>Insights, Trends & Guides</h1>
+            <p className="subtitle">
+              Expert advice and industry news to help you navigate your construction journey with confidence.
             </p>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </header>
 
-      <section className="section container" style={{ paddingTop: '3rem' }}>
-
-        {/* Categories Filter */}
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '3rem', flexWrap: 'wrap' }}>
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              style={{
-                padding: '0.5rem 1.5rem',
-                borderRadius: '50px',
-                background: activeCategory === cat ? 'var(--accent)' : 'var(--bg-card)',
-                color: activeCategory === cat ? '#fff' : 'var(--text-main)',
-                border: '1px solid',
-                borderColor: activeCategory === cat ? 'var(--accent)' : 'var(--border)',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-                fontWeight: 600,
-                fontSize: '0.9rem'
-              }}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Blog Grid */}
-        {filteredBlogs?.length > 0 ? (
-          <div className="grid-3" style={{ marginTop: '3.5rem', gap: '2rem' }}>
-            {filteredBlogs.map((post, idx) => (
-              <MotionWrapper key={post.id} variant="slideUp" delay={idx * 0.1} className="glass-panel" style={{ padding: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-                <Link to={`/blog/${post.id}`} style={{ position: 'relative', height: '220px', overflow: 'hidden', display: 'block' }}>
-                  <img
-                    src={post.image || 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'}
-                    alt={post.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
-                  />
-                  {post.category_name && (
-                    <span style={{ position: 'absolute', top: '1rem', left: '1rem', background: 'var(--accent)', color: '#fff', padding: '0.25rem 0.75rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase' }}>
-                      {post.category_name}
-                    </span>
-                  )}
-                </Link>
-
-                <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                  <div style={{ display: 'flex', gap: '1rem', fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><Calendar size={14} /> {new Date(post.date).toLocaleDateString()}</span>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }}><User size={14} /> {post.author}</span>
-                  </div>
-
-                  <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', lineHeight: 1.4 }}>
-                    <Link to={`/blog/${post.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
-                      {post.title}
-                    </Link>
-                  </h3>
-
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1.5rem', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                    {post.content.replace(/<[^>]+>/g, '')}
-                  </p>
-
-                  <div style={{ marginTop: 'auto' }}>
-                    <Link to={`/blog/${post.id}`} style={{ display: 'inline-flex', alignItems: 'center', color: 'var(--accent)', fontWeight: 600, textDecoration: 'none', fontSize: '0.9rem' }}>
-                      Read Article <ArrowRight size={16} style={{ marginLeft: '4px' }} />
-                    </Link>
-                  </div>
-                </div>
-              </MotionWrapper>
+      <section className={`section ${styles.blogSection}`} style={{ paddingTop: '2rem' }}>
+        <div className="container">
+          
+          {/* Category Filter Tabs */}
+          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '3rem' }}>
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                style={{
+                  padding: '0.5rem 1.5rem',
+                  borderRadius: '100px',
+                  fontWeight: '600',
+                  border: '1px solid',
+                  borderColor: activeCategory === cat ? 'var(--accent)' : 'var(--border)',
+                  backgroundColor: activeCategory === cat ? 'var(--accent)' : 'transparent',
+                  color: activeCategory === cat ? '#fff' : 'var(--text-secondary)',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s'
+                }}
+              >
+                {cat}
+              </button>
             ))}
           </div>
-        ) : (
-          <div style={{ textAlign: 'center', padding: '5rem 0', color: 'var(--text-muted)' }}>
-            No blog posts available in this category yet. Check back later!
-          </div>
-        )}
-      </section>
 
-      {/* ========================================== */}
-      {/* SECTION: CTA */}
-      {/* ========================================== */}
-      <CTASection 
-        title="Looking for Expert Engineering?" 
-        description="Get in touch to discuss your upcoming project. Our team is ready to provide you with a comprehensive structural blueprint and cost analysis."
-      />
+          <motion.div layout className={styles.grid}>
+            <AnimatePresence>
+              {filteredPosts.slice(0, visiblePosts).map((post, idx) => (
+                <motion.div 
+                  key={post.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4 }}
+                  className={styles.card}
+                >
+                  <div className={styles.imageWrapper}>
+                    <img src={post.image} alt={post.title} className={styles.image} loading="lazy" />
+                    <div className={styles.categoryBadge}>{post.category_name}</div>
+                  </div>
+                  
+                  <div className={styles.cardContent}>
+                    <div className={styles.metaData}>
+                      <Calendar size={14} />
+                      <span>{post.date}</span>
+                    </div>
+                    
+                    <h3 className={styles.cardTitle}>
+                      <Link to={`/blog/${post.slug || post.id}`}>{post.title}</Link>
+                    </h3>
+                    
+                    <p className={styles.cardExcerpt}>{post.excerpt || post.content.replace(/<[^>]+>/g, '').substring(0, 100) + '...'}</p>
+                    
+                    <div className={styles.cardFooter}>
+                      <Link to={`/blog/${post.slug || post.id}`} className={styles.readMoreLink}>
+                        Read Article <ArrowRight size={16} style={{ marginLeft: '4px' }} />
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+          
+          {filteredPosts.length === 0 && (
+            <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
+              No articles found in this category.
+            </div>
+          )}
+          
+          {visiblePosts < filteredPosts.length && (
+            <div className={styles.loadMoreWrapper} style={{ marginTop: '3rem', textAlign: 'center' }}>
+              <button onClick={loadMore} className="btn btn-secondary">
+                Load More Posts
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
     </div>
   );
 };

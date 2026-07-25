@@ -1,11 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Globe, Share2, MessageSquare, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Globe, Share2, MessageSquare, Send, Clock } from 'lucide-react';
 import { appConfig } from '../data/appConfig';
 import { navigationData } from '../data/navigationData';
 import Logo from './Logo';
 import { useGlobalData } from '../context/GlobalDataContext';
-// import Newsletter from './Newsletter';
 import styles from './Footer.module.css';
 
 const Footer = () => {
@@ -22,7 +21,8 @@ const Footer = () => {
             <Logo />
           </div>
           <p className={styles.footerDescription}>
-            Your One-Point Solution for All Construction Challenges          </p>
+            Your One-Point Solution for All Construction Challenges
+          </p>
           <div className={styles.socialLinks}>
             <a href={siteSettings?.facebook_url || appConfig.social.facebook} target="_blank" rel="noreferrer" aria-label="Facebook Page Link"><Globe size={18} /></a>
             <a href={siteSettings?.twitter_url || appConfig.social.twitter} target="_blank" rel="noreferrer" aria-label="Twitter Page Link"><MessageSquare size={18} /></a>
@@ -33,7 +33,7 @@ const Footer = () => {
 
         {/* Links Column */}
         <div className={styles.footerCol}>
-          <h3 className={styles.footerColTitle}>Explore</h3>
+          <h3 className={styles.footerColTitle}>Quick Links</h3>
           <ul className={styles.footerLinks}>
             {footerLinks.navigation.map((link, idx) => (
               <li key={idx}><Link to={link.path}>{link.name}</Link></li>
@@ -43,7 +43,7 @@ const Footer = () => {
 
         {/* Specialties Column */}
         <div className={styles.footerCol}>
-          <h3 className={styles.footerColTitle}>Specialties</h3>
+          <h3 className={styles.footerColTitle}>Services</h3>
           <ul className={styles.footerLinks}>
             {footerLinks.specialties.map((link, idx) => (
               <li key={idx}><Link to={link.path}>{link.name}</Link></li>
@@ -51,10 +51,14 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Contacts & Newsletter */}
+        {/* Contacts */}
         <div className={`${styles.footerCol} ${styles.footerColContact}`}>
-          <h3 className={styles.footerColTitle}>Corporate Update</h3>
+          <h3 className={styles.footerColTitle}>Contact Info</h3>
           <div className={styles.footerContactItems}>
+            <div className={styles.footerContactItem}>
+              <MapPin size={16} className={styles.contactIcon} />
+              <span>{siteSettings?.address || appConfig.company.address}</span>
+            </div>
             <div className={styles.footerContactItem}>
               <Phone size={16} className={styles.contactIcon} />
               <a href={`tel:${siteSettings?.contact_phone ? siteSettings.contact_phone.replace(/\D/g, '') : appConfig.company.phoneFormatted.replace('tel:', '')}`}>{siteSettings?.contact_phone || appConfig.company.phone}</a>
@@ -64,12 +68,10 @@ const Footer = () => {
               <a href={`mailto:${siteSettings?.contact_email || appConfig.company.email}`}>{siteSettings?.contact_email || appConfig.company.email}</a>
             </div>
             <div className={styles.footerContactItem}>
-              <MapPin size={16} className={styles.contactIcon} />
-              <span>{siteSettings?.address || appConfig.company.address}</span>
+              <Clock size={16} className={styles.contactIcon} />
+              <span>Mon - Sat: 9:00 AM - 6:00 PM<br />Sun: Closed</span>
             </div>
           </div>
-
-
         </div>
       </div>
 

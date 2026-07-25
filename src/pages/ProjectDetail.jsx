@@ -71,7 +71,7 @@ const ProjectDetail = () => {
   const fallbackImage = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80';
 
   const heroStyle = {
-    backgroundImage: `linear-gradient(rgba(11, 15, 25, 0.85), rgba(11, 15, 25, 0.9)), url(${project.image || fallbackImage})`
+    backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url(${project.image || fallbackImage})`
   };
 
   const handleMouseMove = (e) => {
@@ -96,20 +96,25 @@ const ProjectDetail = () => {
       {/* ========================================== */}
       {/* SECTION: Hero Header */}
       {/* ========================================== */}
-      <section className={styles.hero} style={heroStyle}>
-        <div className={`container ${styles.heroContainer}`}>
-          <div className={styles.breadcrumbs}>
-            <Link to="/">Home</Link>
-            <ChevronRight size={10} />
-            <Link to="/projects">Projects</Link>
-            <ChevronRight size={10} />
-            <span>Case Study</span>
-          </div>
-
-          <h1 className={styles.heroTitle}>{project.title}</h1>
-          <p className={styles.heroDesc}>{project.category_name || project.category || 'Portfolio'} &middot; Completed specs case study</p>
+      <header className="subpage-header" style={heroStyle}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="breadcrumbs">
+              <Link to="/">Home</Link>
+              <span>/</span>
+              <Link to="/projects">Projects</Link>
+              <span>/</span>
+              <span>Case Study</span>
+            </div>
+            <h1>{project.title}</h1>
+            <p className="subtitle">{project.category_name || project.category || 'Portfolio'} &middot; Completed specs case study</p>
+          </motion.div>
         </div>
-      </section>
+      </header>
 
       {/* ========================================== */}
       {/* SECTION: Specifications Dashboard */}

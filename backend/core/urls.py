@@ -6,7 +6,7 @@ from .views import (
     CoreValueViewSet, BlogCategoryViewSet, BlogPostViewSet,
     ServiceCategoryViewSet, ProjectCategoryViewSet, FAQCategoryViewSet,
     PackageAdvantageViewSet, PackageMaterialCategoryViewSet, PackageMaterialSpecViewSet, PackageFAQViewSet,
-    ProjectImageViewSet, GalleryImageViewSet
+    ProjectImageViewSet, GalleryImageViewSet, JourneyMilestoneViewSet
 )
 
 router = DefaultRouter()
@@ -30,7 +30,12 @@ router.register(r'faqs', FAQViewSet)
 router.register(r'core-values', CoreValueViewSet)
 router.register(r'blog-categories', BlogCategoryViewSet)
 router.register(r'blogs', BlogPostViewSet)
+router.register(r'journey', JourneyMilestoneViewSet)
 
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
 
 urlpatterns = [
     path('', include(router.urls)),

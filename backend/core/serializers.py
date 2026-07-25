@@ -3,7 +3,7 @@ from .models import (
     SiteSettings, PageContent, ServiceCategory, Service,
     Package, PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
     ProjectCategory, Project, ProjectImage, Testimonial, FAQCategory, FAQ,
-    CoreValue,
+    CoreValue, JourneyMilestone,
     BlogCategory, BlogPost, GalleryImage
 )
 
@@ -96,7 +96,10 @@ class CoreValueSerializer(serializers.ModelSerializer):
         model = CoreValue
         fields = '__all__'
 
-
+class JourneyMilestoneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = JourneyMilestone
+        fields = '__all__'
 
 class BlogCategorySerializer(serializers.ModelSerializer):
     class Meta:

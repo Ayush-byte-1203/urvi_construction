@@ -2,7 +2,8 @@
    FOOTER — Deep Navy, Premium Contrast
    ============================================= */
 .footer {
-  background: var(--text-primary, #111827); /* Charcoal background */
+  background: var(--text-primary, #111827);
+  /* Charcoal background */
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   padding: 2rem 0 0;
   position: relative;
@@ -175,6 +176,10 @@
   .footerGrid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+  }
+  
+  .footer {
+    padding-bottom: 5rem;
   }
 
   .subFooterContent {

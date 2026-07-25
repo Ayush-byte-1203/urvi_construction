@@ -6,6 +6,7 @@ const SectionHeader = ({
   heading,
   subheading,
   align = 'center',
+  center, // destructured so it doesn't go into DOM
   className = '',
   ...props
 }) => {

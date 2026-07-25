@@ -1,47 +1,62 @@
-import React, { useContext, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { appConfig } from '../data/appConfig';
+import React, { useEffect, useContext } from 'react';
+import SEO from '../components/SEO';
 import { HeaderThemeContext } from '../components/Layout';
+import SectionHeader from '../components/SectionHeader';
+import styles from './Legal.module.css';
 
 const TermsConditions = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
 
   useEffect(() => {
-    setHeaderTheme('dark');
+    setHeaderTheme('light');
   }, [setHeaderTheme]);
+
   return (
-    <div className="terms-page">
-      <Helmet>
-        <title>Terms & Conditions | {appConfig.company.name}</title>
-        <meta name="description" content="General terms and conditions regarding estimation agreements." />
-      </Helmet>
+    <div className="page-wrapper">
+      <SEO title="Terms & Conditions" description="Terms and conditions for using our services." />
 
-      <section className="subpage-header">
+      <div className={styles.pageHeader}>
         <div className="container">
-          <span className="accent-text">Legal Department</span>
-          <h1 className="title-large mb-3">Terms & Conditions</h1>
-          <p className="subtitle">Last updated: June 30, 2026. General terms governing structural contracts, site inspections, and billing estimates.</p>
+          <SectionHeader
+            heading="Terms & Conditions"
+            subheading="Last updated: October 2026"
+            center
+          />
         </div>
-      </section>
+      </div>
 
-      <section className="subpage-content container" style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <h2 className="mb-3" style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }}>1. Structural Estimates Validity</h2>
-        <p className="mb-6">
-          Any BOQ (Bill of Quantities) and cost tables prepared by our automated estimators are valid specifically for 30 calendar days from issue.
-          Raw steel, cement, and electrical cabling prices vary with market triggers, and adjustments are logged accordingly.
-        </p>
+      <section className={`section container ${styles.legalSection}`}>
+        <div className={styles.content}>
+          <h3>1. Agreement to Terms</h3>
+          <p>
+            By accessing or using our website and services, you agree to be bound by these Terms and Conditions. If you disagree with any part of the terms, you may not access the service.
+          </p>
 
-        <h2 className="mb-3" style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }}>2. Site Clearances & Legal Permits</h2>
-        <p className="mb-6">
-          Clients are responsible for providing clear, undisputed land boundaries and deed documents. 
-          BuildCraft manages civil submissions for permits, but the owner remains liable for local zoning violations.
-        </p>
+          <h3>2. Intellectual Property</h3>
+          <p>
+            The website and its original content, features, functionality, architectural designs, and floor plans are owned by the Company and are protected by international copyright, trademark, and other intellectual property laws.
+          </p>
 
-        <h2 className="mb-3" style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }}>3. Payment Schedules Strictness</h2>
-        <p className="mb-6">
-          Construction schedules depend directly on timely payment advances. Delaying milestone checks for more than 10 banking days 
-          gives BuildCraft the right to pause site operations to prevent layout supply disruptions.
-        </p>
+          <h3>3. Service Estimates</h3>
+          <p>
+            Any cost estimates provided on this website or via preliminary consultation are indicative. Final binding costs are only established upon signing a formal construction agreement and BOQ (Bill of Quantities).
+          </p>
+
+          <h3>4. User Responsibilities</h3>
+          <p>
+            Users agree to provide accurate information when requesting quotes. The Company is not responsible for delays caused by inaccurate site details or unverified property ownership claims provided by the client.
+          </p>
+
+          <h3>5. Limitation of Liability</h3>
+          <p>
+            In no event shall the Company, nor its directors, employees, or partners, be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the website or our general services.
+          </p>
+
+          <h3>6. Governing Law</h3>
+          <p>
+            These Terms shall be governed and construed in accordance with the laws of India, without regard to its conflict of law provisions. Jurisdiction shall lie exclusively with the courts in Bengaluru.
+          </p>
+        </div>
       </section>
     </div>
   );

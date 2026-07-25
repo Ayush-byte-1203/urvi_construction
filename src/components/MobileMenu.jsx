@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { X, ChevronRight } from 'lucide-react';
+import { X, ChevronRight, ChevronDown } from 'lucide-react';
 import { ROUTES } from '../data/routes';
+import { useGlobalData } from '../context/GlobalDataContext';
 import styles from './MobileMenu.module.css';
 
 const MobileMenu = ({ isOpen, onClose }) => {
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const { services } = useGlobalData();
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -26,10 +29,16 @@ const MobileMenu = ({ isOpen, onClose }) => {
   const navItems = [
     { name: 'Home', path: ROUTES.HOME },
     { name: 'About Us', path: ROUTES.ABOUT },
-    { name: 'Services', path: ROUTES.SERVICES },
+    { name: 'Packages', path: ROUTES.PACKAGES },
+    { name: 'Services', path: ROUTES.SERVICES, hasChildren: true },
     { name: 'Completed Projects', path: ROUTES.PROJECTS },
     { name: 'Blog', path: ROUTES.BLOG }
   ];
+
+  const servicesList = (services || []).map(s => ({
+    name: s.title,
+    path: `/services/${s.slug || s.id}`
+  }));
 
   return (
     <>
@@ -55,17 +64,51 @@ const MobileMenu = ({ isOpen, onClose }) => {
         {/* Navigation list */}
         <nav className={styles.navList} role="navigation">
           {navItems.map((link) => (
-            <NavLink
-              key={link.path}
-              to={link.path}
-              className={({ isActive }) => 
-                `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-              }
-              onClick={onClose}
-            >
-              <span>{link.name}</span>
-              <ChevronRight size={14} className={styles.chevron} />
-            </NavLink>
+            <React.Fragment key={link.path}>
+              {link.hasChildren ? (
+                <div className={styles.navAccordionWrapper}>
+                  <div
+                    className={`${styles.navLink} ${servicesOpen ? styles.navLinkActive : ''}`}
+                    onClick={() => setServicesOpen(!servicesOpen)}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronDown size={14} className={`${styles.chevron} ${servicesOpen ? styles.chevronOpen : ''}`} style={{ transform: servicesOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                  </div>
+                  {servicesOpen && (
+                    <div className={styles.accordionContent}>
+                      <NavLink
+                        to={link.path}
+                        className={({ isActive }) => `${styles.subNavLink} ${isActive ? styles.subNavLinkActive : ''}`}
+                        onClick={onClose}
+                      >
+                        Overview
+                      </NavLink>
+                      {servicesList.map((service, idx) => (
+                        <NavLink
+                          key={idx}
+                          to={service.path}
+                          className={({ isActive }) => `${styles.subNavLink} ${isActive ? styles.subNavLinkActive : ''}`}
+                          onClick={onClose}
+                        >
+                          {service.name}
+                        </NavLink>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <NavLink
+                  to={link.path}
+                  className={({ isActive }) => 
+                    `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
+                  }
+                  onClick={onClose}
+                >
+                  <span>{link.name}</span>
+                  <ChevronRight size={14} className={styles.chevron} />
+                </NavLink>
+              )}
+            </React.Fragment>
           ))}
         </nav>
 

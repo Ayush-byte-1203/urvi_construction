@@ -3,19 +3,14 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  ChevronRight, CheckCircle2, HelpCircle, ShieldCheck
-} from 'lucide-react';
+import { ChevronRight, CheckCircle2 } from 'lucide-react';
 import { appConfig } from '../data/appConfig';
 import { usePageData } from '../hooks/usePageData';
 import { useGlobalData } from '../context/GlobalDataContext';
-import SectionHeader from '../components/SectionHeader';
-import QuoteWizard from '../components/QuoteWizard';
-import MotionWrapper from '../components/MotionWrapper';
-import Button from '../components/Button';
 import HeroOverlay from '../components/HeroOverlay';
-import PackageComparisonTable from '../components/PackageComparisonTable';
-
+import CostCalculatorSection from '../components/CostCalculatorSection';
+import FAQSection from '../components/FAQSection';
+import CTASection from '../components/CTASection';
 import { HeaderThemeContext } from '../components/Layout';
 import styles from './Packages.module.css';
 
@@ -24,9 +19,6 @@ const Packages = () => {
   const { pageData, isLoading: pageLoading } = usePageData('packages');
   const globalData = useGlobalData();
   const globalLoading = globalData.isLoading;
-  const [activePackage, setActivePackage] = useState(0); 
-  const [openCategory, setOpenCategory] = useState('Design & Drawings');
-
 
   const isLoading = globalLoading || pageLoading;
 
@@ -34,36 +26,28 @@ const Packages = () => {
     setHeaderTheme('dark');
   }, [setHeaderTheme]);
 
-
-
   // Use dynamic packages from the backend
   const packageTiers = globalData.packages || [];
   
-  if (packageTiers.length === 0) {
-    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>No packages available. Please add them in the admin panel.</div>;
-  }
-  
-  // Make sure activePackage is in bounds
-  const currentActiveIdx = activePackage < packageTiers.length ? activePackage : 0;
-  const activeData = packageTiers[currentActiveIdx];
-  
-  // Pre-process material specs for easy accordion rendering
-  // Backend returns: [{category_name: 'Design & Drawings', brand: '...', spec: '...'}, ...]
-  // We want: { 'Design & Drawings': { brand: '...', spec: '...', ... } }
-  const materialSpecs = {};
-  packageTiers.forEach(tier => {
-    materialSpecs[tier.id] = {};
-    if (tier.material_specs) {
-      tier.material_specs.forEach(spec => {
-         if (!materialSpecs[tier.id][spec.category_name]) {
-           materialSpecs[tier.id][spec.category_name] = [];
-         }
-         materialSpecs[tier.id][spec.category_name].push(spec);
-      });
-    }
-  });
+  // State for which category is open per package
+  // packageId -> categoryName
+  const [openCategories, setOpenCategories] = useState({});
+  const [selectedCity, setSelectedCity] = useState('All');
 
+  // Extract unique cities from all packages
+  const availableCities = ['All', ...new Set(packageTiers.flatMap(tier => tier.cities?.map(c => c.name) || []))];
 
+  // Filter package tiers based on selected city
+  const filteredTiers = selectedCity === 'All' 
+    ? packageTiers 
+    : packageTiers.filter(tier => tier.cities?.some(c => c.name === selectedCity));
+
+  const toggleAccordion = (packageId, categoryName) => {
+    setOpenCategories(prev => ({
+      ...prev,
+      [packageId]: prev[packageId] === categoryName ? null : categoryName
+    }));
+  };
 
   if (isLoading) {
     return (
@@ -73,202 +57,139 @@ const Packages = () => {
     );
   }
 
+  if (packageTiers.length === 0) {
+    return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>No packages available. Please add them in the admin panel.</div>;
+  }
+
   return (
     <div className="packages-page">
       <Helmet>
-        <title>Interactive Pricing Packages | {appConfig.company.name}</title>
-        <meta name="description" content={pageData?.subtitle || "Explore and compare Standard, Premium, and Luxury packages"} />
-        <link rel="canonical" href={`${appConfig.seo.siteUrl}/packages`} />
+        <title>Construction Packages | {appConfig.company.name}</title>
+        <meta name="description" content={pageData?.subtitle || "Explore our transparent construction packages."} />
       </Helmet>
 
       {/* Hero Section */}
-      <section className={styles.heroSection}>
-                {pageData?.hero_video && (
-          <video autoPlay loop muted playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
-            <source src={pageData.hero_video} type="video/mp4" />
-          </video>
-        )}
-        {pageData?.hero_image && !pageData?.hero_video && (
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${pageData.hero_image})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
-        )}
-
-        <HeroOverlay type="dark" />
-        <div className={`container ${styles.heroContainer}`}>
-          <div className={styles.breadcrumbs}>
-            <Link to="/">Home</Link>
-            <ChevronRight size={10} />
-            <span>Interactive Packages</span>
-          </div>
-          <h1 className={styles.heroTitle}>{pageData?.title || 'Premium Construction Packages'}</h1>
-          <p className={styles.heroDesc}>
-            {pageData?.subtitle || 'Choose a package tier to explore categorized material specifications, cost transparency charts, advantages, and dynamic estimator comparisons.'}
-          </p>
+      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url(${pageData?.hero_image || 'https://images.unsplash.com/photo-1541888081600-01103f6f1c4e?auto=format&fit=crop&w=1920&q=80'})` }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="breadcrumbs">
+              <Link to="/">Home</Link>
+              <span>/</span>
+              <span>Packages</span>
+            </div>
+            <h1>{pageData?.title || 'Construction Packages'}</h1>
+            <p className="subtitle">
+              {pageData?.subtitle || 'Transparent, flexible pricing tiers for every budget. Explore our inclusions below.'}
+            </p>
+          </motion.div>
         </div>
-      </section>
+      </header>
 
-      {/* 1. Interactive Package Selector */}
-      <section className="section container">
-        <SectionHeader
-          eyebrow="Explore Tiers"
-          heading="Select Your Specifications Package"
-          subheading="Click on a package to update details, material standards, advantages, and calculation metrics across the entire page."
-        />
-
-        <div className={styles.selectorGrid} style={{ marginTop: '2.5rem' }}>
-          {packageTiers.map((tier, idx) => {
-            const isActive = idx === activePackage;
-            return (
-              <div
-                key={tier.id}
-                onClick={() => setActivePackage(idx)}
-                className={`${styles.selectorCard} ${isActive ? styles.selectorCardActive : ''}`}
+      {/* Pricing Tiers Grid */}
+      <section className="section container" style={{ backgroundColor: 'var(--bg-primary)' }}>
+        {/* City Filter Tabs */}
+        {availableCities.length > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+            {availableCities.map(city => (
+              <button
+                key={city}
+                onClick={() => setSelectedCity(city)}
+                style={{
+                  padding: '0.75rem 1.5rem',
+                  borderRadius: 'var(--radius-full)',
+                  border: '1px solid var(--border)',
+                  backgroundColor: selectedCity === city ? 'var(--accent)' : 'var(--bg-card)',
+                  color: selectedCity === city ? '#fff' : 'var(--text-primary)',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                  boxShadow: selectedCity === city ? '0 4px 12px rgba(234, 88, 12, 0.2)' : 'none'
+                }}
               >
-                <div className={styles.selectorCardHeader}>
-                  <h4>{tier.name}</h4>
-                  <div className={styles.selectorCardPrice}>
-                    <strong>₹{tier.price}</strong>
-                    <span>/ sq.ft. onwards</span>
-                  </div>
-                </div>
-                <p className={styles.selectorCardTagline}>{tier.tagline}</p>
-                {isActive && <div className={styles.activeIndicator} />}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 2. Dynamic Package Details Panel */}
-      <section className={`section ${styles.detailsSection}`}>
-        <div className="container">
-          <div className={styles.detailsPanel}>
-            <div className={styles.detailsPanelLeft}>
-              <span className={styles.panelBadge}>Active Details Panel</span>
-              <h2>{activeData.name} Overview</h2>
-              <p className={styles.panelDesc}>{activeData.description}</p>
-
-              <div className={styles.panelTagGroup}>
-                <div className={styles.panelTag}>
-                  <strong>Best For:</strong>
-                  <span>{activeData.best_for}</span>
-                </div>
-                <div className={styles.panelTag}>
-                  <strong>Warranty:</strong>
-                  <span>{activeData.warranty}</span>
-                </div>
-                <div className={styles.panelTag}>
-                  <strong>Timeline:</strong>
-                  <span>{activeData.timeline}</span>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.detailsPanelRight}>
-              <div className={styles.metricGrid}>
-                <div className={styles.metricItem}>
-                  <span>Construction Grade</span>
-                  <strong>{activeData.grade}</strong>
-                </div>
-                <div className={styles.metricItem}>
-                  <span>Suitable Plot Sizes</span>
-                  <strong>{activeData.plot_size}</strong>
-                </div>
-                <div className={styles.metricItem}>
-                  <span>Recommended Floors</span>
-                  <strong>{activeData.floors}</strong>
-                </div>
-                <div className={styles.metricItem}>
-                  <span>Project Types</span>
-                  <strong>{activeData.project_type}</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-
-      {/* 5. Interactive Comparison Table */}
-      <section className={`section ${styles.compareSection}`}>
-        <div className="container">
-          <PackageComparisonTable packageTiers={packageTiers} />
-        </div>
-      </section>
-
-      {/* 8 & 9. Advantages & "Why Choose This Package" */}
-      <section className="section container">
-        <SectionHeader
-          eyebrow="Core Strengths"
-          heading={`Why Choose the ${activeData.name}`}
-          subheading="Advantages, ideal client profiles, recommended plot sizes, and limitations to ensure complete transparency."
-        />
-
-        <div className="grid-3" style={{ marginTop: '3rem' }}>
-          <div className={styles.advantageCard}>
-            <h4>Key Advantages</h4>
-            <ul>
-              {activeData.advantages && activeData.advantages.map((adv, idx) => (
-                <li key={idx}><CheckCircle2 size={16} /> <span>{adv.text}</span></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className={styles.advantageCard}>
-            <h4>Ideal Customer & Value</h4>
-            <div className={styles.advantageMetric}>
-              <strong>Recommended Budget:</strong>
-              <span>{activeData.recommended_budget}</span>
-            </div>
-            <div className={styles.advantageMetric}>
-              <strong>Plot Sizes:</strong>
-              <span>{activeData.plot_size}</span>
-            </div>
-            <p className={styles.advantageText}>{activeData.ideal_customer}</p>
-          </div>
-
-          <div className={styles.advantageCard}>
-            <h4>Limitations & Upgrades</h4>
-            <p><strong>Limitations:</strong> {activeData.limitations}</p>
-            <p style={{ marginTop: '1rem' }}><strong>Upgrades Available:</strong> {activeData.upgrades}</p>
-            <p style={{ marginTop: '1rem' }}><strong>Maintenance Notes:</strong> {activeData.maintenance}</p>
-          </div>
-        </div>
-
-        
-        <div className={styles.ctaRow} style={{ marginTop: '3rem' }}>
-          <Link to="/contact" className="btn btn-primary">Book Consultation</Link>
-          <a href="tel:+918320978291" className="btn btn-secondary">Talk to Expert</a>
-        </div>
-      </section>
-
-      {/* 11. Dynamic FAQs */}
-      <section className={`section ${styles.faqSection}`}>
-        <div className="container">
-          <SectionHeader
-            eyebrow="Common Inquiries"
-            heading={`${activeData.name} FAQs`}
-            subheading="Frequently asked questions configured dynamically for your active package selection."
-          />
-
-          <div className={styles.faqList} style={{ marginTop: '3rem' }}>
-            {activeData.faqs && activeData.faqs.map((faq, idx) => (
-              <div key={idx} className={styles.faqItem}>
-                <HelpCircle size={18} className={styles.faqIcon} />
-                <div className={styles.faqText}>
-                  <h4>{faq.question}</h4>
-                  <p>{faq.answer}</p>
-                </div>
-              </div>
+                {city}
+              </button>
             ))}
           </div>
+        )}
+
+        <div className={styles.pricingGrid} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', alignItems: 'start' }}>
+          {filteredTiers.map((tier) => (
+            <div key={tier.id} className={styles.pricingCard} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', overflow: 'hidden', position: 'relative', boxShadow: 'var(--shadow-sm)' }}>
+              {(tier.badge || (tier.is_popular ? 'Most Popular' : null)) && (
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', background: (tier.badge === 'Most Popular' || tier.is_popular) ? 'var(--accent)' : 'var(--text-secondary)', color: '#fff', textAlign: 'center', padding: '0.5rem', fontSize: '0.875rem', fontWeight: 'bold' }}>
+                  {tier.badge || 'Most Popular'}
+                </div>
+              )}
+              
+              <div style={{ padding: tier.badge ? '3rem 2rem 2rem' : '2rem', borderBottom: '1px solid var(--border)' }}>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{tier.name}</h3>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.25rem', marginBottom: '1rem' }}>
+                  <span style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)' }}>₹{tier.price}</span>
+                  <span style={{ color: 'var(--text-secondary)' }}>/ sq.ft.</span>
+                </div>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{tier.description}</p>
+              </div>
+
+              {/* Accordions */}
+              <div style={{ padding: '1.5rem 1rem' }}>
+                <h4 style={{ marginBottom: '1rem', paddingLeft: '1rem', color: 'var(--text-primary)' }}>Inclusions</h4>
+                {(tier.specifications || tier.material_specs || []).map((spec, idx) => {
+                  const catName = spec.category || spec.category_name;
+                  const isOpen = openCategories[tier.id] === catName;
+                  return (
+                    <div key={idx} style={{ marginBottom: '0.5rem', border: '1px solid var(--border)', borderRadius: '4px', overflow: 'hidden' }}>
+                      <button 
+                        onClick={() => toggleAccordion(tier.id, catName)}
+                        style={{ width: '100%', padding: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: isOpen ? 'var(--bg-secondary)' : 'transparent', border: 'none', cursor: 'pointer', textAlign: 'left' }}
+                      >
+                        <strong style={{ fontSize: '0.95rem', color: 'var(--text-primary)' }}>{catName}</strong>
+                        <ChevronRight size={18} style={{ transform: isOpen ? 'rotate(90deg)' : 'rotate(0deg)', transition: 'transform 0.2s', color: 'var(--text-secondary)' }} />
+                      </button>
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            style={{ overflow: 'hidden', background: 'var(--bg-primary)' }}
+                          >
+                            <ul style={{ padding: '1rem', margin: 0, listStyle: 'none', borderTop: '1px solid var(--border)' }}>
+                              {[
+                                spec.detail && `${spec.detail}`,
+                                spec.brand && `Brand: ${spec.brand}`,
+                                spec.grade && `Grade: ${spec.grade}`,
+                                spec.spec && `Spec: ${spec.spec}`,
+                                spec.why && `Why: ${spec.why}`,
+                                spec.upgrade && `Upgrade: ${spec.upgrade}`,
+                                spec.warranty && `Warranty: ${spec.warranty}`
+                              ].filter(Boolean).map((item, i) => (
+                                <li key={i} style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                                  <CheckCircle2 size={14} style={{ color: 'var(--color-success-default)', marginRight: '0.5rem', marginTop: '3px', flexShrink: 0 }} />
+                                  <span>{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
+      <CostCalculatorSection />
 
-
+      <FAQSection />
       
-      
+      <CTASection title="Not sure which package fits?" subtitle="Schedule a free consultation and let our experts guide you." />
     </div>
   );
 };

@@ -1,0 +1,39 @@
+.pageHeader {
+  padding: calc(80px + var(--gap-section)) 0 3rem;
+  background-color: var(--bg-primary);
+  text-align: center;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.legalSection {
+  padding-bottom: calc(var(--gap-section) * 1.5);
+}
+
+.content {
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.content h3 {
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.content p {
+  margin-bottom: 1rem;
+}
+
+.content ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.content li {
+  margin-bottom: 0.5rem;
+}

@@ -1,0 +1,123 @@
+.pageHeader {
+  padding: 8rem 0 4rem;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.calculatorGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4xl);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.inputPanel {
+  background: var(--bg-card);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.panelHeader h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.outputPanel {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  padding: var(--space-xl);
+  border-radius: var(--radius-lg);
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+}
+
+.outputHeader {
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.1);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-sm);
+  color: var(--accent-light);
+}
+
+.outputHeader h2 {
+  font-size: 3rem;
+  color: #fff;
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-family-display);
+}
+
+.rangeText {
+  color: rgba(255,255,255,0.7);
+  font-size: 1rem;
+}
+
+.breakdown {
+  background: rgba(0,0,0,0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  flex-grow: 1;
+}
+
+.breakdownTitle {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-md);
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: var(--space-xs);
+}
+
+.breakdownItem {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.95rem;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255,255,255,0.1);
+  margin: var(--space-md) 0;
+}
+
+.disclaimer {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: var(--space-xl);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.actions {
+  margin-top: auto;
+}
+
+@media (max-width: 900px) {
+  .calculatorGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+}

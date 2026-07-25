@@ -10,7 +10,7 @@ import styles from './Hero.module.css';
 const Hero = () => {
   const { siteSettings } = useGlobalData();
   const { pageData } = usePageData('home');
-  
+
   // Prefer pageData.hero_video/image over siteSettings over static fallbacks
   const videoUrl = pageData?.hero_video || siteSettings?.hero_video_url || "https://assets.mixkit.co/videos/preview/mixkit-modern-architecture-detail-with-concrete-and-glass-41763-large.mp4";
   const posterUrl = pageData?.hero_image || siteSettings?.hero_poster_url || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80";
@@ -48,8 +48,8 @@ const Hero = () => {
           </div>
 
           {/* Headline */}
-          <h1 
-            className={styles.heroTitle} 
+          <h1
+            className={styles.heroTitle}
             dangerouslySetInnerHTML={{ __html: siteSettings?.hero_headline || `Premium Civil<br/>Construction<br/><span class="${styles.heroTitleAccent}">Residential Commercial Industrial</span>` }}
           />
 

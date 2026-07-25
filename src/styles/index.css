@@ -4,7 +4,9 @@
 /* ==========================================================================
    1. RESET & BASE
    ========================================================================== */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -30,7 +32,12 @@ body {
   color: var(--color-selection-text);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-family-display);
   color: var(--text-primary);
   font-weight: 700;
@@ -43,7 +50,10 @@ a {
   transition: color var(--transition-fast);
 }
 
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font-family: inherit;
   font-size: inherit;
   background: none;
@@ -51,9 +61,12 @@ button, input, textarea, select {
   outline: none;
 }
 
-ul { list-style: none; }
+ul {
+  list-style: none;
+}
 
-img, video {
+img,
+video {
   max-width: 100%;
   height: auto;
   display: block;
@@ -74,13 +87,23 @@ select:focus-visible {
 /* ==========================================================================
    2. CUSTOM SCROLLBAR
    ========================================================================== */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
 ::-webkit-scrollbar-thumb {
   background: var(--color-scrollbar-thumb);
   border-radius: var(--radius-full);
 }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
 
 /* ==========================================================================
    3. TYPOGRAPHY UTILITY CLASSES
@@ -222,19 +245,43 @@ select:focus-visible {
   padding-right: 40px;
 }
 
-.container-narrow    { max-width: var(--container-narrow); }
+.container-narrow {
+  max-width: var(--container-narrow);
+}
+
 .container-standard,
-.container           { max-width: 1400px; }
-.container-wide      { max-width: var(--container-wide); }
-.container-reading   { max-width: var(--container-reading); }
+.container {
+  max-width: 1400px;
+}
+
+.container-wide {
+  max-width: var(--container-wide);
+}
+
+.container-reading {
+  max-width: var(--container-reading);
+}
 
 /* ==========================================================================
    5. BORDERS
    ========================================================================== */
-.border-default     { border: 1px solid var(--border); }
-.border-subtle      { border: 1px solid var(--border-subtle); }
-.border-interactive { border: 1px solid var(--accent); }
-.divider-line       { height: 1px; background: var(--border); width: 100%; }
+.border-default {
+  border: 1px solid var(--border);
+}
+
+.border-subtle {
+  border: 1px solid var(--border-subtle);
+}
+
+.border-interactive {
+  border: 1px solid var(--accent);
+}
+
+.divider-line {
+  height: 1px;
+  background: var(--border);
+  width: 100%;
+}
 
 /* ==========================================================================
    6. GRID & FLEX UTILITIES
@@ -245,12 +292,35 @@ select:focus-visible {
   gap: var(--gap-component);
 }
 
-.flex-center  { display: flex; align-items: center; justify-content: center; }
-.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xxl); }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-xl); }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-lg); }
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-xxl);
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
 
 /* ==========================================================================
    7. CARD — White Surface Panel
@@ -311,13 +381,13 @@ select:focus-visible {
 .btn-primary:hover {
   background: hsl(16, 100%, 38%);
   border-color: hsl(16, 100%, 38%);
-  box-shadow: var(--shadow-accent-lg);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
   transform: translateY(-1px);
 }
 
 .btn-primary:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-accent);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn-secondary {
@@ -352,25 +422,38 @@ select:focus-visible {
   letter-spacing: 0.01em;
 }
 
-.form-control {
+.form-control,
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
   width: 100%;
   padding: var(--padding-input);
   background: var(--bg-card);
-  border: 1.5px solid var(--border);
+  border: 1.5px solid #475569 !important; /* Slate 600 for WCAG AA Contrast - Important prevents overriding */
   border-radius: var(--radius-xs);
   color: var(--text-primary);
   font-size: var(--font-size-input);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.form-control:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--focus-ring);
+.form-control:focus,
+input:not([type="checkbox"]):not([type="radio"]):focus,
+textarea:focus,
+select:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px hsla(16, 100%, 55%, 0.15);
+  outline: none;
 }
 
-.form-control::placeholder { color: var(--text-disabled); }
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-disabled);
+}
 
-.form-control-error { border-color: var(--color-danger-default); }
+.form-control-error {
+  border-color: var(--color-danger-default) !important;
+}
 
 .form-error-msg {
   font-size: var(--font-size-error);
@@ -381,14 +464,33 @@ select:focus-visible {
 /* ==========================================================================
    11. HELPERS
    ========================================================================== */
-.mb-1 { margin-bottom: var(--space-xxs); }
-.mb-2 { margin-bottom: var(--space-xs); }
-.mb-3 { margin-bottom: var(--space-sm); }
-.mb-4 { margin-bottom: var(--space-md); }
-.mb-6 { margin-bottom: var(--space-xl); }
-.mb-8 { margin-bottom: var(--space-xxl); }
+.mb-1 {
+  margin-bottom: var(--space-xxs);
+}
 
-.text-center { text-align: center; }
+.mb-2 {
+  margin-bottom: var(--space-xs);
+}
+
+.mb-3 {
+  margin-bottom: var(--space-sm);
+}
+
+.mb-4 {
+  margin-bottom: var(--space-md);
+}
+
+.mb-6 {
+  margin-bottom: var(--space-xl);
+}
+
+.mb-8 {
+  margin-bottom: var(--space-xxl);
+}
+
+.text-center {
+  text-align: center;
+}
 
 /* Skip to main content — accessibility */
 .skip-link {
@@ -405,20 +507,42 @@ select:focus-visible {
   text-decoration: none;
   transition: top 0.15s;
 }
-.skip-link:focus { top: 1rem; }
+
+.skip-link:focus {
+  top: 1rem;
+}
 
 /* Float animation */
-.anim-float { animation: float 4s ease-in-out infinite; }
-.anim-fade-in { animation: fadeIn 0.4s ease both; }
+.anim-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.anim-fade-in {
+  animation: fadeIn 0.4s ease both;
+}
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================================================
@@ -426,7 +550,7 @@ select:focus-visible {
    ========================================================================== */
 .subpage-header {
   background: linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)),
-              url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1920&q=80') center/cover;
+    url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1920&q=80') center/cover;
   min-height: 75vh;
   display: flex;
   align-items: center;
@@ -437,18 +561,21 @@ select:focus-visible {
   overflow: hidden;
   padding: 5rem 0;
 }
+
 .subpage-header .container {
   max-width: var(--container-standard);
   margin: 0 auto;
   position: relative;
   z-index: 2;
 }
+
 .subpage-header h1 {
   font-size: var(--font-size-page-heading);
   color: #FFFFFF !important;
   text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
   margin-bottom: 0.75rem;
 }
+
 .subpage-header .subtitle {
   font-size: var(--font-size-subheading);
   color: rgba(255, 255, 255, 0.9) !important;
@@ -456,6 +583,7 @@ select:focus-visible {
   margin: 0.5rem auto 0;
   line-height: var(--lh-relaxed);
 }
+
 .subpage-header .breadcrumbs {
   font-family: var(--font-family-display);
   font-size: var(--font-size-overline);
@@ -467,10 +595,12 @@ select:focus-visible {
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+
 .subpage-header .breadcrumbs a {
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
 }
+
 .subpage-header .breadcrumbs span {
   color: var(--accent, #ff6b35);
 }
@@ -519,7 +649,8 @@ select:focus-visible {
    ========================================================================== */
 
 /* --- Prevent any horizontal overflow globally --- */
-html, body {
+html,
+body {
   overflow-x: hidden;
   width: 100%;
   max-width: 100%;
@@ -534,7 +665,11 @@ html, body {
 }
 
 /* --- Images: never overflow their container --- */
-img, video, svg, canvas, iframe {
+img,
+video,
+svg,
+canvas,
+iframe {
   max-width: 100%;
   height: auto;
 }
@@ -553,14 +688,32 @@ table {
   max-width: 100%;
 }
 
-thead, tbody, tr, th, td {
-  display: revert; /* Restore table display within scrollable block */
+thead,
+tbody,
+tr,
+th,
+td {
+  display: revert;
+  /* Restore table display within scrollable block */
 }
 
 /* --- Reduce heavy animations on mobile for performance --- */
 
 /* --- Word wrap safety for long text --- */
-h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, strong {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+li,
+td,
+th,
+label,
+strong {
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
@@ -572,6 +725,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, strong {
 }
 
 @media (max-width: 768px) {
+
   .container-narrow,
   .container-standard,
   .container,
@@ -582,7 +736,9 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, strong {
     padding-right: 20px;
   }
 
-  .grid-2, .grid-3, .grid-4 {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
     grid-template-columns: 1fr;
     gap: var(--space-lg);
   }
@@ -598,6 +754,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, strong {
 }
 
 @media (max-width: 480px) {
+
   .container-narrow,
   .container-standard,
   .container,
@@ -607,7 +764,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, li, td, th, label, strong {
     padding-left: 16px;
     padding-right: 16px;
   }
-  
+
   .btn {
     padding: 0.625rem 1.25rem;
     font-size: 0.875rem;

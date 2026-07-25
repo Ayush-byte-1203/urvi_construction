@@ -65,6 +65,7 @@ class ServiceCategory(models.Model):
 
 class Service(models.Model):
     title = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, null=True, blank=True)
     description = models.TextField()
     icon_name = models.CharField(max_length=100, help_text="Lucide react icon name, e.g., Building2")
     image = models.ImageField(upload_to="services/", null=True, blank=True)
@@ -142,6 +143,11 @@ class PackageMaterialSpec(models.Model):
     package = models.ForeignKey(Package, related_name='material_specs', on_delete=models.CASCADE)
     category = models.ForeignKey(PackageMaterialCategory, on_delete=models.CASCADE)
     brand = models.TextField()
+    grade = models.CharField(max_length=255, null=True, blank=True)
+    spec = models.TextField(null=True, blank=True)
+    why = models.TextField(null=True, blank=True)
+    upgrade = models.TextField(null=True, blank=True)
+    warranty = models.CharField(max_length=100, null=True, blank=True)
     
     class Meta:
         ordering = ['category__order']
@@ -174,6 +180,7 @@ class ProjectCategory(models.Model):
 
 class Project(models.Model):
     title = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, null=True, blank=True)
     category = models.ForeignKey(ProjectCategory, on_delete=models.SET_NULL, null=True, blank=True)
     location = models.CharField(max_length=255)
     description = models.TextField()
@@ -267,6 +274,20 @@ class CoreValue(models.Model):
 
 
 
+class JourneyMilestone(models.Model):
+    year = models.CharField(max_length=50)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.ImageField(upload_to="journey/", null=True, blank=True)
+    order = models.IntegerField(default=0)
+    
+    class Meta:
+        ordering = ['order']
+        verbose_name_plural = "Company Journey / Timeline"
+        
+    def __str__(self):
+        return f"{self.year} - {self.title}"
+
 class BlogCategory(models.Model):
     name = models.CharField(max_length=100)
     
@@ -275,6 +296,7 @@ class BlogCategory(models.Model):
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, null=True, blank=True)
     category = models.ForeignKey(BlogCategory, on_delete=models.SET_NULL, null=True, blank=True)
     author = models.CharField(max_length=255, default="Paramarsh Construction")
     date = models.DateField(auto_now_add=True)

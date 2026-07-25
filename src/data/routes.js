@@ -1,20 +1,15 @@
+
 export const ROUTES = {
   HOME: '/',
   ABOUT: '/about',
   SERVICES: '/services',
-  SERVICE_DETAIL: '/services/:id',
+  SERVICE_DETAIL: '/services/:slug',
   PACKAGES: '/packages',
-  PACKAGE_DETAIL: '/packages/:id',
   PROJECTS: '/projects',
   PROJECT_DETAIL: '/projects/:id',
-  PROCESS: '/process',
-  TESTIMONIALS: '/testimonials',
-  FAQ: '/faq',
   CONTACT: '/contact',
-  PRIVACY: '/privacy',
-  TERMS: '/terms',
-  COOKIES: '/cookies',
+  PRIVACY: '/privacy-policy',
+  TERMS: '/terms-and-conditions',
   BLOG: '/blog',
   BLOG_DETAIL: '/blog/:id',
 };
-

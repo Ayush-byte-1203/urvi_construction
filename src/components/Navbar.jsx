@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
-import { Menu, ArrowRight } from 'lucide-react';
-import { AnimatePresence } from 'framer-motion';
+import { Menu, ArrowRight, Phone, ChevronDown } from 'lucide-react';
 import { ROUTES } from '../data/routes';
 import Logo from './Logo';
 import MobileMenu from './MobileMenu';
+import CitySelector from './CitySelector';
+import { useGlobalData } from '../context/GlobalDataContext';
 import styles from './Navbar.module.css';
 
 const Navbar = ({ theme = 'dark' }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const { services, siteSettings } = useGlobalData();
   
   const location = useLocation();
 
@@ -25,16 +28,13 @@ const Navbar = ({ theme = 'dark' }) => {
   // Close menus on route change
   useEffect(() => {
     setIsMobileOpen(false);
+    setServicesOpen(false);
   }, [location]);
 
-  const navItems = [
-    { name: 'Home', path: ROUTES.HOME, key: 'home' },
-    { name: 'About', path: ROUTES.ABOUT, key: 'about' },
-    { name: 'Services', path: ROUTES.SERVICES, key: 'services' },
-    { name: 'Projects', path: ROUTES.PROJECTS, key: 'projects' },
-    { name: 'Blog', path: ROUTES.BLOG, key: 'blog' },
-    { name: 'Contact', path: ROUTES.CONTACT, key: 'contact' }
-  ];
+  const servicesList = (services || []).map(s => ({
+    name: s.title,
+    path: `/services/${s.slug || s.id}`
+  }));
 
   // Determine header visibility classes based on scroll state and active theme
   const getHeaderClass = () => {
@@ -53,43 +53,78 @@ const Navbar = ({ theme = 'dark' }) => {
 
   return (
     <>
-      <header 
-        className={getHeaderClass()} 
-      >
+      <header className={getHeaderClass()}>
         <div className={`container ${styles.headerContainer}`}>
           {/* LEFT: Brand Logo */}
           <Logo theme={logoTheme} onClick={() => setIsMobileOpen(false)} />
 
           {/* CENTER: Navigation Links */}
           <nav className={styles.desktopNav} role="navigation" aria-label="Main Navigation">
-            {navItems.map((item) => (
-              <div 
-                key={item.key} 
-                className={styles.navItemWrapper}
-              >
-                <NavLink 
-                  to={item.path}
-                  className={({ isActive }) => 
-                    `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`
-                  }
-                  end={item.path === '/'}
-                >
-                  <span className={styles.navLinkText}>{item.name}</span>
-                </NavLink>
-              </div>
-            ))}
+            <div className={styles.navItemWrapper}>
+              <NavLink to={ROUTES.HOME} className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`} end>
+                <span className={styles.navLinkText}>Home</span>
+              </NavLink>
+            </div>
+            <div className={styles.navItemWrapper}>
+              <NavLink to={ROUTES.ABOUT} className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
+                <span className={styles.navLinkText}>About Us</span>
+              </NavLink>
+            </div>
+            <div className={styles.navItemWrapper}>
+              <NavLink to={ROUTES.PACKAGES} className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
+                <span className={styles.navLinkText}>Package</span>
+              </NavLink>
+            </div>
+            
+            {/* SERVICES DROPDOWN */}
+            <div 
+              className={styles.navItemWrapper}
+              onMouseEnter={() => setServicesOpen(true)}
+              onMouseLeave={() => setServicesOpen(false)}
+            >
+              <NavLink to={ROUTES.SERVICES} className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
+                <span className={styles.navLinkText} style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                  Services <ChevronDown size={14} />
+                </span>
+              </NavLink>
+              {servicesOpen && (
+                <div className={styles.dropdownMenu}>
+                  {servicesList.map((service, idx) => (
+                    <Link key={idx} to={service.path} className={styles.dropdownItem}>
+                      {service.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className={styles.navItemWrapper}>
+              <NavLink to={ROUTES.PROJECTS} className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
+                <span className={styles.navLinkText}>Projects</span>
+              </NavLink>
+            </div>
+            <div className={styles.navItemWrapper}>
+              <NavLink to={ROUTES.BLOG} className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
+                <span className={styles.navLinkText}>Blog</span>
+              </NavLink>
+            </div>
+            <div className={styles.navItemWrapper}>
+              <NavLink to={ROUTES.CONTACT} className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
+                <span className={styles.navLinkText}>Contact</span>
+              </NavLink>
+            </div>
           </nav>
 
           {/* RIGHT: Actions row */}
           <div className={styles.actions}>
-            
-            <Link 
-              to={ROUTES.CONTACT}
-              className={`btn btn-primary ${styles.btnNav}`}
-            >
-              Get Free Quote
-              <ArrowRight size={13} style={{ marginLeft: '4px' }} />
-            </Link>
+            <div className={styles.desktopOnly}>
+              <CitySelector />
+            </div>
+
+            <a href={`tel:${siteSettings?.contact_phone ? siteSettings.contact_phone.replace(/\D/g, '') : '919876543210'}`} className={styles.phoneCta}>
+              <Phone size={16} />
+              <span className={styles.desktopOnly}>{siteSettings?.contact_phone || '+91 98765 43210'}</span>
+            </a>
 
             {/* Hamburger Toggle */}
             <button 
@@ -101,7 +136,6 @@ const Navbar = ({ theme = 'dark' }) => {
             </button>
           </div>
         </div>
-
       </header>
 
       {/* Slide-in Mobile Drawer */}

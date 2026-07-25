@@ -17,8 +17,10 @@
 .modal {
   background: #ffffff;
   border-radius: 10px;
-  width: 320px; /* Reduced width */
-  padding: 1.5rem; /* Reduced padding */
+  width: 320px;
+  /* Reduced width */
+  padding: 1.5rem;
+  /* Reduced padding */
   position: relative;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
   pointer-events: auto;
@@ -26,8 +28,15 @@
 }
 
 @keyframes slideUpRight {
-  0% { opacity: 0; transform: translateY(40px) scale(0.95); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
+  0% {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .closeButton {
@@ -88,7 +97,6 @@
 .input {
   width: 100%;
   padding: 0.6rem 0.75rem;
-  border: 1px solid #e2e8f0;
   border-radius: 6px;
   background: #f8fafc;
   font-size: 0.85rem;
@@ -98,8 +106,6 @@
 
 .input:focus {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.1);
   background: #fff;
 }
 
@@ -125,4 +131,48 @@
   background: #1e293b;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2);
+}
+
+.persistentTrigger {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: left top;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 0 0 8px 8px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-md);
+  transition: background-color 0.2s;
+}
+
+.persistentTrigger:hover {
+  background-color: var(--accent-dark);
+}
+
+@media (max-width: 768px) {
+  .persistentTrigger {
+    top: auto;
+    bottom: 2rem;
+    left: 2rem;
+    transform: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+    box-shadow: var(--shadow-floating);
+  }
+
+  .persistentTrigger span {
+    display: none;
+  }
 }

@@ -8,11 +8,11 @@ import LoadingSpinner from './LoadingSpinner';
 import { useGlobalData } from '../context/GlobalDataContext';
 
 
-import FloatingWhatsApp from './FloatingWhatsApp';
+import FloatingContactButtons from './FloatingContactButtons';
 
 export const HeaderThemeContext = createContext({
   headerTheme: 'dark',
-  setHeaderTheme: () => {}
+  setHeaderTheme: () => { }
 });
 
 const Layout = ({ children }) => {
@@ -55,7 +55,7 @@ const Layout = ({ children }) => {
         </main>
         <Footer />
         <QuotePopup />
-        <FloatingWhatsApp />
+        <FloatingContactButtons />
       </div>
     </HeaderThemeContext.Provider>
   );

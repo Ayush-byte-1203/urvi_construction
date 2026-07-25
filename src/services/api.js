@@ -1,11 +1,14 @@
 const hostname = window.location.hostname;
 const isLocal = hostname === 'localhost' || hostname === '127.0.0.1' || hostname.startsWith('192.168.');
-export const API_URL = import.meta.env.VITE_API_URL || 
+export const API_URL = import.meta.env.VITE_API_URL ||
   (isLocal ? `http://${hostname}:8000/api` : 'https://Paramarsh.pythonanywhere.com/api');
 
 export const fetchSiteSettings = async () => {
-  const response = await fetch(`${API_URL}/settings/`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/settings/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
 };
 
 export const fetchPageContent = async (page) => {
@@ -15,46 +18,97 @@ export const fetchPageContent = async (page) => {
 };
 
 export const fetchServices = async () => {
-  const response = await fetch(`${API_URL}/services/`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/services/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
 };
 
 export const fetchPackages = async () => {
-  const response = await fetch(`${API_URL}/packages/`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/packages/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
 };
 
 export const fetchProjects = async () => {
-  const response = await fetch(`${API_URL}/projects/`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/projects/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
 };
 
 export const fetchTestimonials = async () => {
-  const response = await fetch(`${API_URL}/testimonials/`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/testimonials/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
 };
 
 export const fetchFAQs = async () => {
-  const response = await fetch(`${API_URL}/faqs/`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/faqs/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
 };
 
 export const fetchCoreValues = async () => {
-  const response = await fetch(`${API_URL}/core-values/`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/core-values/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
 };
 
 export const fetchBlogCategories = async () => {
-  const response = await fetch(`${API_URL}/blog-categories/`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/blog-categories/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
 };
 
 export const fetchBlogs = async () => {
-  const response = await fetch(`${API_URL}/blogs/`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/blogs/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
 };
 
 export const fetchGalleryImages = async () => {
-  const response = await fetch(`${API_URL}/gallery-images/`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/gallery-images/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
+};
+
+export const fetchCompanyStats = async () => {
+  try {
+    const response = await fetch(`${API_URL}/company-stats/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
+};
+
+export const fetchCalculatorSettings = async () => {
+  try {
+    const response = await fetch(`${API_URL}/calculator-settings/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
+};
+
+export const fetchJourneyMilestones = async () => {
+  try {
+    const response = await fetch(`${API_URL}/journey/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
 };

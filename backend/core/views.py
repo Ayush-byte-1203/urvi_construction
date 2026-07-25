@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from .models import (
     SiteSettings, PageContent, Service, Package,
-    Project, Testimonial, FAQ, CoreValue,
+    Project, Testimonial, FAQ, CoreValue, JourneyMilestone,
     BlogCategory, BlogPost,
     ServiceCategory, ProjectCategory, FAQCategory,
     PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
@@ -10,7 +10,7 @@ from .models import (
 from .serializers import (
     SiteSettingsSerializer, PageContentSerializer, ServiceSerializer,
     PackageSerializer, ProjectSerializer, TestimonialSerializer, FAQSerializer,
-    CoreValueSerializer,
+    CoreValueSerializer, JourneyMilestoneSerializer,
     BlogCategorySerializer, BlogPostSerializer,
     ServiceCategorySerializer, ProjectCategorySerializer, FAQCategorySerializer,
     PackageAdvantageSerializer, PackageMaterialCategorySerializer, PackageMaterialSpecSerializer, PackageFAQSerializer,
@@ -18,7 +18,7 @@ from .serializers import (
 )
 
 class PackageAdvantageViewSet(viewsets.ModelViewSet):
-    queryset = PackageAdvantage.objects.all().order_by('order')
+    queryset = PackageAdvantage.objects.all()
     serializer_class = PackageAdvantageSerializer
 
 class PackageMaterialCategoryViewSet(viewsets.ModelViewSet):
@@ -30,14 +30,12 @@ class PackageMaterialSpecViewSet(viewsets.ModelViewSet):
     serializer_class = PackageMaterialSpecSerializer
 
 class PackageFAQViewSet(viewsets.ModelViewSet):
-    queryset = PackageFAQ.objects.all().order_by('order')
+    queryset = PackageFAQ.objects.all()
     serializer_class = PackageFAQSerializer
 
 class ProjectImageViewSet(viewsets.ModelViewSet):
-    queryset = ProjectImage.objects.all().order_by('order')
+    queryset = ProjectImage.objects.all()
     serializer_class = ProjectImageSerializer
-
-
 
 class ServiceCategoryViewSet(viewsets.ModelViewSet):
     queryset = ServiceCategory.objects.all()
@@ -80,11 +78,13 @@ class FAQViewSet(viewsets.ModelViewSet):
     queryset = FAQ.objects.all()
     serializer_class = FAQSerializer
 
-class CoreValueViewSet(viewsets.ModelViewSet):
+class CoreValueViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CoreValue.objects.all().order_by('order')
     serializer_class = CoreValueSerializer
 
-
+class JourneyMilestoneViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = JourneyMilestone.objects.all().order_by('order')
+    serializer_class = JourneyMilestoneSerializer
 
 class BlogCategoryViewSet(viewsets.ModelViewSet):
     queryset = BlogCategory.objects.all()

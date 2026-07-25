@@ -1,0 +1,80 @@
+export const dummyProjects = [
+  {
+    id: 1,
+    title: "The Oasis Villa",
+    slug: "oasis-villa",
+    description: "A luxury 5BHK modern villa with an infinity pool and smart home integration.",
+    image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80",
+    status: "Completed",
+    location: "Gotri, Vadodara",
+    built_area: "4,500 sq.ft",
+    completion_year: 2023,
+    client: "Mr. Rajiv Desai",
+    category_name: "Residential"
+  },
+  {
+    id: 2,
+    title: "Serenity Heights",
+    slug: "serenity-heights",
+    description: "Premium residential duplexes focusing on sustainable materials and natural lighting.",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    status: "Completed",
+    location: "Alkapuri, Vadodara",
+    built_area: "3,200 sq.ft",
+    completion_year: 2022,
+    client: "Dr. A. Sharma",
+    category_name: "Residential"
+  },
+  {
+    id: 3,
+    title: "Paramarsh Commercial Hub",
+    slug: "commercial-hub",
+    description: "State-of-the-art corporate office space built with a high-strength steel frame.",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+    status: "In Progress",
+    location: "Sayajigunj, Vadodara",
+    built_area: "12,000 sq.ft",
+    completion_year: 2024,
+    client: "TechNova Solutions",
+    category_name: "Commercial"
+  },
+  {
+    id: 4,
+    title: "Heritage Farmhouse",
+    slug: "heritage-farmhouse",
+    description: "Traditional aesthetic meets modern structural integrity in this sprawling farmhouse.",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+    status: "Completed",
+    location: "Bhayli, Vadodara",
+    built_area: "5,500 sq.ft",
+    completion_year: 2021,
+    client: "The Patel Family",
+    category_name: "Residential"
+  },
+  {
+    id: 5,
+    title: "Urban Studio Apartments",
+    slug: "urban-studios",
+    description: "A compact, highly efficient residential block catering to young professionals.",
+    image: "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=800&q=80",
+    status: "In Progress",
+    location: "Vasna-Bhayli, Vadodara",
+    built_area: "18,000 sq.ft",
+    completion_year: 2025,
+    client: "Horizon Developers",
+    category_name: "Residential"
+  },
+  {
+    id: 6,
+    title: "The Glass Pavilion",
+    slug: "glass-pavilion",
+    description: "An architectural marvel featuring floor-to-ceiling structural glass walls.",
+    image: "https://images.unsplash.com/photo-1512915922686-57c11dde9b6b?auto=format&fit=crop&w=800&q=80",
+    status: "Completed",
+    location: "Sevasi, Vadodara",
+    built_area: "3,800 sq.ft",
+    completion_year: 2023,
+    client: "Ms. Neha Singhal",
+    category_name: "Commercial"
+  }
+];

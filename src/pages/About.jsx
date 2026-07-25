@@ -1,257 +1,157 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useContext } from 'react';
 import SEO from '../components/SEO';
-import LoadingSpinner from '../components/LoadingSpinner';
-import { Link } from 'react-router-dom';
-import { 
-  Building2, Users, Target, Shield, Clock, Compass, Ruler, Lightbulb, ChevronRight
-} from 'lucide-react';
 import { useGlobalData } from '../context/GlobalDataContext';
-import { usePageData } from '../hooks/usePageData';
-import { statsData } from '../data/statsData';
-import { appConfig } from '../data/appConfig';
-import SectionHeader from '../components/SectionHeader';
-import PremiumTimeline from '../components/PremiumTimeline';
-import MotionWrapper from '../components/MotionWrapper';
-import MediaWrapper from '../components/MediaWrapper';
-import Button from '../components/Button';
-import sample1 from '../Images/sample1.jpeg';
-import sample2 from '../Images/sample2.jpeg';
-import sample3 from '../Images/sample3.jpeg';
-import sample4 from '../Images/sample4.jpeg';
-
-import HeroOverlay from '../components/HeroOverlay';
 import { HeaderThemeContext } from '../components/Layout';
+import SectionHeader from '../components/SectionHeader';
+import Timeline from '../components/Timeline';
+import { motion } from 'framer-motion';
+import { CheckCircle2, Target, Award, Shield } from 'lucide-react';
 import CTASection from '../components/CTASection';
 import styles from './About.module.css';
 
 const About = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
-  const containerRef = useRef(null);
-  const { siteSettings, coreValues, galleryImages: dynamicGallery, isLoading: isGlobalLoading } = useGlobalData();
-  const { pageData, sections, isLoading: isPageLoading } = usePageData('about');
-  const isLoading = isGlobalLoading || isPageLoading;
+  const { siteSettings } = useGlobalData();
 
   useEffect(() => {
-    setHeaderTheme('dark');
+    setHeaderTheme('none'); // Uses transparent dark theme for the hero banner
   }, [setHeaderTheme]);
 
+  const stats = [
+    { value: '15+', label: 'Years Experience' },
+    { value: '120+', label: 'Projects Completed' },
+    { value: '100%', label: 'Turnkey Delivery' },
+    { value: '50+', label: 'In-house Experts' }
+  ];
 
-
-
-
-  const seoConfig = siteSettings ? { seo: { defaultTitle: `${siteSettings.site_name} | About`, defaultDescription: pageData?.subtitle || 'About Us', siteUrl: '' } } : { seo: { defaultTitle: 'Loading...', defaultDescription: 'Loading...', siteUrl: '' } };
-
-  const galleryImages = dynamicGallery && dynamicGallery.length > 0 
-    ? dynamicGallery 
-    : [
-        { image: sample1 },
-        { image: sample2 },
-        { image: sample3 },
-        { image: sample4 },
-      ];
-
-  if (isLoading) {
-    return (
-      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <LoadingSpinner />
-      </div>
-    );
-  }
+  const values = [
+    { icon: <Target size={32} />, title: "Precision", desc: "Every millimeter matters. We execute with exacting standards and rigorous quality control." },
+    { icon: <Award size={32} />, title: "Excellence", desc: "From premium materials to master craftsmanship, we never compromise on the final product." },
+    { icon: <Shield size={32} />, title: "Integrity", desc: "Transparent pricing, zero hidden costs, and honest communication throughout the build." }
+  ];
 
   return (
-    <div className="about-page">
-      <SEO 
-        title={seoConfig.seo.defaultTitle}
-        description="Discover our history of engineering landmarks, certifications, partner networks, and values that make us Vadodara's premier construction company."
-        url="/about"
+    <div className="page-wrapper">
+      <SEO
+        title="About Us | Our Legacy"
+        description="Learn about our 15+ year legacy in building premium residential and commercial structures."
       />
 
-      {/* ========================================== */}
-      {/* SECTION: Breadcrumbs Subpage Hero */}
-      {/* ========================================== */}
-      <section className={styles.hero}>
-        {pageData?.hero_video && (
-          <video autoPlay loop muted playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
-            <source src={pageData.hero_video} type="video/mp4" />
-          </video>
-        )}
-        {pageData?.hero_image && !pageData?.hero_video && (
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${pageData.hero_image})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
-        )}
-        <HeroOverlay type="dark" />
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className={styles.breadcrumbs}>
-            <Link to="/">Home</Link>
-            <ChevronRight size={12} />
-            <span>About Us</span>
-          </div>
-          <div className={styles.heroText}>
-            {/* <span className={styles.heroEyebrow}>Legacy of Excellence</span> */}
-            <h1 className={styles.heroTitle}>{pageData?.title || 'Precision Meets Passion'}</h1>
-            <p className={styles.heroDesc}>
-              {pageData?.subtitle || `For over two decades, ${appConfig.company.name} has been at the forefront of architectural innovation and structural integrity.`}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================== */}
-      {/* SECTION: Heritage split layout */}
-      {/* ========================================== */}
-      <section className="section container">
-        <div className={styles.overviewSplit}>
-          <MotionWrapper variant="slideRight" className={styles.overviewText}>
-            <span className="text-overline">Heritage & Foundation</span>
-            <h2 className="display-sm">Engineered for Lifetimes</h2>
-            <p className="text-body-md">
-              
-Built to last
-"We believe a premium home shouldn't demand an compromised budget. We deliver exact structural excellence tailored to your financial plan."
-
-
-            </p>
-            <p className="text-body-sm" style={{ color: 'var(--text-muted)' }}>
-              Headquartered in Vadodara, we maintain a zero-incident safety track record across all our residential, commercial, and industrial sites. Over the last 15 years, we have successfully delivered 250+ projects, ranging from bespoke luxury villas to multi-acre industrial logistics parks.
-            </p>
-          </MotionWrapper>
-
-          <MotionWrapper variant="slideLeft">
-            <div className={styles.overviewImageWrapper}>
-              <img
-                src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=800&q=80"
-                alt={`${appConfig.company.name} Engineering Staging`}
-                className={styles.overviewImage}
-              />
-              
+      {/* Hero Banner */}
+      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('https://images.unsplash.com/photo-1541888081600-01103f6f1c4e?auto=format&fit=crop&w=1920&q=80')` }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="breadcrumbs">
+              <a href="/">Home</a>
+              <span>/</span>
+              <span>About Us</span>
             </div>
-          </MotionWrapper>
+            <h1>Our Legacy</h1>
+            <p className="subtitle">Building Tomorrow, Today. Learn about our 15+ year legacy in premium construction.</p>
+          </motion.div>
+        </div>
+      </header>
+
+      {/* Stats Bar */}
+      <section className={styles.statsBar}>
+        <div className="container">
+          <div className={styles.statsGrid}>
+            {stats.map((stat, idx) => (
+              <div key={idx} className={styles.statItem}>
+                <h3 className={styles.statValue}>{stat.value}</h3>
+                <p className={styles.statLabel}>{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ========================================== */}
-      {/* SECTION: Vision & Mission Cards */}
-      {/* ========================================== */}
-      <section className={styles.visionMissionSection}>
-        <div className="container grid-2" style={{ gap: '3rem' }}>
-          <MotionWrapper variant="slideUp" className={styles.visionCard}>
-            <Target size={36} className={styles.cardIcon} />
-            <h3 className={styles.cardTitle}>Our Mission</h3>
-            <p className={styles.cardDesc}>
-              To eliminate the stress and delays of traditional construction by delivering transparent planning, premium materials, and certified engineering standards
-            </p>
-          </MotionWrapper>
-
-          <MotionWrapper variant="slideUp" delay={0.15} className={styles.visionCard}>
-            <Compass size={36} className={styles.cardIcon} />
-            <h3 className={styles.cardTitle}>Our Vision</h3>
-            <p className={styles.cardDesc}>
-              To shape the future of modern living by crafting durable, sustainable, and structurally flawless properties engineered to protect generations to come.
-            </p>
-          </MotionWrapper>
-        </div>
-      </section>
-
-      {/* ========================================== */}
-      {/* SECTION: Core Values Grid */}
-      {/* ========================================== */}
-      <section className="section container">
-        <SectionHeader
-          eyebrow="Core Values"
-          heading={pageData?.title || "What Governs Our Sites"}
-          subheading={pageData?.subtitle || "Our engineering supervisors, design coordinators, and contractors operate under strict guidelines to ensure quality."}
-        />
-
-        <div className={styles.valuesGrid}>
-          {coreValues && coreValues.map((val, idx) => (
-            <MotionWrapper key={idx} variant="slideUp" delay={idx * 0.08} className={styles.valueCard}>
-              <div style={{ color: 'var(--accent)', marginBottom: '0.25rem' }}>{val.icon_name}</div>
-              <h4 className={styles.valueTitle}>{val.title}</h4>
-              <ul className={styles.valueDesc} style={{ paddingLeft: '1.25rem', margin: 0, listStyleType: 'disc' }}>
-                {Array.isArray(val.description) ? val.description.map((bullet, i) => (
-                  <li key={i} style={{ marginBottom: '0.5rem' }}>{bullet}</li>
-                )) : <li>{val.description || val.desc}</li>}
+      {/* Company Story */}
+      <section className={`section container ${styles.storySection}`}>
+        <div className={styles.storyGrid}>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <SectionHeader
+              eyebrow="Our Story"
+              heading="A Foundation of Trust"
+            />
+            <div className={styles.storyText}>
+              <p>
+                What started as a small firm of dedicated engineers over a decade ago has grown into Bengaluru's premier turnkey construction company. We recognized a critical flaw in the traditional construction industry: a fragmented process that left homeowners stressed, over-budget, and managing multiple contractors.
+              </p>
+              <p>
+                We rebuilt the model from the ground up. By bringing architects, structural engineers, project managers, and interior designers under one roof, we created a seamless, end-to-end building experience.
+              </p>
+              <ul className={styles.storyChecklist}>
+                <li><CheckCircle2 size={18} className="text-accent" /> Over 120+ successful handovers</li>
+                <li><CheckCircle2 size={18} className="text-accent" /> In-house structural & architectural team</li>
+                <li><CheckCircle2 size={18} className="text-accent" /> Fixed-price contracts with zero escalation</li>
               </ul>
-            </MotionWrapper>
-          ))}
-        </div>
-      </section>
-
-      {/* ========================================== */}
-      {/* SECTION: Leadership & Team -> Company Story */}
-      {/* ========================================== */}
-      <section className="section container">
-        <SectionHeader
-          eyebrow="Our Heritage"
-          heading="Company Story"
-          subheading="A proven track record of engineering excellence and structural integrity."
-        />
-
-        <div className={styles.visionMissionSection} style={{ marginTop: '3rem', display: 'flex', gap: '3rem', flexWrap: 'wrap' }}>
-          <MotionWrapper variant="slideRight" className={styles.overviewText} style={{ flex: 1, minWidth: '300px' }}>
-            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: 'var(--text-primary)' }}>Our Origins</h3>
-            <p className="text-body-md" style={{ color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-              Founded with the singular vision of bringing absolute transparency to the construction industry, our company ensures that every structural calculation is double-checked and every client communication is completely factual.
-            </p>
-            <p className="text-body-md" style={{ color: 'var(--text-muted)' }}>
-              "We don't just build walls; we engineer secure environments where families and businesses can thrive for generations."
-            </p>
-          </MotionWrapper>
-          <MotionWrapper variant="slideLeft" style={{ flex: 1, minWidth: '300px' }}>
-            <div style={{ background: 'var(--bg-card)', padding: '2rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
-               <h4 style={{ color: 'var(--accent)', marginBottom: '1rem' }}>Certifications & Licenses</h4>
-               <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--text-secondary)' }}>
-                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}><Shield size={20} color="var(--accent)" /> ISO 9001:2015 Quality Management</li>
-                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}><Building2 size={20} color="var(--accent)" /> Licensed Structural Engineers Association</li>
-                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}><Target size={20} color="var(--accent)" /> Approved Class-1 Government Contractors</li>
-                 <li style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}><Shield size={20} color="var(--accent)" /> Green Building Council Members</li>
-               </ul>
             </div>
-          </MotionWrapper>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className={styles.imageGrid}
+          >
+            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80" alt="Architectural Planning" className={styles.gridImg1} loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1590495914106-4d048d6db95a?auto=format&fit=crop&w=600&q=80" alt="Construction Site" className={styles.gridImg2} loading="lazy" />
+          </motion.div>
         </div>
       </section>
 
-      {/* ========================================== */}
-      {/* SECTION: Company Timeline milestones */}
-      {/* ========================================== */}
-      {/* <PremiumTimeline
-        eyebrow="Milestones"
-        heading="Historical Staged Timeline"
-        subheading="Review our trajectory from boutique residential drafts to heavy civil logistics developers."
-        steps={timelineSteps}
-      /> */}
-
-      {/* ========================================== */}
-      {/* SECTION: Office & Site Gallery */}
-      {/* ========================================== */}
-      <section className="section container">
-        <SectionHeader
-          eyebrow="Active Operations"
-          heading="Operations Gallery"
-          subheading="A visual look into our structural construction yards, drafting offices, and completed projects."
-        />
-
-        <div className={styles.galleryGrid}>
-          {galleryImages.map((item, idx) => (
-            <MotionWrapper key={item.id || idx} variant="scale" delay={idx * 0.1} className="glass-panel" style={{ overflow: 'hidden' }}>
-              <MediaWrapper
-                src={item.image}
-                alt={item.caption || `${appConfig.company.name} Operation ${idx + 1}`}
-                aspectRatio="16/10"
-                style={{ transition: 'transform var(--transition-slow)' }}
-              />
-            </MotionWrapper>
-          ))}
+      {/* Timeline Section */}
+      <section className="section bg-light">
+        <div className="container">
+          <SectionHeader
+            eyebrow="Our Journey"
+            heading="Milestones That Defined Us"
+            centered
+          />
+          <Timeline />
         </div>
       </section>
 
-      {/* ========================================== */}
-      {/* SECTION: CTA */}
-      {/* ========================================== */}
-      <CTASection 
-        title="Start Your Engineering Journey Today" 
-        description="Whether it's a residential villa or an industrial logistics park, Paramarsh Construction brings transparency and structural integrity to every blueprint."
-      />
-      
+
+      {/* Mission & Values */}
+      <section className={`section ${styles.valuesSection}`}>
+        <div className="container">
+          <SectionHeader
+            eyebrow="Core Principles"
+            heading="Our Mission & Values"
+            subheading="We don't just aim to build houses; our mission is to elevate the standard of living through superior construction methodologies."
+            center
+          />
+          <div className={styles.valuesGrid}>
+            {values.map((val, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                className={styles.valueCard}
+              >
+                <div className={styles.valueIcon}>{val.icon}</div>
+                <h3 className={styles.valueTitle}>{val.title}</h3>
+                <p className={styles.valueDesc}>{val.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTASection title="Let's Build Your Legacy Together" subtitle="Contact us for a free site visit and architectural consultation." />
     </div>
   );
 };

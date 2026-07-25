@@ -1,122 +1,141 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState, useMemo } from 'react';
+import { useParams, Link, useNavigate, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { HeaderThemeContext } from '../components/Layout';
 import { useGlobalData } from '../context/GlobalDataContext';
-import { ArrowLeft, User, Calendar, Tag, Share2 } from 'lucide-react';
+import { ArrowLeft, User, Calendar, Clock, Send, ChevronRight } from 'lucide-react';
 import MotionWrapper from '../components/MotionWrapper';
+import CTASection from '../components/CTASection';
+import styles from './BlogDetail.module.css';
 
 const BlogDetail = () => {
-  const { id } = useParams();
+  const { id: slug } = useParams();
   const navigate = useNavigate();
   const { setHeaderTheme } = useContext(HeaderThemeContext);
-  const { blogs } = useGlobalData();
-  const [blog, setBlog] = useState(null);
+  const { blogs, isLoading } = useGlobalData();
 
   useEffect(() => {
-    setHeaderTheme('dark');
+    setHeaderTheme('none');
     window.scrollTo(0, 0);
-  }, [setHeaderTheme, id]);
+  }, [setHeaderTheme, slug]);
 
-  useEffect(() => {
-    if (blogs && blogs.length > 0) {
-      const foundBlog = blogs.find(b => b.id.toString() === id);
-      if (foundBlog) {
-        setBlog(foundBlog);
-      } else {
-        navigate('/blog');
-      }
-    }
-  }, [blogs, id, navigate]);
+  const post = useMemo(() => {
+    return (blogs || []).find(p => p.slug === slug || p.id.toString() === slug);
+  }, [slug, blogs]);
 
-  if (!blog) {
+  if (isLoading) {
     return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Loading blog...</div>;
   }
 
-  // Related posts (excluding current, same category if possible, limited to 3)
-  const relatedPosts = blogs
-    .filter(b => b.id !== blog.id)
-    .sort((a, b) => (a.category_name === blog.category_name ? -1 : 1))
+  if (!post) {
+    return <Navigate to="/blog" replace />;
+  }
+
+  const blogPost = {
+    ...post,
+    date: post.date || post.created_at,
+    category: post.category_name,
+    content: post.content || '',
+    author: post.author || 'Admin',
+    tags: post.tags || []
+  };
+
+  const relatedPosts = (blogs || [])
+    .filter(b => b.id !== blogPost.id)
+    .sort((a, b) => (a.category_name === blogPost.category_name ? -1 : 1))
     .slice(0, 3);
 
+  const wordCount = blogPost.content.split(' ').length;
+  const readTime = Math.max(1, Math.ceil(wordCount / 200));
+
   return (
-    <div style={{ paddingBottom: '4rem' }}>
+    <div className={styles.pageWrapper}>
       <Helmet>
-        <title>{blog.title} | Paramarsh Construction</title>
-        <meta name="description" content={blog.content.substring(0, 160).replace(/<[^>]+>/g, '')} />
+        <title>{blogPost.title} | Blog</title>
+        <meta name="description" content={blogPost.excerpt || blogPost.content.replace(/<[^>]+>/g, '').substring(0, 150)} />
       </Helmet>
 
-      {/* Hero Section */}
-      <div style={{ position: 'relative', height: '50vh', minHeight: '400px', display: 'flex', alignItems: 'flex-end', paddingBottom: '3rem' }}>
-        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}>
-          <img
-            src={blog.image || 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&q=80'}
-            alt={blog.title}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-          />
-          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 100%)' }} />
-        </div>
-
-        <div className="container">
+      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url(${blogPost.image})` }}>
+        <div className={`container ${styles.heroContent}`}>
           <MotionWrapper variant="slideUp">
-            <Link to="/blog" style={{ display: 'inline-flex', alignItems: 'center', color: 'rgba(255,255,255,0.7)', textDecoration: 'none', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
-              <ArrowLeft size={16} style={{ marginRight: '8px' }} /> Back to all articles
-            </Link>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.875rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+              <Link to="/blog" style={{ color: 'rgba(255,255,255,0.7)' }}>Blog</Link> <ChevronRight size={14} /> <span>{blogPost.category}</span>
+            </div>
+            <h1 className="hero-title" style={{ fontSize: 'var(--font-size-hero)', color: '#fff', marginBottom: '1.5rem', textShadow: '0 4px 12px rgba(0,0,0,0.5)' }}>{blogPost.title}</h1>
 
-            {blog.category_name && (
-              <span style={{ display: 'inline-block', background: 'var(--accent)', color: '#fff', padding: '0.25rem 0.75rem', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', marginBottom: '1rem' }}>
-                {blog.category_name}
-              </span>
-            )}
-
-            <h1 className="display-sm" style={{ color: '#fff', marginBottom: '1.5rem', maxWidth: '800px' }}>
-              {blog.title}
-            </h1>
-
-            <div style={{ display: 'flex', gap: '1.5rem', color: 'rgba(255,255,255,0.8)', fontSize: '0.9rem' }}>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><User size={16} /> By {blog.author}</span>
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}><Calendar size={16} /> {new Date(blog.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            <div className={styles.metaRow}>
+              <div className={styles.metaItem}>
+                <User size={16} />
+                <span>{blogPost.author}</span>
+              </div>
+              <div className={styles.metaItem}>
+                <Calendar size={16} />
+                <span>{new Date(blogPost.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+              </div>
+              <div className={styles.metaItem}>
+                <Clock size={16} />
+                <span>{readTime} Min Read</span>
+              </div>
             </div>
           </MotionWrapper>
         </div>
-      </div>
+      </header>
 
-      {/* Content Section */}
-      <section className="section container">
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <MotionWrapper variant="slideUp" delay={0.2}>
-            {/* Social Share (Mock) */}
-            {/* <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '2rem' }}>
-              <button
-                onClick={() => alert('Sharing functionality would open native share sheet or links.')}
-                style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', padding: '0.5rem 1rem', borderRadius: '50px', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', color: 'var(--text-main)', fontSize: '0.875rem' }}
-              >
-                <Share2 size={16} /> Share Article
-              </button>
-            </div> */}
+      <section className="container">
+        <div className={styles.contentGrid}>
+          <div className={styles.articleCol}>
+            <MotionWrapper variant="slideUp" delay={0.2}>
+              <article className={styles.mainContent}>
+                <div className={styles.articleBody} dangerouslySetInnerHTML={{ __html: blogPost.content }} />
 
-            {/* Article Body */}
-            <div
-              style={{ fontSize: '1.1rem', lineHeight: 1.8, color: 'var(--text-main)' }}
-              dangerouslySetInnerHTML={{ __html: blog.content.replace(/\n/g, '<br/>') }}
-            />
-          </MotionWrapper>
+                <div className={styles.tagsRow}>
+                  {blogPost.tags && blogPost.tags.map((tag, i) => (
+                    <span key={i} className={styles.tagPill}>{tag}</span>
+                  ))}
+                </div>
+              </article>
+            </MotionWrapper>
+          </div>
+
+          <div className={styles.sidebar}>
+            <div className={styles.stickyForm}>
+              <h3 className={styles.formTitle}>Enquire Now</h3>
+              <p className={styles.formDesc}>Interested in building your dream home? Let's discuss your project.</p>
+
+              <form onSubmit={(e) => { e.preventDefault(); alert("Enquiry submitted!"); }}>
+                <div className="form-group mb-3">
+                  <input type="text" className="form-control" placeholder="Your Name" required />
+                </div>
+                <div className="form-group mb-3">
+                  <input type="email" className="form-control" placeholder="Your Email" required />
+                </div>
+                <div className="form-group mb-3">
+                  <input type="tel" className="form-control" placeholder="Phone Number" required />
+                </div>
+                <div className="form-group mb-4">
+                  <textarea className="form-control" placeholder="Message" rows="3" required></textarea>
+                </div>
+                <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
+                  Submit <Send size={16} />
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Related Articles */}
       {relatedPosts.length > 0 && (
-        <section className="section" style={{ background: 'var(--bg-card)', borderTop: '1px solid var(--border)' }}>
+        <section className="section" style={{ background: 'var(--bg-secondary)', marginTop: '4rem' }}>
           <div className="container">
-            <h2 style={{ fontSize: '2rem', marginBottom: '2.5rem', textAlign: 'center' }}>Keep Reading</h2>
+            <h2 style={{ fontSize: '2rem', marginBottom: '2.5rem', textAlign: 'center', color: 'var(--text-primary)' }}>Keep Reading</h2>
             <div className="grid-3" style={{ gap: '2rem' }}>
               {relatedPosts.map((post, idx) => (
-                <MotionWrapper key={post.id} variant="slideUp" delay={idx * 0.1} style={{ background: 'var(--bg-main)', border: '1px solid var(--border)', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <MotionWrapper key={post.id} variant="slideUp" delay={idx * 0.1} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '12px', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                   <div style={{ height: '200px' }}>
-                    <img src={post.image || 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <img src={post.image || 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80'} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
                   </div>
                   <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                    <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', lineHeight: 1.4 }}>
+                    <h3 style={{ fontSize: '1.25rem', marginBottom: '1rem', lineHeight: 1.4, color: 'var(--text-primary)' }}>
                       <Link to={`/blog/${post.id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
                         {post.title}
                       </Link>
@@ -134,6 +153,8 @@ const BlogDetail = () => {
           </div>
         </section>
       )}
+      
+      <CTASection title="Ready to Build Your Dream Home?" subtitle="Get in touch with our experts to discuss your upcoming project." />
     </div>
   );
 };

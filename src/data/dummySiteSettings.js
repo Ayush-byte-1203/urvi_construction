@@ -1,0 +1,14 @@
+export const dummySiteSettings = {
+  id: 1,
+  site_name: "Paramarsh Construction",
+  contact_email: "hello@paramarshconstruction.in",
+  contact_phone: "+91 98980 12345",
+  address: "Alkapuri, Vadodara, Gujarat 390007",
+  facebook_url: "https://facebook.com/paramarsh",
+  twitter_url: null,
+  linkedin_url: "https://linkedin.com/company/paramarsh",
+  instagram_url: "https://instagram.com/paramarsh",
+  hero_headline: 'Premium Civil<br/>Construction<br/><span class="Hero_heroTitleAccent__Lg3K7">Residential Commercial Industrial</span>',
+  hero_video_url: "https://assets.mixkit.co/videos/preview/mixkit-modern-architecture-detail-with-concrete-and-glass-41763-large.mp4",
+  hero_poster_url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80",
+};

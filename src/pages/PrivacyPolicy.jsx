@@ -1,47 +1,67 @@
-import React, { useContext, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { appConfig } from '../data/appConfig';
+import React, { useEffect, useContext } from 'react';
+import SEO from '../components/SEO';
 import { HeaderThemeContext } from '../components/Layout';
+import SectionHeader from '../components/SectionHeader';
+import styles from './Legal.module.css';
 
 const PrivacyPolicy = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
 
   useEffect(() => {
-    setHeaderTheme('dark');
+    setHeaderTheme('light');
   }, [setHeaderTheme]);
+
   return (
-    <div className="privacy-page">
-      <Helmet>
-        <title>Privacy Policy | {appConfig.company.name}</title>
-        <meta name="description" content="Review our privacy policies regarding structural files and drawings." />
-      </Helmet>
+    <div className="page-wrapper">
+      <SEO title="Privacy Policy" description="Our privacy policy and data handling practices." />
 
-      <section className="subpage-header">
+      <div className={styles.pageHeader}>
         <div className="container">
-          <span className="accent-text">Legal Department</span>
-          <h1 className="title-large mb-3">Privacy Policy</h1>
-          <p className="subtitle">Last updated: June 30, 2026. Review how BuildCraft Constructions protects your blueprints and data files.</p>
+          <SectionHeader
+            heading="Privacy Policy"
+            subheading="Last updated: October 2026"
+            center
+          />
         </div>
-      </section>
+      </div>
 
-      <section className="subpage-content container" style={{ maxWidth: '800px', margin: '0 auto' }}>
-        <h2 className="mb-3" style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }}>1. Data Collection</h2>
-        <p className="mb-6">
-          We collect technical blueprints, plot layout coordinates, email queries, and phone details provided to us during the project estimation phase.
-          This ensures we prepare accurate estimates matching zoning laws.
-        </p>
+      <section className={`section container ${styles.legalSection}`}>
+        <div className={styles.content}>
+          <h3>1. Information We Collect</h3>
+          <p>
+            When you interact with our website, we may collect personal information such as your name, email address, phone number, and project requirements. We also collect non-personal data through cookies to improve our website experience.
+          </p>
 
-        <h2 className="mb-3" style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }}>2. Technical Drawings Protections</h2>
-        <p className="mb-6">
-          All architectural drawings and structural layouts are treated as intellectual property assets. 
-          We store designs on secure cloud servers with active firewalls and do not share blueprints with unauthorized third-party suppliers.
-        </p>
+          <h3>2. How We Use Your Information</h3>
+          <p>
+            The information we collect is strictly used to provide and improve our construction and architectural services, process your inquiries, and send you relevant updates regarding your project.
+          </p>
 
-        <h2 className="mb-3" style={{ fontSize: '1.5rem', color: 'var(--text-primary)' }}>3. Digital Analytics Tracking</h2>
-        <p className="mb-6">
-          Our website systems use minor cookies to analyze traffic patterns and optimize landing speeds. 
-          You can toggle browser settings to decline tracking without degrading your base page browsing experience.
-        </p>
+          <h3>3. Data Security</h3>
+          <p>
+            We implement reasonable security measures to protect your personal information from unauthorized access, alteration, or disclosure. However, no internet-based service can guarantee 100% security.
+          </p>
+
+          <h3>4. Sharing Your Information</h3>
+          <p>
+            We do not sell, trade, or rent your personal information to third parties. We may share data with trusted subcontractors who assist us in delivering our services, provided they agree to keep this information confidential.
+          </p>
+
+          <h3>5. Your Rights</h3>
+          <p>
+            You have the right to request access to the personal data we hold about you and to ask for it to be corrected or deleted.
+          </p>
+
+          <h3>6. Cookies Policy</h3>
+          <p>
+            We use cookies and similar tracking technologies to track the activity on our service and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
+          </p>
+
+          <h3>7. Contact Us</h3>
+          <p>
+            If you have any questions about this Privacy Policy, please contact us at hello@premiumbuilder.in.
+          </p>
+        </div>
       </section>
     </div>
   );

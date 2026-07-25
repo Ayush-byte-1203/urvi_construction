@@ -24,12 +24,14 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
+from core.admin import custom_admin_site
+
 def root_redirect(request):
     return HttpResponseRedirect('/admin/')
 
 urlpatterns = [
     path("", root_redirect),
-    path("admin/", admin.site.urls),
+    path("admin/", custom_admin_site.urls),
     path("api/admin/token/", TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path("api/admin/token/refresh/", TokenRefreshView.as_view(), name='token_refresh'),
     path("api/", include("core.urls")),

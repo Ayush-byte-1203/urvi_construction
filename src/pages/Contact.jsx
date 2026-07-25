@@ -1,143 +1,203 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import SEO from '../components/SEO';
-import LoadingSpinner from '../components/LoadingSpinner';
-import { Link } from 'react-router-dom';
-import { 
-  Mail, Phone, MapPin, Send, CheckCircle2, ChevronRight, ShieldCheck, Clock 
-} from 'lucide-react';
-import { appConfig } from '../data/appConfig';
-import { useGlobalData } from '../context/GlobalDataContext';
-import { usePageData } from '../hooks/usePageData';
-import SectionHeader from '../components/SectionHeader';
-import MotionWrapper from '../components/MotionWrapper';
-import Button from '../components/Button';
-import HeroOverlay from '../components/HeroOverlay';
-import InquiryForm from '../components/InquiryForm';
 import { HeaderThemeContext } from '../components/Layout';
+import SectionHeader from '../components/SectionHeader';
+import { motion } from 'framer-motion';
+import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { useGlobalData } from '../context/GlobalDataContext';
 import styles from './Contact.module.css';
 
 const Contact = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
-  const { pageData, isLoading: isPageLoading } = usePageData('contact');
-  const { isLoading: isGlobalLoading } = useGlobalData();
-  const isLoading = isPageLoading || isGlobalLoading;
+  const { siteSettings } = useGlobalData();
   
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+
   useEffect(() => {
-    setHeaderTheme('dark');
+    setHeaderTheme('light');
   }, [setHeaderTheme]);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-
-  if (isLoading) {
-    return (
-      <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <LoadingSpinner />
-      </div>
-    );
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Contact form submitted (Stub):", formData);
+    alert("Thank you for your message. We will get back to you shortly.");
+    setFormData({ name: '', phone: '', email: '', message: '' });
+  };
 
   return (
-    <div className="contact-page">
+    <div className="page-wrapper">
       <SEO 
-        title={`Contact ${appConfig.company.name} | Premium Construction Estimates`}
-        description={`Get in touch for a free site assessment, engineering drawings review, or cost estimate. Book a consultation with ${appConfig.company.name} today.`}
-        url="/contact"
+        title="Contact Us | Reach Our Experts"
+        description="Get in touch with our construction and design experts for a free consultation or project estimation."
       />
 
-      {/* ========================================== */}
-      {/* SECTION: Breadcrumb Header */}
-      {/* ========================================== */}
-      <section className={styles.hero}>
-        {pageData?.hero_video && (
-          <video autoPlay loop muted playsInline style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 0 }}>
-            <source src={pageData.hero_video} type="video/mp4" />
-          </video>
-        )}
-        {pageData?.hero_image && !pageData?.hero_video && (
-          <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', backgroundImage: `url(${pageData.hero_image})`, backgroundSize: 'cover', backgroundPosition: 'center', zIndex: 0 }} />
-        )}
-        <HeroOverlay type="dark" />
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <div className={styles.breadcrumbs}>
-            <Link to="/">Home</Link>
-            <ChevronRight size={12} />
-            <span>Contact</span>
-          </div>
-          <h1 className={styles.heroTitle}>Start the Dialogue</h1>
-          <p className={styles.heroDesc}>
-            Ready to map out your structural designs? Schedule an estimation call or submit your blueprints.
-          </p>
-        </div>
-      </section>
-
-      {/* ========================================== */}
-      {/* SECTION: Split layout: Info cards vs Multi-form */}
-      {/* ========================================== */}
-      <section className="section container">
-        <div className="grid-2">
-          {/* Direct channels */}
-          <div>
-            <span className="text-overline">Get in touch</span>
-            <h2 className="display-sm" style={{ marginTop: '0.25rem', marginBottom: '2.5rem' }}>Direct Communication Channels</h2>
-            
-            <div className={styles.infoGrid}>
-              <div className={styles.infoCard}>
-                <Phone size={24} style={{ color: 'var(--accent)', flexShrink: 0 }} />
-                <div>
-                  <span className={styles.label}>Phone Inquiries</span>
-                  <a href={appConfig.company.phoneFormatted} className={styles.value}>{appConfig.company.phone}</a>
-                </div>
-              </div>
-
-              <div className={styles.infoCard}>
-                <Mail size={24} style={{ color: 'var(--accent)', flexShrink: 0 }} />
-                <div>
-                  <span className={styles.label}>Email Inquiries</span>
-                  <a href={appConfig.company.emailLink} className={styles.value}>{appConfig.company.email}</a>
-                </div>
-              </div>
-
-              <div className={styles.infoCard}>
-                <Clock size={24} style={{ color: 'var(--accent)', flexShrink: 0 }} />
-                <div>
-                  <span className={styles.label}>Working Shifts</span>
-                  <span className={styles.value}>{appConfig.company.businessHours}</span>
-                </div>
-              </div>
-
-              <div className={styles.infoCard}>
-                <MapPin size={24} style={{ color: 'var(--accent)', flexShrink: 0 }} />
-                <div>
-                  <span className={styles.label}>Headquarters Address</span>
-                  <span className={styles.value}>{appConfig.company.address}</span>
-                </div>
-              </div>
+      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('https://images.unsplash.com/photo-1590495914106-4d048d6db95a?auto=format&fit=crop&w=1920&q=80')` }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="breadcrumbs">
+              <a href="/">Home</a>
+              <span>/</span>
+              <span>Contact</span>
             </div>
-          </div>
+            <h1>Let's Build Something Great</h1>
+            <p className="subtitle">
+              Whether you have a completed architectural plan or just a rough idea, our experts are ready to guide you.
+            </p>
+          </motion.div>
+        </div>
+      </header>
 
-          {/* Interactive Multi-form Container */}
-          <div className="glass-panel" style={{ padding: '3rem' }}>
-            <InquiryForm />
-          </div>
+      <section className={`section container ${styles.contactSection}`}>
+        <div className={styles.grid}>
+          
+          {/* Left: Contact Info */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className={styles.infoCol}
+          >
+            <div className={styles.infoCard}>
+              <h3 className={styles.cardTitle}>Head Office</h3>
+              <p className={styles.cardDesc}>Visit our experience center to discuss your project over coffee.</p>
+              
+              <ul className={styles.contactList}>
+                <li className={styles.contactItem}>
+                  <div className={styles.iconWrapper}><MapPin size={20} /></div>
+                  <div>
+                    <strong>Address</strong>
+                    <p style={{ whiteSpace: 'pre-wrap' }}>{siteSettings?.address || '45, 100 Feet Road, Indiranagar,\nBengaluru, Karnataka 560038'}</p>
+                  </div>
+                </li>
+                
+                <li className={styles.contactItem}>
+                  <div className={styles.iconWrapper}><Phone size={20} /></div>
+                  <div>
+                    <strong>Phone</strong>
+                    <p><a href={`tel:${siteSettings?.contact_phone ? siteSettings.contact_phone.replace(/\D/g, '') : '+919876543210'}`}>{siteSettings?.contact_phone || '+91 98765 43210'}</a></p>
+                  </div>
+                </li>
+                
+                <li className={styles.contactItem}>
+                  <div className={styles.iconWrapper}><Mail size={20} /></div>
+                  <div>
+                    <strong>Email</strong>
+                    <p><a href={`mailto:${siteSettings?.contact_email || 'hello@premiumbuilder.in'}`}>{siteSettings?.contact_email || 'hello@premiumbuilder.in'}</a></p>
+                  </div>
+                </li>
+                
+                <li className={styles.contactItem}>
+                  <div className={styles.iconWrapper}><Clock size={20} /></div>
+                  <div>
+                    <strong>Business Hours</strong>
+                    <p>Mon - Sat: 9:00 AM - 6:30 PM<br/>Sunday: By Appointment</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+
+          {/* Right: Contact Form */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className={styles.formCol}
+          >
+            <div className={styles.formCard}>
+              <h3 className={styles.formTitle}>Send a Message</h3>
+              <form onSubmit={handleSubmit} className={styles.form}>
+                
+                <div className={styles.formRow}>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="name" className={styles.label}>Full Name</label>
+                    <input 
+                      type="text" 
+                      id="name" 
+                      name="name" 
+                      className="form-control" 
+                      value={formData.name} 
+                      onChange={handleChange} 
+                      required 
+                    />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label htmlFor="phone" className={styles.label}>Phone Number</label>
+                    <input 
+                      type="tel" 
+                      id="phone" 
+                      name="phone" 
+                      className="form-control" 
+                      value={formData.phone} 
+                      onChange={handleChange} 
+                      required 
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label htmlFor="email" className={styles.label}>Email Address</label>
+                  <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    className="form-control" 
+                    value={formData.email} 
+                    onChange={handleChange} 
+                    required 
+                  />
+                </div>
+
+                <div className={styles.formGroup}>
+                  <label htmlFor="message" className={styles.label}>Project Details</label>
+                  <textarea 
+                    id="message" 
+                    name="message" 
+                    className="form-control" 
+                    rows="5"
+                    value={formData.message} 
+                    onChange={handleChange} 
+                    required 
+                  ></textarea>
+                </div>
+
+                <button type="submit" className="btn btn-primary" style={{ width: '100%', justifyContent: 'center' }}>
+                  Submit Inquiry <Send size={16} style={{ marginLeft: '8px' }} />
+                </button>
+              </form>
+            </div>
+          </motion.div>
+
         </div>
       </section>
 
-      {/* ========================================== */}
-      {/* SECTION: FAQ Preview Block */}
-      {/* ========================================== */}
-      <section className="section container" style={{ maxWidth: '800px' }}>
-        <SectionHeader
-          eyebrow="FAQ"
-          heading="Contact-Related Queries"
-          subheading="Learn about soil testing clearances, billing parameters, and site visiting policies."
-        />
-        <div className="glass-panel text-center" style={{ marginTop: '3rem', padding: '3rem' }}>
-          <p style={{ color: 'var(--color-text-secondary)', marginBottom: '1.5rem' }}>
-            We have prepared comprehensive files explaining site surveying processes, structural mix testing schedules, and snags clearing handovers.
-          </p>
-          <Link to="/faq">
-            <Button variant="outline">Browse Complete FAQ Directory</Button>
-          </Link>
+      {/* Map Section */}
+      <section className={styles.mapSection}>
+        <div className={styles.mapContainer} style={{ width: '100%', height: '400px', background: '#e5e5e5' }}>
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.971578335092!2d77.6402636152697!3d12.97368559085449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16a75a7c2fcd%3A0x8e8609a632e1430!2s100%20Feet%20Rd%2C%20Indiranagar%2C%20Bengaluru%2C%20Karnataka%20560038!5e0!3m2!1sen!2sin!4v1689254320987!5m2!1sen!2sin" 
+            width="100%" 
+            height="100%" 
+            style={{ border: 0 }} 
+            allowFullScreen="" 
+            loading="lazy" 
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Paramarsh Construction Office Location"
+          ></iframe>
         </div>
       </section>
     </div>

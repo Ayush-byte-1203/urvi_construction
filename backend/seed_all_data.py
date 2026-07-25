@@ -6,7 +6,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
 django.setup()
 
 from core.models import (
-    ServiceCategory, Service, CoreValue, Milestone, CompanyStat, ProcessStep, TrustPartner, SiteSettings
+    ServiceCategory, Service, CoreValue, SiteSettings
 )
 
 def seed_data():
@@ -14,10 +14,6 @@ def seed_data():
     Service.objects.all().delete()
     ServiceCategory.objects.all().delete()
     CoreValue.objects.all().delete()
-    Milestone.objects.all().delete()
-    CompanyStat.objects.all().delete()
-    ProcessStep.objects.all().delete()
-    TrustPartner.objects.all().delete()
     SiteSettings.objects.all().delete()
 
     print("Seeding Site Settings...")
@@ -69,15 +65,7 @@ def seed_data():
     CoreValue.objects.create(title="Quality Assurance", description="Using only premium graded materials.", icon_name="CheckCircle2", order=2)
     CoreValue.objects.create(title="Timely Delivery", description="Strict adherence to project schedules.", icon_name="Clock", order=3)
 
-    print("Seeding Company Stats...")
-    CompanyStat.objects.create(number="15+", label="Years Experience", order=1)
-    CompanyStat.objects.create(number="250+", label="Projects Delivered", order=2)
-    CompanyStat.objects.create(number="50+", label="Expert Engineers", order=3)
 
-    print("Seeding Trust Partners...")
-    TrustPartner.objects.create(name="UltraTech Cement", order=1)
-    TrustPartner.objects.create(name="Asian Paints", order=2)
-    TrustPartner.objects.create(name="Tata Steel", order=3)
 
     print("Seeding complete! Check your Django admin panel.")
 
