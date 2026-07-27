@@ -6,12 +6,26 @@ const RouteScrollToTop = () => {
 
   useEffect(() => {
     if (hash) {
-      setTimeout(() => {
+      let attempts = 0;
+      const findAndScroll = () => {
         const element = document.querySelector(hash);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return true;
         }
-      }, 100);
+        return false;
+      };
+
+      if (!findAndScroll()) {
+        const interval = setInterval(() => {
+          attempts++;
+          if (findAndScroll() || attempts >= 30) {
+            clearInterval(interval);
+          }
+        }, 100);
+
+        return () => clearInterval(interval);
+      }
     } else {
       window.scrollTo({
         top: 0,
