@@ -9,10 +9,13 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 import { useGlobalData } from '../context/GlobalDataContext';
+import { usePageData } from '../hooks/usePageData';
 
 const Services = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
+  const { pageData } = usePageData('services');
   const { faqs } = useGlobalData();
+  const heroBg = pageData?.hero_image || "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&q=80";
   const formattedFaqs = (faqs || []).map(f => ({ title: f.question, content: f.answer }));
 
   useEffect(() => {
@@ -26,7 +29,7 @@ const Services = () => {
         description="Explore our comprehensive range of construction, architectural, and interior design services."
       />
       
-      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&q=80')` }}>
+      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('${heroBg}')` }}>
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -38,9 +41,9 @@ const Services = () => {
               <span>/</span>
               <span>Services</span>
             </div>
-            <h1>Our Services</h1>
+            <h1>{pageData?.title || "Our Services"}</h1>
             <p className="subtitle">
-              Comprehensive turnkey solutions from architectural blueprints to final interiors.
+              {pageData?.subtitle || "Comprehensive turnkey solutions from architectural blueprints to final interiors."}
             </p>
           </motion.div>
         </div>

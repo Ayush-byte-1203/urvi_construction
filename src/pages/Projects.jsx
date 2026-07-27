@@ -6,13 +6,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Maximize, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useGlobalData } from '../context/GlobalDataContext';
+import { usePageData } from '../hooks/usePageData';
 import CTASection from '../components/CTASection';
 import styles from './Projects.module.css';
 
 const Projects = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
+  const { pageData } = usePageData('projects');
   const { projects: allProjects, projectCategories } = useGlobalData();
   const [filter, setFilter] = useState('All');
+  const heroBg = pageData?.hero_image || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80";
 
   const categories = useMemo(() => {
     const cats = new Set();
@@ -50,7 +53,7 @@ const Projects = () => {
         description="Browse our extensive portfolio of completed and ongoing residential and commercial construction projects."
       />
       
-      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80')` }}>
+      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('${heroBg}')` }}>
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -62,9 +65,9 @@ const Projects = () => {
               <span>/</span>
               <span>Projects</span>
             </div>
-            <h1>Our Portfolio</h1>
+            <h1>{pageData?.title || "Our Portfolio"}</h1>
             <p className="subtitle">
-              Explore a curated selection of our finest builds, where precision engineering meets architectural elegance.
+              {pageData?.subtitle || "Explore a curated selection of our finest builds, where precision engineering meets architectural elegance."}
             </p>
           </motion.div>
         </div>

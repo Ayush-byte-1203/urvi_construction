@@ -8,10 +8,13 @@ import { Link } from 'react-router-dom';
 import styles from './Blog.module.css';
 
 import { useGlobalData } from '../context/GlobalDataContext';
+import { usePageData } from '../hooks/usePageData';
 
 const Blog = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
+  const { pageData } = usePageData('blog');
   const { blogs: allPosts } = useGlobalData();
+  const heroBg = pageData?.hero_image || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80";
   const [visiblePosts, setVisiblePosts] = useState(6);
   const [activeCategory, setActiveCategory] = useState('All');
 
@@ -42,7 +45,7 @@ const Blog = () => {
         description="Read our latest articles on construction trends, architectural design, and home building tips."
       />
 
-      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('https://images.unsplash.com/photo-1541888081600-01103f6f1c4e?auto=format&fit=crop&w=1920&q=80')` }}>
+      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('${heroBg}')` }}>
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -54,9 +57,9 @@ const Blog = () => {
               <span>/</span>
               <span>Blog</span>
             </div>
-            <h1>Insights, Trends & Guides</h1>
+            <h1>{pageData?.title || "Insights, Trends & Guides"}</h1>
             <p className="subtitle">
-              Expert advice and industry news to help you navigate your construction journey with confidence.
+              {pageData?.subtitle || "Expert advice and industry news to help you navigate your construction journey with confidence."}
             </p>
           </motion.div>
         </div>

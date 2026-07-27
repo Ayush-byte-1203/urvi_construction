@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState, useMemo } from 'react';
 import SEO from '../components/SEO';
 import { useGlobalData } from '../context/GlobalDataContext';
+import { usePageData } from '../hooks/usePageData';
 import { HeaderThemeContext } from '../components/Layout';
 import SectionHeader from '../components/SectionHeader';
 import Timeline from '../components/Timeline';
@@ -12,8 +13,10 @@ import sample1Img from '../Images/sample1.jpeg';
 
 const About = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
+  const { pageData } = usePageData('about');
   const { siteSettings, projects: allProjects, coreValues, projectCategories } = useGlobalData();
   const [filter, setFilter] = useState('All');
+  const heroBg = pageData?.hero_image || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80";
 
   const categories = useMemo(() => {
     const cats = new Set();
@@ -67,7 +70,7 @@ const About = () => {
       />
 
       {/* Hero Banner */}
-      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('https://images.unsplash.com/photo-1541888081600-01103f6f1c4e?auto=format&fit=crop&w=1920&q=80')` }}>
+      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('${heroBg}')` }}>
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -79,8 +82,8 @@ const About = () => {
               <span>/</span>
               <span>About Us</span>
             </div>
-            <h1>Our Legacy & Portfolio</h1>
-            <p className="subtitle">Building Tomorrow, Today. Learn about our 10+ year legacy and explore our completed signature builds.</p>
+            <h1>{pageData?.title || "Our Legacy & Portfolio"}</h1>
+            <p className="subtitle">{pageData?.subtitle || "Building Tomorrow, Today. Learn about our 10+ year legacy and explore our completed signature builds."}</p>
           </motion.div>
         </div>
       </header>

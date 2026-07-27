@@ -16,18 +16,52 @@ const CostCalculatorSection = () => {
 
   // Sync packageId when packages load
   React.useEffect(() => {
-    if (packages && packages.length > 0 && !packages.find(p => p.id === packageId)) {
+    if (packages && packages.length > 0 && !packages.find(p => String(p.id) === String(packageId))) {
       setPackageId(packages[0].id);
     }
   }, [packages, packageId]);
 
+  const parsePrice = (priceVal, defaultVal = 1800) => {
+    if (typeof priceVal === 'number' && !isNaN(priceVal)) return priceVal;
+    if (!priceVal) return defaultVal;
+    const clean = String(priceVal).replace(/[^0-9.]/g, '');
+    const num = parseFloat(clean);
+    return isNaN(num) || num <= 0 ? defaultVal : num;
+  };
+
   // Calculation
-  const selectedPackage = packages?.find(p => p.id === packageId) || packages?.[0] || { name: 'Essential', price: 1600 };
-  const baseRate = parseInt(selectedPackage.price, 10) || 1600;
+  const selectedPackage = useMemo(() => {
+    if (!packages || packages.length === 0) {
+      return { name: 'Essential Tier', price: 1800 };
+    }
+    const found = packages.find(p => String(p.id) === String(packageId));
+    return found || packages[0];
+  }, [packages, packageId]);
+
+  const baseRate = useMemo(() => parsePrice(selectedPackage?.price, 1800), [selectedPackage]);
+
+  const floorsMultiplier = useMemo(() => {
+    switch (floors) {
+      case 'G+1': return 1.05;
+      case 'G+2': return 1.10;
+      case 'G+3': return 1.15;
+      case 'G+4': return 1.20;
+      case 'Ground Floor':
+      default: return 1.0;
+    }
+  }, [floors]);
+
+  const propertyMultiplier = useMemo(() => {
+    return propertyType === 'Commercial' ? 1.12 : 1.0;
+  }, [propertyType]);
+
+  const effectiveRate = useMemo(() => {
+    return Math.round(baseRate * floorsMultiplier * propertyMultiplier);
+  }, [baseRate, floorsMultiplier, propertyMultiplier]);
 
   const estimatedCost = useMemo(() => {
-    return area * baseRate;
-  }, [area, baseRate]);
+    return area * effectiveRate;
+  }, [area, effectiveRate]);
 
   // Range: +/- 10%
   const lowRange = estimatedCost * 0.9;
@@ -91,10 +125,10 @@ const CostCalculatorSection = () => {
             <select
               className="form-control"
               value={packageId}
-              onChange={(e) => setPackageId(Number(e.target.value))}
+              onChange={(e) => setPackageId(e.target.value)}
             >
               {packages?.map(p => (
-                <option key={p.id} value={p.id}>{p.name} - ₹{p.price}/sq.ft</option>
+                <option key={p.id} value={p.id}>{p.name} - ₹{parsePrice(p.price, 1800)}/sq.ft</option>
               ))}
             </select>
           </div>
@@ -127,6 +161,10 @@ const CostCalculatorSection = () => {
               <strong>{area} sq.ft</strong>
             </div>
             <div className={styles.breakdownItem}>
+              <span>Property & Floors</span>
+              <strong>{propertyType} ({floors})</strong>
+            </div>
+            <div className={styles.breakdownItem}>
               <span>Package Selected</span>
               <strong>{selectedPackage.name}</strong>
             </div>
@@ -134,6 +172,12 @@ const CostCalculatorSection = () => {
               <span>Base Rate</span>
               <strong>₹{baseRate} / sq.ft</strong>
             </div>
+            {effectiveRate !== baseRate && (
+              <div className={styles.breakdownItem}>
+                <span>Effective Rate (incl. structure/type)</span>
+                <strong>₹{effectiveRate} / sq.ft</strong>
+              </div>
+            )}
             <div className={styles.divider}></div>
             <div className={styles.breakdownItem} style={{ fontSize: '1.125rem', color: 'var(--text-primary)' }}>
               <strong>Total Estimated Cost</strong>

@@ -5,11 +5,14 @@ import SectionHeader from '../components/SectionHeader';
 import { motion } from 'framer-motion';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
 import { useGlobalData } from '../context/GlobalDataContext';
+import { usePageData } from '../hooks/usePageData';
 import styles from './Contact.module.css';
 
 const Contact = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
+  const { pageData } = usePageData('contact');
   const { siteSettings } = useGlobalData();
+  const heroBg = pageData?.hero_image || "https://images.unsplash.com/photo-1590495914106-4d048d6db95a?auto=format&fit=crop&w=1920&q=80";
   
   const [formData, setFormData] = useState({
     name: '',
@@ -41,7 +44,7 @@ const Contact = () => {
         description="Get in touch with our construction and design experts for a free consultation or project estimation."
       />
 
-      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('https://images.unsplash.com/photo-1590495914106-4d048d6db95a?auto=format&fit=crop&w=1920&q=80')` }}>
+      <header className="subpage-header" style={{ backgroundImage: `linear-gradient(rgba(8, 12, 24, 0.72), rgba(8, 12, 24, 0.60)), url('${heroBg}')` }}>
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -53,9 +56,9 @@ const Contact = () => {
               <span>/</span>
               <span>Contact</span>
             </div>
-            <h1>Let's Build Something Great</h1>
+            <h1>{pageData?.title || "Let's Build Something Great"}</h1>
             <p className="subtitle">
-              Whether you have a completed architectural plan or just a rough idea, our experts are ready to guide you.
+              {pageData?.subtitle || "Whether you have a completed architectural plan or just a rough idea, our experts are ready to guide you."}
             </p>
           </motion.div>
         </div>

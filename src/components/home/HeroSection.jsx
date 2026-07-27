@@ -4,12 +4,14 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styles from './HeroSection.module.css';
 import { useGlobalData } from '../../context/GlobalDataContext';
+import { usePageData } from '../../hooks/usePageData';
 
 const HeroSection = ({ cityContext }) => {
   const { siteSettings } = useGlobalData();
+  const { pageData } = usePageData('home');
   const siteName = siteSettings?.site_name || 'Paramarsh Construction';
   const badgeText = cityContext ? `${siteName} | ${cityContext}` : `${siteName} | Vadodara`;
-  const bgImage = siteSettings?.hero_poster_url || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80";
+  const bgImage = pageData?.hero_image || siteSettings?.hero_poster_url || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80";
 
   return (
     <section className={styles.hero}>
