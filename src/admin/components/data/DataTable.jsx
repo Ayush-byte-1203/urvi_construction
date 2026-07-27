@@ -5,6 +5,21 @@ import { Plus, Edit2, Trash2, Search, Loader2 } from 'lucide-react';
 import styles from './DataTable.module.css';
 import { API_URL } from '../../../services/api';
 
+const getModuleKey = (endpoint) => {
+  if (endpoint.includes('project')) return 'projects';
+  if (endpoint.includes('service')) return 'services';
+  if (endpoint.includes('package')) return 'packages';
+  if (endpoint.includes('blog')) return 'blogs';
+  if (endpoint.includes('testimonial')) return 'testimonials';
+  if (endpoint.includes('faq')) return 'faqs';
+  if (endpoint.includes('gallery')) return 'gallery';
+  if (endpoint.includes('core-value') || endpoint.includes('journey')) return 'core_values';
+  if (endpoint.includes('page')) return 'pages';
+  if (endpoint.includes('setting')) return 'settings';
+  if (endpoint.includes('user')) return 'users';
+  return 'projects';
+};
+
 const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +27,9 @@ const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => 
   const [prevUrl, setPrevUrl] = useState(null);
   const [currentUrl, setCurrentUrl] = useState(`/${endpoint}/`);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
-  const { token } = useAdminAuth();
+  const { token, hasPermission } = useAdminAuth();
+
+  const canEdit = hasPermission(getModuleKey(endpoint), 'edit');
 
   useEffect(() => {
     const handleDataUpdated = (e) => {
@@ -56,6 +73,7 @@ const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => 
   }, [currentUrl, token, refreshTrigger]);
 
   const handleDelete = async (id) => {
+    if (!canEdit) return;
     if (!window.confirm('Are you sure you want to delete this item?')) return;
     try {
       await axios.delete(`${API_URL}/${endpoint}/${id}/`, {
@@ -86,10 +104,12 @@ const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => 
             <Search size={18} className={styles.searchIcon} />
             <input type="text" placeholder="Search..." className={styles.searchInput} />
           </div>
-          <button className={styles.addBtn} onClick={() => onEdit(null)}>
-            <Plus size={18} />
-            Add New
-          </button>
+          {canEdit && (
+            <button className={styles.addBtn} onClick={() => onEdit(null)}>
+              <Plus size={18} />
+              Add New
+            </button>
+          )}
         </div>
       </div>
 
@@ -105,7 +125,7 @@ const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => 
                 {columns.map(col => (
                   <th key={col.key}>{col.label}</th>
                 ))}
-                <th className={styles.actionsCell}>Actions</th>
+                {canEdit && <th className={styles.actionsCell}>Actions</th>}
               </tr>
             </thead>
             <tbody>
@@ -116,14 +136,16 @@ const DataTable = ({ title, endpoint, columns, onEdit, lookupField = 'id' }) => 
                       {col.render ? col.render(item[col.key], item) : item[col.key]}
                     </td>
                   ))}
-                  <td className={styles.actionsCell}>
-                    <button className={styles.iconBtn} onClick={() => onEdit(item)}>
-                      <Edit2 size={16} />
-                    </button>
-                    <button className={`${styles.iconBtn} ${styles.deleteBtn}`} onClick={() => handleDelete(item[lookupField])}>
-                      <Trash2 size={16} />
-                    </button>
-                  </td>
+                  {canEdit && (
+                    <td className={styles.actionsCell}>
+                      <button className={styles.iconBtn} onClick={() => onEdit(item)}>
+                        <Edit2 size={16} />
+                      </button>
+                      <button className={`${styles.iconBtn} ${styles.deleteBtn}`} onClick={() => handleDelete(item[lookupField])}>
+                        <Trash2 size={16} />
+                      </button>
+                    </td>
+                  )}
                 </tr>
               ))}
               {data.length === 0 && (

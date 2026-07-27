@@ -67,10 +67,10 @@ const Footer = () => {
               <Mail size={16} className={styles.contactIcon} />
               <a href={`mailto:${siteSettings?.contact_email || appConfig.company.email}`}>{siteSettings?.contact_email || appConfig.company.email}</a>
             </div>
-            <div className={styles.footerContactItem}>
+            {/* <div className={styles.footerContactItem}>
               <Clock size={16} className={styles.contactIcon} />
               <span>Mon - Sat: 9:00 AM - 6:00 PM<br />Sun: Closed</span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

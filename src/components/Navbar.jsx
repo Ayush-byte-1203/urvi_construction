@@ -37,19 +37,12 @@ const Navbar = ({ theme = 'dark' }) => {
   }));
 
   // Determine header visibility classes based on scroll state and active theme
+  // Permanent Solid White Header
   const getHeaderClass = () => {
-    let classes = `${styles.header} `;
-    if (theme === 'none' || isScrolled) {
-      classes += `${styles.headerScrolled} `;
-    } else if (theme === 'light') {
-      classes += `${styles.headerTransparentLight} `;
-    } else {
-      classes += `${styles.headerTransparentDark} `;
-    }
-    return classes;
+    return `${styles.header} ${styles.headerScrolled}`;
   };
 
-  const logoTheme = (theme === 'none' || isScrolled || theme === 'light') ? 'light' : 'dark';
+  const logoTheme = 'light';
 
   return (
     <>
@@ -98,11 +91,6 @@ const Navbar = ({ theme = 'dark' }) => {
               )}
             </div>
 
-            <div className={styles.navItemWrapper}>
-              <NavLink to={ROUTES.PROJECTS} className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
-                <span className={styles.navLinkText}>Projects</span>
-              </NavLink>
-            </div>
             <div className={styles.navItemWrapper}>
               <NavLink to={ROUTES.BLOG} className={({ isActive }) => `${styles.navLink} ${isActive ? styles.navLinkActive : ''}`}>
                 <span className={styles.navLinkText}>Blog</span>

@@ -3,63 +3,62 @@
      1. COLOR SYSTEM — Premium Light Architecture
      ========================================================================== */
 
+  /* ==========================================================================
+     1. COLOR SYSTEM — White, Grey & Yellow Corporate Architecture
+     ========================================================================== */
+
   /* --- Core Background Hierarchy --- */
-  --bg-primary: #FAFAF7;
-  /* warm off-white canvas */
-  --bg-secondary: #FAFAF7;
-  /* unified off-white */
-  --bg-tertiary: #FAFAF7;
-  /* unified off-white */
-  --bg-card: #FAFAF7;
-  /* unified off-white */
-  --bg-overlay: rgba(250, 250, 247, 0.92);
+  --bg-primary: #FFFFFF;         /* Crisp White main canvas */
+  --bg-secondary: #F8FAFC;       /* Soft Light Grey section background */
+  --bg-tertiary: #F1F5F9;        /* Medium Light Grey surface */
+  --bg-card: #FFFFFF;            /* White Card Surface */
+  --bg-dark: #0F172A;            /* Charcoal Dark Grey Surface */
+  --bg-overlay: rgba(15, 23, 42, 0.75);
 
   /* Legacy aliases used across codebase */
   --color-bg-default: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
   --color-surface-default: var(--bg-card);
-  --color-surface-elevated: #FAFAF7;
-  --color-surface-acrylic: rgba(250, 250, 247, 0.9);
-  --color-overlay: rgba(17, 24, 39, 0.55);
+  --color-surface-elevated: #FFFFFF;
+  --color-surface-acrylic: rgba(255, 255, 255, 0.9);
+  --color-overlay: var(--bg-overlay);
 
-  /* --- Brand Accent — Premium Terracotta --- */
-  --accent: hsl(20, 85%, 45%);
-  /* Terracotta */
-  --accent-light: hsl(20, 85%, 55%);
-  /* lighter on hover */
-  --accent-dark: hsl(20, 85%, 35%);
-  /* pressed state */
-  --accent-subtle: hsl(20, 85%, 96%);
-  /* tint backgrounds */
-  --accent-glow: hsla(20, 85%, 45%, 0.18);
+  /* --- Brand Primary Accent — Logo Golden Yellow --- */
+  --brand-yellow: #EAB308;
+  --brand-yellow-hover: #FACC15;
+  --brand-yellow-dark: #D97706;
+  --brand-yellow-subtle: #FEF9C3;
+  --brand-yellow-glow: rgba(234, 179, 8, 0.25);
 
-  --brand-primary-default: var(--bg-primary);
-  --brand-primary-hover: var(--bg-secondary);
-  --brand-primary-active: var(--bg-tertiary);
-  --brand-primary-disabled: rgba(250, 250, 247, 0.4);
+  --accent: var(--brand-yellow);
+  --accent-light: var(--brand-yellow-hover);
+  --accent-dark: var(--brand-yellow-dark);
+  --accent-subtle: var(--brand-yellow-subtle);
+  --accent-glow: var(--brand-yellow-glow);
+
+  --brand-primary-default: var(--brand-yellow);
+  --brand-primary-hover: var(--brand-yellow-hover);
+  --brand-primary-active: var(--brand-yellow-dark);
+  --brand-primary-disabled: rgba(234, 179, 8, 0.4);
 
   --brand-secondary-default: var(--bg-secondary);
   --brand-secondary-hover: var(--bg-tertiary);
-  --brand-secondary-active: #DDDECB;
+  --brand-secondary-active: #E2E8F0;
 
   --brand-accent-default: var(--accent);
   --brand-accent-hover: var(--accent-light);
   --brand-accent-active: var(--accent-dark);
-  --brand-accent-disabled: hsla(16, 100%, 55%, 0.3);
+  --brand-accent-disabled: rgba(234, 179, 8, 0.35);
   --brand-accent-glow: var(--accent-glow);
 
   /* --- Typography Contrast Scale --- */
-  --text-primary: #0F172A;
-  /* deep navy/charcoal for headings */
-  --text-secondary: #334155;
-  /* dark gray — body copy */
-  --text-muted: #64748B;
-  /* medium gray — captions */
-  --text-disabled: #94A3B8;
-  /* disabled state */
-  --text-inverse: #FFFFFF;
-  /* text on dark/colored bg */
-  --text-accent: var(--accent);
+  --text-primary: #0F172A;       /* Dark Charcoal Navy for headings & primary text */
+  --text-secondary: #475467;     /* Slate Grey for body copy */
+  --text-muted: #64748B;         /* Medium Grey for captions & metadata */
+  --text-disabled: #94A3B8;      /* Light Grey for disabled text */
+  --text-inverse: #FFFFFF;       /* White text on dark elements */
+  --text-on-yellow: #0F172A;     /* Dark Charcoal text on Yellow buttons (WCAG AA) */
+  --text-accent: #D97706;        /* High-contrast Yellow/Gold for text emphasis */
 
   --color-text-primary: var(--text-primary);
   --color-text-secondary: var(--text-secondary);
@@ -67,11 +66,11 @@
   --color-text-disabled: var(--text-disabled);
 
   /* --- Borders & Dividers --- */
-  --border: #E5E7EB;
-  --border-subtle: #F3F4F6;
-  --border-strong: #D1D5DB;
-  --border-accent: var(--accent);
-  --focus-ring: hsla(16, 100%, 55%, 0.4);
+  --border: #E2E8F0;             /* Clean Grey Border */
+  --border-subtle: #F1F5F9;      /* Light Grey Divider */
+  --border-strong: #CBD5E1;      /* Medium Grey Border */
+  --border-accent: var(--brand-yellow-dark);
+  --focus-ring: rgba(234, 179, 8, 0.5);
 
   --color-border-default: var(--border);
   --color-border-subtle: var(--border-subtle);
@@ -80,13 +79,13 @@
   --color-focus-ring: var(--focus-ring);
 
   /* --- Semantic Feedback Colors --- */
-  --color-success-default: hsl(142, 71%, 38%);
-  --color-success-hover: hsl(142, 71%, 45%);
-  --color-warning-default: hsl(38, 92%, 50%);
-  --color-warning-hover: hsl(38, 92%, 60%);
-  --color-danger-default: hsl(0, 72%, 51%);
-  --color-danger-hover: hsl(0, 72%, 60%);
-  --color-info-default: hsl(199, 89%, 48%);
+  --color-success-default: #16A34A;
+  --color-success-hover: #15803D;
+  --color-warning-default: #EAB308;
+  --color-warning-hover: #D97706;
+  --color-danger-default: #DC2626;
+  --color-danger-hover: #B91C1C;
+  --color-info-default: #0284C7;
 
   /* legacy brand feedback aliases */
   --brand-success: var(--color-success-default);
@@ -96,9 +95,9 @@
   /* --- Scrollbar & Selection --- */
   --color-scrollbar-track: var(--bg-secondary);
   --color-scrollbar-thumb: #CBD5E1;
-  --color-scrollbar-thumb-hover: var(--accent);
-  --color-selection-bg: var(--accent);
-  --color-selection-text: #FFFFFF;
+  --color-scrollbar-thumb-hover: var(--brand-yellow-dark);
+  --color-selection-bg: var(--brand-yellow);
+  --color-selection-text: #0F172A;
 
   /* ==========================================================================
      2. TYPOGRAPHY SYSTEM

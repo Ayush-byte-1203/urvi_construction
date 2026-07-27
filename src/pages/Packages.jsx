@@ -102,12 +102,12 @@ const Packages = () => {
                   padding: '0.75rem 1.5rem',
                   borderRadius: 'var(--radius-full)',
                   border: '1px solid var(--border)',
-                  backgroundColor: selectedCity === city ? 'var(--accent)' : 'var(--bg-card)',
-                  color: selectedCity === city ? '#fff' : 'var(--text-primary)',
-                  fontWeight: '600',
+                  backgroundColor: selectedCity === city ? 'var(--brand-yellow, #EAB308)' : 'var(--bg-card)',
+                  color: selectedCity === city ? '#0F172A' : 'var(--text-primary)',
+                  fontWeight: '700',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
-                  boxShadow: selectedCity === city ? '0 4px 12px rgba(234, 88, 12, 0.2)' : 'none'
+                  boxShadow: selectedCity === city ? '0 4px 12px rgba(234, 179, 8, 0.35)' : 'none'
                 }}
               >
                 {city}
@@ -120,7 +120,7 @@ const Packages = () => {
           {filteredTiers.map((tier) => (
             <div key={tier.id} className={styles.pricingCard} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', overflow: 'hidden', position: 'relative', boxShadow: 'var(--shadow-sm)' }}>
               {(tier.badge || (tier.is_popular ? 'Most Popular' : null)) && (
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', background: (tier.badge === 'Most Popular' || tier.is_popular) ? 'var(--accent)' : 'var(--text-secondary)', color: '#fff', textAlign: 'center', padding: '0.5rem', fontSize: '0.875rem', fontWeight: 'bold' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', background: (tier.badge === 'Most Popular' || tier.is_popular) ? 'var(--brand-yellow, #EAB308)' : '#334155', color: (tier.badge === 'Most Popular' || tier.is_popular) ? '#0F172A' : '#ffffff', textAlign: 'center', padding: '0.5rem', fontSize: '0.875rem', fontWeight: 'bold' }}>
                   {tier.badge || 'Most Popular'}
                 </div>
               )}
@@ -131,14 +131,28 @@ const Packages = () => {
                   <span style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)' }}>₹{tier.price}</span>
                   <span style={{ color: 'var(--text-secondary)' }}>/ sq.ft.</span>
                 </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>{tier.description}</p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5' }}>{tier.description}</p>
+                
+                {tier.advantages && tier.advantages.length > 0 && (
+                  <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px dashed var(--border)' }}>
+                    <h5 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--brand-yellow-dark, #D97706)', marginBottom: '0.75rem', fontWeight: '700' }}>Package Highlights</h5>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                      {tier.advantages.map((adv, aIdx) => (
+                        <li key={aIdx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.88rem', color: 'var(--text-primary)', fontWeight: '500' }}>
+                          <CheckCircle2 size={15} style={{ color: 'var(--brand-yellow-dark, #D97706)', flexShrink: 0 }} />
+                          <span>{adv.text}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
 
               {/* Accordions */}
               <div style={{ padding: '1.5rem 1rem' }}>
                 <h4 style={{ marginBottom: '1rem', paddingLeft: '1rem', color: 'var(--text-primary)' }}>Inclusions</h4>
                 {(tier.specifications || tier.material_specs || []).map((spec, idx) => {
-                  const catName = spec.category || spec.category_name;
+                  const catName = spec.category_name || spec.category?.name || (typeof spec.category === 'string' ? spec.category : '') || `Inclusion Category ${idx + 1}`;
                   const isOpen = openCategories[tier.id] === catName;
                   return (
                     <div key={idx} style={{ marginBottom: '0.5rem', border: '1px solid var(--border)', borderRadius: '4px', overflow: 'hidden' }}>

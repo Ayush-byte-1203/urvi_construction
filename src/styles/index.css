@@ -350,7 +350,7 @@ select:focus-visible {
 }
 
 /* ==========================================================================
-   9. BUTTONS
+   9. BUTTONS — White, Grey & Yellow System
    ========================================================================== */
 .btn {
   display: inline-flex;
@@ -360,7 +360,7 @@ select:focus-visible {
   padding: var(--padding-button);
   border-radius: var(--radius-sm);
   font-family: var(--font-family-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--font-size-btn);
   cursor: pointer;
   transition: all var(--transition-normal);
@@ -372,22 +372,26 @@ select:focus-visible {
 }
 
 .btn-primary {
-  background: var(--accent-dark);
-  color: #FFFFFF;
-  border-color: var(--accent-dark);
-  box-shadow: var(--shadow-accent);
+  background: var(--brand-yellow);
+  color: var(--text-on-yellow, #0F172A);
+  border-color: var(--brand-yellow);
+  box-shadow: 0 4px 16px rgba(234, 179, 8, 0.35);
 }
 
 .btn-primary:hover {
-  background: hsl(16, 100%, 38%);
-  border-color: hsl(16, 100%, 38%);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  background: var(--brand-yellow-hover, #FACC15);
+  border-color: var(--brand-yellow-hover, #FACC15);
+  color: var(--text-on-yellow, #0F172A);
+  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.45);
   transform: translateY(-1px);
 }
 
 .btn-primary:active {
+  background: var(--brand-yellow-dark, #D97706);
+  border-color: var(--brand-yellow-dark, #D97706);
+  color: #FFFFFF;
   transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
 }
 
 .btn-secondary {
@@ -399,8 +403,8 @@ select:focus-visible {
 
 .btn-secondary:hover {
   background: var(--bg-secondary);
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--brand-yellow-dark);
+  color: var(--brand-yellow-dark);
   transform: translateY(-1px);
 }
 

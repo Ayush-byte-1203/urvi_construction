@@ -11,12 +11,19 @@ const CostCalculatorSection = () => {
   // State
   const [area, setArea] = useState(1500);
   const [floors, setFloors] = useState('Ground Floor');
-  const [packageId, setPackageId] = useState(1);
+  const [packageId, setPackageId] = useState(packages?.[0]?.id || 1);
   const [propertyType, setPropertyType] = useState('Residential');
 
+  // Sync packageId when packages load
+  React.useEffect(() => {
+    if (packages && packages.length > 0 && !packages.find(p => p.id === packageId)) {
+      setPackageId(packages[0].id);
+    }
+  }, [packages, packageId]);
+
   // Calculation
-  const selectedPackage = packages?.find(p => p.id === packageId) || packages?.[0] || { name: 'Standard', price: 1850 };
-  const baseRate = parseInt(selectedPackage.price, 10);
+  const selectedPackage = packages?.find(p => p.id === packageId) || packages?.[0] || { name: 'Essential', price: 1600 };
+  const baseRate = parseInt(selectedPackage.price, 10) || 1600;
 
   const estimatedCost = useMemo(() => {
     return area * baseRate;
@@ -35,7 +42,7 @@ const CostCalculatorSection = () => {
   };
 
   return (
-    <section className="section container">
+    <section id="cost-calculator" className="section container">
       <SectionHeader
         eyebrow="Estimate Your Build"
         heading="Construction Cost Calculator"

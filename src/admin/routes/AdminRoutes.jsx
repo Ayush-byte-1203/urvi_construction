@@ -26,6 +26,11 @@ const AdminPackageMaterialCategories = lazy(() => import('../pages/Packages/Admi
 const AdminPackageMaterialSpecs = lazy(() => import('../pages/Packages/AdminPackageMaterialSpecs'));
 const AdminPackageFAQs = lazy(() => import('../pages/Packages/AdminPackageFAQs'));
 const AdminProjectImages = lazy(() => import('../pages/Projects/AdminProjectImages'));
+const AdminUsers = lazy(() => import('../pages/Users/AdminUsers'));
+const AdminWhyChooseUs = lazy(() => import('../pages/SiteContent/AdminWhyChooseUs'));
+const AdminProcessSteps = lazy(() => import('../pages/SiteContent/AdminProcessSteps'));
+const AdminTrustFeatures = lazy(() => import('../pages/SiteContent/AdminTrustFeatures'));
+const AdminJourney = lazy(() => import('../pages/SiteContent/AdminJourney'));
 
 const AdminRoutes = () => {
   return (
@@ -37,6 +42,7 @@ const AdminRoutes = () => {
           <Route element={<ProtectedRoute />}>
             <Route element={<DashboardLayout />}>
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="users" element={<AdminUsers />} />
               <Route path="projects" element={<AdminProjects />} />
               <Route path="services" element={<AdminServices />} />
               <Route path="packages" element={<AdminPackages />} />
@@ -44,6 +50,10 @@ const AdminRoutes = () => {
               <Route path="testimonials" element={<AdminTestimonials />} />
               <Route path="faqs" element={<AdminFAQs />} />
               <Route path="core-values" element={<AdminCoreValues />} />
+              <Route path="why-choose-us" element={<AdminWhyChooseUs />} />
+              <Route path="process-steps" element={<AdminProcessSteps />} />
+              <Route path="trust-features" element={<AdminTrustFeatures />} />
+              <Route path="journey" element={<AdminJourney />} />
               <Route path="gallery" element={<AdminGallery />} />
 
               <Route path="pages" element={<AdminPageContents />} />

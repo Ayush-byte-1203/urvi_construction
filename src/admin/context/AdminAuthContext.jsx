@@ -41,13 +41,35 @@ export const AdminAuthProvider = ({ children }) => {
     };
   }, []);
 
+  const fetchCurrentUser = async (currentToken) => {
+    try {
+      setLoading(true);
+      const res = await axios.get('/api/me/', {
+        headers: { Authorization: `Bearer ${currentToken}` }
+      });
+      setUser(res.data);
+    } catch (err) {
+      console.error('Failed to fetch user permissions', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      fetchCurrentUser(token);
+    } else {
+      setUser(null);
+    }
+  }, [token]);
+
   const login = async (email, password) => {
     try {
       const response = await axios.post('/api/admin/token/', { username: email, password });
       const { access } = response.data;
       setToken(access);
       localStorage.setItem('adminToken', access);
-      setUser({ email });
+      await fetchCurrentUser(access);
       return true;
     } catch (error) {
       console.error('Login failed', error);
@@ -59,10 +81,22 @@ export const AdminAuthProvider = ({ children }) => {
     setToken(null);
     setUser(null);
     localStorage.removeItem('adminToken');
+    sessionStorage.removeItem('admin_access_unlocked');
+    window.location.href = '/';
+  };
+
+  const hasPermission = (moduleKey, action = 'view') => {
+    if (!token) return false;
+    if (!user) return true; // Fallback while loading
+    if (user.is_superuser) return true;
+    if (!user.permissions) return false;
+    const mod = user.permissions[moduleKey];
+    if (!mod) return false;
+    return Boolean(mod[action]);
   };
 
   return (
-    <AdminAuthContext.Provider value={{ user, token, login, logout, loading }}>
+    <AdminAuthContext.Provider value={{ user, token, login, logout, loading, hasPermission }}>
       {children}
     </AdminAuthContext.Provider>
   );

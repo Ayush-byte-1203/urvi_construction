@@ -3,24 +3,30 @@ import { ArrowRight, PlayCircle, MousePointerClick } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styles from './HeroSection.module.css';
+import { useGlobalData } from '../../context/GlobalDataContext';
 
 const HeroSection = ({ cityContext }) => {
-  const badgeText = cityContext ? `Paramarsh Construction | ${cityContext}` : 'Paramarsh Construction | Vadodara';
+  const { siteSettings } = useGlobalData();
+  const siteName = siteSettings?.site_name || 'Paramarsh Construction';
+  const badgeText = cityContext ? `${siteName} | ${cityContext}` : `${siteName} | Vadodara`;
+  const bgImage = siteSettings?.hero_poster_url || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80";
 
   return (
     <section className={styles.hero}>
       {/* Background Video/Image Fallback */}
       <div className={styles.videoBackground}>
         <div className={styles.overlay}></div>
-        <img 
-          src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80" 
-          alt="Luxury Construction Background" 
-          className={styles.bgImage}
-        />
-        {/* TODO: replace placeholder content with actual video asset */}
-        {/* <video autoPlay loop muted playsInline className={styles.video}>
-          <source src="/assets/hero-bg.mp4" type="video/mp4" />
-        </video> */}
+        {siteSettings?.hero_video_url ? (
+          <video autoPlay loop muted playsInline className={styles.bgImage} poster={bgImage}>
+            <source src={siteSettings.hero_video_url} type="video/mp4" />
+          </video>
+        ) : (
+          <img 
+            src={bgImage} 
+            alt="Luxury Construction Background" 
+            className={styles.bgImage}
+          />
+        )}
       </div>
 
       <div className={`container ${styles.content}`}>
@@ -30,43 +36,44 @@ const HeroSection = ({ cityContext }) => {
           transition={{ duration: 0.8 }}
           className={styles.textContent}
         >
-          {/* TODO: replace placeholder content */}
           <span className={styles.eyebrowBadge}>{badgeText}</span>
           
-          <h1 className={styles.title}>
-            Crafting Architecturally <br/>
-            <span className={styles.emphasized}>Superior</span> Homes
-          </h1>
+          {siteSettings?.hero_headline ? (
+            <h1 className={styles.title} dangerouslySetInnerHTML={{ __html: siteSettings.hero_headline }} />
+          ) : (
+            <h1 className={styles.title}>
+              Crafting Architecturally <br/>
+              <span className={styles.emphasized}>Superior</span> Homes
+            </h1>
+          )}
           
           <p className={styles.subtext}>
-            Turnkey construction solutions designed for durability, 
-            aesthetics, and flawless execution from concept to handover.
+            {siteSettings?.hero_subtext || "Turnkey construction solutions designed for durability, aesthetics, and flawless execution from concept to handover."}
           </p>
           
           <div className={styles.actions}>
             <Link to="/contact" className={`btn btn-primary ${styles.btnPrimary}`}>
-              Free Consultation <ArrowRight size={16} style={{ marginLeft: '8px' }} />
+              {siteSettings?.hero_primary_btn_text || "Free Consultation"} <ArrowRight size={16} style={{ marginLeft: '8px' }} />
             </Link>
-            <Link to="/projects" className={`btn btn-outline ${styles.btnSecondary}`}>
-              View Projects <PlayCircle size={16} style={{ marginLeft: '8px' }} />
+            <Link to="/about#projects" className={`btn btn-outline ${styles.btnSecondary}`}>
+              {siteSettings?.hero_secondary_btn_text || "View Projects"} <PlayCircle size={16} style={{ marginLeft: '8px' }} />
             </Link>
           </div>
 
           <div className={styles.stats}>
-            {/* TODO: replace placeholder content */}
             <div className={styles.statPill}>
-              <div className={styles.pulseDot}></div>
-              <span><strong>10+</strong> Live Projects</span>
+              <span className={styles.pulseDot}></span>
+              <span>{siteSettings?.hero_stat_pill_1 || "10+ Live Projects"}</span>
             </div>
             <div className={styles.statPill}>
-              <span><strong>₹1950/sq.ft</strong> Starting Price</span>
+              <MousePointerClick size={14} style={{ color: 'var(--brand-yellow-dark, #D97706)' }} />
+              <span>{siteSettings?.hero_stat_pill_2 || "₹1600/sq.ft Starting Price"}</span>
             </div>
           </div>
         </motion.div>
       </div>
 
       <div className={styles.scrollIndicator}>
-        <MousePointerClick size={24} />
         <span>Scroll to Explore</span>
       </div>
     </section>

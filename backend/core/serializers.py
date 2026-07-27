@@ -1,10 +1,12 @@
 from rest_framework import serializers
+from django.contrib.auth.models import User
 from .models import (
     SiteSettings, PageContent, ServiceCategory, Service,
     Package, PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
     ProjectCategory, Project, ProjectImage, Testimonial, FAQCategory, FAQ,
     CoreValue, JourneyMilestone,
-    BlogCategory, BlogPost, GalleryImage
+    BlogCategory, BlogPost, GalleryImage, AdminUserProfile,
+    WhyChooseUsItem, ProcessStep, TrustFeature
 )
 
 class SiteSettingsSerializer(serializers.ModelSerializer):
@@ -117,3 +119,68 @@ class GalleryImageSerializer(serializers.ModelSerializer):
         model = GalleryImage
         fields = '__all__'
 
+
+class AdminUserSerializer(serializers.ModelSerializer):
+    permissions = serializers.JSONField(source='profile.permissions', required=False, default=dict)
+    password = serializers.CharField(write_only=True, required=False, allow_blank=True)
+
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'is_superuser', 'is_staff', 'is_active', 'password', 'permissions']
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        # Ensure permissions dictionary exists
+        profile, _ = AdminUserProfile.objects.get_or_create(user=instance)
+        ret['permissions'] = profile.permissions or {}
+        return ret
+
+    def create(self, validated_data):
+        profile_data = validated_data.pop('profile', {})
+        password = validated_data.pop('password', None)
+        user = User.objects.create(**validated_data)
+        if password:
+            user.set_password(password)
+        else:
+            user.set_unusable_password()
+        user.save()
+
+        permissions = profile_data.get('permissions', {})
+        AdminUserProfile.objects.create(user=user, permissions=permissions)
+        return user
+
+    def update(self, instance, validated_data):
+        profile_data = validated_data.pop('profile', {})
+        password = validated_data.pop('password', None)
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        if password:
+            instance.set_password(password)
+
+        instance.save()
+
+        permissions = profile_data.get('permissions', None)
+        if permissions is not None:
+            profile, _ = AdminUserProfile.objects.get_or_create(user=instance)
+            profile.permissions = permissions
+            profile.save()
+
+        return instance
+
+
+class WhyChooseUsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WhyChooseUsItem
+        fields = '__all__'
+
+class ProcessStepSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProcessStep
+        fields = '__all__'
+
+class TrustFeatureSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TrustFeature
+        fields = '__all__'

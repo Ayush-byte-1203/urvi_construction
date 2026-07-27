@@ -6,7 +6,9 @@ from .views import (
     CoreValueViewSet, BlogCategoryViewSet, BlogPostViewSet,
     ServiceCategoryViewSet, ProjectCategoryViewSet, FAQCategoryViewSet,
     PackageAdvantageViewSet, PackageMaterialCategoryViewSet, PackageMaterialSpecViewSet, PackageFAQViewSet,
-    ProjectImageViewSet, GalleryImageViewSet, JourneyMilestoneViewSet
+    ProjectImageViewSet, GalleryImageViewSet, JourneyMilestoneViewSet,
+    AdminUserViewSet, CurrentAdminUserView,
+    WhyChooseUsViewSet, ProcessStepViewSet, TrustFeatureViewSet
 )
 
 router = DefaultRouter()
@@ -31,12 +33,14 @@ router.register(r'core-values', CoreValueViewSet)
 router.register(r'blog-categories', BlogCategoryViewSet)
 router.register(r'blogs', BlogPostViewSet)
 router.register(r'journey', JourneyMilestoneViewSet)
+router.register(r'why-choose-us', WhyChooseUsViewSet)
+router.register(r'process-steps', ProcessStepViewSet)
+router.register(r'trust-features', TrustFeatureViewSet)
+router.register(r'users', AdminUserViewSet)
 
 
 urlpatterns = [
+    path('me/', CurrentAdminUserView.as_view(), name='current_user'),
     path('', include(router.urls)),
 ]
 
-urlpatterns = [
-    path('', include(router.urls)),
-]

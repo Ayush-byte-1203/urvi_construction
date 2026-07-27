@@ -1,14 +1,14 @@
 export const dummyServices = [
   {
     id: 1,
-    title: "Architectural Design",
-    slug: "architectural-design",
+    title: "Interior Designing",
+    slug: "interior-designing",
     description: "Comprehensive architectural blueprints focusing on optimal space utilization, aesthetics, and structural integrity. We bring your vision to life.",
     image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
     icon: "Building",
     features: ["Custom Blueprints", "Vastu Compliance", "3D Elevation"],
     tagline: "Designs that inspire and endure.",
-    
+
     whyChooseUs: {
       image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80",
       benefits: [
@@ -59,11 +59,11 @@ export const dummyServices = [
     icon: "Ruler",
     features: ["Soil Testing", "RCC Framing", "Seismic Design"],
     tagline: "Safety and stability from the ground up.",
-    
+
     whyChooseUs: {
       image: "https://images.unsplash.com/photo-1541888086425-d81bb19240f5?auto=format&fit=crop&w=600&q=80",
       benefits: [
-        "Certified structural engineers with 15+ years experience",
+        "Certified structural engineers with 10+ years experience",
         "Advanced software modeling (STAAD.Pro, ETABS)",
         "Earthquake resistant designs (Seismic Zone compliant)",
         "Optimized steel consumption for cost savings",
@@ -110,7 +110,7 @@ export const dummyServices = [
     icon: "ClipboardList",
     features: ["Daily Updates", "Cost Tracking", "Quality Checks"],
     tagline: "Your project, perfectly executed.",
-    
+
     whyChooseUs: {
       image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=600&q=80",
       benefits: [
@@ -161,7 +161,7 @@ export const dummyServices = [
     icon: "Key",
     features: ["One Point Contact", "Fixed Pricing", "Guaranteed Timeline"],
     tagline: "From empty plot to keys in hand.",
-    
+
     whyChooseUs: {
       image: "https://images.unsplash.com/photo-1590243171353-83cb99f1bcac?auto=format&fit=crop&w=600&q=80",
       benefits: [
@@ -212,7 +212,7 @@ export const dummyServices = [
     icon: "Home",
     features: ["Premium Finishes", "Smart Home Ready", "Sustainable Design"],
     tagline: "Building homes for generations.",
-    
+
     whyChooseUs: {
       image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
       benefits: [
@@ -263,7 +263,7 @@ export const dummyServices = [
     icon: "Sofa",
     features: ["Custom Furniture", "Lighting Design", "Material Selection"],
     tagline: "Where comfort meets aesthetic perfection.",
-    
+
     whyChooseUs: {
       image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80",
       benefits: [

@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import styles from './Timeline.module.css';
+import { useGlobalData } from '../context/GlobalDataContext';
 
-const milestones = [
+const defaultMilestones = [
   {
     year: '2016',
     title: 'The Foundation',
@@ -36,13 +37,17 @@ const milestones = [
 ];
 
 const Timeline = () => {
+  const { journey } = useGlobalData();
+  const milestones = (journey && journey.length > 0) ? journey : defaultMilestones;
+
   return (
     <div className={styles.timelineContainer}>
       <div className={styles.timelineLine}></div>
       {milestones.map((item, index) => {
         const isEven = index % 2 === 0;
+        const imgUrl = item.image ? (typeof item.image === 'string' && item.image.startsWith('http') ? item.image : item.image) : defaultMilestones[index % defaultMilestones.length].image;
         return (
-          <div key={index} className={`${styles.timelineItem} ${isEven ? styles.left : styles.right}`}>
+          <div key={item.id || index} className={`${styles.timelineItem} ${isEven ? styles.left : styles.right}`}>
             <div className={styles.timelineDot}></div>
             <motion.div
               className={styles.timelineContent}
@@ -54,7 +59,7 @@ const Timeline = () => {
               <div className={styles.year}>{item.year}</div>
               <h3 className={styles.title}>{item.title}</h3>
               <p className={styles.description}>{item.description}</p>
-              <img src={item.image} alt={item.title} className={styles.image} loading="lazy" />
+              {imgUrl && <img src={imgUrl} alt={item.title} className={styles.image} loading="lazy" />}
             </motion.div>
           </div>
         );

@@ -100,13 +100,13 @@ const Contact = () => {
                   </div>
                 </li>
                 
-                <li className={styles.contactItem}>
+                {/* <li className={styles.contactItem}>
                   <div className={styles.iconWrapper}><Clock size={20} /></div>
                   <div>
                     <strong>Business Hours</strong>
                     <p>Mon - Sat: 9:00 AM - 6:30 PM<br/>Sunday: By Appointment</p>
                   </div>
-                </li>
+                </li> */}
               </ul>
             </div>
           </motion.div>
@@ -185,21 +185,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className={styles.mapSection}>
-        <div className={styles.mapContainer} style={{ width: '100%', height: '400px', background: '#e5e5e5' }}>
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.971578335092!2d77.6402636152697!3d12.97368559085449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16a75a7c2fcd%3A0x8e8609a632e1430!2s100%20Feet%20Rd%2C%20Indiranagar%2C%20Bengaluru%2C%20Karnataka%20560038!5e0!3m2!1sen!2sin!4v1689254320987!5m2!1sen!2sin" 
-            width="100%" 
-            height="100%" 
-            style={{ border: 0 }} 
-            allowFullScreen="" 
-            loading="lazy" 
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Paramarsh Construction Office Location"
-          ></iframe>
-        </div>
-      </section>
     </div>
   );
 };

@@ -1,9 +1,12 @@
 import React, { lazy, Suspense } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import RouteScrollToTop from './components/RouteScrollToTop';
 import Layout from './components/Layout';
 import LoadingSpinner from './components/LoadingSpinner';
 import { ROUTES } from './data/routes';
+
+import AdminSecretUnlock from './components/AdminSecretUnlock';
+import AdminAccessGuard from './components/AdminAccessGuard';
 
 // ── Public pages ──────────────────────────────────────────────────────────────
 const Home = lazy(() => import('./pages/Home.jsx'));
@@ -11,9 +14,6 @@ const About = lazy(() => import('./pages/About.jsx'));
 const Services = lazy(() => import('./pages/Services.jsx'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail.jsx'));
 const Packages = lazy(() => import('./pages/Packages.jsx'));
-// PackageDetail route removed
-const Projects = lazy(() => import('./pages/Projects.jsx'));
-const ProjectDetail = lazy(() => import('./pages/ProjectDetail.jsx'));
 const Contact = lazy(() => import('./pages/Contact.jsx'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy.jsx'));
 const TermsConditions = lazy(() => import('./pages/TermsConditions.jsx'));
@@ -32,9 +32,16 @@ const AppRouter = () => (
       </div>
     }>
       <Routes>
-        {/* ── Admin Area (No Layout) ── */}
-        <Route path="/admin/*" element={<AdminRoutes />} />
-        
+        {/* ── Secret Admin Unlock Route ── */}
+        <Route path="/66331q" element={<AdminSecretUnlock />} />
+
+        {/* ── Admin Area (Protected by Secret Access Guard) ── */}
+        <Route path="/admin/*" element={
+          <AdminAccessGuard>
+            <AdminRoutes />
+          </AdminAccessGuard>
+        } />
+
         {/* ── Public website with Layout ── */}
         <Route path="/*" element={
           <Layout>
@@ -44,9 +51,9 @@ const AppRouter = () => (
               <Route path="/services" element={<Services />} />
               <Route path="/services/:slug" element={<ServiceDetail />} />
               <Route path="/packages" element={<Packages />} />
-              {/* PackageDetail removed */}
-              <Route path={ROUTES.PROJECTS} element={<Projects />} />
-              <Route path={ROUTES.PROJECT_DETAIL} element={<ProjectDetail />} />
+              {/* Standalone Projects routes merged into About Us */}
+              <Route path="/projects" element={<Navigate to="/about#projects" replace />} />
+              <Route path="/projects/*" element={<Navigate to="/about#projects" replace />} />
               <Route path={ROUTES.CONTACT} element={<Contact />} />
               <Route path={ROUTES.PRIVACY} element={<PrivacyPolicy />} />
               <Route path={ROUTES.TERMS} element={<TermsConditions />} />

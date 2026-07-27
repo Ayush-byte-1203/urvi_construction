@@ -24,8 +24,8 @@ const Home = () => {
   const isLoading = isGlobalLoading || isPageLoading;
 
   useEffect(() => {
-    // Make the header transparent dark since the Hero section is dark
-    setHeaderTheme('none');
+    // Dark header theme for transparent dark navigation with top gradient
+    setHeaderTheme('dark');
   }, [setHeaderTheme]);
 
   if (isLoading) {

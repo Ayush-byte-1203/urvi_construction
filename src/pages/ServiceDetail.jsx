@@ -135,7 +135,7 @@ const ServiceDetail = () => {
       </section>
 
       {/* D. Our Process (6-step flow on dark background) */}
-      <section className="section" style={{ backgroundColor: '#111827', color: '#fff' }}>
+      {/* <section className="section" style={{ backgroundColor: '#111827', color: '#fff' }}>
         <div className="container">
           <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
             <span className="text-overline" style={{ color: 'var(--accent)' }}>Proven Methodology</span>
@@ -160,7 +160,7 @@ const ServiceDetail = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* E. We Specialize In (2x2 grid) */}
       <section className="section container">
@@ -241,8 +241,8 @@ const ServiceDetail = () => {
       </section>
 
       {/* G. CTA */}
-      <CTASection 
-        title={`Ready to Start Your ${service.title} Project?`} 
+      <CTASection
+        title={`Ready to Start Your ${service.title} Project?`}
         subtitle="Get in touch with our experts for a free consultation and customized quote tailored to your specific needs."
       />
     </div>

@@ -11,8 +11,26 @@ import styles from './Projects.module.css';
 
 const Projects = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
-  const { projects: allProjects } = useGlobalData();
+  const { projects: allProjects, projectCategories } = useGlobalData();
   const [filter, setFilter] = useState('All');
+
+  const categories = useMemo(() => {
+    const cats = new Set();
+    if (projectCategories && projectCategories.length > 0) {
+      projectCategories.forEach(c => {
+        if (c.name) cats.add(c.name);
+      });
+    }
+    if (allProjects && allProjects.length > 0) {
+      allProjects.forEach(p => {
+        if (p.category_name) cats.add(p.category_name);
+      });
+    }
+    if (cats.size === 0) {
+      return ['All', 'Residential', 'Commercial'];
+    }
+    return ['All', ...Array.from(cats)];
+  }, [projectCategories, allProjects]);
 
   useEffect(() => {
     setHeaderTheme('light');
@@ -55,7 +73,7 @@ const Projects = () => {
       <div className={styles.filterTabsContainer} style={{ paddingTop: '3rem', display: 'flex', justifyContent: 'center' }}>
 
           <div className={styles.filterTabs}>
-            {['All', 'Residential', 'Commercial'].map(type => (
+            {categories.map(type => (
               <button 
                 key={type}
                 className={`${styles.filterBtn} ${filter === type ? styles.active : ''}`}

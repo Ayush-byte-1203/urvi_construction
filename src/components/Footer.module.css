@@ -2,9 +2,9 @@
    FOOTER — Deep Navy, Premium Contrast
    ============================================= */
 .footer {
-  background: var(--text-primary, #111827);
+  background: #0F172A;
   /* Charcoal background */
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   padding: 2rem 0 0;
   position: relative;
   overflow: hidden;
@@ -19,7 +19,7 @@
   width: 400px;
   height: 400px;
   border-radius: 50%;
-  background: radial-gradient(circle, hsla(16, 100%, 55%, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -66,11 +66,11 @@
 }
 
 .socialLinks a:hover {
-  background: var(--accent, #ea580c);
-  border-color: var(--accent, #ea580c);
-  color: #ffffff;
+  background: var(--brand-yellow, #EAB308);
+  border-color: var(--brand-yellow, #EAB308);
+  color: #0F172A;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px hsla(16, 100%, 55%, 0.35);
+  box-shadow: 0 4px 12px rgba(234, 179, 8, 0.35);
 }
 
 /* Column Titles */
@@ -100,7 +100,7 @@
 }
 
 .footerLinks a:hover {
-  color: #ffffff;
+  color: var(--brand-yellow, #EAB308);
   transform: translateX(4px);
 }
 
@@ -122,11 +122,11 @@
 }
 
 .footerContactItem a:hover {
-  color: #ffffff;
+  color: var(--brand-yellow, #EAB308);
 }
 
 .contactIcon {
-  color: var(--accent);
+  color: var(--brand-yellow, #EAB308);
   margin-top: 2px;
   flex-shrink: 0;
 }

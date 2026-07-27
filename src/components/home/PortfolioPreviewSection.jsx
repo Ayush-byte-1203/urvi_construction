@@ -30,7 +30,7 @@ const PortfolioPreviewSection = () => {
             heading="Signature Projects"
             subheading="Explore a curated selection of our finest builds, where precision engineering meets architectural elegance."
           />
-          <Link to="/projects" className={`btn btn-secondary ${styles.desktopBtn}`}>
+          <Link to="/about#projects" className={`btn btn-secondary ${styles.desktopBtn}`}>
             View All Projects <ArrowRight size={16} style={{ marginLeft: '8px' }} />
           </Link>
         </div>
@@ -70,7 +70,7 @@ const PortfolioPreviewSection = () => {
         </div>
 
         <div className={styles.mobileBtnWrapper}>
-          <Link to="/projects" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
+          <Link to="/about#projects" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
             View All Projects <ArrowRight size={16} style={{ marginLeft: '8px' }} />
           </Link>
         </div>

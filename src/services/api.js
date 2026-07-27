@@ -41,6 +41,14 @@ export const fetchProjects = async () => {
   } catch { return []; }
 };
 
+export const fetchProjectCategories = async () => {
+  try {
+    const response = await fetch(`${API_URL}/project-categories/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
+};
+
 export const fetchTestimonials = async () => {
   try {
     const response = await fetch(`${API_URL}/testimonials/`);
@@ -108,6 +116,30 @@ export const fetchCalculatorSettings = async () => {
 export const fetchJourneyMilestones = async () => {
   try {
     const response = await fetch(`${API_URL}/journey/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
+};
+
+export const fetchWhyChooseUs = async () => {
+  try {
+    const response = await fetch(`${API_URL}/why-choose-us/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
+};
+
+export const fetchProcessSteps = async () => {
+  try {
+    const response = await fetch(`${API_URL}/process-steps/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
+};
+
+export const fetchTrustFeatures = async () => {
+  try {
+    const response = await fetch(`${API_URL}/trust-features/`);
     if (!response.ok) return [];
     return response.json();
   } catch { return []; }

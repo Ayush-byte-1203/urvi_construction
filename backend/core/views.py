@@ -1,11 +1,16 @@
 from rest_framework import viewsets
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from django.contrib.auth.models import User
 from .models import (
     SiteSettings, PageContent, Service, Package,
     Project, Testimonial, FAQ, CoreValue, JourneyMilestone,
     BlogCategory, BlogPost,
     ServiceCategory, ProjectCategory, FAQCategory,
     PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
-    ProjectImage, GalleryImage
+    ProjectImage, GalleryImage, AdminUserProfile,
+    WhyChooseUsItem, ProcessStep, TrustFeature
 )
 from .serializers import (
     SiteSettingsSerializer, PageContentSerializer, ServiceSerializer,
@@ -14,7 +19,8 @@ from .serializers import (
     BlogCategorySerializer, BlogPostSerializer,
     ServiceCategorySerializer, ProjectCategorySerializer, FAQCategorySerializer,
     PackageAdvantageSerializer, PackageMaterialCategorySerializer, PackageMaterialSpecSerializer, PackageFAQSerializer,
-    ProjectImageSerializer, GalleryImageSerializer
+    ProjectImageSerializer, GalleryImageSerializer, AdminUserSerializer,
+    WhyChooseUsSerializer, ProcessStepSerializer, TrustFeatureSerializer
 )
 
 class PackageAdvantageViewSet(viewsets.ModelViewSet):
@@ -78,11 +84,11 @@ class FAQViewSet(viewsets.ModelViewSet):
     queryset = FAQ.objects.all()
     serializer_class = FAQSerializer
 
-class CoreValueViewSet(viewsets.ReadOnlyModelViewSet):
+class CoreValueViewSet(viewsets.ModelViewSet):
     queryset = CoreValue.objects.all().order_by('order')
     serializer_class = CoreValueSerializer
 
-class JourneyMilestoneViewSet(viewsets.ReadOnlyModelViewSet):
+class JourneyMilestoneViewSet(viewsets.ModelViewSet):
     queryset = JourneyMilestone.objects.all().order_by('order')
     serializer_class = JourneyMilestoneSerializer
 
@@ -97,3 +103,57 @@ class BlogPostViewSet(viewsets.ModelViewSet):
 class GalleryImageViewSet(viewsets.ModelViewSet):
     queryset = GalleryImage.objects.all().order_by('order')
     serializer_class = GalleryImageSerializer
+
+
+from rest_framework.exceptions import PermissionDenied
+
+class AdminUserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('-id')
+    serializer_class = AdminUserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def check_user_edit_permission(self, request):
+        if request.user.is_superuser:
+            return True
+        profile = getattr(request.user, 'profile', None)
+        perms = profile.permissions if profile else {}
+        if not perms.get('users', {}).get('edit', False):
+            raise PermissionDenied("You do not have permission to edit or create user accounts.")
+
+    def create(self, request, *args, **kwargs):
+        self.check_user_edit_permission(request)
+        return super().create(request, *args, **kwargs)
+
+    def update(self, request, *args, **kwargs):
+        self.check_user_edit_permission(request)
+        return super().update(request, *args, **kwargs)
+
+    def partial_update(self, request, *args, **kwargs):
+        self.check_user_edit_permission(request)
+        return super().partial_update(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        self.check_user_edit_permission(request)
+        return super().destroy(request, *args, **kwargs)
+
+
+class CurrentAdminUserView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user
+        serializer = AdminUserSerializer(user)
+        return Response(serializer.data)
+
+
+class WhyChooseUsViewSet(viewsets.ModelViewSet):
+    queryset = WhyChooseUsItem.objects.all().order_by('order')
+    serializer_class = WhyChooseUsSerializer
+
+class ProcessStepViewSet(viewsets.ModelViewSet):
+    queryset = ProcessStep.objects.all().order_by('order')
+    serializer_class = ProcessStepSerializer
+
+class TrustFeatureViewSet(viewsets.ModelViewSet):
+    queryset = TrustFeature.objects.all().order_by('order')
+    serializer_class = TrustFeatureSerializer

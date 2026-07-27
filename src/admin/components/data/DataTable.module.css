@@ -51,26 +51,30 @@
 }
 
 .searchInput:focus {
-  border-color: #ea580c;
+  border-color: #EAB308;
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.2);
 }
 
 .addBtn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: #ea580c;
-  color: white;
+  background-color: #EAB308;
+  color: #0F172A;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  font-weight: 500;
+  font-weight: 700;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(234, 179, 8, 0.3);
 }
 
 .addBtn:hover {
-  background-color: #c2410c;
+  background-color: #FACC15;
+  color: #0F172A;
+  box-shadow: 0 4px 12px rgba(234, 179, 8, 0.4);
 }
 
 .tableWrapper {
@@ -87,7 +91,7 @@
 
 .spinner {
   animation: spin 1s linear infinite;
-  color: #ea580c;
+  color: #EAB308;
 }
 
 @keyframes spin {

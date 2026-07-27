@@ -1,75 +1,44 @@
-# Logs
-logs
-*.log
-npm-debug.log*
+# ==============================================================================
+# Comprehensive .gitignore for Vite React + Django Project
+# ==============================================================================
+
+# --- Environment & Secret Variables ---
+.env
+.env.*
+!.env.example
+*.env
+backend/.env
+secrets.json
+*.pem
+*.key
+
+# --- Dependencies & Package Managers ---
+node_modules/
+.pnp
+.pnp.js
+.npm
+.yarn/
 yarn-debug.log*
 yarn-error.log*
+npm-debug.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Diagnostic reports (https://nodejs.org/api/report.html)
-report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+# --- Production & Build Outputs ---
+dist/
+dist-ssr/
+build/
+out/
+.vite/
+.vercel/
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Dependencies
-node_modules
-.pnp
-.pnp.js
-
-# Coverage directory used by tools like istanbul
-coverage
+# --- Test & Lint Caches ---
+coverage/
 *.lcov
-
-# nyc test coverage
-.nyc_output
-
-# Optional npm cache directory
-.npm
-
-# Optional eslint cache
+.nyc_output/
 .eslintcache
 
-# Production builds
-dist
-dist-ssr
-build
-out
-
-# Vercel
-.vercel
-
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDEs and Editors
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# OS Files
-.DS_Store
-Thumbs.db
-
-# TypeScript
-*.tsbuildinfo
-
-# =========================
-# Python & Django (Backend)
-# =========================
+# --- Python & Django Backend ---
 __pycache__/
 *.py[cod]
 *$py.class
@@ -78,11 +47,11 @@ __pycache__/
 env/
 venv/
 ENV/
+.venv/
 env.bak/
 venv.bak/
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
@@ -98,8 +67,52 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# Django stuff:
-*.log
-local_settings.py
+# --- Django Databases & User Uploads ---
 db.sqlite3
 db.sqlite3-journal
+*.sqlite3
+backend/db.sqlite3
+backend/db.sqlite3-journal
+backend/media/
+backend/static/
+media/
+static/
+
+# --- Logs & Runtime Data ---
+logs/
+*.log
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# --- IDEs, Editors & OS Junk ---
+.DS_Store
+**/.DS_Store
+*.DS_Store*
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*.swo
+*~
+*.tmp
+*.temp
+*.tsbuildinfo
+.cache/
+.pytest_cache/
+.mypy_cache/
+.antigravityignore
+.gemini/

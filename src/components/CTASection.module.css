@@ -43,9 +43,9 @@
 .primaryButton {
   padding: 1rem 2rem;
   font-size: 1.05rem;
-  font-weight: 600;
-  background: var(--accent);
-  color: #fff;
+  font-weight: 700;
+  background: var(--brand-yellow, #EAB308);
+  color: #0F172A;
   border: none;
   border-radius: var(--radius-full, 9999px);
   cursor: pointer;
@@ -54,13 +54,14 @@
   justify-content: center;
   gap: 0.5rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 16px rgba(234, 179, 8, 0.35);
 }
 
 .primaryButton:hover {
-  background: #e55a2b;
+  background: var(--brand-yellow-hover, #FACC15);
+  color: #0F172A;
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.45);
 }
 
 .secondaryButton {

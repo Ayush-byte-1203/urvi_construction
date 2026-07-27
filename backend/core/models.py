@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class SiteSettings(models.Model):
     site_name = models.CharField(max_length=255, default="Paramarsh Construction")
@@ -14,8 +15,21 @@ class SiteSettings(models.Model):
     
     # Hero Section
     hero_headline = models.TextField(null=True, blank=True, help_text="e.g., Your Dream <br/> Our Build <br/> Complete Site Solutions Under One Roof!")
+    hero_subtext = models.TextField(null=True, blank=True, help_text="Subheading paragraph under hero title")
     hero_video_url = models.URLField(max_length=500, null=True, blank=True, help_text="URL to the background video for the homepage hero")
     hero_poster_url = models.URLField(max_length=500, null=True, blank=True, help_text="URL to the poster image while video loads")
+    hero_primary_btn_text = models.CharField(max_length=100, default="Free Consultation", null=True, blank=True)
+    hero_secondary_btn_text = models.CharField(max_length=100, default="View Projects", null=True, blank=True)
+    hero_stat_pill_1 = models.CharField(max_length=255, default="10+ Live Projects", null=True, blank=True)
+    hero_stat_pill_2 = models.CharField(max_length=255, default="₹1600/sq.ft Starting Price", null=True, blank=True)
+
+    # Section Media Assets
+    trust_section_image = models.ImageField(upload_to="site/trust/", null=True, blank=True, help_text="Showcase image for Trust & Intro section")
+    process_section_video_url = models.URLField(max_length=500, null=True, blank=True, help_text="Video URL for How It Works process section")
+    process_section_poster_image = models.ImageField(upload_to="site/process/", null=True, blank=True, help_text="Poster image for How It Works process section")
+    about_story_image_1 = models.ImageField(upload_to="site/about/", null=True, blank=True, help_text="First story grid image on About page")
+    about_story_image_2 = models.ImageField(upload_to="site/about/", null=True, blank=True, help_text="Second story grid image on About page")
+
     # EmailJS Credentials
     emailjs_service_id = models.CharField(max_length=255, null=True, blank=True, help_text="e.g., service_xxxxxxx")
     emailjs_template_id = models.CharField(max_length=255, null=True, blank=True, help_text="e.g., template_xxxxxxx")
@@ -317,4 +331,56 @@ class GalleryImage(models.Model):
     def __str__(self):
         return self.caption or f"Gallery Image {self.id}"
 
+
+class AdminUserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    permissions = models.JSONField(default=dict, blank=True, help_text="Module permission dictionary e.g. {'projects': {'view': True, 'edit': False}}")
+
+    def __str__(self):
+        return f"Profile for {self.user.username}"
+
+
+class WhyChooseUsItem(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    icon_name = models.CharField(max_length=100, default="ShieldCheck", help_text="Lucide react icon name")
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+        verbose_name_plural = "Why Choose Us Items"
+
+    def __str__(self):
+        return self.title
+
+
+class ProcessStep(models.Model):
+    step_number = models.CharField(max_length=10, default="01", help_text="e.g. 01, 02, 03")
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    icon_name = models.CharField(max_length=100, default="FileText", help_text="Lucide react icon name")
+    image = models.ImageField(upload_to="process/", null=True, blank=True, help_text="Optional custom image for this process step")
+    video_url = models.URLField(max_length=500, null=True, blank=True, help_text="Optional video URL for this step")
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+        verbose_name_plural = "Process Steps / How It Works"
+
+    def __str__(self):
+        return f"Step {self.step_number}: {self.title}"
+
+
+class TrustFeature(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    icon_name = models.CharField(max_length=100, default="CheckCircle2", help_text="Lucide react icon name")
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+        verbose_name_plural = "Trust & Intro Features"
+
+    def __str__(self):
+        return self.title
 

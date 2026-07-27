@@ -1,44 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Clock, Handshake, Users, Hammer, TrendingUp } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import styles from './WhyChooseUsSection.module.css';
 import SectionHeader from '../SectionHeader';
+import { useGlobalData } from '../../context/GlobalDataContext';
 
-// TODO: replace placeholder content
-const features = [
-  {
-    icon: <Shield size={28} />,
-    title: "Uncompromising Quality",
-    description: "Premium materials and a 150+ point quality checklist ensure structural integrity and flawless finish."
-  },
-  {
-    icon: <Clock size={28} />,
-    title: "On-Time Delivery",
-    description: "Strict project management timelines mean we hand over the keys precisely when promised."
-  },
-  {
-    icon: <Handshake size={28} />,
-    title: "100% Transparency",
-    description: "No hidden costs. Detailed BOQs and regular site updates keep you fully informed."
-  },
-  {
-    icon: <Users size={28} />,
-    title: "In-House Experts",
-    description: "Architects, engineers, and designers working under one roof for seamless coordination."
-  },
-  {
-    icon: <Hammer size={28} />,
-    title: "Skilled Craftsmanship",
-    description: "Our dedicated artisan teams bring years of experience to the finer details of your home."
-  },
-  {
-    icon: <TrendingUp size={28} />,
-    title: "Long-Term Warranty",
-    description: "Enjoy peace of mind with our comprehensive 10-year structural warranty on all projects."
-  }
+const defaultFeatures = [
+  { icon_name: "Shield", title: "Uncompromising Quality", description: "Premium materials and a 150+ point quality checklist ensure structural integrity and flawless finish." },
+  { icon_name: "Clock", title: "On-Time Delivery", description: "Strict project management timelines mean we hand over the keys precisely when promised." },
+  { icon_name: "Handshake", title: "100% Transparency", description: "No hidden costs. Detailed BOQs and regular site updates keep you fully informed." },
+  { icon_name: "Users", title: "In-House Experts", description: "Architects, engineers, and designers working under one roof for seamless coordination." },
+  { icon_name: "Hammer", title: "Skilled Craftsmanship", description: "Our dedicated artisan teams bring years of experience to the finer details of your home." },
+  { icon_name: "TrendingUp", title: "Long-Term Warranty", description: "Enjoy peace of mind with our comprehensive 10-year structural warranty on all projects." }
 ];
 
 const WhyChooseUsSection = () => {
+  const { whyChooseUs } = useGlobalData();
+  const items = (whyChooseUs && whyChooseUs.length > 0) ? whyChooseUs : defaultFeatures;
+
+  const renderIcon = (iconName) => {
+    const IconComp = LucideIcons[iconName] || LucideIcons.ShieldCheck;
+    return <IconComp size={28} />;
+  };
+
   return (
     <section className={`section ${styles.whySection}`}>
       <div className="container">
@@ -50,9 +34,9 @@ const WhyChooseUsSection = () => {
         />
 
         <div className={styles.grid}>
-          {features.map((feature, idx) => (
+          {items.map((feature, idx) => (
             <motion.div 
-              key={idx}
+              key={feature.id || idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
@@ -60,7 +44,7 @@ const WhyChooseUsSection = () => {
               className={styles.card}
             >
               <div className={styles.iconWrapper}>
-                {feature.icon}
+                {renderIcon(feature.icon_name)}
               </div>
               <h3 className={styles.cardTitle}>{feature.title}</h3>
               <p className={styles.cardDesc}>{feature.description}</p>

@@ -37,9 +37,10 @@
 }
 
 .statsBar {
-  background-color: var(--accent);
-  padding: 3rem 0;
+  background-color: #0F172A;
+  padding: 3.5rem 0;
   color: #fff;
+  border-bottom: 1px solid #1E293B;
 }
 
 .statsGrid {
@@ -50,18 +51,19 @@
 }
 
 .statValue {
-  font-size: 2.5rem;
+  font-size: 2.75rem;
   font-weight: 800;
   line-height: 1;
   margin-bottom: 0.5rem;
+  color: var(--brand-yellow, #EAB308);
 }
 
 .statLabel {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  opacity: 0.9;
+  color: #94A3B8;
 }
 
 .storySection {

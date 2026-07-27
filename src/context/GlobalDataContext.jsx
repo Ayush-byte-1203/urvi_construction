@@ -11,7 +11,11 @@ import {
   fetchBlogCategories,
   fetchBlogs,
   fetchGalleryImages,
-  fetchJourneyMilestones
+  fetchJourneyMilestones,
+  fetchWhyChooseUs,
+  fetchProcessSteps,
+  fetchTrustFeatures,
+  fetchProjectCategories
 } from '../services/api';
 
 import { dummySiteSettings } from '../data/dummySiteSettings';
@@ -41,6 +45,10 @@ export const GlobalDataProvider = ({ children }) => {
     blogs: dummyBlogs,
     galleryImages: dummyGalleryImages,
     journey: [],
+    whyChooseUs: [],
+    processSteps: [],
+    trustFeatures: [],
+    projectCategories: [],
     isLoading: true,
   });
 
@@ -58,7 +66,11 @@ export const GlobalDataProvider = ({ children }) => {
           blogCategoriesRes,
           blogsRes,
           galleryImagesRes,
-          journeyRes
+          journeyRes,
+          whyRes,
+          processRes,
+          trustRes,
+          projectCategoriesRes
         ] = await Promise.all([
           fetchSiteSettings(),
           fetchServices(),
@@ -70,7 +82,11 @@ export const GlobalDataProvider = ({ children }) => {
           fetchBlogCategories(),
           fetchBlogs(),
           fetchGalleryImages(),
-          fetchJourneyMilestones()
+          fetchJourneyMilestones(),
+          fetchWhyChooseUs(),
+          fetchProcessSteps(),
+          fetchTrustFeatures(),
+          fetchProjectCategories()
         ]);
 
         setGlobalData({
@@ -85,6 +101,10 @@ export const GlobalDataProvider = ({ children }) => {
           blogs: (blogsRes && blogsRes.length > 0) ? blogsRes : dummyBlogs,
           galleryImages: (galleryImagesRes && galleryImagesRes.length > 0) ? galleryImagesRes : dummyGalleryImages,
           journey: journeyRes || [],
+          whyChooseUs: whyRes || [],
+          processSteps: processRes || [],
+          trustFeatures: trustRes || [],
+          projectCategories: projectCategoriesRes || [],
           isLoading: false,
         });
       } catch (error) {
