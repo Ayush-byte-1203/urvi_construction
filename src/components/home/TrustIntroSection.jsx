@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styles from './TrustIntroSection.module.css';
 import { useGlobalData } from '../../context/GlobalDataContext';
+import pic1Img from '../../Images/pic1.jpeg';
 
 const defaultChecklist = [
   "150+ Point Quality Inspection",
@@ -17,7 +18,7 @@ const TrustIntroSection = () => {
   const listItems = (trustFeatures && trustFeatures.length > 0)
     ? trustFeatures.map(item => item.title)
     : defaultChecklist;
-  const introImg = siteSettings?.trust_section_image || "src/Images/pic1.jpeg";
+  const introImg = siteSettings?.trust_section_image || pic1Img;
 
   return (
     <section className={`section ${styles.trustSection}`}>

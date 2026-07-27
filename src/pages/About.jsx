@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle2, Target, Award, Shield, MapPin, Maximize } from 'lucide-react';
 import CTASection from '../components/CTASection';
 import styles from './About.module.css';
+import sample1Img from '../Images/sample1.jpeg';
 
 const About = () => {
   const { setHeaderTheme } = useContext(HeaderThemeContext);
@@ -133,7 +134,7 @@ const About = () => {
             className={styles.imageGrid}
           >
             <img src={siteSettings?.about_story_image_1 || "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=600&q=80"} alt="Architectural Planning" className={styles.gridImg1} loading="lazy" />
-            <img src={siteSettings?.about_story_image_2 || "src/Images/sample1.jpeg"} alt="Construction Site" className={styles.gridImg2} loading="lazy" />
+            <img src={siteSettings?.about_story_image_2 || sample1Img} alt="Construction Site" className={styles.gridImg2} loading="lazy" />
           </motion.div>
         </div>
       </section>
