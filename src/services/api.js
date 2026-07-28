@@ -144,3 +144,12 @@ export const fetchTrustFeatures = async () => {
     return response.json();
   } catch { return []; }
 };
+
+export const fetchPaymentTerms = async () => {
+  try {
+    const response = await fetch(`${API_URL}/payment-terms/`);
+    if (!response.ok) return [];
+    return response.json();
+  } catch { return []; }
+};
+

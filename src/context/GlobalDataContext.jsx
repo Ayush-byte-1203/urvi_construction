@@ -15,7 +15,8 @@ import {
   fetchWhyChooseUs,
   fetchProcessSteps,
   fetchTrustFeatures,
-  fetchProjectCategories
+  fetchProjectCategories,
+  fetchPaymentTerms
 } from '../services/api';
 
 import { dummySiteSettings } from '../data/dummySiteSettings';
@@ -49,6 +50,7 @@ export const GlobalDataProvider = ({ children }) => {
     processSteps: [],
     trustFeatures: [],
     projectCategories: [],
+    paymentTerms: [],
     isLoading: true,
   });
 
@@ -70,7 +72,8 @@ export const GlobalDataProvider = ({ children }) => {
           whyRes,
           processRes,
           trustRes,
-          projectCategoriesRes
+          projectCategoriesRes,
+          paymentTermsRes
         ] = await Promise.all([
           fetchSiteSettings(),
           fetchServices(),
@@ -86,7 +89,8 @@ export const GlobalDataProvider = ({ children }) => {
           fetchWhyChooseUs(),
           fetchProcessSteps(),
           fetchTrustFeatures(),
-          fetchProjectCategories()
+          fetchProjectCategories(),
+          fetchPaymentTerms()
         ]);
 
         setGlobalData({
@@ -105,6 +109,7 @@ export const GlobalDataProvider = ({ children }) => {
           processSteps: processRes || [],
           trustFeatures: trustRes || [],
           projectCategories: projectCategoriesRes || [],
+          paymentTerms: paymentTermsRes || [],
           isLoading: false,
         });
       } catch (error) {

@@ -8,6 +8,7 @@ import { appConfig } from '../data/appConfig';
 import { usePageData } from '../hooks/usePageData';
 import { useGlobalData } from '../context/GlobalDataContext';
 import HeroOverlay from '../components/HeroOverlay';
+import SectionHeader from '../components/SectionHeader';
 import CostCalculatorSection from '../components/CostCalculatorSection';
 import FAQSection from '../components/FAQSection';
 import CTASection from '../components/CTASection';
@@ -120,12 +121,12 @@ const Packages = () => {
           {filteredTiers.map((tier) => (
             <div key={tier.id} className={styles.pricingCard} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', overflow: 'hidden', position: 'relative', boxShadow: 'var(--shadow-sm)' }}>
               {(tier.badge || (tier.is_popular ? 'Most Popular' : null)) && (
-                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', background: (tier.badge === 'Most Popular' || tier.is_popular) ? 'var(--brand-yellow, #EAB308)' : '#334155', color: (tier.badge === 'Most Popular' || tier.is_popular) ? '#0F172A' : '#ffffff', textAlign: 'center', padding: '0.5rem', fontSize: '0.875rem', fontWeight: 'bold' }}>
+                <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', background: (tier.badge === 'Most Popular' || tier.is_popular) ? 'var(--brand-yellow, #EAB308)' : '#334155', color: (tier.badge === 'Most Popular' || tier.is_popular) ? '#0F172A' : '#ffffff', textAlign: 'center', padding: '0.55rem 1rem', fontSize: '0.875rem', fontWeight: 'bold', letterSpacing: '0.5px' }}>
                   {tier.badge || 'Most Popular'}
                 </div>
               )}
               
-              <div style={{ padding: tier.badge ? '3rem 2rem 2rem' : '2rem', borderBottom: '1px solid var(--border)' }}>
+              <div style={{ padding: (tier.badge || tier.is_popular) ? '3.75rem 2rem 2rem' : '2rem', borderBottom: '1px solid var(--border)' }}>
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{tier.name}</h3>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.25rem', marginBottom: '1rem' }}>
                   <span style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)' }}>₹{tier.price}</span>

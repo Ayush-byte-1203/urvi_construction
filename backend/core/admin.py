@@ -7,7 +7,7 @@ from .models import (
     Package, PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
     ProjectCategory, Project, ProjectImage, Testimonial, FAQCategory, FAQ,
     CoreValue, JourneyMilestone,
-    BlogCategory, BlogPost, GalleryImage
+    BlogCategory, BlogPost, GalleryImage, PaymentTerm
 )
 
 class CustomAdminSite(AdminSite):
@@ -30,7 +30,7 @@ class CustomAdminSite(AdminSite):
                 "models": [ServiceCategory, Service],
             },
             "Packages": {
-                "models": [Package, PackageMaterialCategory],
+                "models": [Package, PackageMaterialCategory, PaymentTerm],
             },
             "Portfolio": {
                 "models": [ProjectCategory, Project, GalleryImage],
@@ -112,12 +112,19 @@ class PackageMaterialSpecInline(admin.TabularInline):
 class PackageAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'project_type', 'is_popular', 'order')
     list_filter = ('is_popular',)
+    list_editable = ('is_popular', 'order')
     search_fields = ('name', 'tagline', 'description')
     inlines = [PackageAdvantageInline, PackageMaterialSpecInline, PackageFAQInline]
     ordering = ('order',)
 
 class PackageMaterialCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'order')
+    ordering = ('order',)
+
+class PaymentTermAdmin(admin.ModelAdmin):
+    list_display = ('stage_name', 'percentage_or_condition', 'order')
+    list_editable = ('percentage_or_condition', 'order')
+    search_fields = ('stage_name', 'percentage_or_condition', 'note')
     ordering = ('order',)
 
 # --- PORTFOLIO ---
@@ -177,6 +184,7 @@ custom_admin_site.register(Service, ServiceAdmin)
 
 custom_admin_site.register(Package, PackageAdmin)
 custom_admin_site.register(PackageMaterialCategory, PackageMaterialCategoryAdmin)
+custom_admin_site.register(PaymentTerm, PaymentTermAdmin)
 
 custom_admin_site.register(ProjectCategory, ProjectCategoryAdmin)
 custom_admin_site.register(Project, ProjectAdmin)

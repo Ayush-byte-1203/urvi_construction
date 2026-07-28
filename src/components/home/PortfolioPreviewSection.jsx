@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin, Maximize, Loader } from 'lucide-react';
 import styles from './PortfolioPreviewSection.module.css';
 import SectionHeader from '../SectionHeader';
 import { useGlobalData } from '../../context/GlobalDataContext';
+import ProjectDetailModal from '../ProjectDetailModal';
 
 const PortfolioPreviewSection = () => {
   const { projects, isLoading } = useGlobalData();
+  const [selectedProject, setSelectedProject] = useState(null);
 
   if (isLoading) {
     return (
@@ -30,7 +32,7 @@ const PortfolioPreviewSection = () => {
             heading="Signature Projects"
             subheading="Explore a curated selection of our finest builds, where precision engineering meets architectural elegance."
           />
-          <Link to="/about#projects" className={`btn btn-secondary ${styles.desktopBtn}`}>
+          <Link to="/projects" className={`btn btn-secondary ${styles.desktopBtn}`}>
             View All Projects <ArrowRight size={16} style={{ marginLeft: '8px' }} />
           </Link>
         </div>
@@ -44,6 +46,8 @@ const PortfolioPreviewSection = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
               className={styles.card}
+              style={{ cursor: 'pointer' }}
+              onClick={() => setSelectedProject(project)}
             >
               <div className={styles.imageWrapper}>
                 <img src={project.image} alt={project.title} className={styles.image} loading="lazy" />
@@ -70,14 +74,22 @@ const PortfolioPreviewSection = () => {
         </div>
 
         <div className={styles.mobileBtnWrapper}>
-          <Link to="/about#projects" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
+          <Link to="/projects" className="btn btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
             View All Projects <ArrowRight size={16} style={{ marginLeft: '8px' }} />
           </Link>
         </div>
 
       </div>
+
+      {selectedProject && (
+        <ProjectDetailModal 
+          project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+        />
+      )}
     </section>
   );
 };
 
 export default PortfolioPreviewSection;
+

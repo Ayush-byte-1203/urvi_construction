@@ -31,6 +31,7 @@ const AdminWhyChooseUs = lazy(() => import('../pages/SiteContent/AdminWhyChooseU
 const AdminProcessSteps = lazy(() => import('../pages/SiteContent/AdminProcessSteps'));
 const AdminTrustFeatures = lazy(() => import('../pages/SiteContent/AdminTrustFeatures'));
 const AdminJourney = lazy(() => import('../pages/SiteContent/AdminJourney'));
+const AdminPaymentTerms = lazy(() => import('../pages/SiteContent/AdminPaymentTerms'));
 
 const AdminRoutes = () => {
   return (
@@ -54,6 +55,7 @@ const AdminRoutes = () => {
               <Route path="process-steps" element={<AdminProcessSteps />} />
               <Route path="trust-features" element={<AdminTrustFeatures />} />
               <Route path="journey" element={<AdminJourney />} />
+              <Route path="payment-terms" element={<AdminPaymentTerms />} />
               <Route path="gallery" element={<AdminGallery />} />
 
               <Route path="pages" element={<AdminPageContents />} />

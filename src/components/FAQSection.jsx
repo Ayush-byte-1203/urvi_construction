@@ -82,7 +82,7 @@ const FAQSection = () => {
                     exit={{ height: 0, opacity: 0 }}
                     style={{ overflow: 'hidden' }}
                   >
-                    <div style={{ padding: '0 1.5rem 1.5rem 3.5rem', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+                    <div style={{ padding: '0 1.5rem 1.5rem 3.5rem', color: 'var(--text-secondary)', lineHeight: '1.6', whiteSpace: 'pre-line' }}>
                       {faq.answer}
                     </div>
                   </motion.div>

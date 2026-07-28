@@ -14,6 +14,7 @@ const About = lazy(() => import('./pages/About.jsx'));
 const Services = lazy(() => import('./pages/Services.jsx'));
 const ServiceDetail = lazy(() => import('./pages/ServiceDetail.jsx'));
 const Packages = lazy(() => import('./pages/Packages.jsx'));
+const Projects = lazy(() => import('./pages/Projects.jsx'));
 const Contact = lazy(() => import('./pages/Contact.jsx'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy.jsx'));
 const TermsConditions = lazy(() => import('./pages/TermsConditions.jsx'));
@@ -51,9 +52,7 @@ const AppRouter = () => (
               <Route path="/services" element={<Services />} />
               <Route path="/services/:slug" element={<ServiceDetail />} />
               <Route path="/packages" element={<Packages />} />
-              {/* Standalone Projects routes merged into About Us */}
-              <Route path="/projects" element={<Navigate to="/about#projects" replace />} />
-              <Route path="/projects/*" element={<Navigate to="/about#projects" replace />} />
+              <Route path="/projects" element={<Projects />} />
               <Route path={ROUTES.CONTACT} element={<Contact />} />
               <Route path={ROUTES.PRIVACY} element={<PrivacyPolicy />} />
               <Route path={ROUTES.TERMS} element={<TermsConditions />} />

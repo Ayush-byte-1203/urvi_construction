@@ -14,8 +14,8 @@ import ServicesSection from '../components/home/ServicesSection';
 import ProcessSection from '../components/home/ProcessSection';
 import TestimonialsSection from '../components/home/TestimonialsSection';
 import FAQSection from '../components/FAQSection';
-import ClientSpotlightSection from '../components/home/ClientSpotlightSection';
 import PortfolioPreviewSection from '../components/home/PortfolioPreviewSection';
+import NotFound from './NotFound';
 
 const CityLanding = () => {
   const { citySlug } = useParams();
@@ -28,6 +28,13 @@ const CityLanding = () => {
   useEffect(() => {
     setHeaderTheme('none');
   }, [setHeaderTheme]);
+
+  // Validate city slug (must be purely alphabetic words separated by hyphens, no digits or random codes)
+  const isValidCitySlug = citySlug && /^[a-zA-Z]+(?:-[a-zA-Z]+)*$/.test(citySlug);
+
+  if (!isValidCitySlug) {
+    return <NotFound />;
+  }
 
   if (isLoading) {
     return (
@@ -70,10 +77,7 @@ const CityLanding = () => {
       {/* 6. Testimonials */}
       <TestimonialsSection />
 
-      {/* 7. Client Review Spotlight */}
-      <ClientSpotlightSection />
-
-      {/* 8. Portfolio Preview */}
+      {/* 7. Portfolio Preview */}
       <PortfolioPreviewSection />
 
     </div>

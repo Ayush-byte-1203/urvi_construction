@@ -8,7 +8,7 @@ from .views import (
     PackageAdvantageViewSet, PackageMaterialCategoryViewSet, PackageMaterialSpecViewSet, PackageFAQViewSet,
     ProjectImageViewSet, GalleryImageViewSet, JourneyMilestoneViewSet,
     AdminUserViewSet, CurrentAdminUserView,
-    WhyChooseUsViewSet, ProcessStepViewSet, TrustFeatureViewSet
+    WhyChooseUsViewSet, ProcessStepViewSet, TrustFeatureViewSet, PaymentTermViewSet
 )
 
 router = DefaultRouter()
@@ -16,6 +16,7 @@ router.register(r'package-advantages', PackageAdvantageViewSet)
 router.register(r'package-material-categories', PackageMaterialCategoryViewSet)
 router.register(r'package-material-specs', PackageMaterialSpecViewSet)
 router.register(r'package-faqs', PackageFAQViewSet)
+router.register(r'payment-terms', PaymentTermViewSet)
 router.register(r'project-images', ProjectImageViewSet)
 router.register(r'gallery-images', GalleryImageViewSet)
 

@@ -152,6 +152,20 @@ const PackageForm = ({ initialData, onCancel, onSuccess }) => {
               <label className={styles.label}>Description</label>
               <textarea className={styles.textarea} value={formData.description || ''} onChange={e => handleChange('description', e.target.value)} rows={3} />
             </div>
+
+            {/* Most Popular Feature Toggle Box */}
+            <div style={{ marginTop: '0.75rem', marginBottom: '1rem', padding: '0.85rem 1rem', background: 'rgba(234, 179, 8, 0.12)', borderRadius: '8px', border: '1px solid var(--brand-yellow, #EAB308)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <input 
+                type="checkbox" 
+                id="is_popular_checkbox"
+                style={{ width: '18px', height: '18px', cursor: 'pointer', accentColor: '#d97706' }}
+                checked={Boolean(formData.is_popular)} 
+                onChange={e => handleChange('is_popular', e.target.checked)} 
+              />
+              <label htmlFor="is_popular_checkbox" style={{ fontWeight: '700', color: '#92400e', cursor: 'pointer', fontSize: '0.95rem', margin: 0 }}>
+                🌟 Mark as "Most Popular" Package (Adds yellow ribbon on website)
+              </label>
+            </div>
             
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
               <div className={styles.formGroup}>
@@ -217,13 +231,6 @@ const PackageForm = ({ initialData, onCancel, onSuccess }) => {
                 <label className={styles.label}>Construction Quality</label>
                 <textarea className={styles.textarea} value={formData.construction_quality || ''} onChange={e => handleChange('construction_quality', e.target.value)} rows={2} />
               </div>
-            </div>
-
-            <div className={styles.formGroup} style={{ marginTop: '1rem' }}>
-              <label className={styles.label} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                <input type="checkbox" checked={formData.is_popular || false} onChange={e => handleChange('is_popular', e.target.checked)} />
-                Is Popular Package?
-              </label>
             </div>
             
             {/* Inline: Advantages */}

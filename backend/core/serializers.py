@@ -6,7 +6,7 @@ from .models import (
     ProjectCategory, Project, ProjectImage, Testimonial, FAQCategory, FAQ,
     CoreValue, JourneyMilestone,
     BlogCategory, BlogPost, GalleryImage, AdminUserProfile,
-    WhyChooseUsItem, ProcessStep, TrustFeature
+    WhyChooseUsItem, ProcessStep, TrustFeature, PaymentTerm
 )
 
 class SiteSettingsSerializer(serializers.ModelSerializer):
@@ -184,3 +184,9 @@ class TrustFeatureSerializer(serializers.ModelSerializer):
     class Meta:
         model = TrustFeature
         fields = '__all__'
+
+class PaymentTermSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentTerm
+        fields = '__all__'
+

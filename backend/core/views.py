@@ -10,7 +10,7 @@ from .models import (
     ServiceCategory, ProjectCategory, FAQCategory,
     PackageAdvantage, PackageMaterialCategory, PackageMaterialSpec, PackageFAQ,
     ProjectImage, GalleryImage, AdminUserProfile,
-    WhyChooseUsItem, ProcessStep, TrustFeature
+    WhyChooseUsItem, ProcessStep, TrustFeature, PaymentTerm
 )
 from .serializers import (
     SiteSettingsSerializer, PageContentSerializer, ServiceSerializer,
@@ -20,7 +20,7 @@ from .serializers import (
     ServiceCategorySerializer, ProjectCategorySerializer, FAQCategorySerializer,
     PackageAdvantageSerializer, PackageMaterialCategorySerializer, PackageMaterialSpecSerializer, PackageFAQSerializer,
     ProjectImageSerializer, GalleryImageSerializer, AdminUserSerializer,
-    WhyChooseUsSerializer, ProcessStepSerializer, TrustFeatureSerializer
+    WhyChooseUsSerializer, ProcessStepSerializer, TrustFeatureSerializer, PaymentTermSerializer
 )
 
 class PackageAdvantageViewSet(viewsets.ModelViewSet):
@@ -157,3 +157,8 @@ class ProcessStepViewSet(viewsets.ModelViewSet):
 class TrustFeatureViewSet(viewsets.ModelViewSet):
     queryset = TrustFeature.objects.all().order_by('order')
     serializer_class = TrustFeatureSerializer
+
+class PaymentTermViewSet(viewsets.ModelViewSet):
+    queryset = PaymentTerm.objects.all().order_by('order')
+    serializer_class = PaymentTermSerializer
+

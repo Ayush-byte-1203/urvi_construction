@@ -33,6 +33,7 @@ const Sidebar = () => {
         { name: 'Gallery', icon: <ImageIcon size={18} />, path: '/admin/gallery', moduleKey: 'gallery' },
         { name: 'Package Categories', icon: <LayoutDashboard size={18} />, path: '/admin/package-material-categories', moduleKey: 'packages' },
         { name: 'Packages', icon: <FileText size={18} />, path: '/admin/packages', moduleKey: 'packages' },
+        { name: 'Payment Terms', icon: <CheckCircle size={18} />, path: '/admin/payment-terms', moduleKey: 'packages' },
         { name: 'Page Contents', icon: <LayoutDashboard size={18} />, path: '/admin/pages', moduleKey: 'pages' },
         { name: 'Process Steps', icon: <List size={18} />, path: '/admin/process-steps', moduleKey: 'pages' },
         { name: 'Project Categories', icon: <Map size={18} />, path: '/admin/project-categories', moduleKey: 'projects' },

@@ -384,3 +384,19 @@ class TrustFeature(models.Model):
     def __str__(self):
         return self.title
 
+
+class PaymentTerm(models.Model):
+    stage_name = models.CharField(max_length=255, help_text="e.g. Advance Payment for Material dumping")
+    percentage_or_condition = models.CharField(max_length=255, help_text="e.g. 10% Based on Total Slab Area")
+    order = models.IntegerField(default=0)
+    note = models.TextField(null=True, blank=True, help_text="Optional additional notes for this milestone")
+
+    class Meta:
+        ordering = ['order']
+        verbose_name = "Payment Term & Condition"
+        verbose_name_plural = "Payment Terms & Conditions"
+
+    def __str__(self):
+        return f"{self.stage_name} ({self.percentage_or_condition})"
+
+

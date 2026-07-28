@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import { useGlobalData } from '../context/GlobalDataContext';
 import { usePageData } from '../hooks/usePageData';
 import CTASection from '../components/CTASection';
+import ProjectDetailModal from '../components/ProjectDetailModal';
 import styles from './Projects.module.css';
 
 const Projects = () => {
@@ -15,6 +16,7 @@ const Projects = () => {
   const { pageData } = usePageData('projects');
   const { projects: allProjects, projectCategories } = useGlobalData();
   const [filter, setFilter] = useState('All');
+  const [selectedProject, setSelectedProject] = useState(null);
   const heroBg = pageData?.hero_image || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80";
 
   const categories = useMemo(() => {
@@ -101,6 +103,8 @@ const Projects = () => {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.4 }}
                   className={styles.card}
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => setSelectedProject(project)}
                 >
                   <div className={styles.imageWrapper}>
                     <img src={project.image} alt={project.title} className={styles.image} loading="lazy" />
@@ -136,6 +140,13 @@ const Projects = () => {
       </section>
 
       <CTASection title="Inspired by Our Work?" subtitle="Contact us to discuss how we can bring a similar level of excellence to your next project." />
+
+      {selectedProject && (
+        <ProjectDetailModal 
+          project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+        />
+      )}
     </div>
   );
 };

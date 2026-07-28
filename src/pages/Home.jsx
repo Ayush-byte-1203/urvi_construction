@@ -13,7 +13,6 @@ import ServicesSection from '../components/home/ServicesSection';
 import ProcessSection from '../components/home/ProcessSection';
 import TestimonialsSection from '../components/home/TestimonialsSection';
 import FAQSection from '../components/FAQSection';
-import ClientSpotlightSection from '../components/home/ClientSpotlightSection';
 import PortfolioPreviewSection from '../components/home/PortfolioPreviewSection';
 
 const Home = () => {
@@ -68,10 +67,7 @@ const Home = () => {
       {/* 6. Testimonials (3 Client Reviews) */}
       <TestimonialsSection />
 
-      {/* 7. Client Review Spotlight (Video + Feature Review) */}
-      <ClientSpotlightSection />
-
-      {/* 8. Portfolio Preview (3 Projects) */}
+      {/* 7. Portfolio Preview (3 Projects) */}
       <PortfolioPreviewSection />
 
     </div>
