@@ -23,7 +23,6 @@ import { dummySiteSettings } from '../data/dummySiteSettings';
 import { dummyServices } from '../data/dummyServices';
 import { dummyPackages } from '../data/dummyPackages';
 import { dummyProjects } from '../data/dummyProjects';
-import { dummyTestimonials } from '../data/dummyTestimonials';
 import { dummyFAQs } from '../data/dummyFAQs';
 import { dummyCoreValues } from '../data/dummyCoreValues';
 import { dummyBlogs } from '../data/dummyBlogs';
@@ -39,7 +38,7 @@ export const GlobalDataProvider = ({ children }) => {
     services: dummyServices,
     packages: dummyPackages,
     projects: dummyProjects,
-    testimonials: dummyTestimonials,
+    testimonials: [],
     faqs: dummyFAQs,
     coreValues: dummyCoreValues,
     blogCategories: [],
@@ -98,7 +97,7 @@ export const GlobalDataProvider = ({ children }) => {
           services: (servicesRes && servicesRes.length > 0) ? servicesRes : dummyServices,
           packages: (packagesRes && packagesRes.length > 0) ? packagesRes : dummyPackages,
           projects: (projectsRes && projectsRes.length > 0) ? projectsRes : dummyProjects,
-          testimonials: (testimonialsRes && testimonialsRes.length > 0) ? testimonialsRes : dummyTestimonials,
+          testimonials: Array.isArray(testimonialsRes) ? testimonialsRes : [],
           faqs: (faqsRes && faqsRes.length > 0) ? faqsRes : dummyFAQs,
           coreValues: (coreValuesRes && coreValuesRes.length > 0) ? coreValuesRes : dummyCoreValues,
           blogCategories: blogCategoriesRes || [],
