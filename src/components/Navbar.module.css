@@ -55,7 +55,7 @@
 /* Permanent Link Style (Dark Slate Text) */
 .navLink {
   font-family: var(--font-family-display, inherit);
-  font-size: 0.875rem;
+  font-size: 1.155rem;
   font-weight: 600;
   color: var(--text-secondary, #374151) !important;
   text-shadow: none !important;
