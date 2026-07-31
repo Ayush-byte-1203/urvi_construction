@@ -162,3 +162,68 @@ class PaymentTermViewSet(viewsets.ModelViewSet):
     queryset = PaymentTerm.objects.all().order_by('order')
     serializer_class = PaymentTermSerializer
 
+
+def sitemap_xml_view(request):
+    from django.http import HttpResponse
+    from django.utils.timezone import now
+    from .models import Service, BlogPost
+    base_url = "https://pccbuild.in"
+    today = now().strftime('%Y-%m-%d')
+
+    core_pages = [
+        ('/', '1.0', 'daily'),
+        ('/about', '0.8', 'weekly'),
+        ('/services', '0.9', 'weekly'),
+        ('/packages', '0.9', 'weekly'),
+        ('/projects', '0.9', 'weekly'),
+        ('/blog', '0.7', 'weekly'),
+        ('/contact', '0.8', 'monthly'),
+        ('/privacy-policy', '0.3', 'yearly'),
+        ('/terms-and-conditions', '0.3', 'yearly'),
+    ]
+
+    cities = ['vadodara', 'ahmedabad', 'surat', 'rajkot', 'gandhinagar', 'mumbai']
+
+    xml_lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+    ]
+
+    for path, priority, changefreq in core_pages:
+        xml_lines.append('  <url>')
+        xml_lines.append(f'    <loc>{base_url}{path}</loc>')
+        xml_lines.append(f'    <lastmod>{today}</lastmod>')
+        xml_lines.append(f'    <changefreq>{changefreq}</changefreq>')
+        xml_lines.append(f'    <priority>{priority}</priority>')
+        xml_lines.append('  </url>')
+
+    for service in Service.objects.all():
+        slug_or_id = service.slug or str(service.id)
+        lastmod = service.updated_at.strftime('%Y-%m-%d') if hasattr(service, 'updated_at') and getattr(service, 'updated_at', None) else today
+        xml_lines.append('  <url>')
+        xml_lines.append(f'    <loc>{base_url}/services/{slug_or_id}</loc>')
+        xml_lines.append(f'    <lastmod>{lastmod}</lastmod>')
+        xml_lines.append('    <changefreq>monthly</changefreq>')
+        xml_lines.append('    <priority>0.8</priority>')
+        xml_lines.append('  </url>')
+
+    for blog in BlogPost.objects.all():
+        slug_or_id = blog.slug or str(blog.id)
+        lastmod = blog.date.strftime('%Y-%m-%d') if hasattr(blog, 'date') and getattr(blog, 'date', None) else today
+        xml_lines.append('  <url>')
+        xml_lines.append(f'    <loc>{base_url}/blog/{slug_or_id}</loc>')
+        xml_lines.append(f'    <lastmod>{lastmod}</lastmod>')
+        xml_lines.append('    <changefreq>weekly</changefreq>')
+        xml_lines.append('    <priority>0.7</priority>')
+        xml_lines.append('  </url>')
+
+    for city in cities:
+        xml_lines.append('  <url>')
+        xml_lines.append(f'    <loc>{base_url}/{city}</loc>')
+        xml_lines.append(f'    <lastmod>{today}</lastmod>')
+        xml_lines.append('    <changefreq>monthly</changefreq>')
+        xml_lines.append('    <priority>0.7</priority>')
+        xml_lines.append('  </url>')
+
+    xml_lines.append('</urlset>')
+    return HttpResponse('\n'.join(xml_lines), content_type='application/xml')

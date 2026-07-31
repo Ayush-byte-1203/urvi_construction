@@ -43,45 +43,32 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- ── Detailed Service Pages ── -->
+  <!-- ── Dynamic Service Pages ── -->
   <url>
-    <loc>https://pccbuild.in/services/interior-designing</loc>
+    <loc>https://pccbuild.in/services/custom-home-construction</loc>
     <lastmod>2026-07-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pccbuild.in/services/structural-engineering</loc>
+    <loc>https://pccbuild.in/services/commercial-spaces</loc>
     <lastmod>2026-07-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://pccbuild.in/services/project-management</loc>
+    <loc>https://pccbuild.in/services/architectural-consulting</loc>
     <lastmod>2026-07-31</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- ── Dynamic Blog Post Pages ── -->
   <url>
-    <loc>https://pccbuild.in/services/turnkey-construction</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://pccbuild.in/blog/top-5-trends</loc>
+    <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://pccbuild.in/services/residential-construction</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://pccbuild.in/services/interior-design</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
   <!-- ── City Landing Pages for SEO ── -->
   <url>
     <loc>https://pccbuild.in/vadodara</loc>
@@ -119,7 +106,6 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-
   <!-- ── Legal Pages ── -->
   <url>
     <loc>https://pccbuild.in/privacy-policy</loc>

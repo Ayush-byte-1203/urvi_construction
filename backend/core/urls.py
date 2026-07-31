@@ -8,7 +8,8 @@ from .views import (
     PackageAdvantageViewSet, PackageMaterialCategoryViewSet, PackageMaterialSpecViewSet, PackageFAQViewSet,
     ProjectImageViewSet, GalleryImageViewSet, JourneyMilestoneViewSet,
     AdminUserViewSet, CurrentAdminUserView,
-    WhyChooseUsViewSet, ProcessStepViewSet, TrustFeatureViewSet, PaymentTermViewSet
+    WhyChooseUsViewSet, ProcessStepViewSet, TrustFeatureViewSet, PaymentTermViewSet,
+    sitemap_xml_view
 )
 
 router = DefaultRouter()
@@ -42,6 +43,8 @@ router.register(r'users', AdminUserViewSet)
 
 urlpatterns = [
     path('me/', CurrentAdminUserView.as_view(), name='current_user'),
+    path('sitemap.xml', sitemap_xml_view, name='sitemap_xml'),
     path('', include(router.urls)),
 ]
+
 
