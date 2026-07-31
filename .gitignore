@@ -116,3 +116,16 @@ Desktop.ini
 .mypy_cache/
 .antigravityignore
 .gemini/
+
+# --- Microsoft Office Lock Files & Temp Documents ---
+~$*
+~*.doc*
+~*.xls*
+~*.ppt*
+
+# --- Archives & Backup Bundles ---
+*.zip
+*.tar.gz
+*.tar
+*.rar
+*.7z

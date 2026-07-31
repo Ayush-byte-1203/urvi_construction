@@ -1,0 +1,11 @@
+# Paramarsh Construction Robots.txt for Search Engines
+User-agent: *
+Allow: /
+
+# Prevent search engine indexing of admin portal, backend API, and private routes
+Disallow: /admin/
+Disallow: /66331q
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://paramarshconstruction.com/sitemap.xml
