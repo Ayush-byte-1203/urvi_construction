@@ -8,4 +8,4 @@ Disallow: /66331q
 Disallow: /api/
 
 # Sitemap location
-Sitemap: https://paramarshconstruction.com/sitemap.xml
+Sitemap: https://pccbuild.in/sitemap.xml
