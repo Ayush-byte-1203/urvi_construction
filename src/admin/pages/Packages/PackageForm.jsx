@@ -266,16 +266,52 @@ const PackageForm = ({ initialData, onCancel, onSuccess }) => {
             <div style={{ marginTop: '2rem', borderTop: '2px solid #e2e8f0', paddingTop: '1rem' }}>
               <h3 style={{ fontSize: '1rem', fontWeight: 600, marginBottom: '1rem', color: '#0f172a' }}>PACKAGE MATERIAL SPECS</h3>
               {materialSpecs.filter(m => !m._delete).map((item, idx) => (
-                <div key={idx} style={{ display: 'flex', gap: '1rem', marginBottom: '0.5rem', alignItems: 'flex-start' }}>
-                  <select className={styles.input} value={item.category || ''} onChange={e => handleInlineChange(setMaterialSpecs, idx, 'category', e.target.value)} style={{ width: '200px' }} required>
-                    <option value="">Select Category</option>
-                    {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-                  </select>
-                  <textarea className={styles.textarea} placeholder="Brand / Specification" value={item.brand} onChange={e => handleInlineChange(setMaterialSpecs, idx, 'brand', e.target.value)} style={{ flex: 1 }} rows={3} required />
-                  <button type="button" className={styles.removeBtn} onClick={() => removeInline(setMaterialSpecs, idx)}><Trash2 size={16} /></button>
+                <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '1.5rem', background: '#f8fafc', padding: '1rem', borderRadius: '8px', border: '1px solid #e2e8f0', position: 'relative' }}>
+                  <button type="button" className={styles.removeBtn} onClick={() => removeInline(setMaterialSpecs, idx)} style={{ position: 'absolute', top: '10px', right: '10px' }}><Trash2 size={16} /></button>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', paddingRight: '2rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b' }}>Category *</label>
+                      <select className={styles.input} value={item.category || ''} onChange={e => handleInlineChange(setMaterialSpecs, idx, 'category', e.target.value)} required>
+                        <option value="">Select Category</option>
+                        {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+                      </select>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b' }}>Brand *</label>
+                      <input type="text" className={styles.input} placeholder="e.g. Ultratech / Ambuja" value={item.brand || ''} onChange={e => handleInlineChange(setMaterialSpecs, idx, 'brand', e.target.value)} required />
+                    </div>
+                  </div>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b' }}>Grade</label>
+                      <input type="text" className={styles.input} placeholder="e.g. 43/53 Grade OPC" value={item.grade || ''} onChange={e => handleInlineChange(setMaterialSpecs, idx, 'grade', e.target.value)} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b' }}>Warranty</label>
+                      <input type="text" className={styles.input} placeholder="e.g. 10 Year Structural" value={item.warranty || ''} onChange={e => handleInlineChange(setMaterialSpecs, idx, 'warranty', e.target.value)} />
+                    </div>
+                  </div>
+                  
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                    <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b' }}>Spec Details</label>
+                    <textarea className={styles.textarea} placeholder="e.g. Fe-500 TMT Steel (Tata Tiscon / Kamdhenu)" value={item.spec || ''} onChange={e => handleInlineChange(setMaterialSpecs, idx, 'spec', e.target.value)} rows={2} />
+                  </div>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b' }}>Why?</label>
+                      <textarea className={styles.textarea} placeholder="e.g. High tensile strength & durability" value={item.why || ''} onChange={e => handleInlineChange(setMaterialSpecs, idx, 'why', e.target.value)} rows={2} />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      <label style={{ fontSize: '0.8rem', fontWeight: 600, color: '#64748b' }}>Upgrade Info</label>
+                      <textarea className={styles.textarea} placeholder="e.g. Optional JSW Steel upgrade" value={item.upgrade || ''} onChange={e => handleInlineChange(setMaterialSpecs, idx, 'upgrade', e.target.value)} rows={2} />
+                    </div>
+                  </div>
                 </div>
               ))}
-              <button type="button" className={styles.addListBtn} onClick={() => addInline(setMaterialSpecs, { category: '', brand: '' })}>+ Add another Material spec</button>
+              <button type="button" className={styles.addListBtn} onClick={() => addInline(setMaterialSpecs, { category: '', brand: '', grade: '', warranty: '', spec: '', why: '', upgrade: '' })}>+ Add another Material spec</button>
             </div>
 
           </div>
