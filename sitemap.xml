@@ -63,12 +63,7 @@
     <priority>0.8</priority>
   </url>
   <!-- ── Dynamic Blog Post Pages ── -->
-  <url>
-    <loc>https://pccbuild.in/blog/top-5-trends</loc>
-    <lastmod>2026-07-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
+ 
   <!-- ── City Landing Pages for SEO ── -->
   <url>
     <loc>https://pccbuild.in/vadodara</loc>
@@ -76,43 +71,9 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://pccbuild.in/ahmedabad</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pccbuild.in/surat</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pccbuild.in/rajkot</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pccbuild.in/gandhinagar</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://pccbuild.in/mumbai</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
+ 
   <!-- ── Legal Pages ── -->
-  <url>
-    <loc>https://pccbuild.in/privacy-policy</loc>
-    <lastmod>2026-07-31</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
+  
   <url>
     <loc>https://pccbuild.in/terms-and-conditions</loc>
     <lastmod>2026-07-31</lastmod>
