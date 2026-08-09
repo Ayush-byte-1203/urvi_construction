@@ -31,7 +31,7 @@ export const navigationData = {
       { name: 'Sustainable Building', path: '/services' },
     ],
     legal: [
-      { name: 'Privacy Policy', path: '/privacy' },
+      { name: 'Privacy Policy', path: '' },
       { name: 'Terms & Conditions', path: '/terms' },
       
     ]

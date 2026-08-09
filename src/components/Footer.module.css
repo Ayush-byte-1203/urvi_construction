@@ -155,13 +155,13 @@
   gap: 1.5rem;
 }
 
-.legalLinks a {
+.legalLinks a, .legalLinks span {
   font-size: 0.825rem;
   color: rgba(255, 255, 255, 0.65);
   transition: color var(--transition-fast);
 }
 
-.legalLinks a:hover {
+.legalLinks a:hover, .legalLinks span:hover {
   color: #ffffff;
 }
 

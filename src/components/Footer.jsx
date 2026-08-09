@@ -83,7 +83,7 @@ const Footer = () => {
           </p>
           <div className={styles.legalLinks}>
             {footerLinks.legal.map((link, idx) => (
-              <Link key={idx} to={link.path}>{link.name}</Link>
+              link.path ? <Link key={idx} to={link.path}>{link.name}</Link> : <span key={idx}>{link.name}</span>
             ))}
           </div>
         </div>
