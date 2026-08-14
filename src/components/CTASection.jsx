@@ -18,7 +18,7 @@ const CTASection = ({ title, subtitle, btnText = "Get a Free Consultation", btnL
           <Link to={btnLink} className={styles.primaryButton}>
             {btnText} <ArrowRight size={16} />
           </Link>
-          <a href="tel:+919876543210" className={styles.secondaryButton}>
+          <a href="tel:+91 98980 12345" className={styles.secondaryButton}>
             Call Us Now <Phone size={16} />
           </a>
         </div>
