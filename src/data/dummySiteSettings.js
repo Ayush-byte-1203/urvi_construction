@@ -11,9 +11,4 @@ export const dummySiteSettings = {
   hero_headline: 'Premium Civil<br/>Construction<br/><span class="Hero_heroTitleAccent__Lg3K7">Residential Commercial Industrial</span>',
   hero_video_url: "https://assets.mixkit.co/videos/preview/mixkit-modern-architecture-detail-with-concrete-and-glass-41763-large.mp4",
   hero_poster_url: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80",
-  cta_title: "Ready to Bring Your Vision to Life?",
-  cta_subtitle: "Contact our team of experts today for a free site visit and project estimation.",
-  cta_btn_text: "Get a Free Consultation",
-  cta_btn_link: "/contact",
-  cta_phone: "+91 98765 43210",
 };

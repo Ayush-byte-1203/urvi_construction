@@ -36,13 +36,6 @@ class SiteSettings(models.Model):
     emailjs_public_key = models.CharField(max_length=255, null=True, blank=True, help_text="e.g., your_public_key")
     emailjs_private_key = models.CharField(max_length=255, null=True, blank=True, help_text="Optional, for backend/server usage")
     
-    # CTA Settings
-    cta_title = models.CharField(max_length=255, null=True, blank=True)
-    cta_subtitle = models.TextField(null=True, blank=True)
-    cta_btn_text = models.CharField(max_length=100, null=True, blank=True)
-    cta_btn_link = models.CharField(max_length=255, null=True, blank=True)
-    cta_phone = models.CharField(max_length=50, null=True, blank=True)
-    
     def __str__(self):
         return self.site_name
     
