@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import styles from './TrustIntroSection.module.css';
 import { useGlobalData } from '../../context/GlobalDataContext';
+import Skeleton from '../Skeleton';
 import pic1Img from '../../Images/pic1.jpeg';
 
 const defaultChecklist = [
@@ -14,11 +15,11 @@ const defaultChecklist = [
 ];
 
 const TrustIntroSection = () => {
-  const { trustFeatures, siteSettings } = useGlobalData();
+  const { trustFeatures, siteSettings, isLoading } = useGlobalData();
   const listItems = (trustFeatures && trustFeatures.length > 0)
     ? trustFeatures.map(item => item.title)
     : defaultChecklist;
-  const introImg = siteSettings?.trust_section_image || pic1Img;
+  const introImg = siteSettings?.trust_section_image || (isLoading ? null : pic1Img);
 
   return (
     <section className={`section ${styles.trustSection}`}>
@@ -65,12 +66,18 @@ const TrustIntroSection = () => {
           className={styles.imageWrapper}
         >
           <div className={styles.imageCard}>
-            <img 
-              src={introImg} 
-              alt="Engineering Team Reviewing Plans" 
-              className={styles.image}
-              loading="lazy"
-            />
+            {isLoading ? (
+              <div style={{ width: '100%', aspectRatio: '4/5', display: 'flex' }}>
+                <Skeleton width="100%" height="100%" />
+              </div>
+            ) : (
+              <img 
+                src={introImg} 
+                alt="Engineering Team Reviewing Plans" 
+                className={styles.image}
+                loading="lazy"
+              />
+            )}
             {/* Overlay element */}
             <div className={styles.experienceOverlay}>
               <span className={styles.expNumber}>10+</span>
