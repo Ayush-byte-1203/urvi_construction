@@ -5,29 +5,39 @@ import { Link } from 'react-router-dom';
 import styles from './HeroSection.module.css';
 import { useGlobalData } from '../../context/GlobalDataContext';
 import { usePageData } from '../../hooks/usePageData';
+import Skeleton from '../Skeleton';
 
 const HeroSection = ({ cityContext }) => {
-  const { siteSettings } = useGlobalData();
-  const { pageData } = usePageData('home');
+  const { siteSettings, isLoading: isGlobalLoading } = useGlobalData();
+  const { pageData, isLoading: isPageLoading } = usePageData('home');
+  const isLoading = isGlobalLoading || isPageLoading;
+
   const siteName = siteSettings?.site_name || 'Paramarsh Construction';
   const badgeText = cityContext ? `${siteName} | ${cityContext}` : `${siteName} | Vadodara`;
-  const bgImage = pageData?.hero_image || siteSettings?.hero_poster_url || "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80";
+  
+  const bgImage = isLoading ? null : (pageData?.hero_image || siteSettings?.hero_poster_url || null);
 
   return (
     <section className={styles.hero}>
       {/* Background Video/Image Fallback */}
       <div className={styles.videoBackground}>
         <div className={styles.overlay}></div>
-        {siteSettings?.hero_video_url ? (
-          <video autoPlay loop muted playsInline className={styles.bgImage} poster={bgImage}>
+        {isLoading ? (
+          <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
+            <Skeleton width="100%" height="100%" />
+          </div>
+        ) : siteSettings?.hero_video_url ? (
+          <video autoPlay loop muted playsInline className={styles.bgImage} poster={bgImage || undefined}>
             <source src={siteSettings.hero_video_url} type="video/mp4" />
           </video>
-        ) : (
+        ) : bgImage ? (
           <img 
             src={bgImage} 
             alt="Luxury Construction Background" 
             className={styles.bgImage}
           />
+        ) : (
+          <div style={{ width: '100%', height: '100%', backgroundColor: '#111', position: 'absolute', top: 0, left: 0, zIndex: -1 }} />
         )}
       </div>
 
