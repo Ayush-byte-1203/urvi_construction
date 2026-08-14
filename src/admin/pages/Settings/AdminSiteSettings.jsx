@@ -36,7 +36,12 @@ const AdminSiteSettings = () => {
     { key: 'emailjs_service_id', label: 'EmailJS Service ID', type: 'text' },
     { key: 'emailjs_template_id', label: 'EmailJS Template ID', type: 'text' },
     { key: 'emailjs_public_key', label: 'EmailJS Public Key', type: 'text' },
-    { key: 'emailjs_private_key', label: 'EmailJS Private Key', type: 'text' }
+    { key: 'emailjs_private_key', label: 'EmailJS Private Key', type: 'text' },
+    { key: 'cta_title', label: 'Global CTA Title', type: 'text' },
+    { key: 'cta_subtitle', label: 'Global CTA Subtitle', type: 'textarea' },
+    { key: 'cta_btn_text', label: 'Global CTA Primary Button Text', type: 'text' },
+    { key: 'cta_btn_link', label: 'Global CTA Primary Button Link', type: 'text' },
+    { key: 'cta_phone', label: 'Global CTA Phone Number', type: 'text' }
   ];
 
   return (
