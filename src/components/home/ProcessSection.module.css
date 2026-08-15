@@ -1,5 +1,6 @@
 .processSection {
-  padding: var(--gap-section) 0;
+  padding-top: var(--gap-section, 4rem);
+  padding-bottom: var(--gap-section, 4rem);
   background-color: var(--bg-secondary);
 }
 

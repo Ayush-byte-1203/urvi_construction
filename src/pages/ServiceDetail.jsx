@@ -164,7 +164,7 @@ const ServiceDetail = () => {
 
       {/* E. We Specialize In (2x2 grid) */}
       <section className="section container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4rem', alignItems: 'center' }}>
+        <div className={styles.specializeSection}>
           <div>
             <span className="text-overline">Expertise</span>
             <h2 className="section-heading">We Specialize In</h2>
@@ -173,7 +173,7 @@ const ServiceDetail = () => {
             </p>
             <Link to="/projects" className="btn btn-secondary">View Our Portfolio <ArrowRight size={16} /></Link>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
+          <div className={styles.specializeCards}>
             {service.specializations.map((spec, idx) => (
               <motion.div
                 key={idx}

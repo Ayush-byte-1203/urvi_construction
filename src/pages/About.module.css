@@ -67,7 +67,8 @@
 }
 
 .storySection {
-  padding: var(--gap-section) 0;
+  padding-top: var(--gap-section, 4rem);
+  padding-bottom: var(--gap-section, 4rem);
 }
 
 .storyGrid {
@@ -128,7 +129,8 @@
 
 .valuesSection {
   background-color: var(--bg-secondary);
-  padding: var(--gap-section) 0;
+  padding-top: var(--gap-section, 4rem);
+  padding-bottom: var(--gap-section, 4rem);
 }
 
 .valuesGrid {

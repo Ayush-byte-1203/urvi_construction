@@ -37,7 +37,8 @@
 }
 
 .contentSection {
-  padding: var(--gap-section) 0;
+  padding-top: var(--gap-section, 4rem);
+  padding-bottom: var(--gap-section, 4rem);
 }
 
 .grid {
@@ -146,5 +147,31 @@
   }
   .ctaCard {
     position: static;
+  }
+}
+
+.specializeSection {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.specializeCards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .specializeSection {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .specializeCards {
+    grid-template-columns: 1fr;
   }
 }
