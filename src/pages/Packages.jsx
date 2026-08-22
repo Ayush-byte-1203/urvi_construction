@@ -44,10 +44,26 @@ const Packages = () => {
     : packageTiers.filter(tier => tier.cities?.some(c => c.name === selectedCity));
 
   const toggleAccordion = (packageId, categoryName) => {
-    setOpenCategories(prev => ({
-      ...prev,
-      [packageId]: prev[packageId] === categoryName ? null : categoryName
-    }));
+    const isDesktop = window.innerWidth >= 992;
+    
+    setOpenCategories(prev => {
+      const isCurrentlyOpen = prev[packageId] === categoryName;
+      
+      if (isDesktop) {
+        // Sync accordion state across all packages on desktop
+        const newState = {};
+        packageTiers.forEach(tier => {
+          newState[tier.id] = isCurrentlyOpen ? null : categoryName;
+        });
+        return { ...prev, ...newState };
+      } else {
+        // Only toggle for the specific package on mobile
+        return {
+          ...prev,
+          [packageId]: isCurrentlyOpen ? null : categoryName
+        };
+      }
+    });
   };
 
   if (isLoading) {
@@ -117,16 +133,16 @@ const Packages = () => {
           </div>
         )}
 
-        <div className={styles.pricingGrid} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', alignItems: 'start' }}>
+        <div className={styles.pricingGrid} style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', alignItems: 'stretch' }}>
           {filteredTiers.map((tier) => (
-            <div key={tier.id} className={styles.pricingCard} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', overflow: 'hidden', position: 'relative', boxShadow: 'var(--shadow-sm)' }}>
+            <div key={tier.id} className={styles.pricingCard} style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: '8px', overflow: 'hidden', position: 'relative', boxShadow: 'var(--shadow-sm)', display: 'flex', flexDirection: 'column' }}>
               {(tier.badge || (tier.is_popular ? 'Most Popular' : null)) && (
                 <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', background: (tier.badge === 'Most Popular' || tier.is_popular) ? 'var(--brand-yellow, #EAB308)' : '#334155', color: (tier.badge === 'Most Popular' || tier.is_popular) ? '#0F172A' : '#ffffff', textAlign: 'center', padding: '0.55rem 1rem', fontSize: '0.875rem', fontWeight: 'bold', letterSpacing: '0.5px' }}>
                   {tier.badge || 'Most Popular'}
                 </div>
               )}
               
-              <div style={{ padding: (tier.badge || tier.is_popular) ? '3.75rem 2rem 2rem' : '2rem', borderBottom: '1px solid var(--border)' }}>
+              <div style={{ padding: (tier.badge || tier.is_popular) ? '3.75rem 2rem 2rem' : '3.75rem 2rem 2rem', borderBottom: '1px solid var(--border)', flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>{tier.name}</h3>
                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.25rem', marginBottom: '1rem' }}>
                   <span style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--text-primary)' }}>₹{tier.price}</span>
@@ -135,7 +151,7 @@ const Packages = () => {
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: '1.5' }}>{tier.description}</p>
                 
                 {tier.advantages && tier.advantages.length > 0 && (
-                  <div style={{ marginTop: '1.25rem', paddingTop: '1rem', borderTop: '1px dashed var(--border)' }}>
+                  <div style={{ marginTop: 'auto', paddingTop: '1rem', borderTop: '1px dashed var(--border)' }}>
                     <h5 style={{ fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.5px', color: 'var(--brand-yellow-dark, #D97706)', marginBottom: '0.75rem', fontWeight: '700' }}>Package Highlights</h5>
                     <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                       {tier.advantages.map((adv, aIdx) => (
